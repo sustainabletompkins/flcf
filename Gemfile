@@ -18,6 +18,7 @@ gem 'formtastic', '~> 3.0'
 
 gem 'foundation-rails', '5.4.5'
 gem 'foundation-icons-sass-rails'
+gem 'devise'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'

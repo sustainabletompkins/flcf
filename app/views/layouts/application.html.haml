@@ -15,5 +15,7 @@
 
   %body
     =render :partial => 'layouts/head'
+    %p.notice= notice
+    %p.alert= alert
     = yield
     =render :partial => 'layouts/footer'

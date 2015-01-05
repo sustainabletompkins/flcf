@@ -10,22 +10,25 @@
       %a{:href => "#"}
         %span Menu
   %section.top-bar-section
-    / Right Nav Section
-    %ul.right
-      %li
-        .icon-bar.three-up{:style=>"display:block"}
-          %a.item
-            %i.fi-play
-          %a.item
-            %i.fi-crown
-          %a.item
-            %i.fi-torso-female
-      %li.has-dropdown
-        %a{:href => "#"} Username
-        %ul.dropdown
-          %li
-            %a{:href => "#"} Account Settings
-          %li.active
-            %a{:href => "#"} Logout
-
+    -if user_signed_in?
+      %ul.right
+        %li
+          .icon-bar.three-up{:style=>"display:block"}
+            %a.item
+              %i.fi-play
+            %a.item
+              %i.fi-crown
+            %a.item
+              %i.fi-torso-female
+        %li.has-dropdown
+          %a{:href => "#"} Username
+          %ul.dropdown
+            %li
+              %a{:href => "#"} Account Settings
+            %li.active
+              = link_to "Log out", destroy_session_path(:user), :method => :delete
+    -else
+      %ul.right
+        %li.active
+          =link_to "Login/Signup", new_user_session_path
 
