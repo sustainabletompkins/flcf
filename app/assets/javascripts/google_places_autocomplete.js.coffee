@@ -1,4 +1,6 @@
 $ ->
+  total_cost = undefined
+  total_weight = undefined
   autocomplete1 = undefined
   autocomplete2 = undefined
   origin = "ithaca, ny"
@@ -37,12 +39,6 @@ $ ->
     destination = place.geometry.location
 
 
-  calcRoute = ->
-
-
-    return
-
-
   $("#air-travel-button").on "click", ->
     offset_type = "air"
     $("#air-travel-offset").fadeIn "slow"
@@ -71,11 +67,23 @@ $ ->
     return
 
   $("#checkout").on "click", ->
+    costs = ""
+    $(".cost").each ->
+      costs += $(this).text() + "|"
+      return
 
-    #formulate and post payment query
-    $("[name=cost]").val total_cost
-    $("[name=weight]").val total_weight
-    $("[name=label]").val "offset total"
+    weights = ""
+    $(".weight").each ->
+      weights += $(this).text() + "|"
+      return
+
+    titles = ""
+    $(".name").each ->
+      titles += $(this).text() + "|"
+      return
+    $("[name=cost]").val costs
+    $("[name=weight]").val weights
+    $("[name=label]").val titles
     $("#submit-cart").submit()
     return
 
@@ -129,16 +137,3 @@ $ ->
     $.post "/offsets", data
     return
 
-  totalCart = ->
-    total_cost = 0
-    total_weight = 0
-    $(".cost").each ->
-      total_cost += parseInt($(this).text())
-      return
-
-    $(".weight").each ->
-      total_weight += parseInt($(this).text())
-      return
-
-    $("#total-cost").html total_cost
-    return
