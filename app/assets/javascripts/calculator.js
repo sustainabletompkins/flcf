@@ -11,6 +11,7 @@ $(document).on('ready page:load', function(){
 		$("#offset-buttons").fadeOut("slow");
 	});
 	$("#car-travel-button").on('click', function() {
+		offset_type = "car";
 		$("#car-travel-offset").fadeIn("slow");
 		$("#offset-buttons").fadeOut("slow");
 	});
@@ -54,7 +55,8 @@ $(document).on('ready page:load', function(){
 		$("#cart").fadeOut("slow");
 		$("#offset-buttons").fadeIn("slow");
 	});
-	$('#calculate-offset').on('click', function() {
+	$('.calculate-offset').on('click', function() {
+		alert('hey');
 		switch(offset_type) {
 			case 'air':
 				// do calculations here
@@ -62,7 +64,13 @@ $(document).on('ready page:load', function(){
 				units = "miles";
 				quantity = 100;
 				break;
+			case 'car':
+				alert("sdfsf");
+				miles = calcRoute();
+				console.log(miles);
+				break;
 		}
+
 
 
 
