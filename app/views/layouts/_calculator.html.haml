@@ -1,5 +1,5 @@
 #calculator
-  %h2 calculator
+  %h2
   #total-cost
   #total-weight
   #offset-buttons
@@ -16,17 +16,32 @@
     %hr
     %input{:placeholder => "starting location"}
     %input{:placeholder => "end location"}
+    %hr
     .calculate-offset.button
       calculate offset
     .button.cancel
       cancel
 
   #car-travel-offset.offset-form
-    %input{:placeholder => "total miles"}
+    %label enter your trip mileage
+    %input{:placeholder => "total miles", :id=>"car-miles", :type => "text"}
     %hr
+    %label or, let us calculate it for you:
     %input.starting-city{:placeholder => "starting location"}
     %input.ending-city{:placeholder => "end location"}
+    %hr
     #calculate-car-offset.button
+      calculate offset
+    .button.cancel
+      cancel
+
+  #home-energy-offset.offset-form
+    %p enter your energy use
+    %input{:type=> "text", :id=>"propane",:placeholder => "propane (gallons)"}
+    %input{:type=> "text", :id=>"natural-gas",:placeholder => "natural gas (therms)"}
+    %input{:type=> "text", :id=>"electricity",:placeholder => "electricity (kWh)"}
+    %input{:type=> "text", :id=>"fuel-oil",:placeholder => "fuel oil (gallons)"}
+    #calculate-home-offset.button
       calculate offset
     .button.cancel
       cancel

@@ -1,6 +1,11 @@
 $ ->
-  total_cost = undefined
-  total_weight = undefined
+  cost_per_pound = .01
+  propane_rate = 12.17
+  fuel_oil_rate = 22.37
+  natural_gas_rate = 11
+  electricity_rate = 0.7208
+  lbs_co2_per_gallon = 19.64
+  mpg = 25
   autocomplete1 = undefined
   autocomplete2 = undefined
   origin = "ithaca, ny"
@@ -38,6 +43,22 @@ $ ->
     place = autocomplete2.getPlace()
     destination = place.geometry.location
 
+  calculateHomeEnergy = ->
+
+    propane_co2 = propane_rate * parseInt($('#propane').text())
+    console.log propane_co2
+
+  calculateCarOffset = (miles) ->
+    console.log miles
+    gallons_gas = miles/mpg
+    offset_weight = gallons_gas * lbs_co2_per_gallon
+    offset_cost = offset_weight * cost_per_pound
+    data =
+      pounds: offset_weight.toFixed(2)
+      cost: offset_cost.toFixed(2)
+      title: offset_title
+
+    saveOffset data
 
   $("#air-travel-button").on "click", ->
     offset_type = "air"
@@ -89,7 +110,7 @@ $ ->
 
   $(".quick").on "click", ->
     offset_weight = parseInt($(this).attr("value"))
-    offset_cost = offset_weight * 2.7
+    offset_cost = offset_weight * cost_per_pound
     offset_title = $(this).attr("title")
     data =
       pounds: offset_weight
@@ -104,28 +125,38 @@ $ ->
     $("#offset-buttons").fadeIn "slow"
     return
 
+  $("#calculate-home-offset").on "click", ->
+    propane_co2 = propane_rate * parseInt($('#propane').val())
+    gas_co2 = natural_gas_rate * parseInt($('#natural-gas').val())
+    oil_co2 = fuel_oil_rate * parseInt($('#fuel-oil').val())
+    electricity_co2 = electricity_rate * parseInt($('#electricity').val())
+    offset_weight = propane_co2 + gas_co2 + oil_co2 + electricity_co2
+    offset_cost = offset_weight * cost_per_pound
+    offset_title = "Home Energy Use"
+    data =
+      pounds: offset_weight.toFixed(2)
+      cost: offset_cost.toFixed(2)
+      title: offset_title
+    saveOffset data
+
   $("#calculate-car-offset").on "click", ->
-    request =
-      origin: origin
-      destination: destination
-      travelMode: google.maps.DirectionsTravelMode.DRIVING
-    offset_title = autocomplete1.getPlace().formatted_address + " > " + autocomplete2.getPlace().formatted_address
-    directionsService.route request, (response, status) ->
+    miles = undefined
+    unless parseInt($("#car-miles").val()) > 0
+      request =
+        origin: origin
+        destination: destination
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
+      offset_title = autocomplete1.getPlace().formatted_address + " > " + autocomplete2.getPlace().formatted_address
+      directionsService.route request, (response, status) ->
 
-      miles = response.routes[0].legs[0].distance.value / 1000
-      console.log miles
-      offset_weight = miles * 4
-      console.log offset_weight
+        miles = response.routes[0].legs[0].distance.value / 1000
+        calculateCarOffset miles
+    else
+      miles = $("#car-miles").val()
+      offset_title = "Car Trip"
+      calculateCarOffset miles
 
 
-
-      offset_cost = offset_weight * 5
-      data =
-        pounds: offset_weight
-        cost: offset_cost
-        title: offset_title
-      console.log(data)
-      saveOffset data
 
   calculateCost = ->
 
