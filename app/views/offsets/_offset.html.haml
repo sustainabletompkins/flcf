@@ -1,7 +1,9 @@
 %div{:class=>"offset offset-#{offset.id}"}
   .name=offset.title
-  .cost=offset.cost
-  .weight=offset.pounds
+
   .delete
     =link_to offset_path(offset), :method=>:delete, :remote=>:true do
       %i.fi-trash
+  %div{:style=>"clear:both;"}
+  .cost $#{offset.cost}
+  .weight #{offset.pounds}lbs

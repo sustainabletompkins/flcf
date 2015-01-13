@@ -27,3 +27,29 @@
   }
 }
 
+.offset {
+  clear:both;
+  height: 50px;
+  min-width: 300px;
+  .name {
+    color: #0b629d;
+    float:left;
+  }
+  .delete {
+    float: right;
+    position: relative;
+    top:0px;
+    right: 0px;
+  }
+  .cost {
+    color: #bf2e1a;
+    font-size: 12px;
+    float:left;
+
+  }
+  .weight {
+    color: #bf2e1a;
+    font-size: 12px;
+    float:right;
+  }
+}

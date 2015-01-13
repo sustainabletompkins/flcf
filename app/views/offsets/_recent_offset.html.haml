@@ -1,4 +1,6 @@
-%div{:class=>"offset-#{offset.id}"}
-  %p=offset.title
-  .cost=offset.cost
-  .weight=offset.pounds
+%div{:class=>"offset offset-#{offset.id}"}
+  .name=offset.title
+
+  %div{:style=>"clear:both;"}
+  .cost $#{offset.cost}
+  .weight #{offset.pounds}lbs
