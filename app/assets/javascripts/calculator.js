@@ -46,7 +46,6 @@ $(document).on('ready page:load', function(){
 			title: "air travel"
 		}
 		$.post('/offsets', data);
-		//$("#cart").fadeIn("slow");
-		//$(".offset-form").fadeOut("slow");
+
 	});
 });

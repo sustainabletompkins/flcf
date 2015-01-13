@@ -1,0 +1,5 @@
+%div{:class=>"offset-#{offset.id}"}
+  %p=offset.title
+  .delete
+    =link_to offset_path(offset), :method=>:delete, :remote=>:true do
+      %i.fi-trash

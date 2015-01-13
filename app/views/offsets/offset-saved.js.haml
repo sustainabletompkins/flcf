@@ -1,1 +1,3 @@
-alert('offset saved');
+$("#cart").html("#{escape_javascript render @offsets}");
+$("#cart").fadeIn("slow");
+$(".offset-form").fadeOut("slow");
