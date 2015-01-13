@@ -71,3 +71,6 @@ function totalCart() {
 	$('#total-cost').html(total_cost);
 }
 
+function startSpotSet() {
+	$('.ending-city').focus();
+}
