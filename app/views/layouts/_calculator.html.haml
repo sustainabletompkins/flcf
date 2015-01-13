@@ -4,7 +4,12 @@
   #offset-buttons
     #air-travel-button.button
       air travel
-
+    #car-travel-button.button
+      air travel
+    #home-energy-button.button
+      air travel
+    #quick-button.button
+      quick offset
   #air-travel-offset.offset-form
     %input{:placeholder => "total miles"}
     %hr
@@ -14,6 +19,13 @@
       calculate offset
     .button.cancel
       cancel
+
+  #quick-offset.offset-form
+    #home-month.quick.button{:value=>20, :title=>"Home Energy, 1 mo"} Avg US Home Energy, 1mo
+    #home-year.quick.button{:value=>240, :title=>"Home Energy, 1 yr"} Avg US Home Energy, 1yr
+    #commute-month.quick.button{:value=>10, :title=>"Car Commute, 1 mo"} Avg US Car Commute, 1mo
+    #commute-year.quick.button{:value=>120, :title=>"Car Commute, 1 yr"} Avg US Car Commute, 1yr
+
 
   #cart
     #offsets

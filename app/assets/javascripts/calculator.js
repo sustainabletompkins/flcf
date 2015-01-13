@@ -1,5 +1,10 @@
 $(document).on('ready page:load', function(){
 	var offset_type = "home";
+	var offset_weight;
+	var offset_cost;
+	var offset_quantity;
+	var offset_units;
+	var offset_title;
 	$("#air-travel-button").on('click', function() {
 		offset_type = "air";
 		$("#air-travel-offset").fadeIn("slow");
@@ -13,7 +18,7 @@ $(document).on('ready page:load', function(){
 		$("#home-energy-offset").fadeIn("slow");
 		$("#offset-buttons").fadeOut("slow");
 	});
-	$("#quick-offset-button").on('click', function() {
+	$("#quick-button").on('click', function() {
 		$("#quick-offset").fadeIn("slow");
 		$("#offset-buttons").fadeOut("slow");
 	});
@@ -30,6 +35,21 @@ $(document).on('ready page:load', function(){
 
 
 	});
+
+	$('.quick').on('click', function() {
+
+		offset_weight = parseInt($(this).attr("value"));
+		offset_cost = offset_weight * 2.7;
+		offset_title = $(this).attr("title");
+		var data = {
+			pounds: offset_weight,
+			cost: offset_cost,
+			title: offset_title
+		}
+		saveOffset(data);
+
+	});
+
 	$('.new-offset').on('click', function() {
 		$("#cart").fadeOut("slow");
 		$("#offset-buttons").fadeIn("slow");
@@ -44,18 +64,20 @@ $(document).on('ready page:load', function(){
 				break;
 		}
 
-		var data = {
-			pounds: pounds,
-			units: units,
-			quantity: quantity,
-			cost: 10,
-			title: "air travel"
-		}
-		$.post('/offsets', data);
+
 
 	});
 });
 
+function calculateCost() {
+	//placeholder equation until I get real numbers
+	offset_cost = offset_weight * 5;
+}
+
+function saveOffset(data) {
+
+	$.post('/offsets', data);
+}
 
 function totalCart() {
 	total_cost = 0;
@@ -71,13 +93,3 @@ function totalCart() {
 	$('#total-cost').html(total_cost);
 }
 
-function startSpotSet() {
-	$('.ending-city').focus();
-	var place = autocomplete.getPlace();
-  	if (place.geometry) {
-  		console.log(place.geometry);
-	} else {
-		console.log("bumm");
-	}
-
-}
