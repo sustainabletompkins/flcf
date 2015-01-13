@@ -23,6 +23,12 @@ $(document).on('ready page:load', function(){
 	});
 	$('#checkout').on('click', function() {
 		//formulate and post payment query
+		$('[name=cost]').val(total_cost);
+		$('[name=weight]').val(total_weight);
+		$('[name=label]').val('offset total');
+		$('#submit-cart').submit();
+
+
 	});
 	$('.new-offset').on('click', function() {
 		$("#cart").fadeOut("slow");
@@ -53,8 +59,13 @@ $(document).on('ready page:load', function(){
 
 function totalCart() {
 	total_cost = 0;
+	total_weight = 0;
 	$('.cost').each(function() {
 		total_cost += parseInt($(this).text());
+
+	});
+	$('.weight').each(function() {
+		total_weight += parseInt($(this).text());
 
 	});
 	$('#total-cost').html(total_cost);

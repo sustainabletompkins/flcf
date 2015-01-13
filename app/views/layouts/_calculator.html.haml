@@ -16,7 +16,12 @@
       cancel
 
   #cart
+    #offsets
     #checkout.button
       checkout
     .new-offset.button
       new offset
+    %form{:action => "http://sustainabletompkins.org/process-cart.php", :method => "post", :id=>"submit-cart"}
+      %input{:name => "label", :type => "hidden", :value => "plane"}
+      %input{:name => "weight", :type => "hidden", :value => "7"}
+      %input{:name => "cost", :type => "hidden", :value => "5"}
