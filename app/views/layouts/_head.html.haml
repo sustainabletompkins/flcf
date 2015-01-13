@@ -1,34 +1,15 @@
-%nav.top-bar{"data-topbar" => "", :role => "navigation"}
-  %ul.title-area
-    %li.name
-      %h1
-        %a{:href => "#"}
-          %i.fi-play
-          Good Luck
-    / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-    %li.toggle-topbar.menu-icon
-      %a{:href => "#"}
-        %span Menu
-  %section.top-bar-section
-    -if user_signed_in?
-      %ul.right
-        %li
-          .icon-bar.three-up{:style=>"display:block"}
-            %a.item
-              %i.fi-play
-            %a.item
-              %i.fi-crown
-            %a.item
-              %i.fi-torso-female
-        %li.has-dropdown
-          %a{:href => "#"} Username
-          %ul.dropdown
-            %li
-              %a{:href => "#"} Account Settings
-            %li.active
-              = link_to "Log out", destroy_session_path(:user), :method => :delete
-    -else
-      %ul.right
-        %li.active
-          =link_to "Login/Signup", new_user_session_path
+%nav.tab-bar
+  %section.left.tab-bar-section
+    %h1.title Finger Lakes Climate Find
+  %section.right-small
+    %a.right-off-canvas-toggle.menu-icon{:href => "#"}
+      %span
+%aside.right-off-canvas-menu
+  %ul.off-canvas-list
+    %li
+      %label Menu
+    %li
+      =link_to "About Us", pages_path("about")
+
+
 

@@ -14,8 +14,11 @@
     = csrf_meta_tag
 
   %body
-    =render :partial => 'layouts/head'
-    %p.notice= notice
-    %p.alert= alert
-    = yield
-    =render :partial => 'layouts/footer'
+    .off-canvas-wrap{"data-offcanvas" => ""}
+      .inner-wrap
+        =render :partial => 'layouts/head'
+        %p.notice= notice
+        %p.alert= alert
+        %section.main-section
+          = yield
+        =render :partial => 'layouts/footer'
