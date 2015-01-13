@@ -1,6 +1,7 @@
 $(document).on('ready page:load', function(){
-
+	var offset_type = "home";
 	$("#air-travel-button").on('click', function() {
+		offset_type = "air";
 		$("#air-travel-offset").fadeIn("slow");
 		$("#offset-buttons").fadeOut("slow");
 	});
@@ -28,7 +29,24 @@ $(document).on('ready page:load', function(){
 		$("#offset-buttons").fadeIn("slow");
 	});
 	$('#calculate-offset').on('click', function() {
-		$("#cart").fadeIn("slow");
-		$(".offset-form").fadeOut("slow");
+		switch(offset_type) {
+			case 'air':
+				// do calculations here
+				pounds = 10;
+				units = "miles";
+				quantity = 100;
+				break;
+		}
+
+		var data = {
+			pounds: pounds,
+			units: units,
+			quantity: quantity,
+			cost: 10,
+			title: "air travel"
+		}
+		$.post('/offsets', data);
+		//$("#cart").fadeIn("slow");
+		//$(".offset-form").fadeOut("slow");
 	});
 });
