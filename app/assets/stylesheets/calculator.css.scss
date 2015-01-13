@@ -1,0 +1,25 @@
+#calculator{
+  width: 100%;
+  position: relative;
+  min-height: 500px;
+}
+
+#offset-buttons {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+
+#air-travel-offset, #car-travel-offset, #home-evergy-offset, #quick-offset, #cart {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.offset-form {
+  input {
+    font-size: 1.2em;
+  }
+}
