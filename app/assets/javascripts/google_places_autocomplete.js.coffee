@@ -6,10 +6,17 @@ $ ->
   electricity_rate = 0.7208
   lbs_co2_per_gallon = 19.64
   mpg = 25
+  miles_per_meter = 0.000621371
   autocomplete1 = undefined
   autocomplete2 = undefined
+  air_autocomplete1 = undefined
+  air_autocomplete2 = undefined
   origin = "ithaca, ny"
   destination = undefined
+  air_origin = undefined
+  air_destination = undefined
+  origin_latlng = undefined
+  destination_latlng = undefined
   directionsService = new google.maps.DirectionsService()
   offset_type = "home"
   offset_weight = undefined
@@ -23,13 +30,21 @@ $ ->
       types: ['(cities)']
     }
 
-    input1 = $('.starting-city')
+    input1 = $('.starting-car-city')
     autocomplete1 = new google.maps.places.Autocomplete(input1[0], options)
     google.maps.event.addListener(autocomplete1, 'place_changed', setOrigin)
 
-    input2 = $('.ending-city')
+    input2 = $('.ending-car-city')
     autocomplete2 = new google.maps.places.Autocomplete(input2[0], options)
     google.maps.event.addListener(autocomplete2, 'place_changed', setDestination)
+
+    input3 = $('.starting-air-city')
+    air_autocomplete1 = new google.maps.places.Autocomplete(input3[0], options)
+    google.maps.event.addListener(air_autocomplete1, 'place_changed', setAirOrigin)
+
+    input4 = $('.ending-air-city')
+    air_autocomplete2 = new google.maps.places.Autocomplete(input4[0], options)
+    google.maps.event.addListener(air_autocomplete2, 'place_changed', setAirDestination)
 
   google.maps.event.addDomListener(window, 'load', initialize)
 
@@ -38,10 +53,30 @@ $ ->
     place = autocomplete1.getPlace()
     origin = place.geometry.location
 
+
   setDestination = ->
 
     place = autocomplete2.getPlace()
     destination = place.geometry.location
+
+  setAirOrigin = ->
+
+    place = air_autocomplete1.getPlace()
+    air_origin = place.geometry.location.lat()
+    origin_latlng = new google.maps.LatLng(parseFloat(place.geometry.location.lat()), parseFloat(place.geometry.location.lng()));
+
+
+  setAirDestination = ->
+
+    place = air_autocomplete2.getPlace()
+    air_destintion = place.geometry.location.lat()
+    destination_latlng = new google.maps.LatLng(parseFloat(place.geometry.location.lat()), parseFloat(place.geometry.location.lng()));
+    air_meters = google.maps.geometry.spherical.computeDistanceBetween origin_latlng, destination_latlng
+    air_miles = air_meters * miles_per_meter
+
+    console.log air_miles.toFixed(2)
+
+
 
   calculateHomeEnergy = ->
 
@@ -124,6 +159,8 @@ $ ->
     $("#cart").fadeOut "slow"
     $("#offset-buttons").fadeIn "slow"
     return
+
+
 
   $("#calculate-home-offset").on "click", ->
     propane_co2 = propane_rate * parseInt($('#propane').val())
