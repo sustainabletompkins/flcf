@@ -49,3 +49,14 @@ $(document).on('ready page:load', function(){
 
 	});
 });
+
+
+function totalCart() {
+	total_cost = 0;
+	$('.cost').each(function() {
+		total_cost += parseInt($(this).text());
+
+	});
+	$('#total-cost').html(total_cost);
+}
+
