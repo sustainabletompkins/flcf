@@ -73,4 +73,11 @@ function totalCart() {
 
 function startSpotSet() {
 	$('.ending-city').focus();
+	var place = autocomplete.getPlace();
+  	if (place.geometry) {
+  		console.log(place.geometry);
+	} else {
+		console.log("bumm");
+	}
+
 }
