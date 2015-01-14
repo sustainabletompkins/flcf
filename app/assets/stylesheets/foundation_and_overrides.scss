@@ -452,8 +452,8 @@ $button-font-weight: $font-weight-bold;
 // We use these to control button border and hover styles.
 // $button-border-width: 5px;
 // $button-border-style: solid;
-$button-bg-color: $primary-color;
-// $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
+$button-bg-color: $dark-blue;
+$button-bg-hover: #60983b;
 // $button-border-color: $button-bg-hover;
 // $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
 // $secondary-button-border-color: $secondary-button-bg-hover;
@@ -810,8 +810,8 @@ $button-bg-color: $primary-color;
 
 // $include-html-off-canvas-classes: $include-html-classes;
 
-// $tabbar-bg: $oil;
-// $tabbar-height: rem-calc(45);
+$tabbar-bg: $green;
+$tabbar-height: rem-calc(55);
 // $tabbar-icon-width: $tabbar-height;
 // $tabbar-line-height: $tabbar-height;
 // $tabbar-color: $white;
@@ -1370,7 +1370,7 @@ $button-bg-color: $primary-color;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg: $green;
 
 // Height and margin
 // $topbar-height: rem-calc(45);
@@ -1378,7 +1378,7 @@ $button-bg-color: $primary-color;
 
 // Controlling the styles for the title in the top bar
 // $topbar-title-weight: $font-weight-normal;
-// $topbar-title-font-size: rem-calc(17);
+$topbar-title-font-size: rem-calc(20);
 
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: $oil;
@@ -1396,7 +1396,7 @@ $button-bg-color: $primary-color;
 // $topbar-link-color-active: $white;
 // $topbar-link-color-active-hover: $white;
 // $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
+$topbar-link-font-size: rem-calc(18);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
