@@ -1,8 +1,14 @@
+
+
 #calculator
   %h4 Carbon Calculator
-  %p choose an offset to get started:
 
+  #total-cost.checkout
+    %i.fi-shopping-cart
+    .value $0
+  #total-weight
   #offset-buttons
+    %p choose an offset to get started:
     #air-travel-button.button
       %i.fi-star.left-logo
       air travel
@@ -18,6 +24,11 @@
     #quick-button.button
       %i.fi-star.left-logo
       quick offset
+      %i.fi-arrow-right.arrow
+    %p{:style=>"margin-top: 15px;"} or, enter a total dollar value:
+    %input{:placeholder => "dollar value", :id => "donation-value",:style=>"margin-bottom: 10px;"}
+    #donate.button
+      add to cart
       %i.fi-arrow-right.arrow
   #air-travel-offset.offset-form
     %label enter your trip mileage
@@ -64,20 +75,29 @@
     #commute-year.quick.button{:value=>8660, :title=>"Car Commute, 1 yr"} Avg US Car Commute, 1yr
     #air-travel.quick.button{:value=>8660, :title=>"Domestic Air Travel, 1 yr"} Domestic Air Travel, 1yr
     #air-travel.quick.button{:value=>8660, :title=>"International Air Travel, 1 yr"} International Air Travel, 1yr
-    %p or, enter a total dollar value:
-    %input{:placeholder => "dollar value", :id => "donation-value"}
-    #donate.button
-      add to cart
+    %p
+    .button.cancel
+      cancel
   #cart
-    #offsets
-    %hr
-    #total-cost
-    #total-weight
-    #checkout.button
+    .checkout.button
+      %i.fi-shopping-cart
       checkout
     .new-offset.button
+      %i.fi-plus
       new offset
+    #offsets
+    %hr
+
+
     %form{:action => "http://fingerlakesclimatefund.org/process-cart-temp.php", :method => "post", :id=>"submit-cart"}
       %input{:name => "label", :type => "hidden", :value => ""}
       %input{:name => "weight", :type => "hidden", :value => ""}
       %input{:name => "cost", :type => "hidden", :value => ""}
+
+-if @offsets.present?
+
+  :javascript
+    $("#cart").html("#{escape_javascript render @offsets}");
+    totalCart();
+    $("#cart").css("display","block");
+    $("#offset-buttons").css("display","none");

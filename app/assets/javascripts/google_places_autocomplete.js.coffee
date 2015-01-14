@@ -104,32 +104,32 @@ $ ->
 
   $("#air-travel-button").on "click", ->
     offset_type = "air"
-    $("#air-travel-offset").fadeIn "slow"
-    $("#offset-buttons").fadeOut "slow"
+    $("#air-travel-offset").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
     return
 
   $("#car-travel-button").on "click", ->
     offset_type = "car"
-    $("#car-travel-offset").fadeIn "slow"
-    $("#offset-buttons").fadeOut "slow"
+    $("#car-travel-offset").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
     return
 
   $("#home-energy-button").on "click", ->
-    $("#home-energy-offset").fadeIn "slow"
-    $("#offset-buttons").fadeOut "slow"
+    $("#home-energy-offset").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
     return
 
   $("#quick-button").on "click", ->
-    $("#quick-offset").fadeIn "slow"
-    $("#offset-buttons").fadeOut "slow"
+    $("#quick-offset").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
     return
 
   $(".cancel").on "click", ->
-    $(".offset-form").fadeOut "slow"
-    $("#offset-buttons").fadeIn "slow"
+    $(".offset-form").fadeOut "fast"
+    $("#offset-buttons").fadeIn "fast"
     return
 
-  $("#checkout").on "click", ->
+  $(".checkout").on "click", ->
     costs = ""
     $(".cost").each ->
       costs += $(this).text() + "|"
@@ -163,8 +163,8 @@ $ ->
     return
 
   $(".new-offset").on "click", ->
-    $("#cart").fadeOut "slow"
-    $("#offset-buttons").fadeIn "slow"
+    $("#cart").fadeOut "fast"
+    $("#offset-buttons").fadeIn "fast"
     return
 
   $("#calculate-home-offset").on "click", ->
@@ -229,6 +229,7 @@ $ ->
     calculateAirOffset miles
 
   $("#donate").on "click", ->
+    $("#offset-buttons").fadeOut "fast"
     offset_cost = parseInt($("#donation-value").val().replace('$', ''))
     offset_weight = offset_cost * 100
     offset_title = "Quick Donation"
@@ -241,7 +242,9 @@ $ ->
 
     return
 
+
   saveOffset = (data) ->
+    $('#checkout').css("display","block")
     $.post "/offsets", data
     return
 

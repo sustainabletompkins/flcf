@@ -1,11 +1,8 @@
+
 .row
-  .large-12.columns
-    %h3 Offset your carbon > Help locals families > Protect the climate
-.row
-  .large-4.medium-5.columns
+  .large-4.medium-5.columns{:style => "background-color: #c0e3f6;"}
     =render :partial => 'layouts/calculator'
     #recent-offsets
-      =render :partial => "offsets/recent_offset", :collection => @offsets, :as => :offset
   .large-8.medium-7.columns
     %h4 How it works
     %h5 #1 Calculate your emissions

@@ -1,18 +1,42 @@
 #calculator{
   position: relative;
-  min-height: 400px;
-  background-color: #c0e3f6;
+
+
   padding: 5px 10px;
+  input {
+    font-size: 1.2em;
+  }
+}
+
+#total-cost {
+  position:absolute;
+  top: 10px;
+  right: 0px;
+  width: 65px;
+  height: 30px;
+  background-color: #fcaf17;
+  text-align: center;
+  .value {
+    display:inline;
+  }
+  cursor: pointer;
+
+}
+
+#checkout {
+  display: none;
+}
+#total-cost:hover {
+  background-color: #60983b;
 }
 
 #offset-buttons {
-  position: absolute;
-  top: 80px;
-  left: 10px;
+
   .button {
     display: block;
     text-align: left;
     font-size: 25px;
+    margin-bottom: 3px;
   }
   i.left-logo {
     margin-right: 7px;
@@ -22,12 +46,13 @@
     margin-left: 7px;
     font-size: 25px;
   }
-}
-
-#quick-offset {
   p {
     margin-bottom: 0px;
   }
+}
+
+#quick-offset {
+
   .button {
     margin-bottom: 3px;
   }
@@ -37,14 +62,11 @@
 #air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #cart {
   display: none;
   background-color: #c0e3f6;
-  top: -50px;
   position: relative;
 }
 
 .offset-form {
-  input {
-    font-size: 1.2em;
-  }
+
 }
 
 .offset {
@@ -63,7 +85,7 @@
     top:0px;
     right: 0px;
   }
-  .cost {
+  .dollar, .cost {
     color: #bf2e1a;
     font-size: 12px;
     float:left;

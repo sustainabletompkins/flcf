@@ -5,5 +5,6 @@
     =link_to offset_path(offset), :method=>:delete, :remote=>:true do
       %i.fi-trash
   %div{:style=>"clear:both;"}
-  .cost $#{offset.cost}
+  .dollar $
+  .cost #{offset.cost}
   .weight #{offset.pounds}lbs
