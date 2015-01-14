@@ -72,13 +72,11 @@ $ ->
     air_destintion = place.geometry.location
     destination_latlng = new google.maps.LatLng(parseFloat(place.geometry.location.lat()), parseFloat(place.geometry.location.lng()));
 
-
-
-
   calculateHomeEnergy = ->
 
     propane_co2 = propane_rate * parseInt($('#propane').text())
-    console.log propane_co2
+    propane_co2 = propane_rate * parseInt($('#propane').text())
+
 
   calculateCarOffset = (miles) ->
     console.log miles
@@ -169,20 +167,28 @@ $ ->
     $("#offset-buttons").fadeIn "slow"
     return
 
-
-
   $("#calculate-home-offset").on "click", ->
-    propane_co2 = propane_rate * parseInt($('#propane').val())
-    gas_co2 = natural_gas_rate * parseInt($('#natural-gas').val())
-    oil_co2 = fuel_oil_rate * parseInt($('#fuel-oil').val())
-    electricity_co2 = electricity_rate * parseInt($('#electricity').val())
-    offset_weight = propane_co2 + gas_co2 + oil_co2 + electricity_co2
+    offset_weight = 0
+    if parseInt($('#propane').val()) > 0
+      co2 = propane_rate * parseInt($('#propane').val())
+      offset_weight += co2
+    if parseInt($('#natural_game').val()) > 0
+      co2 = natural_gas_rate * parseInt($('#natural-gas').val())
+      offset_weight += co2
+    if parseInt($('#fuel-oil').val()) > 0
+      co2 = fuel_oil_rate * parseInt($('#fuel-oil').val())
+      offset_weight += co2
+    if parseInt($('#electricity').val()) > 0
+      co2 = electricity_rate * parseInt($('#electricity').val())
+      offset_weight += co2
+
     offset_cost = offset_weight * cost_per_pound
     offset_title = "Home Energy Use"
     data =
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
+
     saveOffset data
 
   $("#calculate-car-offset").on "click", ->
