@@ -129,6 +129,7 @@ $ ->
   $("#home-energy-button").on "click", ->
     $("#home-energy-offset").fadeIn "fast"
     $("#offset-buttons").fadeOut "fast"
+    $("#home-energy-offset input").val("")
     return
 
   $("#quick-button").on "click", ->
@@ -184,7 +185,7 @@ $ ->
     if parseInt($('#propane').val()) > 0
       co2 = propane_rate * parseInt($('#propane').val())
       offset_weight += co2
-    if parseInt($('#natural_game').val()) > 0
+    if parseInt($('#natural-gas').val()) > 0
       co2 = natural_gas_rate * parseInt($('#natural-gas').val())
       offset_weight += co2
     if parseInt($('#fuel-oil').val()) > 0
