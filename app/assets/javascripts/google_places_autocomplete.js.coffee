@@ -205,6 +205,8 @@ $ ->
 
   $("#calculate-car-offset").on "click", ->
     miles = undefined
+    mpg = parseInt($('#mpg').val())
+    console.log mpg
     unless parseInt($("#car-miles").val()) > 0
       request =
         origin: origin
