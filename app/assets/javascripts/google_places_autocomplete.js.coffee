@@ -91,9 +91,17 @@ $ ->
     saveOffset data
 
   calculateAirOffset = (miles) ->
-
+    console.log miles
     # need to add plane specific numbers
-    offset_weight = gallons_gas * lbs_co2_per_gallon
+    if miles < 400
+      offset_weight = miles * .56
+    else if miles < 1500
+      offset_weight = miles * .45
+    else if miles < 3000
+      offset_weight = miles * .4
+    else
+      offset_weight = miles * .39
+
     offset_cost = offset_weight * cost_per_pound
     data =
       pounds: offset_weight.toFixed(2)
@@ -101,6 +109,10 @@ $ ->
       title: offset_title
 
     saveOffset data
+
+  $('.clearer').on "click", ->
+
+    $('input.clearable').val("")
 
   $("#air-travel-button").on "click", ->
     offset_type = "air"
@@ -209,7 +221,7 @@ $ ->
         miles = response.routes[0].legs[0].distance.value / 1000
         calculateCarOffset miles
     else
-      miles = $("#car-miles").val()
+      miles = parseInt($("#car-miles").val())
       offset_title = "Car Trip"
       calculateCarOffset miles
 

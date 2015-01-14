@@ -32,11 +32,11 @@
       %i.fi-arrow-right.arrow
   #air-travel-offset.offset-form
     %label enter your trip mileage
-    %input{:placeholder => "total miles", :id=>"air-miles"}
+    %input.clearable{:placeholder => "total miles", :id=>"air-miles"}
     %hr
     %label or, let us calculate it for you:
-    %input.starting-air-city{:placeholder => "starting location"}
-    %input.ending-air-city{:placeholder => "end location"}
+    %input.starting-air-city.clearer{:placeholder => "starting location"}
+    %input.ending-air-city.clearer{:placeholder => "end location"}
     %hr
     #calculate-air-offset.button
       calculate offset
@@ -45,11 +45,11 @@
 
   #car-travel-offset.offset-form
     %label enter your trip mileage
-    %input{:placeholder => "total miles", :id=>"car-miles"}
+    %input.clearable{:placeholder => "total miles", :id=>"car-miles"}
     %hr
     %label or, let us calculate it for you:
-    %input.starting-car-city{:placeholder => "starting location"}
-    %input.ending-car-city{:placeholder => "end location"}
+    %input.starting-car-city.clearer{:placeholder => "starting location"}
+    %input.ending-car-city.clearer{:placeholder => "end location"}
     %hr
     #calculate-car-offset.button
       calculate offset
