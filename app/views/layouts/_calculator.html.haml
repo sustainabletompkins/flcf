@@ -94,10 +94,3 @@
       %input{:name => "weight", :type => "hidden", :value => ""}
       %input{:name => "cost", :type => "hidden", :value => ""}
 
--if @offsets.present?
-
-  :javascript
-    $("#cart").html("#{escape_javascript render @offsets}");
-    totalCart();
-    $("#cart").css("display","block");
-    $("#offset-buttons").css("display","none");

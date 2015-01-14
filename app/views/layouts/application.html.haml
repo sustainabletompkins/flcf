@@ -21,5 +21,21 @@
         %p.notice= notice
         %p.alert= alert
         %section.main-section
-          = yield
+          .row
+            .large-4.small-12.medium-5.columns
+              %div{:style => "background-color: #c0e3f6;"}
+                =render :partial => 'layouts/calculator'
+              #recent-offsets
+                %h4 recent offsets
+            .large-8.small-12.medium-7.columns
+              #content
+                = yield :main_section
         =render :partial => 'layouts/footer'
+
+:javascript
+  $(document).on("ready", function() {
+
+    $('.about-page').on("click", function() {
+      $("#content").html("#{escape_javascript render :partial => 'pages/about'}");
+    });
+  });

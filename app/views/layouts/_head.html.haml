@@ -37,7 +37,8 @@
               %a{:href => "#"} Menu
           %section.top-bar-section
             %ul.right
-              %li=link_to "About", pages_path("about")
+
+              %li=link_to "About", "#", :class=>'about-page'
               %li=link_to "Project Portfolio", pages_path("about")
               %li=link_to "FAQ", pages_path("about")
               %li=link_to "Resources", pages_path("about")
