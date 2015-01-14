@@ -62,19 +62,16 @@ $ ->
   setAirOrigin = ->
 
     place = air_autocomplete1.getPlace()
-    air_origin = place.geometry.location.lat()
+    air_origin = place.geometry.location
     origin_latlng = new google.maps.LatLng(parseFloat(place.geometry.location.lat()), parseFloat(place.geometry.location.lng()));
 
 
   setAirDestination = ->
 
     place = air_autocomplete2.getPlace()
-    air_destintion = place.geometry.location.lat()
+    air_destintion = place.geometry.location
     destination_latlng = new google.maps.LatLng(parseFloat(place.geometry.location.lat()), parseFloat(place.geometry.location.lng()));
-    air_meters = google.maps.geometry.spherical.computeDistanceBetween origin_latlng, destination_latlng
-    air_miles = air_meters * miles_per_meter
 
-    console.log air_miles.toFixed(2)
 
 
 
@@ -86,6 +83,18 @@ $ ->
   calculateCarOffset = (miles) ->
     console.log miles
     gallons_gas = miles/mpg
+    offset_weight = gallons_gas * lbs_co2_per_gallon
+    offset_cost = offset_weight * cost_per_pound
+    data =
+      pounds: offset_weight.toFixed(2)
+      cost: offset_cost.toFixed(2)
+      title: offset_title
+
+    saveOffset data
+
+  calculateAirOffset = (miles) ->
+
+    # need to add plane specific numbers
     offset_weight = gallons_gas * lbs_co2_per_gallon
     offset_cost = offset_weight * cost_per_pound
     data =
@@ -183,7 +192,12 @@ $ ->
         origin: origin
         destination: destination
         travelMode: google.maps.DirectionsTravelMode.DRIVING
-      offset_title = autocomplete1.getPlace().formatted_address + " > " + autocomplete2.getPlace().formatted_address
+
+      l1 = autocomplete1.getPlace().formatted_address.substring(0, autocomplete1.getPlace().formatted_address.lastIndexOf(','))
+      l2 = autocomplete2.getPlace().formatted_address.substring(0, autocomplete2.getPlace().formatted_address.lastIndexOf(','))
+      offset_title =  l1+ " > " + l2
+
+
       directionsService.route request, (response, status) ->
 
         miles = response.routes[0].legs[0].distance.value / 1000
@@ -193,7 +207,20 @@ $ ->
       offset_title = "Car Trip"
       calculateCarOffset miles
 
+  $("#calculate-air-offset").on "click", ->
 
+    miles = undefined
+    unless parseInt($("#air-miles").val()) > 0
+      air_meters = google.maps.geometry.spherical.computeDistanceBetween origin_latlng, destination_latlng
+      miles = air_meters * miles_per_meter
+      l1 = air_autocomplete1.getPlace().formatted_address.substring(0, air_autocomplete1.getPlace().formatted_address.lastIndexOf(','))
+      l2 = air_autocomplete2.getPlace().formatted_address.substring(0, air_autocomplete2.getPlace().formatted_address.lastIndexOf(','))
+      offset_title =  l1+ " > " + l2
+
+    else
+      miles = $("#air-miles").val()
+      offset_title = "Plane Trip"
+    calculateAirOffset miles
 
   calculateCost = ->
 
