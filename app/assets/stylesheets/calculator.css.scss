@@ -24,6 +24,15 @@
   }
 }
 
+#quick-offset {
+  p {
+    margin-bottom: 0px;
+  }
+  .button {
+    margin-bottom: 3px;
+  }
+}
+
 
 #air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #cart {
   display: none;

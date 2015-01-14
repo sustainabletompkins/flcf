@@ -228,9 +228,16 @@ $ ->
       offset_title = "Plane Trip"
     calculateAirOffset miles
 
-  calculateCost = ->
+  $("#donate").on "click", ->
+    offset_cost = parseInt($("#donation-value").val().replace('$', ''))
+    offset_weight = offset_cost * 100
+    offset_title = "Quick Donation"
+    data =
+      pounds: offset_weight.toFixed(2)
+      cost: offset_cost.toFixed(2)
+      title: offset_title
 
-    #placeholder equation until I get real numbers
+    saveOffset data
 
     return
 
