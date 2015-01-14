@@ -24,6 +24,9 @@ $ ->
   offset_quantity = undefined
   offset_units = undefined
   offset_title = undefined
+
+  $("#donation-value").focus()
+
   initialize = () ->
     options = {
       language: 'en-GB',
@@ -140,6 +143,7 @@ $ ->
   $(".cancel").on "click", ->
     $(".offset-form").fadeOut "fast"
     $("#offset-buttons").fadeIn "fast"
+    $("#donation-value").focus()
     return
 
   $(".checkout").on "click", ->
@@ -178,6 +182,7 @@ $ ->
   $(".new-offset").on "click", ->
     $("#cart").fadeOut "fast"
     $("#offset-buttons").fadeIn "fast"
+    $("#donation-value").focus()
     return
 
   $("#calculate-home-offset").on "click", ->
