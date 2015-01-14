@@ -229,16 +229,21 @@ $ ->
     calculateAirOffset miles
 
   $("#donate").on "click", ->
-    $("#offset-buttons").fadeOut "fast"
-    offset_cost = parseInt($("#donation-value").val().replace('$', ''))
-    offset_weight = offset_cost * 100
-    offset_title = "Quick Donation"
-    data =
-      pounds: offset_weight.toFixed(2)
-      cost: offset_cost.toFixed(2)
-      title: offset_title
+    if $("#donation-value").val() == ""
+      $("#donation-value").css("border","2px solid red")
+      $("#donation-value").attr("placeholder","enter an amount ($)")
 
-    saveOffset data
+    else
+      $("#offset-buttons").fadeOut "fast"
+      offset_cost = parseInt($("#donation-value").val().replace('$', ''))
+      offset_weight = offset_cost * 100
+      offset_title = "Quick Donation"
+      data =
+        pounds: offset_weight.toFixed(2)
+        cost: offset_cost.toFixed(2)
+        title: offset_title
+
+      saveOffset data
 
     return
 
