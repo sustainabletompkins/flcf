@@ -25,7 +25,28 @@
   %button.show-login yop
   %a.close-reveal-modal ×
 
+
 :javascript
   $('.show-login').on("click", function() {
     $("#myModal").html("#{j render :partial => 'devise/sessions/login'}")
   });
+
+
+-if current_user
+  -if current_user.session_id
+    #login-status{:value=>current_user.email}
+    #user-offsets.reveal-modal{"data-reveal" => ""}
+      %h3 Your account has been created
+      %p Ok, let's get back to offsetting you carbon use.
+      =render :partial => 'offsets/offset', :collection => current_user.offsets.where(:purchased=>:false), :as => :offset
+      %p you will be taken to our parent site, sustainabletompkins.org, to complete payment
+      %button.checkout pay for offsets
+
+      %a.close-reveal-modal ×
+
+    :javascript
+      $(document).on("ready", function() {
+        $('#user-offsets').foundation('reveal', 'open');
+      });
+-else
+  #login-status{:value=>"guest"}

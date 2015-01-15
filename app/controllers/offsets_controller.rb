@@ -20,4 +20,14 @@ class OffsetsController < ApplicationController
     end
   end
 
+  def process_purchased
+    current_user.session_id = nil
+    current_user.save
+    current_user.offsets.each do |o|
+      o.purchased = true
+      o.save
+    end
+    redirect_to :back
+  end
+
 end

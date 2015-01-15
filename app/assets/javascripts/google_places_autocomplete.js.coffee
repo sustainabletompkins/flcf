@@ -148,25 +148,29 @@ $ ->
     return
 
   $(".checkout").on "click", ->
-    costs = ""
-    $(".cost").each ->
-      costs += $(this).text() + "|"
-      return
+    if $('#login-status').val == "guest"
+      $('#myModal').foundation('reveal', 'open')
+    else
+      costs = ""
+      $(".cost").each ->
+        costs += $(this).text() + "|"
+        return
 
-    weights = ""
-    $(".weight").each ->
-      weights += $(this).text() + "|"
-      return
+      weights = ""
+      $(".weight").each ->
+        weights += $(this).text() + "|"
+        return
 
-    titles = ""
-    $(".name").each ->
-      titles += $(this).text() + "|"
-      return
-    $("[name=cost]").val costs
-    $("[name=weight]").val weights
-    $("[name=label]").val titles
-    #$("#submit-cart").submit()
-    $('#myModal').foundation('reveal', 'open')
+      titles = ""
+      $(".offset-name").each ->
+        titles += $(this).text() + "|"
+        return
+      $("[name=cost]").val costs
+      $("[name=weight]").val weights
+      $("[name=label]").val titles
+      $.get "/offsets/process_purchased"
+      $("#submit-cart").submit()
+
     return
 
   $(".quick").on "click", ->
