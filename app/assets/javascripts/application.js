@@ -15,5 +15,11 @@
 //= require foundation
 //= require turbolinks
 //= require_tree .
-
+$(document).on('ready', function() {
+	if ($.cookie('session_id')==undefined) {
+		var id = Math.random();
+		$.cookie('session_id', id, { expires: 7 });
+	}
+	else console.log($.cookie('session_id'));
+})
 $(function(){ $(document).foundation(); });

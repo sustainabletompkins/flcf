@@ -1,0 +1,15 @@
+.login-form
+  %h2 Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), :id=>"sign-up") do |f|
+    = devise_error_messages!
+    = f.hidden_field :session_id, :value=> "dfgd", :id => "session-id"
+    %div
+      = f.label :email
+      = f.email_field :email, autofocus: true
+      = f.label :password
+      = f.password_field :password, autocomplete: "off"
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "off"
+    %div= f.submit "Sign up"
+:javascript
+  $('#session-id').val("34908534");

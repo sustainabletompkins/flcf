@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: luck_development
+  database: flcf_development
   pool: 5
   username: swidjit
   password: password

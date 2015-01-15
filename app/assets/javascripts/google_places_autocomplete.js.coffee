@@ -164,7 +164,8 @@ $ ->
     $("[name=cost]").val costs
     $("[name=weight]").val weights
     $("[name=label]").val titles
-    $("#submit-cart").submit()
+    #$("#submit-cart").submit()
+    $('#myModal').foundation('reveal', 'open')
     return
 
   $(".quick").on "click", ->
@@ -267,6 +268,8 @@ $ ->
 
     return
 
+  $('.checkout-without-login').on "click", ->
+    $("#submit-cart").submit()
 
   saveOffset = (data) ->
     $('#checkout').css("display","block")
