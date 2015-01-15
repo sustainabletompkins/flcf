@@ -6,4 +6,18 @@ class User < ActiveRecord::Base
 
   has_many :offsets
 
+  after_create :load_offsets_from_session
+
+  private
+
+  def load_offsets_from_session
+    puts "creating user"
+    puts self.session_id
+    @user_offsets = Offset.where(:session_id => self.session_id)
+    @user_offsets.each do |o|
+      o.user_id = self.id
+      o.save
+    end
+  end
+
 end

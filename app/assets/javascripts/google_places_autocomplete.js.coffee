@@ -90,6 +90,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
+      session_id: $.cookie('session_id')
 
     saveOffset data
 
