@@ -1,9 +1,15 @@
 class OffsetsController < ApplicationController
 
   def create
-    @offset = Offset.new(:user_id=>1,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id],:quantity=>params[:quantity],:units=>params[:units])
+    user_id = current_user.id | 0
+    @offset = Offset.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id],:quantity=>params[:quantity],:units=>params[:units])
     if @offset.save
-      @offsets = Offset.all
+      if user_signed_in?
+        @offsets = current_user.offsets.where(:purchased=>:false)
+      else
+        @offsets = Offset.where(:session_id => params[:session_id])
+      end
+
       respond_to do |format|
         format.js {render 'offset-saved'}
       end
