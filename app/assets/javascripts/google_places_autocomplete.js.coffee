@@ -237,10 +237,16 @@ $ ->
       directionsService.route request, (response, status) ->
 
         miles = response.routes[0].legs[0].distance.value / 1000
+        if $("#car-travel-offset input[type=checkbox]")[0].checked
+          miles = miles*2
+          offset_title += " (RT)"
         calculateCarOffset miles
     else
       miles = parseInt($("#car-miles").val())
       offset_title = "Car Trip"
+      if $("#car-travel-offset input[type=checkbox]")[0].checked
+        miles = miles*2
+        offset_title += " (RT)"
       calculateCarOffset miles
 
   $("#calculate-air-offset").on "click", ->
@@ -256,6 +262,10 @@ $ ->
     else
       miles = $("#air-miles").val()
       offset_title = "Plane Trip"
+
+    if $("#air-travel-offset input[type=checkbox]")[0].checked
+      miles = miles*2
+      offset_title += " (RT)"
     calculateAirOffset miles
 
   $("#donate").on "click", ->

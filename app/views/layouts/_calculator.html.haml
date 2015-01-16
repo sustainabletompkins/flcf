@@ -38,6 +38,9 @@
     %input.starting-air-city.clearer{:placeholder => "starting location"}
     %input.ending-air-city.clearer{:placeholder => "end location"}
     %hr
+    .round-trip
+      %label round trip?
+      %input{:checked=>:true,:type => "checkbox"}
     #calculate-air-offset.button
       calculate offset
     .button.cancel
@@ -53,6 +56,9 @@
     %hr
     %label car mpg (optional)
     %input{:value => "25", :id => "mpg"}
+    .round-trip
+      %label round trip?
+      %input{:checked=>:true,:type => "checkbox"}
     %hr
     #calculate-car-offset.button
       calculate offset
