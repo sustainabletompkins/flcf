@@ -32,7 +32,7 @@
               #recent-offsets
                 %h4 Recent Offsets
                 %p recently completed offsets shown here
-
+                =render :partial=>'offsets/recent', :collection=>@recent_offsets, :as => :offset
             .large-8.small-12.medium-7.columns
               #content
                 = yield :main_section
