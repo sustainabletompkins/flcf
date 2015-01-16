@@ -60,7 +60,7 @@
 }
 
 
-#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #cart {
+#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart {
   display: none;
   background-color: #c0e3f6;
   position: relative;
@@ -89,7 +89,7 @@
     top:0px;
     right: 0px;
   }
-  .dollar, .cost {
+  .dollar, .cost, .amount {
     color: #bf2e1a;
     font-size: 12px;
     float:left;
@@ -99,6 +99,9 @@
     color: #bf2e1a;
     font-size: 12px;
     float:right;
+  }
+  button {
+    margin-top: 7px;
   }
 }
 

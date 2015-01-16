@@ -129,7 +129,11 @@ $ ->
     $("#car-travel-offset").fadeIn "fast"
     $("#offset-buttons").fadeOut "fast"
     return
-
+  $("#saved-button").on "click", ->
+    offset_type = "car"
+    $("#saved-offsets").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
+    return
   $("#home-energy-button").on "click", ->
     $("#home-energy-offset").fadeIn "fast"
     $("#offset-buttons").fadeOut "fast"
@@ -149,17 +153,17 @@ $ ->
 
   $(".checkout").on "click", ->
     costs = ""
-    $(".cost").each ->
+    $("#cart .cost").each ->
       costs += $(this).text() + "|"
       return
 
     weights = ""
-    $(".weight").each ->
+    $("#cart .weight").each ->
       weights += $(this).text() + "|"
       return
 
     titles = ""
-    $(".offset-name").each ->
+    $("#cart .offset-name").each ->
       titles += $(this).text() + "|"
       return
     $("[name=cost]").val costs
@@ -290,6 +294,11 @@ $ ->
 
   $('.checkout-without-login').on "click", ->
     $("#submit-cart").submit()
+
+  $('.redo').on "click", ->
+    data = {
+      offset_id: parseInt($(this).attr("value"))    }
+    $.post "offsets/duplicate", data
 
   saveOffset = (data) ->
     $('#checkout').css("display","block")

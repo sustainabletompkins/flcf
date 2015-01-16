@@ -1,0 +1,9 @@
+%div{:class=>"offset offset-#{offset.id}", :style=>"height:100px;"}
+  .offset-name=offset.title
+
+  %div{:style=>"clear:both;"}
+  .dollar $
+  .amount #{offset.cost}
+  .weight #{offset.pounds}lbs
+  %div{:style=>"clear:both;"}
+  %button{:class=>"redo", :value=>offset.id} add to cart

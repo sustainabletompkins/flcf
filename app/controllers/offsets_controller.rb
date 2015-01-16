@@ -30,6 +30,18 @@ class OffsetsController < ApplicationController
     end
   end
 
+  def duplicate
+    offset = Offset.find(params[:offset_id])
+    new_offset = offset.dup
+    new_offset.purchased = false;
+    if new_offset.save
+      @offsets = current_user.offsets.where(:purchased=>:false)
+      respond_to do |format|
+        format.js {render 'offset-saved'}
+      end
+    end
+  end
+
   def process_purchased
     current_user.session_id = nil
     current_user.save

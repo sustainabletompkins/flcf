@@ -25,6 +25,11 @@
       %i.fi-star.left-logo
       quick offset
       %i.fi-arrow-right.arrow
+    -if user_signed_in?
+      #saved-button.button
+        %i.fi-star.left-logo
+        saved offsets
+        %i.fi-arrow-right.arrow
     %p{:style=>"margin-top: 15px;"} or, enter a total dollar value:
     %input{:placeholder => "dollar value", :id => "donation-value",:style=>"margin-bottom: 10px;"}
     #donate.button
@@ -96,7 +101,9 @@
       new offset
     #offsets
     %hr
-
+  -if user_signed_in?
+    #saved-offsets.offset-form
+      =render :partial => 'offsets/saved', :collection => @saved_offsets, :as=>:offset
 
     %form{:action => "http://fingerlakesclimatefund.org/process-cart-temp.php", :method => "post", :id=>"submit-cart"}
       %input{:name => "label", :type => "hidden", :value => ""}

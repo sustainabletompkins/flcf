@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :offsets, :only => [:create,:destroy,:show] do
     collection do
       get 'process_purchased'
+      post 'duplicate'
     end
   end
   root :to => 'pages#home'
