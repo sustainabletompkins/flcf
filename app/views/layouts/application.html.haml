@@ -27,7 +27,8 @@
               %div{:style => "background-color: #c0e3f6;margin-bottom: 15px;"}
                 =render :partial => 'layouts/calculator'
               #video
-                %img{:src => "http://placehold.it/300x200&text=[video goes here]"}/
+                =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
+                  =image_tag('video-placeholder.png')
               #recent-offsets
                 %h4 Recent Offsets
                 %p recently completed offsets shown here

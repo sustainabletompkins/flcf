@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require jquery.fancybox
+//= require helpers/jquery.fancybox-media
 //= require_tree .
 $(document).on('ready', function() {
 	if ($.cookie('session_id')==undefined) {
@@ -21,5 +23,15 @@ $(document).on('ready', function() {
 		$.cookie('session_id', id, { expires: 7 });
 	}
 	else console.log($.cookie('session_id'));
+
+	$(".fancybox").fancybox({
+	});
+	$('.fancybox-media').fancybox({
+        openEffect: 'none',
+        closeEffect: 'none',
+        helpers: {
+          media: {}
+        }
+    });
 })
 $(function(){ $(document).foundation(); });
