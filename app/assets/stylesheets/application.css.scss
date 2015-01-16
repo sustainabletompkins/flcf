@@ -24,6 +24,17 @@ $red: #bf2e1a;
 $green:#60983b;
 $yellow:#fcaf17;
 
+.subhead {
+  color: $red;
+}
+
+.faq-nav {
+  a {
+    display:block;
+  }
+  margin-bottom: 15px;
+}
+
 .button-icon {
 	font-size: 3em;
 }

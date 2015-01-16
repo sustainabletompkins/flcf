@@ -10,17 +10,7 @@
     %aside.left-off-canvas-menu
       %ul.off-canvas-list
         %li=link_to "About", pages_path("about")
-        %li.has-dropdown
-          %a{:href => "/blog"} Blog
-          %ul.dropdown
-            %li
-              %a{:href => "/blog/zurb-foundation"} ZURB Foundation
-            %li
-              %a{:href => "/blog/middleman"} Ruby Middleman
-            %li
-              %a{:href => "/blog/review"} Reviews
-            %li
-              %a{:href => "/blog/studio"} Studio
+
         %li
           %a{:href => "/about"} About
         %li
@@ -39,9 +29,9 @@
             %ul.right
 
               %li=link_to "About", "#", :class=>'about-page'
-              %li=link_to "Project Portfolio", pages_path("about")
-              %li=link_to "FAQ", pages_path("about")
-              %li=link_to "Resources", pages_path("about")
+              %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
+              %li=link_to "FAQ","#", :class=>'faq-page'
+              %li=link_to "Resources","#", :class=>'resources-page'
               %li
                 #checkout.button.checkout{:style => "margin-right: 6px;"}
                   %i.fi-shopping-cart

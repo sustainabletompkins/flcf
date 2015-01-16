@@ -44,4 +44,13 @@
     $('.about-page').on("click", function() {
       $("#content").html("#{escape_javascript render :partial => 'pages/about'}");
     });
+    $('.faq-page').on("click", function() {
+      $("#content").html("#{escape_javascript render :partial => 'pages/faq'}");
+    });
+    $('.resources-page').on("click", function() {
+      $("#content").html("#{escape_javascript render :partial => 'pages/resources'}");
+    });
+    $('.portfolio-page').on("click", function() {
+      $("#content").html("#{escape_javascript render :partial => 'pages/portfolio'}");
+    });
   });
