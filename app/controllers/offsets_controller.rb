@@ -1,7 +1,7 @@
 class OffsetsController < ApplicationController
 
   def create
-    if defined?(current_user)
+    if user_signed_in?
       user_id = current_user.id
     else user_id = 0
     end
@@ -11,7 +11,7 @@ class OffsetsController < ApplicationController
       if user_signed_in?
         @offsets = current_user.offsets.where(:purchased=>:false)
       else
-        @offsets = Offset.where(:session_id => params[:session_id])
+        @offsets = Offset.where(:session_id => params[:session_id],:purchased=>:false)
       end
 
       respond_to do |format|
