@@ -82,7 +82,6 @@ $ ->
 
 
   calculateCarOffset = (miles) ->
-    console.log miles
     gallons_gas = miles/mpg
     offset_weight = gallons_gas * lbs_co2_per_gallon
     offset_cost = offset_weight * cost_per_pound
@@ -111,6 +110,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
+      session_id: $.cookie('session_id')
 
     saveOffset data
 
@@ -148,26 +148,28 @@ $ ->
     return
 
   $(".checkout").on "click", ->
-    if $('#login-status').val == "guest"
+    costs = ""
+    $(".cost").each ->
+      costs += $(this).text() + "|"
+      return
+
+    weights = ""
+    $(".weight").each ->
+      weights += $(this).text() + "|"
+      return
+
+    titles = ""
+    $(".offset-name").each ->
+      titles += $(this).text() + "|"
+      return
+    $("[name=cost]").val costs
+    $("[name=weight]").val weights
+    $("[name=label]").val titles
+
+    if $('#login-status').attr('value') == "guest"
       $('#myModal').foundation('reveal', 'open')
     else
-      costs = ""
-      $(".cost").each ->
-        costs += $(this).text() + "|"
-        return
 
-      weights = ""
-      $(".weight").each ->
-        weights += $(this).text() + "|"
-        return
-
-      titles = ""
-      $(".offset-name").each ->
-        titles += $(this).text() + "|"
-        return
-      $("[name=cost]").val costs
-      $("[name=weight]").val weights
-      $("[name=label]").val titles
       $.get "/offsets/process_purchased"
       $("#submit-cart").submit()
 
@@ -181,6 +183,7 @@ $ ->
       pounds: offset_weight
       cost: offset_cost
       title: offset_title
+      session_id: $.cookie('session_id')
 
     saveOffset data
     return
@@ -212,6 +215,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
+      session_id: $.cookie('session_id')
 
     saveOffset data
 
@@ -268,6 +272,7 @@ $ ->
         pounds: offset_weight.toFixed(2)
         cost: offset_cost.toFixed(2)
         title: offset_title
+        session_id: $.cookie('session_id')
 
       saveOffset data
 

@@ -1,7 +1,7 @@
 class OffsetsController < ApplicationController
 
   def create
-    user_id = current_user.id | 0
+    user_id = defined?(current_user.id) || 0
     @offset = Offset.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id],:quantity=>params[:quantity],:units=>params[:units])
     if @offset.save
       if user_signed_in?
