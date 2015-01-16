@@ -1,6 +1,7 @@
 .login-form
 
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = f.hidden_field :session_id, :value=> "dfgd", :id => "session-id"
     %div
       = f.label :email
       = f.email_field :email, autofocus: true
@@ -12,6 +13,7 @@
   %button.sign-up No account yet?  Sign up
 
 :javascript
+  $('#session-id').val($.cookie("session_id"));
   $('.sign-up').on('click', function() {
     $("#myModal").html("#{j render :partial => 'devise/registrations/register'}");
   });

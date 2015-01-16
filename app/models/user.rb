@@ -11,8 +11,6 @@ class User < ActiveRecord::Base
   private
 
   def load_offsets_from_session
-    puts "creating user"
-    puts self.session_id
     @user_offsets = Offset.where(:session_id => self.session_id)
     @user_offsets.each do |o|
       o.user_id = self.id
