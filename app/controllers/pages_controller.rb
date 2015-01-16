@@ -7,8 +7,4 @@ class PagesController < ApplicationController
     @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
   end
 
-  def index
-    @title = params[:page_name].titleize
-    render params[:page_name]
-  end
 end
