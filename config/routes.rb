@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get 'process_purchased'
       post 'duplicate'
+      post 'populate_cart'
     end
   end
   root :to => 'pages#home'

@@ -33,5 +33,10 @@ $(document).on('ready', function() {
           media: {}
         }
     });
+	var data = {
+		session_id: $.cookie("session_id")
+	}
+	$.post("offsets/populate_cart", data);
+
 })
 $(function(){ $(document).foundation(); });

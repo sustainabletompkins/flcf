@@ -42,6 +42,16 @@ class OffsetsController < ApplicationController
     end
   end
 
+  def populate_cart
+    puts
+    @user_offsets = Offset.where(:session_id=>params[:session_id])
+    if @user_offsets.present?
+      respond_to do |format|
+        format.js {render 'populate_cart'}
+      end
+    end
+  end
+
   def process_purchased
     current_user.session_id = nil
     current_user.save

@@ -179,6 +179,10 @@ $ ->
 
     return
 
+  $('.cart').on "click", ->
+    $("#cart").fadeIn "fast"
+    $("#offset-buttons").fadeOut "fast"
+
   $(".quick").on "click", ->
     offset_weight = parseInt($(this).attr("value"))
     offset_cost = offset_weight * cost_per_pound

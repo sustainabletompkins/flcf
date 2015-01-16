@@ -1,7 +1,7 @@
 
 function totalCart() {
 	total_cost = 0;
-	$('.cost').each(function() {
+	$('#cart .cost').each(function() {
 		console.log($(this).text());
 		total_cost += parseFloat($(this).text());
 
