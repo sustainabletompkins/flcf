@@ -20,7 +20,7 @@
 $(document).on('ready', function() {
 	if ($.cookie('session_id')==undefined) {
 		var id = Math.random();
-		$.cookie('session_id', id, { expires: 7 });
+		$.cookie('session_id', id, { expires: 1 });
 	}
 	else console.log($.cookie('session_id'));
 
