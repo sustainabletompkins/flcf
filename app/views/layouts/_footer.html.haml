@@ -15,6 +15,11 @@
         -if user_signed_in?
           %li
             = link_to "Log out", destroy_session_path(:user), :method => :delete
+
+        -else
+          %li
+            =link_to  new_user_registration_path, :class=>'button header-button' do
+              Register
         %p © Sustainable Tompkins
       .large-6.columns
         %p Carbon offsets are deductible through Social Ventures 501(c)3

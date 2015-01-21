@@ -18,6 +18,22 @@
 //= require helpers/jquery.fancybox-media
 //= require_tree .
 $(document).on('ready', function() {
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '330833490453349',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
 	if ($.cookie('session_id')==undefined) {
 		var id = Math.random();
 		$.cookie('session_id', id, { expires: 1 });
