@@ -1,39 +1,36 @@
-.off-canvas-wrap
-  .inner-wrap
-    %nav.tab-bar.hide-for-medium-up
-      %section.left-small
-        %a.left-off-canvas-toggle.menu-icon
-          %span
-      %section.middle.tab-bar-section
-        %h2.title
-          %a{:href => "/"} Finger Lakes Climate Fund
-    %aside.left-off-canvas-menu
-      %ul.off-canvas-list
-        %li=link_to "About", pages_path("about")
+%nav.top-bar{"data-topbar" => "", :role => "navigation"}
+  %ul.title-area
+    %li.name
+      %h1
+        %a{:href => "#"}
+          =image_tag('logo.png')
+    %li.toggle-topbar.menu-icon
+      %a{:href => "#"}
+        %span Menu
+  %section.top-bar-section
+    / Right Nav Section
+    %ul.right
+      %li
+        #checkout.button.checkout{:style => "margin-right: 6px;"}
+          %i.fi-shopping-cart
+          checkout
 
-        %li
-          %a{:href => "/about"} About
-        %li
-          %a.button{:href => "/updates"} Updates
-    %section.main-section
-      / add topbar, hide for small
-      .sticky{"data-options" => "sticky_on: large"}
-        %nav.top-bar.hide-for-small{"data-topbar" => ""}
-          %ul.title-area
-            %li.name
-              %h1
-                %a{:href => "/"}
-                  =image_tag('logo.png')
-            %li.toggle-topbar.menu-icon
-              %a{:href => "#"} Menu
-          %section.top-bar-section
-            %ul.right
+      %li
+        =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+          %i.fi-social-facebook
+      %li
+        =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
+          %i.fi-social-twitter
+      %li
+        =link_to "/contact-us", :class=>"social" do
+          %i.fi-mail
+      %li.has-dropdown
+        %a{:href => "#"} Explore
+        %ul.dropdown
+          %li=link_to "About", "#", :class=>'about-page'
+          %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
+          %li=link_to "FAQ","#", :class=>'faq-page'
+          %li=link_to "Resources","#", :class=>'resources-page'
 
-              %li=link_to "About", "#", :class=>'about-page'
-              %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
-              %li=link_to "FAQ","#", :class=>'faq-page'
-              %li=link_to "Resources","#", :class=>'resources-page'
-              %li
-                #checkout.button.checkout{:style => "margin-right: 6px;"}
-                  %i.fi-shopping-cart
-                  checkout
+
+
