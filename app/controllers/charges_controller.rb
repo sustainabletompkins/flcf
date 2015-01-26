@@ -5,14 +5,16 @@ class ChargesController < ApplicationController
 
   def create
 
-    @amount = (current_user.offsets.where(:purchased=>:false).sum(:cost) * 100).to_i
-    puts @amount
-    current_user.session_id = nil
-    current_user.save
-    current_user.offsets.each do |o|
+    if user_signed_in?
+      current_user.session_id = nil
+      current_user.save
+    end
+
+    Offset.where(:session_id=>params[:stripeSession]).each do |o|
       o.purchased = true
       o.save
     end
+
     customer = Stripe::Customer.create(
       :email => 'example@stripe.com',
       :card  => params[:stripeToken]
@@ -20,7 +22,7 @@ class ChargesController < ApplicationController
 
     charge = Stripe::Charge.create(
       :customer    => customer.id,
-      :amount      => @amount,
+      :amount      => params[:stripeCharge],
       :description => 'Rails Stripe customer',
       :currency    => 'usd'
     )

@@ -93,9 +93,15 @@
     .button.cancel
       cancel
   #cart
-    .checkout.button
-      %i.fi-shopping-cart
-      checkout
+    -if user_signed_in?
+      %button.stripe.button
+        %i.fi-shopping-cart
+        checkout
+    -else
+      .checkout.button
+        %i.fi-shopping-cart
+        checkout
+
     .new-offset.button
       %i.fi-plus
       new offset

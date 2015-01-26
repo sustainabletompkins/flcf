@@ -55,6 +55,5 @@ $(document).on('ready', function() {
 	$.post("offsets/populate_cart", data);
 
 
-
 })
 $(function(){ $(document).foundation(); });

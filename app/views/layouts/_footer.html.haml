@@ -37,58 +37,91 @@
 #myModal.reveal-modal{"data-reveal" => ""}
   %h2 OK, ready for checkout.
   %p Just a quick question first:  Would you like to proceed as a guest, or login to your FLCF account.  Using a FLCF account will allow you to save and reuse your offsets.
-  %button.checkout-without-login checkout as guest
+
+  %button#stripe.button
+    %i.fi-shopping-cart
+    pay now
   %button.show-login create account before checkout
   %a.close-reveal-modal ×
 
+#user-offsets.reveal-modal{"data-reveal" => ""}
+  %h3 Your account has been created
+  %p Ok, let's get back to offsetting you carbon use.
+  #offset-checkout
+#checkout-form
+  = form_tag charges_path, id: 'chargeForm' do
+    %script{:src => "https://checkout.stripe.com/checkout.js"}
+    = hidden_field_tag 'stripeToken'
+    = hidden_field_tag 'stripeEmail'
+    = hidden_field_tag 'stripeCharge'
+    = hidden_field_tag 'stripeSession'
+
+-if current_user
+
+  :javascript
+    $('#stripe')[0].addEventListener('click', function(e) {
+      total_cost=0;
+      cost=0;
+      $('#cart .cost').each(function() {
+        total_cost += parseFloat($(this).text());
+      });
+      cost = parseInt(total_cost*100);
+      handler.open({
+        name: 'Finger Lakes Climate Fund',
+        email: '#{j current_user.email}',
+        description: 'Carbon Offset ($'+total_cost+')',
+        amount: cost,
+        shippingAddress: false
+      });
+      e.preventDefault();
+    });
+  -if current_user.session_id
+
+    :javascript
+      $(document).on("ready", function() {
+        $('#user-offsets').foundation('reveal', 'open');
+        var button = $('#stripe');
+        $('#user-offsets').append(button);
+      });
+
+-else
+  #login-status{:value=>"guest"}
+  :javascript
+    $('#stripe')[0].addEventListener('click', function(e) {
+      total_cost=0;
+      cost=0;
+      $('#cart .cost').each(function() {
+        total_cost += parseFloat($(this).text());
+      });
+      cost = parseInt(total_cost*100);
+      handler.open({
+        name: 'Finger Lakes Climate Fund',
+        description: 'Carbon Offset ($'+total_cost+')',
+        amount: cost,
+        shippingAddress: false
+      });
+      e.preventDefault();
+    });
 
 :javascript
   $('.show-login').on("click", function() {
     $("#myModal").html("#{j render :partial => 'devise/sessions/login'}")
   });
+  var total_cost = 0;
+  var cost = 0;
+  var key = '#{j Rails.configuration.stripe[:publishable_key]}';
+  var handler = StripeCheckout.configure({
+    key: key,
+    token: function(token, args) {
+          document.getElementById("stripeToken").value = token.id;
+          document.getElementById("stripeEmail").value = token.email;
+          document.getElementById("stripeCharge").value = cost;
+          document.getElementById("stripeSession").value = $.cookie('session_id');
+          document.getElementById("chargeForm").submit();
+        }
+    });
 
 
--if current_user
 
-  #login-status{:value=>current_user.email}
-  #user-offsets.reveal-modal{"data-reveal" => ""}
-    %h3 Your account has been created
-    %p Ok, let's get back to offsetting you carbon use.
-    =render :partial => 'offsets/offset', :collection => current_user.offsets.where(:purchased=>:false), :as => :offset
-    = form_tag charges_path, id: 'chargeForm' do
-      %script{:src => "https://checkout.stripe.com/checkout.js"}
-      = hidden_field_tag 'stripeToken'
-      = hidden_field_tag 'stripeEmail'
-      %button#customButton.btn.btn-large.btn-primary Buy Now
-      :javascript
-        var key = '#{j Rails.configuration.stripe[:publishable_key]}';
 
-        var handler = StripeCheckout.configure({
-          key: key,
-          token: function(token, args) {
-                document.getElementById("stripeToken").value = token.id;
-                document.getElementById("stripeEmail").value = token.email;
-                document.getElementById("chargeForm").submit();
-              }
-          });
 
-        document.getElementById('customButton').addEventListener('click', function(e) {
-          total_cost = 0;
-          $('#cart .cost').each(function() {
-            total_cost += parseFloat($(this).text());
-            console.log($(this).text());
-
-          });
-          cost = parseInt(total_cost*100);
-          console.log("t:"+total_cost);
-          console.log(cost);
-          handler.open({
-            name: 'Finger Lakes Climate Fund',
-            description: 'Carbon Offset ($'+total_cost+')',
-            amount: cost,
-            shippingAddress: false
-          });
-          e.preventDefault();
-        });
--else
-  #login-status{:value=>"guest"}
