@@ -23,26 +23,11 @@
 
         %section.main-section
           .row
-            .large-12
-              -if alert
-                .alert-box.success.radius{"data-alert" => ""}
-                  =alert
-                  %a.close{:href => "#"} &times;
-              -if notice
-                .alert-box.success.radius{"data-alert" => ""}
-                  =notice
-                  %a.close{:href => "#"} &times;
-          .row
             .large-4.small-12.medium-5.columns
-              %div{:style => "background-color: #c0e3f6;margin-bottom: 15px;"}
-                =render :partial => 'layouts/calculator'
-              #video
-                =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
-                  =image_tag('video-placeholder.png')
-              #recent-offsets
-                %h4 Recent Offsets
-                %p recently completed offsets shown here
-                =render :partial=>'offsets/recent', :collection=>@recent_offsets, :as => :offset
+              .panel
+                #recent-offsets
+                  %h4 Recent Offsets
+                  =render :partial=>'offsets/recent', :collection=>@recent_offsets, :as => :offset
             .large-8.small-12.medium-7.columns
               #content
                 = yield :main_section
