@@ -174,8 +174,7 @@ $ ->
       $('#myModal').foundation('reveal', 'open')
     else
 
-      $.get "/offsets/process_purchased"
-      $("#submit-cart").submit()
+      $('#user-offsets').foundation('reveal', 'open')
 
     return
 

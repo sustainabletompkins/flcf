@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :charges
+
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root :to => 'pages#home'
   get 'pages/:page_name' => 'pages#index', :as => :pages
