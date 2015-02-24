@@ -1,36 +1,38 @@
-%nav.top-bar{"data-topbar" => "", :role => "navigation"}
-  %ul.title-area
-    %li.name
-      %h1
-        %a{:href => "/"}
-          =image_tag('logo.png')
-    %li.toggle-topbar.menu-icon
-      %a{:href => "#"}
-        %span Menu
-  %section.top-bar-section
-    / Right Nav Section
-    %ul.right
-      %li
-        #checkout.button.checkout{:style => "margin-right: 6px;"}
-          %i.fi-shopping-cart
-          checkout
+.row
+  .large-12.columns{:style => "padding:0px;"}
+    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+      %ul.title-area
+        %li.name
+          %h1
+            %a{:href => "/"}
+              =image_tag('logo.png')
+        %li.toggle-topbar.menu-icon
+          %a{:href => "#"}
+            %span Menu
+      %section.top-bar-section
+        protect our climate by helping others
+        %ul.right
+          %li
+            #checkout.button.checkout{:style => "margin-right: 6px;"}
+              %i.fi-shopping-cart
+              checkout
 
-      %li
-        =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
-          %i.fi-social-facebook
-      %li
-        =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
-          %i.fi-social-twitter
-      %li
-        =link_to "/contact-us", :class=>"social" do
-          %i.fi-mail
-      %li.has-dropdown
-        %a{:href => "#"} Explore
-        %ul.dropdown
-          %li=link_to "About", "#", :class=>'about-page'
-          %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
-          %li=link_to "FAQ","#", :class=>'faq-page'
-          %li=link_to "Resources","#", :class=>'resources-page'
+          %li
+            =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+              %i.fi-social-facebook
+          %li
+            =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
+              %i.fi-social-twitter
+          %li
+            =link_to "/contact-us", :class=>"social" do
+              %i.fi-mail
+          %li.has-dropdown
+            %a{:href => "#"} Explore
+            %ul.dropdown
+              %li=link_to "About", "#", :class=>'about-page'
+              %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
+              %li=link_to "FAQ","#", :class=>'faq-page'
+              %li=link_to "Resources","#", :class=>'resources-page'
 
 
 

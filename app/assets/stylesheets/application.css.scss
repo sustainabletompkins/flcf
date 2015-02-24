@@ -24,6 +24,10 @@ $red: #bf2e1a;
 $green:#60983b;
 $yellow:#fcaf17;
 
+body {
+  background: url('weave-bg-green.gif')
+}
+
 .subhead {
   color: $red;
 }
@@ -53,9 +57,59 @@ $yellow:#fcaf17;
 	padding-left: .5em;
 }
 
-.main-section {
-  margin-top: 10px;
-}
+
 
 .cycle-slideshow { width: 100% }
 .cycle-slideshow img { width: 100%; height: auto }
+
+.explanatory-text {
+  background-color: #FCAF17;
+  padding: 8px 12px;
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    margin:4px;
+  }
+
+  ul {
+    margin-top: 12px;
+    li {
+      font-size: 14px;
+
+    }
+  }
+}
+#try-calc {
+  background-color: #B42B17;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.pac-container {
+    z-index: 1051 !important;
+}
+
+#recent-offsets {
+  text-align: center;
+  line-height: 1;
+  h5 {
+    font-weight: 600;
+    color: #333;
+  }
+  .sample {
+    margin-bottom: 10px;
+    .name {
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+    .cost {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+
+#main-image {
+    max-height: 100px;
+}

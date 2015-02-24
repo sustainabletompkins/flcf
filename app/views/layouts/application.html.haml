@@ -22,7 +22,7 @@
 
 
         %section.main-section
-          .row
+          .row{:style => "background-color: #fff"}
             .large-12
               -if alert
                 .alert-box.success.radius{"data-alert" => ""}
@@ -32,36 +32,58 @@
                 .alert-box.success.radius{"data-alert" => ""}
                   =notice
                   %a.close{:href => "#"} &times;
-          .row
-            .large-4.small-12.medium-5.columns
-              %div{:style => "background-color: #c0e3f6;margin-bottom: 15px;"}
-                =render :partial => 'layouts/calculator'
+          .row{:style => "background-color: #fff"}
+            .large-3.small-12.medium-4.columns{:style => "background-color: #A4D8EE;text-align:center; padding: 10px"}
+              %h5 Offset your carbon use
+              =image_tag 'calculator.png', :style => "margin-bottom: 15px"
+              %button#try-calc try the calculator
+
+
+            .large-9.small-12.medium-8.columns
+              #main-image
+                =image_tag 'worker.png'
+          .row{:style => "background-color: #fff"}
+            .large-3.medium-3.columns
+              #recent-offsets
+                %h5 sample offsets
+                .sample
+                  .name NYS household/mo
+                  .cost $12.47
+                .sample
+                  .name US car commute/mo
+                  .cost $7.22
+                .sample
+                  .name x-country flight
+                  .cost $19.03
+
+            .explanatory-text.large-5.medium-6.small-12.columns
+              %p What can you do about climate change and local resilience?
+              %ul
+                %li First, take responsibility for your own carbon emissions.  Get started with the Finger Lakes Energy Challenge where you can make a personalized plan and connect to resources.
+                %li Next, offset your unavoidable emissions and help out others in our community.  Our carbon calculator shows you how much CO2 is associated with your travel and other daily activities.
+                %li Your donation to cover the offset goes to local households needing assistance with their home energy improvements.
+              %p It's quick, easy, affordable, and strengthens our community.
+            .large-4.medium-6.small-12.columns{:style=>"background-color:#B42B17;"}
+              %h5 Testimonials
+              .cycle-slideshow
+                =image_tag('testimonial_1.gif')
+                =image_tag('testimonial_2.jpg')
+                =image_tag('testimonial_3.jpg')
+              .cycle-slideshow
+                =image_tag('testimonial_1.gif')
+                =image_tag('testimonial_2.jpg')
+                =image_tag('testimonial_3.jpg')
+          .row{:style => "background-color: #fff"}
+            .large-3.medium-3.columns
+              #facebook
+                .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
+            .large-5.medium-5.small-12.columns{:style=>"text-align:center; background-color: #006893;padding: 15px"}
               #video
                 =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
                   =image_tag('video-placeholder.png')
-              #recent-offsets
-                %h4 Recent Offsets
-                %p recently completed offsets shown here
-                =render :partial=>'offsets/recent', :collection=>@recent_offsets, :as => :offset
-            .large-8.small-12.medium-7.columns
-              #content
-                = yield :main_section
-                =yield
+            .large-4.medium-4.small-12.columns
+              %h5 Business & Event Offsets
+              %p The Finger Lakes Climate Fund also offers carbon offsets for businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@fingerlakesclimatefund.org or 607-216-1552.
+
+
         =render :partial => 'layouts/footer'
-
-:javascript
-  $(document).on("ready", function() {
-
-    $('.about-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/about'}");
-    });
-    $('.faq-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/faq'}");
-    });
-    $('.resources-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/resources'}");
-    });
-    $('.portfolio-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/portfolio'}");
-    });
-  });
