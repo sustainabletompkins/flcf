@@ -304,7 +304,7 @@ $ ->
     $.post "offsets/duplicate", data
 
   saveOffset = (data) ->
-    $('#checkout').css("display","block")
+    $('#checkout').css("display","inline")
     $.post "/offsets", data
     return
 

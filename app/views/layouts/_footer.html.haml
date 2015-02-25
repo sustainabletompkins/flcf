@@ -1,7 +1,7 @@
-.row{:style => "background-color: #fff"}
+.row{:style => "background-color: #fff;"}
 
   .large-6.medium-6.small-12.columns
-    .panel
+    .panel{:style => "margin-top: 12px;"}
       %h4 Get in touch!
       .row
         .large-7.columns
@@ -23,14 +23,7 @@
   .large-12.columns
     .row
       .large-6.columns
-        -if user_signed_in?
-          %li
-            = link_to "Log out", destroy_session_path(:user), :method => :delete
 
-        -else
-          %li
-            =link_to  new_user_registration_path, :class=>'button header-button' do
-              Register
         %p © Sustainable Tompkins
       .large-6.columns
         %p Carbon offsets are deductible through Social Ventures 501(c)3

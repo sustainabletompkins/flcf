@@ -20,15 +20,24 @@
           %li
             =link_to "/contact-us", :class=>"social" do
               %i.fi-mail
+
+          -if user_signed_in?
+            %li
+              = link_to "Log out", destroy_session_path(:user), :method => :delete
+
+          -else
+            %li
+              =link_to  new_user_registration_path do
+                %button{:style=>"top:0px;"} Register
 .row.horizontal-menu
-  .large-12.columns{:style=>"background-color: #006893;"}
+  .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
     %ul{:style => "display: inline;"}
       %li=link_to "home", root_path, :class => 'show-for-medium-up'
       %li=link_to "about", pages_path("about")
       %li=link_to "faq", pages_path("faq")
       %li=link_to "portfolio", pages_path("portfolio")
       %li=link_to "resources", pages_path("resources"), :class => 'show-for-medium-up'
-    #checkout.checkout{:style => "margin-right: 6px;"}
+    #checkout.show-for-medium-up
       %i.fi-shopping-cart
       checkout
 
