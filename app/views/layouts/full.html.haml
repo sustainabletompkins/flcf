@@ -22,31 +22,16 @@
 
 
         %section.main-section
-          .row
-            .large-4.small-12.medium-5.columns
+          .row{:style => "background-color: #fff"}
+            .large-3.small-12.medium-4.columns{:style => "background-color: #A4D8EE;text-align:center; padding: 10px"}
+              %h5 Offset your carbon use
+              =image_tag 'calculator.png', :style => "margin-bottom: 15px"
+              %br
+              %button#try-calc try the calculator
+            .large-9.small-12.medium-5.columns
               .panel
-                #recent-offsets
-                  %h4 Recent Offsets
-                  =render :partial=>'offsets/recent', :collection=>@recent_offsets, :as => :offset
-            .large-8.small-12.medium-7.columns
-              #content
-                = yield :main_section
-                =yield
+
+                #content
+                  =yield
         =render :partial => 'layouts/footer'
 
-:javascript
-  $(document).on("ready", function() {
-
-    $('.about-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/about'}");
-    });
-    $('.faq-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/faq'}");
-    });
-    $('.resources-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/resources'}");
-    });
-    $('.portfolio-page').on("click", function() {
-      $("#content").html("#{escape_javascript render :partial => 'pages/portfolio'}");
-    });
-  });

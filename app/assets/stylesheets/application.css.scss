@@ -25,7 +25,7 @@ $green:#60983b;
 $yellow:#fcaf17;
 
 body {
-  background: url('weave-bg-green.gif')
+  background: url('weave-bg-green.jpg')
 }
 
 .subhead {
@@ -111,5 +111,42 @@ body {
 }
 
 #main-image {
-    max-height: 100px;
+    max-height: 200px;
+}
+
+.top-bar-section {
+  ul {
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  li {
+    a {
+      line-height: 20px !important;
+      padding: 8px !important;
+    }
+  }
+  i {
+    font-size: 30px;
+  }
+}
+
+.horizontal-menu {
+  ul {
+    li {
+      background-color: #006893;
+      float:left;
+      list-style-type: none;
+      padding: 3px 15px;
+      text-align:center;
+      font-size: 17px;
+      a {
+        color: #fff;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+    }
+    li:hover {
+      background-color: #B42B17;
+    }
+  }
 }

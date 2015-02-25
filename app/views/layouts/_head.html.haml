@@ -2,10 +2,10 @@
   .large-12.columns{:style => "padding:0px;"}
     %nav.top-bar{"data-topbar" => "", :role => "navigation"}
       %ul.title-area
-        %li.name
-          %h1
-            %a{:href => "/"}
-              =image_tag('logo.png')
+        =link_to root_path do
+          %li.name
+
+            =image_tag('logo.png')
         %li.toggle-topbar.menu-icon
           %a{:href => "#"}
             %span Menu
@@ -26,13 +26,15 @@
           %li
             =link_to "/contact-us", :class=>"social" do
               %i.fi-mail
-          %li.has-dropdown
-            %a{:href => "#"} Explore
-            %ul.dropdown
-              %li=link_to "About", "#", :class=>'about-page'
-              %li=link_to "Project Portfolio","#", :class =>'portfolio-page'
-              %li=link_to "FAQ","#", :class=>'faq-page'
-              %li=link_to "Resources","#", :class=>'resources-page'
+.row.horizontal-menu
+  .large-12.columns{:style=>"background-color: #006893;"}
+    %ul
+      %li=link_to "home", root_path
+      %li=link_to "about", pages_path("about")
+      %li=link_to "faq", pages_path("faq")
+      %li=link_to "project portfolio", pages_path("portfolio")
+      %li=link_to "resources", pages_path("resources")
+
 
 
 
