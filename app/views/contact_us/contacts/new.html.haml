@@ -1,0 +1,27 @@
+.row{:style => "background-color: #fff"}
+  .large-12.columns{:style =>"padding:15px;"}
+    = form_for @contact, :url => contacts_path, :html => {:class => 'formtastic'} do |f|
+      - if ContactUs.require_name
+        #contact_us_contact_name_input.string.required
+          = f.label :name, (t('.name') + content_tag(:abbr, '*', :class => 'required')).html_safe
+          = f.text_field :name
+          - if f.object.errors[:name].present?
+            %p.inline-error= f.object.errors[:name].join(' and ')
+      #contact_us_contact_email_input.string.required
+        = f.label :email, (t('.email') + content_tag(:abbr, '*', :class => 'required')).html_safe
+        = f.text_field :email
+        - if f.object.errors[:email].present?
+          %p.inline-error= f.object.errors[:email].join(' and ')
+      - if ContactUs.require_subject
+        #contact_us_contact_subject_input.string.required
+          = f.label :subject, (t('.subject') + content_tag(:abbr, '*', :class => 'required')).html_safe
+          = f.text_field :subject
+          - if f.object.errors[:subject].present?
+            %p.inline-error= f.object.errors[:subject].join(' and ')
+      #contact_us_contact_message_input.text.required
+        = f.label :message, (t('.message') + content_tag(:abbr, '*', :class => 'required')).html_safe
+        = f.text_area :message
+        - if f.object.errors[:message].present?
+          %p.inline-error= f.object.errors[:message].join(' and ')
+      .commit
+        = f.submit :submit, :class => 'submit create', :title => t('.submit')

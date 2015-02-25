@@ -25,11 +25,9 @@ $green:#60983b;
 $yellow:#fcaf17;
 
 body {
+   background: image-url('weave-bg-green.jpg');
+}
 
-}
-.off-canvas-wrap {
-    background: image-url('weave-bg-green.jpg');
-}
 .subhead {
   color: $red;
 }

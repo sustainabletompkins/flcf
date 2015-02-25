@@ -3,41 +3,69 @@
   %meta{:content => "http://fingerlakesclimatefund.org", :property => "og:url"}
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
 
-=content_for :main_section do
-  %h4 The Finger Lakes Climate Fund
-  .row
-    .large-7.columns
-      %h5 #1 Calculate your emissions
-      %p Use our calculator to estimate your home energy, vehicle, and airplane travel emissions.
-      .down-arrow{:style=>"font-size: 50px;text-align:center;"}
-        %i.fi-arrow-down
-    .large-5.columns{:style=>"margin-bottom: 10px;"}
-      =image_tag('step-1.jpg')
-    .large-7.columns
-      %h5 #2 Purchase carbon offsets
-      %p Use our calculator to estimate your home energy, vehicle, and airplane travel emissions.
-      .down-arrow{:style=>"font-size: 50px;text-align:center;"}
-        %i.fi-arrow-down
+%section.main-section
+  .row{:style => "background-color: #fff"}
+    .large-12.columns
+      -if alert
+        .alert-box.success.radius{"data-alert" => ""}
+          =alert
+          %a.close{:href => "#"} &times;
+      -if notice
+        .alert-box.success.radius{"data-alert" => ""}
+          =notice
+          %a.close{:href => "#"} &times;
+  .row{:style => "background-color: #fff"}
+    .large-3.small-12.medium-4.columns{:style => "background-color: #A4D8EE;text-align:center; padding: 10px"}
+      %h5 Offset your carbon use
+      =image_tag 'calculator.png', :style => "margin-bottom: 15px"
+      %br
+      %button#try-calc try the calculator
+      .checkout.mobile.show-for-small-only
+        %i.fi-shopping-cart
+        checkout
 
-    .large-5.columns{:style=>"margin-bottom: 10px;"}
-      =image_tag('step-2.jpg')
-    .large-7.columns
-      %h5 #3 Put offsets to work locally
-      %p Use our calculator to estimate your home energy, vehicle, and airplane travel emissions.
-    .large-5.columns
-      =image_tag('step-3.jpg')
-  .row{:style=>"margin-top: 20px;"}
-    .large-7.small-12.columns
-      %h5 Testimonials
-      .cycle-slideshow
+    .large-9.small-12.medium-8.columns.show-for-medium-up
+      #main-image
+        =image_tag 'worker.png'
+  .row{:style => "background-color: #fff"}
+    .large-3.show-for-large-only.columns
+      #recent-offsets
+        %h5 sample offsets
+        .sample
+          .name NYS household/mo
+          .cost $12.47
+        .sample
+          .name US car commute/mo
+          .cost $7.22
+        .sample
+          .name x-country flight
+          .cost $19.03
+      #facebook
+        .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
+
+    .explanatory-text.large-5.medium-6.small-12.columns
+      %p What can you do about climate change and local resilience?
+      %ul
+        %li First, take responsibility for your own carbon emissions.  Get started with the Finger Lakes Energy Challenge where you can make a personalized plan and connect to resources.
+        %li Next, offset your unavoidable emissions and help out others in our community.  Our carbon calculator shows you how much CO2 is associated with your travel and other daily activities.
+        %li Your donation to cover the offset goes to local households needing assistance with their home energy improvements.
+      %p It's quick, easy, affordable, and strengthens our community.
+      #video
+        =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
+          =image_tag('video-placeholder.png')
+    .large-4.medium-6.small-12.columns{:style=>"background-color:#B42B17;color: #fff;padding-top:10px;min-height: 620px;"}
+      .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "600", "data-cycle-timeout"=> "6800"}
         =image_tag('testimonial_1.gif')
         =image_tag('testimonial_2.jpg')
         =image_tag('testimonial_3.jpg')
-
-
-    .large-5.small-12.columns
-      %h5 Business & Event Offsets
-      %p The Finger Lakes Climate Fund also offers carbon offsets for businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@fingerlakesclimatefund.org or 607-216-1552.
-
+        =image_tag('testimonial_4.jpg')
+        =image_tag('testimonial_5.jpg')
+      .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "500", "data-cycle-timeout"=> "7200"}
+        =image_tag('testimonial_6.jpg')
+        =image_tag('testimonial_7.jpg')
+        =image_tag('testimonial_8.jpg')
+        =image_tag('testimonial_9.jpg')
+        =image_tag('testimonial_10.jpg')
+      %p The Finger Lakes Climate Fund offers carbon offsets for individuals businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@fingerlakesclimatefund.org or 607-216-1552.
 
 
