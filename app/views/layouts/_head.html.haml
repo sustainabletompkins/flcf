@@ -1,9 +1,9 @@
 .row
   .large-12.columns{:style => "padding:0px;"}
     %nav.top-bar{"data-topbar" => "", :role => "navigation"}
-      %ul.title-area
+      .title-area
         =link_to root_path do
-          %li=image_tag('logo.png')
+          =image_tag('logo.png')
 
       %section.top-bar-section
         protect our climate by helping others
@@ -37,7 +37,7 @@
       %li=link_to "faq", pages_path("faq")
       %li=link_to "portfolio", pages_path("portfolio")
       %li=link_to "resources", pages_path("resources"), :class => 'show-for-medium-up'
-    #checkout.show-for-medium-up
+    .checkout.show-for-medium-up
       %i.fi-shopping-cart
       checkout
 

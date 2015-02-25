@@ -24,13 +24,23 @@
 
 }
 
-#checkout {
+.checkout {
   display: none;
   float:right;
-  font-size: 21px;
+  font-size: 19px;
+  font-weight: 600;
   padding: 3px 6px;
   background-color: #FCAF17;
   cursor:pointer;
+}
+.checkout.mobile {
+  clear:both;
+}
+
+
+.checkout:hover {
+  background-color: #60983b;
+
 }
 #total-cost:hover {
   background-color: #60983b;
