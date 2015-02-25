@@ -40,7 +40,7 @@
               %button#try-calc try the calculator
 
 
-            .large-9.small-12.medium-8.columns
+            .large-9.small-12.medium-8.columns.show-for-medium-up
               #main-image
                 =image_tag 'worker.png'
           .row{:style => "background-color: #fff"}
@@ -56,6 +56,8 @@
                 .sample
                   .name x-country flight
                   .cost $19.03
+              #facebook
+                .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
 
             .explanatory-text.large-5.medium-6.small-12.columns
               %p What can you do about climate change and local resilience?
@@ -64,32 +66,24 @@
                 %li Next, offset your unavoidable emissions and help out others in our community.  Our carbon calculator shows you how much CO2 is associated with your travel and other daily activities.
                 %li Your donation to cover the offset goes to local households needing assistance with their home energy improvements.
               %p It's quick, easy, affordable, and strengthens our community.
-            .large-4.medium-6.small-12.columns{:style=>"background-color:#B42B17;"}
-              %h5 Testimonials
-              .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "300"}
+              #video
+                =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
+                  =image_tag('video-placeholder.png')
+            .large-4.medium-6.small-12.columns{:style=>"background-color:#B42B17;color: #fff;padding-top:10px;min-height: 620px;"}
+              .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "600", "data-cycle-timeout"=> "6800"}
                 =image_tag('testimonial_1.gif')
                 =image_tag('testimonial_2.jpg')
                 =image_tag('testimonial_3.jpg')
                 =image_tag('testimonial_4.jpg')
                 =image_tag('testimonial_5.jpg')
-              .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "300"}
+              .cycle-slideshow{"data-cycle-fx" => "scrollHorz", "data-cycle-pause-on-hover" => "true", "data-cycle-speed" => "500", "data-cycle-timeout"=> "7200"}
                 =image_tag('testimonial_6.jpg')
                 =image_tag('testimonial_7.jpg')
                 =image_tag('testimonial_8.jpg')
                 =image_tag('testimonial_9.jpg')
                 =image_tag('testimonial_10.jpg')
-          .row{:style => "background-color: #fff"}
-            .large-3.show-for-large-only.columns
-              #facebook
-                .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
-            .large-5.medium-6.small-12.columns{:style=>"text-align:center; background-color: #006893;padding: 15px"}
-              #video
-                =link_to "http://vimeo.com/100650108", :class=> 'fancybox-media' do
-                  =image_tag('video-placeholder.png')
-            .large-4.medium-6.small-12.columns
-              .panel{:style=>"margin-top:8px;"}
-                %h5 Business & Event Offsets
-                %p The Finger Lakes Climate Fund also offers carbon offsets for businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@fingerlakesclimatefund.org or 607-216-1552.
+              %p The Finger Lakes Climate Fund offers carbon offsets for individuals businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@fingerlakesclimatefund.org or 607-216-1552.
+
 
 
         =render :partial => 'layouts/footer'

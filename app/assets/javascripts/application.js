@@ -17,7 +17,7 @@
 //= require jquery.fancybox
 //= require helpers/jquery.fancybox-media
 //= require_tree .
-$(document).on('ready', function() {
+$(document).on('ready page:load', function(){
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1752616198297352',

@@ -25,9 +25,11 @@ $green:#60983b;
 $yellow:#fcaf17;
 
 body {
-  background: url('weave-bg-green.jpg')
-}
 
+}
+.off-canvas-wrap {
+    background: url('weave-bg-green.jpg')
+}
 .subhead {
   color: $red;
 }
@@ -64,7 +66,8 @@ body {
 
 .explanatory-text {
   background-color: #FCAF17;
-  padding: 8px 12px;
+  padding: 9px 15px;
+  min-height: 620px;
   p {
     font-size: 18px;
     font-weight: 500;
@@ -88,6 +91,10 @@ body {
 
 .pac-container {
     z-index: 1051 !important;
+}
+
+#video, #facebook {
+  margin-top: 12px;
 }
 
 #recent-offsets {

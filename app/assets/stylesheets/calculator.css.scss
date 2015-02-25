@@ -26,6 +26,12 @@
 
 #checkout {
   display: none;
+  display: inline;
+  float:right;
+  font-size: 21px;
+  padding: 3px 6px;
+  background-color: #FCAF17;
+  cursor:pointer;
 }
 #total-cost:hover {
   background-color: #60983b;

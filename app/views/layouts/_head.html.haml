@@ -3,19 +3,13 @@
     %nav.top-bar{"data-topbar" => "", :role => "navigation"}
       %ul.title-area
         =link_to root_path do
-          %li.name
+          %li=image_tag('logo.png')
 
-            =image_tag('logo.png')
-        %li.toggle-topbar.menu-icon
-          %a{:href => "#"}
-            %span Menu
       %section.top-bar-section
         protect our climate by helping others
         %ul.right
           %li
-            #checkout.button.checkout{:style => "margin-right: 6px;"}
-              %i.fi-shopping-cart
-              checkout
+
 
           %li
             =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
@@ -28,13 +22,15 @@
               %i.fi-mail
 .row.horizontal-menu
   .large-12.columns{:style=>"background-color: #006893;"}
-    %ul
-      %li=link_to "home", root_path
+    %ul{:style => "display: inline;"}
+      %li=link_to "home", root_path, :class => 'show-for-medium-up'
       %li=link_to "about", pages_path("about")
       %li=link_to "faq", pages_path("faq")
-      %li=link_to "project portfolio", pages_path("portfolio")
-      %li=link_to "resources", pages_path("resources")
-
+      %li=link_to "portfolio", pages_path("portfolio")
+      %li=link_to "resources", pages_path("resources"), :class => 'show-for-medium-up'
+    #checkout.checkout{:style => "margin-right: 6px;"}
+      %i.fi-shopping-cart
+      checkout
 
 
 
