@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
+
 //= require jquery.fancybox
 //= require helpers/jquery.fancybox-media
 //= require_tree .
