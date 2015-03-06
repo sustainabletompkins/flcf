@@ -1,32 +1,14 @@
-.row{:style => "background-color: #fff;"}
-
-  .large-6.medium-6.small-12.columns
-    .panel{:style => "margin-top: 12px;"}
-      %h4 Get in touch!
-      .row
-        .large-7.columns
-          %p Comments, questions, problems or ideas?  Send us an email!
-        .large-5.columns
-          %a.radius.button.right{:href => "/contact-us"} Contact Us
-  .large-6.medium-6.small-12.columns
-    .panel
-      %h4 Spread the word!
-      .row
-        .large-12.columns
-          %p Help us grow the FLCF by sharing on your social networks
-          %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "fingerlakes", "data-text" => "Offset your carbon locally", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
-          .fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
 
 
-%footer.row{:style => "background-color: #fff"}
+%footer.row{:style => "background-color: #006893; padding:5px; color: #fff;"}
 
   .large-12.columns
     .row
       .large-6.columns
 
-        %p © Sustainable Tompkins
+        © Sustainable Tompkins
       .large-6.columns
-        %p Carbon offsets are deductible through Social Ventures 501(c)3
+        Carbon offsets are deductible through Social Ventures 501(c)3
 
 #calc.reveal-modal{"data-reveal" => ""}
   =render :partial => 'layouts/calculator'
