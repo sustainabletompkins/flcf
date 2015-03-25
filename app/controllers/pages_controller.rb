@@ -11,4 +11,8 @@ class PagesController < ApplicationController
     render params[:page_name], :layout => "full"
   end
 
+  def offset_log
+    @offsets = Offset.where(:purchased => :true)
+  end
+
 end
