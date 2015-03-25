@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121224342) do
+ActiveRecord::Schema.define(version: 20150325225356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,18 @@ ActiveRecord::Schema.define(version: 20150121224342) do
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "offsets", force: true do |t|
-    t.integer "user_id"
-    t.string  "title"
-    t.float   "pounds"
-    t.float   "cost"
-    t.string  "units"
-    t.float   "quantity"
-    t.boolean "purchased",  default: false
-    t.string  "session_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.float    "pounds"
+    t.float    "cost"
+    t.string   "units"
+    t.float    "quantity"
+    t.boolean  "purchased",  default: false
+    t.string   "session_id"
+    t.string   "name"
+    t.integer  "zipcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
