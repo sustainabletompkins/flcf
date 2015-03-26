@@ -1,7 +1,7 @@
 class SessionsController < Devise::SessionsController
   def create
     super
-    puts "asdsfff"
+
     resource.session_id = sign_in_params[:session_id]
     resource.save
     @user_offsets = Offset.where(:session_id => resource.session_id)

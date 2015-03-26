@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
   def offset_log
     @offsets = Offset.where(:purchased => :true)
+    render 'offset_log', :layout => false
   end
 
 end
