@@ -16,14 +16,14 @@ class ChargesController < ApplicationController
     end
 
     customer = Stripe::Customer.create(
-      :email => 'example@stripe.com',
+      :email => params[:stripeEmail],
       :card  => params[:stripeToken]
     )
 
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => params[:stripeCharge],
-      :description => 'Rails Stripe customer',
+      :description => 'Carbon offset',
       :currency    => 'usd'
     )
     @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
