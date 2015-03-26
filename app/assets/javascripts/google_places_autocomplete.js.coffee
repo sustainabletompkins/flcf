@@ -181,6 +181,9 @@ $ ->
   $('.cart').on "click", ->
     $("#cart").fadeIn "fast"
     $("#offset-buttons").fadeOut "fast"
+  $('#guest-checkout').on "click", ->
+    $("#user-info").fadeIn "fast"
+    $(".show-login").fadeOut "fast"
 
   $(".quick").on "click", ->
     offset_weight = parseInt($(this).attr("value"))

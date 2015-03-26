@@ -20,6 +20,16 @@ class OffsetsController < ApplicationController
     end
   end
 
+  def add_name_and_zip
+    if user_signed_in?
+      user_id = current_user.id
+    else user_id = 0
+    end
+
+    Offset.where(:session_id => params[:session_id]).update_all(:name=>params[:name], :zipcode=>params[:zipcode])
+
+  end
+
   def destroy
     @offset = Offset.find(params[:id])
     @id = @offset.id

@@ -15,10 +15,16 @@
 #myModal.reveal-modal{"data-reveal" => ""}
   %h2 OK, ready for checkout.
   %p Just a quick question first:  Would you like to proceed as a guest, or login to your FLCF account.  Using a FLCF account will allow you to save and reuse your offsets.
-
-  %button#stripe.button
+  %button#guest-checkout.button
     %i.fi-shopping-cart
-    pay now
+    guest checkout
+  #user-info{:style => "display:none;"}
+    %p Please provide your name and zipcode for our records
+    %input{:type=> "text", :id=>"name",:placeholder => "your name"}
+    %input{:type=> "text", :id=>"zipcode",:placeholder => "zipcode"}
+    %button#stripe.button
+      %i.fi-shopping-cart
+      pay now
   %button.show-login create account before checkout
   %a.close-reveal-modal ×
 
@@ -72,18 +78,17 @@
   #login-status{:value=>"guest"}
   :javascript
     $('#stripe')[0].addEventListener('click', function(e) {
-      total_cost=0;
-      cost=0;
-      $('#cart .cost').each(function() {
-        total_cost += parseFloat($(this).text());
+      console.log($('#name').val());
+      console.log($('#zipcode').val());
+      var data = {
+        name: $('#name').val(),
+        zipcode: $('#zipcode').val(),
+        session_id: $.cookie('session_id')
+      }
+      $.post("offsets/add_name_and_zip/", data, function() {
+
       });
-      cost = parseInt(total_cost*100);
-      handler.open({
-        name: 'Finger Lakes Climate Fund',
-        description: 'Carbon Offset ($'+total_cost+')',
-        amount: cost,
-        shippingAddress: false
-      });
+
       e.preventDefault();
     });
 
@@ -107,7 +112,20 @@
           document.getElementById("chargeForm").submit();
         }
     });
-
+  function checkoutUser() {
+    total_cost=0;
+    cost=0;
+    $('#cart .cost').each(function() {
+      total_cost += parseFloat($(this).text());
+    });
+    cost = parseInt(total_cost*100);
+    handler.open({
+      name: 'Finger Lakes Climate Fund',
+      description: 'Carbon Offset ($'+total_cost+')',
+      amount: cost,
+      shippingAddress: false
+    });
+  };
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
 

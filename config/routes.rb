@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'process_purchased'
       post 'duplicate'
       post 'populate_cart'
+      post 'add_name_and_zip'
     end
   end
 
