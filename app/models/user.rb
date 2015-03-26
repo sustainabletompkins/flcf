@@ -60,9 +60,12 @@ class User < ActiveRecord::Base
   private
 
   def load_offsets_from_session
+    puts "asdsfff"
     @user_offsets = Offset.where(:session_id => self.session_id)
     @user_offsets.each do |o|
       o.user_id = self.id
+      o.name = self.name
+      o.zipcode = self.zipcode
       o.save
     end
   end
