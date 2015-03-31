@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root :to => 'pages#home'
   match '/offset-log' => 'pages#offset_log', via: [:get]
+  match '/calculator' => 'pages#calculator', via: [:get]
   get 'pages/:page_name' => 'pages#index', :as => :pages
 end

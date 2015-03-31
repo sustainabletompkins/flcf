@@ -16,4 +16,8 @@ class PagesController < ApplicationController
     render 'offset_log', :layout => false
   end
 
+  def calculator
+    render 'calculator', :layout => "blank"
+  end
+
 end
