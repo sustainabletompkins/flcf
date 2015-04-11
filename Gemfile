@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-
+gem 'newrelic_rpm'
 gem 'haml-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

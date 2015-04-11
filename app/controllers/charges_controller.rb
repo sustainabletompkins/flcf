@@ -12,6 +12,7 @@ class ChargesController < ApplicationController
 
     Offset.where(:session_id=>params[:stripeSession]).each do |o|
       o.purchased = true
+      o.email = params[:stripeEmail]
       o.save
     end
 

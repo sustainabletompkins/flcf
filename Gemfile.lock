@@ -99,6 +99,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.10.2)
+    newrelic_rpm (3.11.2.286)
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -201,6 +202,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  newrelic_rpm
   omniauth
   omniauth-facebook
   omniauth-twitter
