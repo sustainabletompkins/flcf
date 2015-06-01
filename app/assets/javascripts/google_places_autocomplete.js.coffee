@@ -273,6 +273,8 @@ $ ->
       miles = $("#air-miles").val()
       offset_title = "Plane Trip"
 
+    miles = miles * $("#air-travel-offset input[type=number]")[0].value
+
     if $("#air-travel-offset input[type=checkbox]")[0].checked
       miles = miles*2
       offset_title += " (RT)"

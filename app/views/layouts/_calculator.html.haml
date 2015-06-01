@@ -36,6 +36,9 @@
       add to cart
       %i.fi-arrow-right.arrow
   #air-travel-offset.offset-form
+    %label how many travelers?
+    %input.traveler-count.clearer{:type=>"number",:min => 1, :value => 1}
+    %hr
     %label enter your trip mileage
     %input.clearable{:placeholder => "total miles", :id=>"air-miles"}
     %hr
@@ -43,6 +46,7 @@
     %input.starting-air-city.clearer{:placeholder => "starting location"}
     %input.ending-air-city.clearer{:placeholder => "end location"}
     %hr
+
     .round-trip
       %label round trip?
       %input{:checked=>:true,:type => "checkbox"}
