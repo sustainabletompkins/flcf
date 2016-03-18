@@ -1,5 +1,5 @@
 $ ->
-  cost_per_pound = .01
+  cost_per_pound = .0125
   propane_rate = 12.17
   fuel_oil_rate = 22.37
   natural_gas_rate = 11
