@@ -1,7 +1,9 @@
 #calculator{
   position: relative;
 
-
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   input {
     font-size: 1.2em;
     padding: 3px;
@@ -58,13 +60,19 @@
 }
 
 
-#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart {
+#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart, #offset-choices {
   display: none;
   position: relative;
   hr {
     margin:12px 0;
   }
   z-index: 999;
+  padding: 10px;
+
+}
+
+#cart {
+  background-color: #e0d238;
 }
 
 .offset-form {
@@ -118,6 +126,22 @@
 .round-trip {
   label,input {
     display:inline;
+  }
+}
+
+.more {
+  &::after {
+    content: '\25ba';
+  }
+  font-weight: 600;
+  color: #1b75b8;
+  cursor: pointer;
+}
+a.more:hover {
+  color: #5b922f;
+  &::after {
+    content: '\25ba';
+    color: #000;
   }
 }
 

@@ -2,6 +2,23 @@
   %meta{:content => "Finger Lakes Climate Fund", :property => "og:title"}
   %meta{:content => "http://fingerlakesclimatefund.org", :property => "og:url"}
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
+.row#overview
+  .large-4.medium-4.columns
+    animation goes here
+  .large-4.medium-4.columns
+    %h3 Recent Offset Donors
+    =image_tag('recent-awardee.jpg', :class=>'img-circle')
+    %label The Paw Family
+    %span We offset our 9 hot tubs and backyard air-conditioner and now our conscience is completely free!
+    .more=link_to 'Offset your carbon use', "#"
+  .large-4.medium-4.columns
+    %h3 Recent Grant Awardees
+    =image_tag('recent-awardee.jpg', :class=>'img-circle')
+    %label The Paw Family
+    %span Grant Amount: $1,224
+    %br
+    %span C02 Offset: 122,440lbs
+    .more=link_to 'Find out more!', pages_path('portfolio')
 .row#your-impact
   .large-12.columns
     %h5 Our Impact
@@ -13,15 +30,15 @@
   .large-3.medium-3.columns.impact
 
     %span 3,999,999
-    %label lbs C02 offset
+    %label gallons gas avoided
   .large-3.medium-3.columns.impact
 
     %span 3,999,999
-    %label lbs C02 offset
+    %label in offsets raised
   .large-3.medium-3.columns.impact
 
-    %span 3,999,999
-    %label lbs C02 offset
+    %span 18
+    %label grants awarded
 .row#seal-the-cracks{:style=>"padding:0px;"}
   .large-8.columns{:style=>'padding-top: 15px;'}
     %h4 Help us
@@ -50,10 +67,10 @@
         .alert-box.success.radius{"data-alert" => ""}
           =notice
           %a.close{:href => "#"} &times;
-  .row
-    .large-12.columns{:style => "background-color: #851cb7; padding: 0px;"}
-      .heading-text carbon races
-    .large-12.columns{:style=>'height:300px;'}
+  -#.row
+    -#.large-12.columns{:style => "background-color: #851cb7; padding: 0px;"}
+      -#.heading-text carbon races
+    -#.large-12.columns{:style=>'height:300px;'}
       -#%a.twitter-share-button{"data-count" => "none", "data-hashtags" => "fingerlakes", "data-text" => "Offset your carbon locally", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
       -#.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "300"}
 

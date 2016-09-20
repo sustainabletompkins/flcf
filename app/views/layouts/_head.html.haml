@@ -3,19 +3,42 @@
     .large-12.columns{:style => "padding:0px;position:relative;"}
       #calculator-buttons
         #offset-buttons
-          #air-travel-button.button.blue-header-button
+          #air-travel-button.air-travel-button.button.blue-header-button
             =image_tag('plane.png', :size=>'30x30')
             air travel
 
-          #car-travel-button.button.green-header-button
+          #car-travel-button.button.car-travel-button.green-header-button
             =image_tag('car.png', :size=>'30x30')
             car travel
 
-          #home-energy-button.button.yellow-header-button
+          #home-energy-button.home-energy-button.button.yellow-header-button
             =image_tag('house.png', :size=>'30x30')
             building energy
 
-          #quick-button.button.purple-header-button
+          #quick-button.quick-button.button.purple-header-button
+            =image_tag('quick.png', :size=>'30x30')
+            quick offset
+
+          -if user_signed_in?
+            #saved-button.button
+              =image_tag('disk.png', :size=>'30x30')
+              saved offsets
+              %i.fi-arrow-right.arrow
+        #offset-choices.offset-form
+          %p What would you like to offset?
+          .air-travel-button.button
+            =image_tag('plane.png', :size=>'30x30')
+            air travel
+
+          .car-travel-button.button
+            =image_tag('car.png', :size=>'30x30')
+            car travel
+
+          .home-energy-button.button
+            =image_tag('house.png', :size=>'30x30')
+            building energy
+
+          .quick-button.button
             =image_tag('quick.png', :size=>'30x30')
             quick offset
 
@@ -92,6 +115,9 @@
             .button.cancel
               cancel
           #cart
+
+            #offsets
+            %hr
             -if user_signed_in?
               %button#stripe.button
                 %i.fi-shopping-cart
@@ -104,8 +130,6 @@
             .new-offset.button
               %i.fi-plus
               new offset
-            #offsets
-            %hr
           -if user_signed_in?
             #saved-offsets.offset-form
               =render :partial => 'offsets/saved', :collection => @saved_offsets, :as=>:offset

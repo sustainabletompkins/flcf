@@ -118,7 +118,7 @@ $ ->
 
     $('input.clearable').val("")
 
-  $("#air-travel-button").on "click", ->
+  $(".air-travel-button").on "click", ->
     offset_type = "air"
     $(".offset-form").hide()
     $("#air-travel-offset").show()
@@ -126,20 +126,20 @@ $ ->
 
     return
 
-  $("#car-travel-button").on "click", ->
+  $(".car-travel-button").on "click", ->
     offset_type = "car"
     $(".offset-form").hide()
     $("#car-travel-offset").show()
     $(".offset-form").css('background-color','#5b922f')
 
     return
-  $("#saved-button").on "click", ->
+  $(".saved-button").on "click", ->
     $(".offset-form").hide()
     $("#saved-offsets").show()
     $(".offset-form").css('background-color','#2774ad')
 
     return
-  $("#home-energy-button").on "click", ->
+  $(".home-energy-button").on "click", ->
     $(".offset-form").hide()
     $("#home-energy-offset").show()
     $(".offset-form").css('background-color','#dca600')
@@ -147,7 +147,7 @@ $ ->
     $("#home-energy-offset input").val("")
     return
 
-  $("#quick-button").on "click", ->
+  $(".quick-button").on "click", ->
     $(".offset-form").hide()
     $("#quick-offset").fadeIn "fast"
     $(".offset-form").css('background-color','#8012b3')
@@ -208,8 +208,8 @@ $ ->
     return
 
   $(".new-offset").on "click", ->
-    $("#cart").fadeOut "fast"
-    $("#offset-buttons").fadeIn "fast"
+    $("#cart").hide()
+    $("#offset-choices").show()
     $("#donation-value").focus()
     return
 

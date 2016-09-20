@@ -143,6 +143,9 @@ body {
       color: white;
 
     }
+    a:hover {
+      color: #eee;
+    }
     i {
       font-size: 1.9em;
       margin-right: 8px;
@@ -250,7 +253,7 @@ background:hover;
   position: absolute;
   top: 0px;
   right: 0px;
-  bottom: 1px;
+  height: 45px;
   background: #1b75b8;
   line-height: 1.1em;
   float: left;
@@ -328,6 +331,7 @@ background:hover;
   label {
     font-size: 1em;
     line-height: 1em;
+    color: #fff;
   }
   span {
     font-size: 1.5em;
@@ -349,4 +353,22 @@ background:hover;
 
 .video-wrap {
   width: 300px;
+}
+
+.img-circle {
+    border-radius: 50%;
+    width: 76%;
+    margin: 0 12%;
+}
+
+#overview {
+  padding: 12px 0;
+  text-align:center;
+  h3 {
+    font-size: 1.1em;
+    font-weight:bold;
+    text-align:center;
+    color: #5b922f;
+    line-height: .8em;
+  }
 }
