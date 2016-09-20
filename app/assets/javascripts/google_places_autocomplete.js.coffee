@@ -120,29 +120,38 @@ $ ->
 
   $("#air-travel-button").on "click", ->
     offset_type = "air"
-    $("#air-travel-offset").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
+    $(".offset-form").hide()
+    $("#air-travel-offset").show()
+    $(".offset-form").css('background-color','#2774ad')
+
     return
 
   $("#car-travel-button").on "click", ->
     offset_type = "car"
-    $("#car-travel-offset").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
+    $(".offset-form").hide()
+    $("#car-travel-offset").show()
+    $(".offset-form").css('background-color','#5b922f')
+
     return
   $("#saved-button").on "click", ->
-    offset_type = "car"
-    $("#saved-offsets").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
+    $(".offset-form").hide()
+    $("#saved-offsets").show()
+    $(".offset-form").css('background-color','#2774ad')
+
     return
   $("#home-energy-button").on "click", ->
-    $("#home-energy-offset").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
+    $(".offset-form").hide()
+    $("#home-energy-offset").show()
+    $(".offset-form").css('background-color','#dca600')
+
     $("#home-energy-offset input").val("")
     return
 
   $("#quick-button").on "click", ->
+    $(".offset-form").hide()
     $("#quick-offset").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
+    $(".offset-form").css('background-color','#8012b3')
+
     return
 
   $(".cancel").on "click", ->

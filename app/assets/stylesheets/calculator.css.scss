@@ -2,7 +2,6 @@
   position: relative;
 
 
-  padding: 5px 10px;
   input {
     font-size: 1.2em;
     padding: 3px;
@@ -13,28 +12,10 @@
   }
 }
 
-#total-cost {
-  position:absolute;
-  top: 10px;
-  right: 10px;
-  width: 75px;
-  height: 30px;
-  background-color: #fcaf17;
-  text-align: center;
-  .value {
-    display:inline;
-  }
-  cursor: pointer;
 
-}
 
 .checkout {
   display: none;
-  float:right;
-  font-size: 19px;
-  font-weight: 600;
-  padding: 3px 6px;
-  background-color: #FCAF17;
   cursor:pointer;
 }
 .checkout.mobile {
@@ -51,13 +32,11 @@
 }
 
 #offset-buttons {
-
   .button {
-    display: block;
-    text-align: left;
-    font-size: 25px;
-    margin-bottom: 3px;
+    margin: 0px;
   }
+  z-index: 1000;
+  height: 45px;
   i.left-logo {
     margin-right: 7px;
     font-size: 25px;
@@ -85,10 +64,23 @@
   hr {
     margin:12px 0;
   }
+  z-index: 999;
 }
 
 .offset-form {
+  padding: 0px 12px;
+  label {
+      color: #fff;
+      margin-bottom: 3px;
+  }
 
+}
+
+#home-energy-offset {
+  input {
+    margin-bottom: 5px;
+    display: block;
+  }
 }
 
 .offset {

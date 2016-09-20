@@ -25,7 +25,7 @@ $green:#60983b;
 $yellow:#fcaf17;
 
 body {
-   background: image-url('weave-bg-green.jpg');
+
 }
 
 .subhead {
@@ -136,24 +136,20 @@ body {
 }
 
 .horizontal-menu {
-  ul {
-    li {
-      background-color: #006893;
-      float:left;
-      list-style-type: none;
-      padding: 3px 15px;
-      text-align:center;
-      font-size: 17px;
-      a {
-        color: #fff;
-        font-weight: 500;
-        text-transform: uppercase;
-      }
+    padding: 4px 10px;
+    display: inline-block;
+    vertical-align:middle;
+    a {
+      color: white;
+
     }
-    li:hover {
-      background-color: #B42B17;
+    i {
+      font-size: 1.9em;
+      margin-right: 8px;
     }
-  }
+          line-height: 1.1em;
+    text-align:center;
+    margin: 4px 0;
 }
 
 .pic {
@@ -162,3 +158,195 @@ body {
 }
 
 
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#508129+0,5b922f+100 */
+.green-header-button {
+  float: left;
+  width: 25%;
+  text-align:center;
+  background: #508129; /* Old browsers */
+  background: -moz-linear-gradient(top,  #508129 0%, #5b922f 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #508129 0%,#5b922f 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #508129 0%,#5b922f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#508129', endColorstr='#5b922f',GradientType=0 ); /* IE6-9 */
+}
+.green-header-button:hover, .blue-header-button:hover, .yellow-header-button:hover, .purple-header-button:hover {
+  &::after {
+    content: '\25ba';
+  }
+}
+.blue-header-button {
+  float: left;
+  text-align:center;
+  width: 25%;
+  background: #0a2d48; /* Old browsers */
+  background: -moz-linear-gradient(top,  #0a2d48 0%, #2774ad 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #0a2d48 0%,#2774ad 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #0a2d48 0%,#2774ad 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a2d48', endColorstr='#2774ad',GradientType=0 ); /* IE6-9 */
+}
+.yellow-header-button {
+  display: inline-block;
+  float: left;
+  text-align:center;
+  width: 25%;
+background: #c29300; /* Old browsers */
+background: -moz-linear-gradient(top, #c29300 0%, #dca600 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #c29300 0%,#dca600 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #c29300 0%,#dca600 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c29300', endColorstr='#dca600',GradientType=0 );  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a2d48', endColorstr='#2774ad',GradientType=0 ); /* IE6-9 */
+}
+.purple-header-button {
+  float: left;
+  text-align:center;
+  width: 25%;
+background: #7517a1; /* Old browsers */
+background: -moz-linear-gradient(top, #7517a1 0%, #8012b3 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #7517a1 0%,#8012b3 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #7517a1 0%,#8012b3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7517a1', endColorstr='#8012b3',GradientType=0 );
+
+}
+
+.purple-header-button:hover {
+background:hover;
+}
+.narrow {
+  width: 9%;
+  margin-left: 1%;
+}
+.wide {
+  width: 15%;
+}
+#calculator-buttons {
+  color: white;
+  font-size: 1.1em;
+  line-height: 1.1em;
+  i {
+    font-size: 1.7em;
+    margin-right: 6px;
+    vertical-align:middle;
+  }
+  margin-right: 100px;
+
+}
+
+#logo {
+  width: 35px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  background: #1b75b8;
+    line-height: 1.1em;
+  i {
+    margin: 2px 0 0px 9px;
+    font-size: 25px;
+    color: white;
+  }
+}
+
+#total-cost {
+  width: 100px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 1px;
+  background: #1b75b8;
+  line-height: 1.1em;
+  float: left;
+  padding-top: 5px;
+  text-align:center;
+  i {
+
+    font-size: 1.7em;
+    margin-right: 6px;
+    vertical-align:middle;
+  }
+}
+
+#banner {
+  background-color: gray;
+
+}
+#seal-the-cracks {
+  background: url('seal-the-cracks-1100.png');
+  padding: 25px 15px 10px;
+
+  h5 {
+    color: #5b922f;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+
+  }
+  h4 {
+    color: #5b922f;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-left: 26%;
+
+  }
+}
+
+.heading-text {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding: 7px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+#cracks-impacts {
+  margin-top: 20px;
+  color: #1b75b8;
+  font-weight: 600;
+  ul, li {
+    font-size: 1.1em;
+    list-style-type: none;
+  }
+}
+.cracks-logo {
+  text-align: center;
+  width: 75%;
+  margin: 0 12%;
+}
+#your-impact {
+  background-color: #5b922f;
+  padding: 10px;
+  h5 {
+    text-align:center;
+    color: #fff;
+
+  }
+
+}
+
+.impact {
+  color: #fff;
+  text-align: center;
+  label {
+    font-size: 1em;
+    line-height: 1em;
+  }
+  span {
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1em;
+    padding: 0px;
+    color: #fff;
+  }
+}
+
+#carbon-races-heading {
+  background: url('carbon-races-1100.png') -50px;
+  text-align: center;
+  vertical-align:middle;
+  height: 240px;
+  line-height: 240px;
+  font-size: 3em;
+}
+
+.video-wrap {
+  width: 300px;
+}

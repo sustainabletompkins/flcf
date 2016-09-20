@@ -22,33 +22,15 @@
 
 
         %section.main-section
-          .row{:style => "background-color: #fff"}
-            .large-3.small-12.medium-4.columns{:style=>"padding:0px;"}
-              %div{:style => "background-color: #A4D8EE;text-align:center; padding: 10px"}
-                %h5 Offset your carbon use
-                =image_tag 'calculator.png', :style => "margin-bottom: 15px"
-                %br
-                %button#try-calc try the calculator
+          .row{:style => "background-color: #fff;padding:0px;"}
+            .large-3.small-12.medium-4.columns
 
-              #recent-offsets
-                %h5 sample offsets
-                .sample
-                  .name NYS household/mo
-                  .cost $12.47
-                .sample
-                  .name US car commute/mo
-                  .cost $7.22
-                .sample
-                  .name x-country flight
-                  .cost $19.03
               #facebook
                 .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
 
 
-            .large-9.small-12.medium-8.columns
-              .panel
-
-                #content
-                  =yield
+            .large-9.small-12.medium-8.columns{:style=>"padding-top: 8px;"}
+              #content
+                =yield
         =render :partial => 'layouts/footer'
 

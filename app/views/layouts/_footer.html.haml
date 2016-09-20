@@ -1,14 +1,15 @@
 
 
-%footer.row{:style => "background-color: #006893; padding:5px; color: #fff;"}
+%footer.row{:style => "background-color: #006893; padding:5px; color: #fff;text-align:center;"}
 
   .large-12.columns
     .row
-      .large-6.columns
-
-        © Sustainable Tompkins
-      .large-6.columns
-        Carbon offsets are deductible through Social Ventures 501(c)3
+      .large-12.columns
+        The Finger Lakes Climate Fund is a program of
+        %br
+        =image_tag('st-logo.jpg', :size=>'200', :style=>'margin: 7px;')
+        %br
+        Carbon offsets are deductible through Sustainable Tompkins 501(c)3
 
 #calc.reveal-modal{"data-reveal" => ""}
   =render :partial => 'layouts/calculator'
@@ -93,8 +94,17 @@
     });
 
 :javascript
+  var calcDiv;
   $('#try-calc').on('click',function() {
     $('#calc').foundation("reveal","open");
+  });
+  $('.calc-button').on("click", function() {
+    console.log(calcDiv);
+    $('#calc-div').empty();
+    calcDiv = document.createElement('div');
+    $('#calc-div').append("#{j render :partial => 'layouts/calculator'}");
+    $(this).append(calcDiv);
+
   });
   $('.show-login').on("click", function() {
     $("#myModal").html("#{j render :partial => 'devise/sessions/login'}")

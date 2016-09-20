@@ -1,45 +1,148 @@
-.row
-  .large-12.columns{:style => "padding:0px;"}
-    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
-      .title-area
-        =link_to root_path do
-          =image_tag('logo.png')
+.contain-to-grid.fixed
+  .row.topbar
+    .large-12.columns{:style => "padding:0px;position:relative;"}
+      #calculator-buttons
+        #offset-buttons
+          #air-travel-button.button.blue-header-button
+            =image_tag('plane.png', :size=>'30x30')
+            air travel
 
-      %section.top-bar-section
-        protect our climate by helping others
-        %ul.right
-          %li
+          #car-travel-button.button.green-header-button
+            =image_tag('car.png', :size=>'30x30')
+            car travel
 
+          #home-energy-button.button.yellow-header-button
+            =image_tag('house.png', :size=>'30x30')
+            building energy
 
-          %li
-            =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
-              %i.fi-social-facebook
-          %li
-            =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
-              %i.fi-social-twitter
-          %li
-            =link_to "/contact-us", :class=>"social" do
-              %i.fi-mail
+          #quick-button.button.purple-header-button
+            =image_tag('quick.png', :size=>'30x30')
+            quick offset
 
           -if user_signed_in?
-            %li
-              = link_to "Log out", destroy_session_path(:user), :method => :delete
+            #saved-button.button
+              =image_tag('disk.png', :size=>'30x30')
+              saved offsets
+              %i.fi-arrow-right.arrow
+        #total-cost.checkout.show-for-medium-up
+          %i.fi-shopping-cart
+          pay
 
-          -else
-            %li
-              =link_to  new_user_registration_path do
-                %button{:style=>"top:0px;"} Register
-.row.horizontal-menu
+
+        #calculator
+          #air-travel-offset.offset-form
+            %label how many travelers?
+            %input.traveler-count.clearer{:type=>"number",:min => 1, :value => 1}
+            %hr
+            %label enter your trip mileage
+            %input.clearable{:placeholder => "total miles", :id=>"air-miles"}
+            %hr
+            %label or, let us calculate it for you:
+            %input.starting-air-city.clearer{:placeholder => "starting location"}
+            %input.ending-air-city.clearer{:placeholder => "end location"}
+            %hr
+
+            .round-trip
+              %label round trip?
+              %input{:checked=>:true,:type => "checkbox"}
+            #calculate-air-offset.button
+              calculate offset
+            .button.cancel
+              cancel
+
+          #car-travel-offset.offset-form
+            %label enter your trip mileage
+            %input.clearable{:placeholder => "total miles", :id=>"car-miles"}
+            %hr
+            %label or, let us calculate it for you:
+            %input.starting-car-city.clearer{:placeholder => "starting location"}
+            %input.ending-car-city.clearer{:placeholder => "end location"}
+            %hr
+            %label car mpg (optional)
+            %input{:value => "25", :id => "mpg"}
+            .round-trip
+              %label round trip?
+              %input{:checked=>:true,:type => "checkbox"}
+            %hr
+            #calculate-car-offset.button
+              calculate offset
+            .button.cancel
+              cancel
+
+          #home-energy-offset.offset-form
+            %p enter your energy use
+            %input.clearable{:id=>"propane",:placeholder => "propane (gallons)"}
+            %input.clearable{:id=>"natural-gas",:placeholder => "natural gas (therms)"}
+            %input.clearable{:id=>"electricity",:placeholder => "electricity (kWh)"}
+            %input.clearable{:id=>"fuel-oil",:placeholder => "fuel oil (gallons)"}
+            #calculate-home-offset.button
+              calculate offset
+            .button.cancel
+              cancel
+
+          #quick-offset.offset-form
+            %p choose a quick offset
+            #home-month.quick.button{:value=>1240, :title=>"Home Energy, 1 mo"} Avg NY Home Energy, 1mo
+            #home-year.quick.button{:value=>14962, :title=>"Home Energy, 1 yr"} Avg NY Home Energy, 1yr
+            #commute-month.quick.button{:value=>722, :title=>"Car Commute, 1 mo"} Avg US Car Commute, 1mo
+            #commute-year.quick.button{:value=>8660, :title=>"Car Commute, 1 yr"} Avg US Car Commute, 1yr
+            #air-travel.quick.button{:value=>504, :title=>"Domestic Air Travel, 1 yr"} Domestic Air Travel, 1 trip
+            #air-travel.quick.button{:value=>1268, :title=>"International Air Travel, 1 yr"} International Air Travel, 1 trip
+            %p
+            .button.cancel
+              cancel
+          #cart
+            -if user_signed_in?
+              %button#stripe.button
+                %i.fi-shopping-cart
+                checkout
+            -else
+              .checkout.button
+                %i.fi-shopping-cart
+                checkout
+
+            .new-offset.button
+              %i.fi-plus
+              new offset
+            #offsets
+            %hr
+          -if user_signed_in?
+            #saved-offsets.offset-form
+              =render :partial => 'offsets/saved', :collection => @saved_offsets, :as=>:offset
+              .button.cancel
+                cancel
+            %form{:action => "http://fingerlakesclimatefund.org/process-cart-temp.php", :method => "post", :id=>"submit-cart"}
+              %input{:name => "label", :type => "hidden", :value => ""}
+              %input{:name => "weight", :type => "hidden", :value => ""}
+              %input{:name => "cost", :type => "hidden", :value => ""}
+
+.row{:style => "padding:0px;margin-top: 45px;"}
   .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
-    %ul{:style => "display: inline;"}
-      %li=link_to "home", root_path, :class => 'show-for-medium-up'
-      %li=link_to "about", pages_path("about")
-      %li=link_to "faq", pages_path("faq")
-      %li=link_to "portfolio", pages_path("portfolio")
-      %li=link_to "resources", pages_path("resources"), :class => 'show-for-medium-up'
-    .checkout.show-for-medium-up
-      %i.fi-shopping-cart
-      checkout
+    #banner
+      =image_tag('carbon-offset-banner-1100.png')
+
+.row
+  .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
+    .horizontal-menu.narrow
+      =link_to "Home", root_path, :class => 'show-for-medium-up'
+    .horizontal-menu.wide
+      =link_to "How Do I Reduce My Emissions?", pages_path("reduce-emissions")
+    .horizontal-menu.narrow
+      =link_to "Carbon Races", pages_path("carbon-races")
+    .horizontal-menu.wide
+      =link_to "Business and Event Offsets", pages_path("business-events-offsets")
+    .horizontal-menu.narrow
+      =link_to "Grant Recipients", pages_path("portfolio")
+    .horizontal-menu.narrow
+      =link_to "FAQ", pages_path("faq")
+    .horizontal-menu.narrow
+      =link_to "About Us", pages_path("about"), :class => 'show-for-medium-up'
+    .horizontal-menu.wide
+      =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+        %i.fi-social-facebook
+      =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
+        %i.fi-social-twitter
+
 
 
 
