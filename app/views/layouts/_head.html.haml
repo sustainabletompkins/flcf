@@ -24,35 +24,36 @@
               =image_tag('disk.png', :size=>'30x30')
               saved offsets
               %i.fi-arrow-right.arrow
-        #offset-choices.offset-form
-          %p What would you like to offset?
-          .air-travel-button.button
-            =image_tag('plane.png', :size=>'30x30')
-            air travel
 
-          .car-travel-button.button
-            =image_tag('car.png', :size=>'30x30')
-            car travel
-
-          .home-energy-button.button
-            =image_tag('house.png', :size=>'30x30')
-            building energy
-
-          .quick-button.button
-            =image_tag('quick.png', :size=>'30x30')
-            quick offset
-
-          -if user_signed_in?
-            #saved-button.button
-              =image_tag('disk.png', :size=>'30x30')
-              saved offsets
-              %i.fi-arrow-right.arrow
         #total-cost.checkout.show-for-medium-up
           %i.fi-shopping-cart
           pay
 
 
         #calculator
+          #offset-choices.offset-form
+            %p What would you like to offset?
+            .air-travel-button.button
+              =image_tag('plane.png', :size=>'30x30')
+              air travel
+
+            .car-travel-button.button
+              =image_tag('car.png', :size=>'30x30')
+              car travel
+
+            .home-energy-button.button
+              =image_tag('house.png', :size=>'30x30')
+              building energy
+
+            .quick-button.button
+              =image_tag('quick.png', :size=>'30x30')
+              quick offset
+
+            -if user_signed_in?
+              #saved-button.button
+                =image_tag('disk.png', :size=>'30x30')
+                saved offsets
+                %i.fi-arrow-right.arrow
           #air-travel-offset.offset-form
             %label how many travelers?
             %input.traveler-count.clearer{:type=>"number",:min => 1, :value => 1}

@@ -372,3 +372,38 @@ background:hover;
     line-height: .8em;
   }
 }
+
+/* progress bar */
+#graph {
+  div {
+      position:relative;
+      width: 80%;
+      margin: 10%;
+  }
+  canvas {
+      display: block;
+      position:absolute;
+      top:10%;
+      left:10%;
+  }
+  span {
+      width: 80%;
+      margin: 10%;
+      color:#5b922f;
+      display:block;
+      line-height:220px;
+      text-align:center;
+      font-family:sans-serif;
+      font-size:40px;
+      font-weight:100;
+      margin-left:5px;
+  }
+
+  input {
+      width: 200px;
+  }
+
+  span {
+
+  }
+}

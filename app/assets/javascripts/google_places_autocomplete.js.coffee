@@ -118,6 +118,12 @@ $ ->
 
     $('input.clearable').val("")
 
+  $(".show-calc").on "click", ->
+    $(".offset-form").hide()
+    $("#offset-choices").show()
+
+    return
+
   $(".air-travel-button").on "click", ->
     offset_type = "air"
     $(".offset-form").hide()

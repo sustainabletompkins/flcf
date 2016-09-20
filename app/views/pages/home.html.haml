@@ -10,7 +10,7 @@
     =image_tag('recent-awardee.jpg', :class=>'img-circle')
     %label The Paw Family
     %span We offset our 9 hot tubs and backyard air-conditioner and now our conscience is completely free!
-    .more=link_to 'Offset your carbon use', "#"
+    .more.show-calc=link_to 'Offset your carbon use', "#"
   .large-4.medium-4.columns
     %h3 Recent Grant Awardees
     =image_tag('recent-awardee.jpg', :class=>'img-circle')
@@ -54,6 +54,8 @@
           %li Help protect the climate
           %li Strengthen our local economy
   .large-4.columns
+    #graph.chart{"data-percent" => "88"}
+
 
 
 %section.main-section
@@ -73,4 +75,46 @@
     -#.large-12.columns{:style=>'height:300px;'}
       -#%a.twitter-share-button{"data-count" => "none", "data-hashtags" => "fingerlakes", "data-text" => "Offset your carbon locally", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
       -#.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "300"}
+:javascript
 
+  var el = document.getElementById('graph'); // get canvas
+
+  var options = {
+      percent:  el.getAttribute('data-percent') || 25,
+      size: el.getAttribute('data-size') || 220,
+      lineWidth: el.getAttribute('data-line') || 20,
+      rotate: el.getAttribute('data-rotate') || 0
+  }
+
+  var canvas = document.createElement('canvas');
+  var span = document.createElement('span');
+  span.textContent = options.percent + '%';
+
+  if (typeof(G_vmlCanvasManager) !== 'undefined') {
+      G_vmlCanvasManager.initElement(canvas);
+  }
+
+  var ctx = canvas.getContext('2d');
+  canvas.width = canvas.height = options.size;
+
+  el.appendChild(span);
+  el.appendChild(canvas);
+
+  ctx.translate(options.size / 2, options.size / 2); // change center
+  ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
+
+  //imd = ctx.getImageData(0, 0, 240, 240);
+  var radius = (options.size - options.lineWidth) / 2;
+
+  var drawCircle = function(color, lineWidth, percent) {
+      percent = Math.min(Math.max(0, percent || 1), 1);
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
+      ctx.strokeStyle = color;
+          ctx.lineCap = 'round'; // butt, round or square
+      ctx.lineWidth = lineWidth
+      ctx.stroke();
+  };
+
+  drawCircle('#efefef', options.lineWidth, 100 / 100);
+  drawCircle('#5b922f', options.lineWidth, options.percent / 100);
