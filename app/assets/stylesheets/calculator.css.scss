@@ -29,9 +29,6 @@
   background-color: #60983b;
 
 }
-#total-cost:hover {
-  background-color: #60983b;
-}
 
 #offset-buttons {
   .button {
@@ -133,19 +130,4 @@
   }
 }
 
-.more {
-  &::after {
-    content: '\25ba';
-  }
-  font-weight: 600;
-  color: #1b75b8;
-  cursor: pointer;
-}
-a.more:hover {
-  color: #5b922f;
-  &::after {
-    content: '\25ba';
-    color: #000;
-  }
-}
 

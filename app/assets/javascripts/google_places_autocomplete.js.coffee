@@ -325,6 +325,8 @@ $ ->
 
   saveOffset = (data) ->
     $('#checkout').css("display","inline")
+    $('#total-cost').show()
+    $('#quick-button').hide()
     $.post "/offsets", data
     return
 

@@ -230,7 +230,6 @@ background:hover;
     margin-right: 6px;
     vertical-align:middle;
   }
-  margin-right: 100px;
 
 }
 
@@ -249,18 +248,13 @@ background:hover;
 }
 
 #total-cost {
-  width: 100px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  height: 45px;
-  background: #1b75b8;
-  line-height: 1.1em;
-  float: left;
+  background: #e0d238;
   padding-top: 5px;
   text-align:center;
+  display: none;
+  color: #2774ad;
   i {
-
+    color: #2774ad;
     font-size: 1.7em;
     margin-right: 6px;
     vertical-align:middle;
@@ -323,6 +317,23 @@ background:hover;
 
   }
 
+}
+
+
+.more {
+  &::after {
+    content: '\25ba';
+  }
+  font-weight: 600;
+  color: #1b75b8;
+  cursor: pointer;
+}
+a.more:hover {
+  color: #5b922f;
+  &::after {
+    content: '\25ba';
+    color: #000;
+  }
 }
 
 .impact {
