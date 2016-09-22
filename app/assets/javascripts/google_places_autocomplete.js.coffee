@@ -126,6 +126,7 @@ $ ->
 
   $(".air-travel-button").on "click", ->
     offset_type = "air"
+    $("#cart").hide()
     $(".offset-form").hide()
     $("#air-travel-offset").show()
     $(".offset-form").css('background-color','#2774ad')
@@ -135,18 +136,21 @@ $ ->
   $(".car-travel-button").on "click", ->
     offset_type = "car"
     $(".offset-form").hide()
+    $("#cart").hide()
     $("#car-travel-offset").show()
     $(".offset-form").css('background-color','#5b922f')
 
     return
   $(".saved-button").on "click", ->
     $(".offset-form").hide()
+    $("#cart").hide()
     $("#saved-offsets").show()
     $(".offset-form").css('background-color','#2774ad')
 
     return
   $(".home-energy-button").on "click", ->
     $(".offset-form").hide()
+    $("#cart").hide()
     $("#home-energy-offset").show()
     $(".offset-form").css('background-color','#dca600')
 
@@ -155,6 +159,7 @@ $ ->
 
   $(".quick-button").on "click", ->
     $(".offset-form").hide()
+    $("#cart").hide()
     $("#quick-offset").fadeIn "fast"
     $(".offset-form").css('background-color','#8012b3')
 

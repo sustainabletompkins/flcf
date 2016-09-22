@@ -1,0 +1,62 @@
+.cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
+  -@prizes.each do |p|
+    -p.count.times do
+      =render p
+  -@empties.times do
+    =image_tag('empty.png', :'data-name'=>'Nothing')
+#award{:style=>'display:none'}
+  you have won an award
+#spin.button Spin Prize Wheel
+#email-address{:style=>'display:none'}
+  To claim your prize, enter your email address
+  %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
+  #claim-prize.button Claim Your Prize
+
+:javascript
+  var spin;
+  count = 0;
+  var prize_id;
+  $.fn.shuffleChildren = function() {
+      $.each(this.get(), function(index, el) {
+          var $el = $(el);
+          var $find = $el.children();
+
+          $find.sort(function() {
+              return 0.5 - Math.random();
+          });
+
+          $el.empty();
+          $find.appendTo($el);
+      });
+  };
+  $('.cycle-slideshow').shuffleChildren();
+
+  $('#spin').on('click',function() {
+    spin = setInterval(cycleWheel, 250);
+    count = 0;
+    $('#spin').hide();
+  })
+
+  $('#claim-prize').on('click', function() {
+    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val()});
+  })
+  function cycleWheel() {
+    $('.cycle-slideshow').cycle('next');
+    count++;
+    if(count == 5) {
+      clearInterval(spin);
+      $('#award').show();
+      val = $('.cycle-slideshow').data("cycle.opts").currSlide;
+      prize_id = parseInt($('.cycle-slide-active').data('prize-id'));
+      if(prize_id > 0) {
+        prize_id = $('.cycle-slide-active').data('prize-id');
+        $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '!');
+
+        $('#email-address').show();
+      }
+      else {
+        $('#award').html('Sorry, you did not win anything.');
+      }
+    }
+  }
+

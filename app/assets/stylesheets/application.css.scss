@@ -364,6 +364,17 @@ a.more:hover {
 
 .video-wrap {
   width: 300px;
+  float: right;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .img-circle {
@@ -417,4 +428,31 @@ a.more:hover {
   span {
 
   }
+}
+
+.cycle-slideshow {
+  img {
+    width: 200px;
+    height: 200px;
+    padding: 15px;
+    border:  1px solid #ccc;
+    background-color: #eee;
+    width:  200px;
+    height: 200px;
+    top:  0;
+    left: 0
+  }
+}
+.cycle-slideshow {
+    height:  232px;
+    width:   232px;
+    padding: 0;
+    margin:  0;
+}
+
+#award {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 12px 0;
+  color: red;
 }

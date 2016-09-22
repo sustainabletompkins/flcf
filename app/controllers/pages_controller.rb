@@ -8,6 +8,15 @@ class PagesController < ApplicationController
   end
 
   def index
+    if params[:page_name] == 'prize-wheel'
+      @prizes = Prize.where('count > 0')
+      count = 0
+      @prizes.each do |p|
+        count = count+p.count
+      end
+      @empties = count*2
+    end
+
     render params[:page_name], :layout => "full"
   end
 

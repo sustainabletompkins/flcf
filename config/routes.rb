@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   match '/offset-log' => 'pages#offset_log', via: [:get]
   match '/calculator' => 'pages#calculator', via: [:get]
   get 'pages/:page_name' => 'pages#index', :as => :pages
+  post '/save-prize' => 'prizes#save', :as => :prize_won
 end
