@@ -9,11 +9,14 @@ class ChargesController < ApplicationController
       current_user.session_id = nil
       current_user.save
     end
-
+    stat = Stat.first
     Offset.where(:session_id=>params[:stripeSession]).each do |o|
       o.purchased = true
       o.email = params[:stripeEmail]
       o.save
+
+      stat.increment!(:pounds, @offset.pounds)
+      stat.increment!(:dollars, @offset.cost)
     end
 
     customer = Stripe::Customer.create(

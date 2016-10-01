@@ -15,4 +15,8 @@ namespace :init do
 
     end
   end
+
+  task :set_stats => :environment do
+    Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
+  end
 end

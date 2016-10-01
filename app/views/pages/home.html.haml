@@ -25,19 +25,19 @@
 
   .large-3.medium-3.columns.impact
 
-    %span 3,999,999
+    %span=number_with_delimiter(@stats.pounds)
     %label lbs C02 offset
   .large-3.medium-3.columns.impact
 
-    %span 173,565
+    %span=number_with_delimiter(@stats.pounds/20)
     %label gallons gas avoided
   .large-3.medium-3.columns.impact
 
-    %span $33,092
+    %span=number_to_currency(@stats.dollars, :precision => 0)
     %label in offsets raised
   .large-3.medium-3.columns.impact
 
-    %span 18
+    %span=@stats.awardees
     %label grants awarded
 .row#seal-the-cracks{:style=>"padding:0px;"}
   .large-8.medium-8.columns{:style=>'padding-top: 15px;'}
@@ -54,8 +54,14 @@
           %li Help protect the climate
           %li Strengthen our local economy
   .large-4.medium-4.columns.show-for-medium-up
-    #graph.chart{"data-percent" => "50"}
-      %span hey
+    #graph.chart{"data-percent" => "#{@cracks_pct}"}
+
+      %span
+        .white We've raised
+        .green $#{@cracks_money}
+        .white of our
+        .green{:style=>'font-size: 25px'} $12,500
+        .white goal
 .row.purple-section
   .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
     %h3.heading-text Carbon Races
