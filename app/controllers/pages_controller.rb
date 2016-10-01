@@ -16,6 +16,7 @@ class PagesController < ApplicationController
 
   def index
     if params[:page_name] == 'prize-wheel'
+      @teams = Team.all
       @prizes = Prize.where('count > 0')
       count = 0
       @prizes.each do |p|

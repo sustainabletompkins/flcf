@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :teams, :only => [:create, :show]
+
   resources :charges
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup

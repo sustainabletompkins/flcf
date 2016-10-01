@@ -31,7 +31,9 @@ class ChargesController < ApplicationController
       :currency    => 'usd'
     )
     @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
+    @teams = Team.all
     render :layout=>"full"
+
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

@@ -1,10 +1,87 @@
-%h3 Thanks for your payment!
+%h3 You did it!
 %p
-  Your contribution to the climate fund will help a local family improve their household energy efficiency and thus reduce carbon pollution.  For more info, check out some of
+  Your contribution to the Climate Fund will help a local family improve their household energy efficiency and thus reduce carbon pollution.  For more info, check out some of
   =link_to "our past climate fund awardees", pages_path("portfolio")
+
+.row#prize-wheel
+  .large-6.medium-6.columns
+    #spin-button
+      .round-button Spin Wheel
+
+  .large-6.medium-6.columns
+
+.row#carbon-race
+  .large-12.columns
+    %p<
+      Our
+      =link_to 'Carbon Races ', pages_path('carbon-races')
+      are a fun competition to see which business, club, neighborhood or other organization can offset the most carbon in a month's time.  You can join an existing team, or create one of your own.
+  .large-6.medium-6.columns
+    %h4 Create a  Team
+    %p Anyone can make a team for their organization and invite others to join it
+    =form_for :team, :url=>teams_path, :html=> {:id=>'new-team'} do |f|
+      %label Team Name
+      =f.text_field :name
+
+      -#=f.file_field :image, :class => 'file-upload'
+      %label team members?
+      =f.number_field :members, :value => 20, :max=>500, :min=>5
+      %br
+      =f.submit 'submit', :class=>'button'
+
+  .large-6.medium-6.columns
+
 %p You can amplify the impact of your offset by sharing on social networks
 %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
 %br
 .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
 
+
+:javascript
+  var spin;
+  count = 0;
+  var prize_id;
+  $.fn.shuffleChildren = function() {
+      $.each(this.get(), function(index, el) {
+          var $el = $(el);
+          var $find = $el.children();
+
+          $find.sort(function() {
+              return 0.5 - Math.random();
+          });
+
+          $el.empty();
+          $find.appendTo($el);
+      });
+  };
+  $('.cycle-slideshow').shuffleChildren();
+
+  $('#spin').on('click',function() {
+    spin = setInterval(cycleWheel, 250);
+    count = 0;
+    $('#spin').hide();
+  })
+
+  $('#claim-prize').on('click', function() {
+    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
+  })
+  function cycleWheel() {
+    $('.cycle-slideshow').cycle('next');
+    count++;
+    if(count == 5) {
+      clearInterval(spin);
+      $('#award').show();
+      val = $('.cycle-slideshow').data("cycle.opts").currSlide;
+      prize_id = parseInt($('.cycle-slide-active').data('prize-id'));
+      if(prize_id > 0) {
+        prize_id = $('.cycle-slide-active').data('prize-id');
+        $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '!');
+
+        $('#email-address').show();
+      }
+      else {
+        $('#award').html('Sorry, you did not win anything.');
+      }
+    }
+  }
 
