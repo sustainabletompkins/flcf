@@ -1,2 +1,6 @@
-=image_tag(prize.title.gsub(' ', '-')+'.png', :"data-name" => "#{prize.description}", :"data-prize-id"=>prize.id)
-
+.row.winner[prize]
+  .large-4.medium-5.columns
+    =image_tag("#{prize.title.gsub(' ', '-')}.png")
+  .large-8.medium-7.columns
+    %label #{prize.description} from
+    %span #{prize.title}

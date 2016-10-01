@@ -1,7 +1,7 @@
 .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
   -@prizes.each do |p|
     -p.count.times do
-      =render p
+      =render :partial => 'prizes/spot', :locals => {prize:p}
   -@empties.times do
     =image_tag('empty.png', :'data-name'=>'Nothing')
 #award{:style=>'display:none'}
@@ -10,6 +10,8 @@
 #email-address{:style=>'display:none'}
   To claim your prize, enter your email address
   %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
+  How about a first name to share publicly?
+  %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
   #claim-prize.button Claim Your Prize
 
 :javascript
@@ -38,7 +40,7 @@
   })
 
   $('#claim-prize').on('click', function() {
-    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val()});
+    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
   })
   function cycleWheel() {
     $('.cycle-slideshow').cycle('next');

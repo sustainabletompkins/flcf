@@ -5,6 +5,9 @@ class PagesController < ApplicationController
       @saved_offsets = current_user.offsets.where(:purchased=>:true)
     end
     @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
+
+    @recent_prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :desc)
+    @prizes = Prize.all.order(count: :asc)
   end
 
   def index

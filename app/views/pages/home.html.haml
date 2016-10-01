@@ -29,35 +29,71 @@
     %label lbs C02 offset
   .large-3.medium-3.columns.impact
 
-    %span 3,999,999
+    %span 173,565
     %label gallons gas avoided
   .large-3.medium-3.columns.impact
 
-    %span 3,999,999
+    %span $33,092
     %label in offsets raised
   .large-3.medium-3.columns.impact
 
     %span 18
     %label grants awarded
 .row#seal-the-cracks{:style=>"padding:0px;"}
-  .large-8.columns{:style=>'padding-top: 15px;'}
+  .large-8.medium-8.columns{:style=>'padding-top: 15px;'}
     %h4 Help us
     .cracks-logo=image_tag('seal-the-cracks-logo-1100.png')
     %h5 October 1 through November 30
     .row#cracks-impacts
-      .large-6.columns{:style=>'text-align:right; font-size: 1.5em;line-height: 1.1em;'}
+      .large-6.medium-6.columns{:style=>'text-align:right; font-size: 1.5em;line-height: 1.1em;'}
         Your offsets during our annual drive will
-      .large-6.columns{:style=>'text-align:left; '}
+      .large-6.medium-6.columns{:style=>'text-align:left; '}
         %ul
           %li Help others in need
           %li Support local green jobs
           %li Help protect the climate
           %li Strengthen our local economy
-  .large-4.columns
-    #graph.chart{"data-percent" => "88"}
+  .large-4.medium-4.columns.show-for-medium-up
+    #graph.chart{"data-percent" => "50"}
+      %span hey
+.row.purple-section
+  .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
+    %h3.heading-text Carbon Races
+  .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+    %h4.right Monthly Leaders By Tonnage
+    %hr
+    .row.leader{:style=>'margin: 0px; padding: 0px;'}
+      .large-2.medium-3.columns
+        %span.right 1
+      .large-3.columns.show-for-large-only
+        .frame=image_tag('Cinemapolis.png')
+      .large-7.medium-9.columns
 
+        %h5 Fall Creek Brass Band
+        .stat
+          %label C02 Offset:
+          %p 523 lbs
+        .stat
+          %label Number Offsets:
+          %p 33
+        .stat
+          %label Number Players:
+          %p 15
 
-
+  .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
+    %h4.left Monthly Leaders By Participation
+    %hr
+.row.yellow-section
+  .large-12.columns{:style=>'text-align:center;background-color: #dca600;'}
+    %h3.heading-text Win Prizes
+  .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+    %h4.right Recently Claimed Prizes
+    %hr
+    =render @recent_prizes
+  .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+    %h4.left Available Prizes
+    %hr
+    =render @prizes
 %section.main-section
   .row{:style => "background-color: #fff"}
     .large-12.columns
@@ -97,7 +133,6 @@
   var ctx = canvas.getContext('2d');
   canvas.width = canvas.height = options.size;
 
-  el.appendChild(span);
   el.appendChild(canvas);
 
   ctx.translate(options.size / 2, options.size / 2); // change center

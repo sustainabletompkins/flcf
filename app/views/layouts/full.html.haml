@@ -23,13 +23,9 @@
 
         %section.main-section
           .row{:style => "background-color: #fff;padding:0px;"}
-            .large-3.small-12.medium-4.columns
-
-              #facebook
-                .fb-like-box{"data-colorscheme" => "light", "data-header" => "true", "data-href" => "https://www.facebook.com/climatefund", "data-show-border" => "false", "data-show-faces" => "false", "data-stream" => "true", "data-width" => "230"}
 
 
-            .large-9.small-12.medium-8.columns{:style=>"padding-top: 8px;"}
+            .large-12.columns{:style=>"padding-top: 8px;"}
               #content
                 =yield
         =render :partial => 'layouts/footer'

@@ -17,6 +17,7 @@
  */
 
 @import 'foundation-icons';
+//@import 'https://fonts.googleapis.com/css?family=Titillium+Web';
 
 $light-blue:#c0e3f6;
 $dark-blue:#0b629d;
@@ -25,7 +26,7 @@ $green:#60983b;
 $yellow:#fcaf17;
 
 body {
-
+  //font-family: 'Titillium Web', sans-serif;
 }
 
 .subhead {
@@ -182,10 +183,10 @@ body {
   float: left;
   text-align:center;
   width: 25%;
-  background: #0a2d48; /* Old browsers */
-  background: -moz-linear-gradient(top,  #0a2d48 0%, #2774ad 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #0a2d48 0%,#2774ad 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #0a2d48 0%,#2774ad 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: #1767a3; /* Old browsers */
+  background: -moz-linear-gradient(top,  #1767a3 0%, #2774ad 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #1767a3 0%,#2774ad 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #1767a3 0%,#2774ad 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a2d48', endColorstr='#2774ad',GradientType=0 ); /* IE6-9 */
 }
 .yellow-header-button {
@@ -294,6 +295,99 @@ background:hover;
   text-transform: uppercase;
 }
 
+.sub-heading {
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 2px solid #c0c;
+}
+
+.purple-section {
+
+  h4 {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #8012b3;
+    margin-bottom:0px;
+  }
+  h5 {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #8012b3;
+    margin-bottom: 3px;
+  }
+  hr {
+    border: 2px solid #8012b3;
+  }
+  margin-bottom: 20px;
+}
+.yellow-section {
+
+  h4 {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #dca600;
+    margin-bottom:0px;
+  }
+  span {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #5b922f;
+  }
+  hr {
+    border: 2px solid #dca600;
+  }
+  label {
+
+  }
+  margin-bottom: 20px;
+}
+
+.leader {
+  vertical-align: middle;
+  span {
+    text-align:center;
+    font-weight: 600;
+    font-size: 3.5em;
+    color: #8012b3;
+  }
+  img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+  }
+  label, p { display:inline-block;}
+  p, label{
+    line-height: .9em;
+    margin: 0px;padding:0px;
+    font-size: 1.1em;
+  }
+  label {
+    font-weight: 300;
+  }
+  p{
+    font-weight: 500;
+  }
+}
+
+.winner {
+
+  margin-bottom: 15px !important;
+
+}
+.frame {
+    height: 100px; /*can be anything*/
+    width: 100px; /*can be anything*/
+    position: relative;
+
+}
+
 #cracks-impacts {
   margin-top: 20px;
   color: #1b75b8;
@@ -310,11 +404,15 @@ background:hover;
 }
 #your-impact {
   background-color: #5b922f;
-  padding: 10px;
+  padding: 13px;
+  font-size: 1.2em;
+
   h5 {
     text-align:center;
     color: #fff;
-
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 15px;
   }
 
 }
@@ -340,13 +438,14 @@ a.more:hover {
   color: #fff;
   text-align: center;
   label {
-    font-size: 1em;
+    font-size: .9em;
     line-height: 1em;
     color: #fff;
+    margin-top: 3px;
   }
   span {
-    font-size: 1.5em;
-    font-weight: 600;
+    font-size: 1.7em;
+    font-weight: 700;
     line-height: 1em;
     padding: 0px;
     color: #fff;
@@ -384,19 +483,30 @@ a.more:hover {
 }
 
 #overview {
-  padding: 12px 0;
+  padding: 20px 0;
   text-align:center;
   h3 {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight:bold;
     text-align:center;
     color: #5b922f;
     line-height: .8em;
+    padding-bottom: 7px;
+  }
+  label {
+    font-size: 1.1em;
+    color: #5b922f;
+    font-weight: 600;
+    margin: 5px;
   }
 }
 
 /* progress bar */
 #graph {
+  position:absolute;
+  top:0px;
+  left:0px;
+  right: 0px;
   div {
       position:relative;
       width: 80%;
@@ -413,12 +523,13 @@ a.more:hover {
       margin: 10%;
       color:#5b922f;
       display:block;
-      line-height:220px;
+      line-height:200px;
       text-align:center;
       font-family:sans-serif;
       font-size:40px;
       font-weight:100;
-      margin-left:5px;
+      text-align:center;
+      width: 220px;
   }
 
   input {
@@ -430,6 +541,16 @@ a.more:hover {
   }
 }
 
+#prizes {
+
+}
+
+#graph-info{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: 220px;
+}
 .cycle-slideshow {
   img {
     width: 200px;

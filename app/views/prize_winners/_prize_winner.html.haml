@@ -1,0 +1,7 @@
+.row.winner[prize_winner]
+  .large-4.medium-5.columns
+    =image_tag('Cinemapolis.png')
+  .large-8.medium-7.columns
+    %span=prize_winner.name
+    %label won a #{prize_winner.prize.description} from
+    %span=prize_winner.prize.title
