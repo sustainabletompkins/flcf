@@ -46,7 +46,7 @@
       .large-6.medium-6.columns#join-team
         %h4 Join a  Team
         %p Are others in your organization already playing?  Join them!
-        =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'join-team'
+        =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
   %hr
 
   .row#prize-wheel
@@ -123,8 +123,9 @@
     $('#join-team').insertBefore('#create-team')
   })
 
-   $('#join-team').on('change', function() {
-    alert($(this).val());
+   $('#select-team').on('change', function() {
+    console.log($(this));
+    console.log($(this).val());
     $.post('#{join_teams_path}', {league_id: $(this).val(), pounds:$('#pounds').val()});
 
     });
