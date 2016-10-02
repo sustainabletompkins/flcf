@@ -1,1 +1,3 @@
-$('#carbon-race').html('Great, your team has been created and your offset has been added to their tally.  Now spin that prize wheel!');
+$('#msg').html("<h4>New Team Added</h4><span>Great, your <b>#{@league.name}</b> team has been created and your offset of <b>#{@league.pounds}lbs</b> has been added to their tally.  Now spin that prize wheel!</span>");
+$('#prize-wheel').show();
+$('#team-actions').hide();

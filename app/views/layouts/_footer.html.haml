@@ -86,7 +86,7 @@
         zipcode: $('#zipcode').val(),
         session_id: $.cookie('session_id')
       }
-      $.post("offsets/add_name_and_zip/", data, function() {
+      $.post("#{add_user_data_path}", data, function() {
 
       });
 

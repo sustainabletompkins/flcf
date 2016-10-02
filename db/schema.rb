@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20161001202030) do
   create_table "teams", force: true do |t|
     t.string  "name"
     t.integer "members"
+    t.integer "pounds"
+    t.integer "count"
     t.float   "participation_rate"
   end
 

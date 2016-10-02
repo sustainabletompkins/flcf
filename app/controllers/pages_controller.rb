@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     @recent_prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :desc)
     @prizes = Prize.all.order(count: :asc)
     @stats = Stat.first
+    @leaders = Team.all.order(pounds: :desc).limit(3)
 
     @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2016-09-01T21:00:00-06:00')).sum(:cost)
     @cracks_pct = (@cracks_money/125).round(1)

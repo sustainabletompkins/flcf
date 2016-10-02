@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :teams, :only => [:create, :show]
+  resource :teams, :only => [:create, :show] do
+    member do
+      post 'join'
+    end
+  end
 
   resources :charges
 
@@ -22,5 +26,6 @@ Rails.application.routes.draw do
   match '/offset-log' => 'pages#offset_log', via: [:get]
   match '/calculator' => 'pages#calculator', via: [:get]
   get 'pages/:page_name' => 'pages#index', :as => :pages
+  post 'offsets/add_name_and_zip/' => 'offsets#add_name_and_zip', :as => :add_user_data
   post '/save-prize' => 'prizes#save', :as => :prize_won
 end

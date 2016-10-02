@@ -9,15 +9,26 @@ class ChargesController < ApplicationController
       current_user.session_id = nil
       current_user.save
     end
-    stat = Stat.first
+    @stat = Stat.all.first
+    puts @stat
+    @offset_data = {:pounds=>0, :cost=>0}
     Offset.where(:session_id=>params[:stripeSession]).each do |o|
       o.purchased = true
       o.email = params[:stripeEmail]
       o.save
+      @offset_data[:pounds] = @offset_data[:pounds] + o.pounds
+      @offset_data[:cost] = @offset_data[:cost] + o.cost
 
-      stat.increment!(:pounds, @offset.pounds)
-      stat.increment!(:dollars, @offset.cost)
+      @stat.increment!(:pounds, o.pounds)
+      @stat.increment!(:dollars, o.cost)
     end
+    @teams = Team.all
+    @prizes = Prize.where('count > 0')
+    count = 0
+    @prizes.each do |p|
+      count = count+p.count
+    end
+    @empties = count*4
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
