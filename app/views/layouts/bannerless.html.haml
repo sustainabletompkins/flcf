@@ -10,7 +10,7 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
-    = javascript_include_tag "http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=places,geometry"
+    = javascript_include_tag "https://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=places,geometry"
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
     =yield :head
@@ -20,13 +20,6 @@
       .inner-wrap
         =render :partial => 'layouts/bannerless_head'
 
+        =yield
 
-        %section.main-section
-          .row{:style => "background-color: #fff;padding:0px;"}
-
-
-            .large-12.columns{:style=>"padding-top: 8px;"}
-              #content
-                =yield
         =render :partial => 'layouts/footer'
-
