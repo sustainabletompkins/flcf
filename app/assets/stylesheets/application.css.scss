@@ -296,7 +296,7 @@ background:hover;
 .heading-text {
   text-align: center;
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.3em;
   padding: 7px;
   color: #fff;
   text-transform: uppercase;
@@ -309,7 +309,13 @@ background:hover;
 }
 
 .purple-section {
+  button {
+    background-color:#8012b3;
+  }
 
+  h3 {
+    color:#8012b3;
+  }
   h4 {
     font-weight: 600;
     font-size: 1.2em;
@@ -338,7 +344,7 @@ background:hover;
   span {
     font-size: 1.1em;
     font-weight: 500;
-    color: #5b922f;
+    color: #dca600;
   }
   hr {
     border: 2px solid #dca600;
@@ -513,7 +519,7 @@ a.more:hover {
 /* progress bar */
 #graph {
   position:absolute;
-  top:0px;
+  top:50px;
   left:0px;
   right: 0px;
   div {
