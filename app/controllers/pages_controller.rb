@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
     @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2016-09-01T21:00:00-06:00')).sum(:cost)
     @cracks_pct = (@cracks_money/125).round(1)
+
   end
 
   def index
@@ -24,6 +25,10 @@ class PagesController < ApplicationController
         count = count+p.count
       end
       @empties = count*2
+
+    elsif params[:page_name] == 'carbon-races'
+      @teams = Team.all
+      @leaders = Team.all.order(pounds: :desc)
     end
 
     render params[:page_name], :layout => "full"

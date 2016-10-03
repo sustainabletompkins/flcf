@@ -66,6 +66,14 @@
   .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
     %h3.heading-text Carbon Races
   .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+    %h3 Join the Race!
+    %p Show the world how much your organization cares about the planet by participating in our Carbon Races.  Once you have created a team, encourage your colleagues to join you as you race against other teams to see who can offset the most carbon each week and month.
+    =link_to pages_path('carbon-races',:anchor => "create-team" ) do
+      %button.large Create a Team
+    -if user_signed_in?
+      =link_to pages_path('carbon-races',:anchor => "join-team") do
+        %button.large Join a Team
+  .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
     %h4.right Monthly Leaders By Tonnage
     %hr
     .row.leader{:style=>'margin: 0px; padding: 0px;'}
@@ -74,9 +82,6 @@
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
 
-  .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
-    %h4.left Monthly Leaders By Participation
-    %hr
 .row.yellow-section
   .large-12.columns{:style=>'text-align:center;background-color: #dca600;'}
     %h3.heading-text Win Prizes

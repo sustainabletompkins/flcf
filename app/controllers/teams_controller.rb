@@ -2,8 +2,14 @@ class TeamsController < ApplicationController
 
   def create
     @league = Team.create(team_params)
-    @league.update_attribute(:count, 1)
-    render 'team_created_after_offset'
+    if params.has_key?(:pounds)
+      @league.update_attribute(:count, 1)
+      @league.increment!(:pounds, params[:pounds].to_i)
+      render 'team_created_after_offset'
+    else
+      @count = Team.all.count
+      render 'team_created'
+    end
   end
 
   def join

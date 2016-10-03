@@ -1,0 +1,3 @@
+$('#msg').html('You have successfully created a team.  Time to invite others to join!');
+$('#create-team').hide();
+$('#leaders').append("#{j render :partial=>'teams/team_leaderboard', :locals=>{team:@league, counter:@count}}")
