@@ -22,11 +22,6 @@
     .large-12.columns
       %button#spin Skip Carbon Races and Proceed to Prize Wheel
 
-
-
-
-
-
   .row#carbon-race
     .large-12.columns#msg
     #team-actions
@@ -57,10 +52,15 @@
       #wheel
         .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
           -@prizes.each do |p|
+            -@count=0
             -p.count.times do
               =render :partial => 'prizes/spot', :locals => {prize:p}
+              -@count = @count + 1
           -@empties.times do
-            =image_tag('empty.png', :'data-name'=>'Nothing')
+            =image_tag('footprint.jpg', :'data-name'=>'Nothing')
+            -@count = @count + 1
+          :javascript
+            var total_spots = "#{@count}";
 
     .large-6.medium-6.columns
       #award{:style=>'display:none'}
@@ -136,7 +136,9 @@
   function cycleWheel() {
     $('.cycle-slideshow').cycle('next');
     count++;
-    if(count == 5) {
+
+    if(count == 20) {
+
       clearInterval(spin);
       $('#award').show();
       val = $('.cycle-slideshow').data("cycle.opts").currSlide;

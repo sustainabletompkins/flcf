@@ -2,8 +2,11 @@ namespace :init do
   desc "This task is called by the Heroku cron add-on"
   task :seed_prizes => :environment do
     Prize.destroy_all
-    Prize.create(:title=>'Cinemapolis', :description => 'One movie pass',:count=>16)
-    Prize.create(:title=>'Ithaca Bakery', :description => 'Free bagel sandwich',:count=>24)
+    Prize.create(:title=>'Cinemapolis', :description => '1 movie pass',:count=>12)
+    Prize.create(:title=>'Ithaca Bakery', :description => '$5 Gift Certificate',:count=>16)
+    Prize.create(:title=>'Autumn Leaves', :description => '$5 Gift Certificate',:count=>10)
+    Prize.create(:title=>'Waffle Frolic', :description => '$5 Gift Card',:count=>4)
+
   end
 
   task :set_codes => :environment do
