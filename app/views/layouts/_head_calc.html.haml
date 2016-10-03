@@ -2,21 +2,36 @@
   .large-12.columns{:style => "padding:0px;position:relative;"}
     #calculator-buttons
       #offset-buttons
-        #air-travel-button.air-travel-button.button.blue-header-button
-          =image_tag('plane.png', :size=>'30x30')
-          air travel
+        .hide-for-small
+          #air-travel-button.air-travel-button.button.blue-header-button
+            =image_tag('plane.png', :size=>'30x30')
+            air travel
 
-        #car-travel-button.button.car-travel-button.green-header-button
-          =image_tag('car.png', :size=>'30x30')
-          car travel
+          #car-travel-button.button.car-travel-button.green-header-button
+            =image_tag('car.png', :size=>'30x30')
+            car travel
 
-        #home-energy-button.home-energy-button.button.yellow-header-button
-          =image_tag('house.png', :size=>'30x30')
-          building energy
+          #home-energy-button.home-energy-button.button.yellow-header-button
+            =image_tag('house.png', :size=>'30x30')
+            building energy
 
-        #quick-button.quick-button.button.purple-header-button
-          =image_tag('quick.png', :size=>'30x30')
-          quick offset
+          #quick-button.quick-button.button.purple-header-button
+            =image_tag('quick.png', :size=>'30x30')
+            quick offset
+        .hide-for-medium-up
+          #air-travel-button.air-travel-button.button.blue-header-button
+            =image_tag('plane.png', :size=>'30x30')
+
+
+          #car-travel-button.button.car-travel-button.green-header-button
+            =image_tag('car.png', :size=>'30x30')
+
+
+          #home-energy-button.home-energy-button.button.yellow-header-button
+            =image_tag('house.png', :size=>'30x30')
+
+          #quick-button.quick-button.button.purple-header-button
+            =image_tag('quick.png', :size=>'30x30')
 
         -if user_signed_in?
           #saved-button.button
