@@ -15,6 +15,6 @@
       = f.password_field :password, autocomplete: "off"
       = f.label :password_confirmation
       = f.password_field :password_confirmation, autocomplete: "off"
-    %div= f.submit "Sign up"
+      = f.submit "Sign up"
 :javascript
   $('#session-id').val($.cookie("session_id"));

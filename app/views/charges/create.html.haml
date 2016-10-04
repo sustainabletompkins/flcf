@@ -13,12 +13,15 @@
         =link_to 'Carbon Races ', pages_path('carbon-races')
         are a fun competition to see which business, club, neighborhood or other organization can offset the most carbon in a month's time.  You can join an existing team, or create one of your own.
 
-    .large-6.columns{:style=>'text-align:center;'}
+    .large-4.columns{:style=>'text-align:center;'}
       %button#join Contribute to Team
       %span Your offset will count towards the team stats
-    .large-6.columns{:style=>'text-align:center;'}
+    .large-4.columns{:style=>'text-align:center;'}
       %button#create Create New Team
       %span Found a new team and add your recent offset
+    .large-4.columns{:style=>'text-align:center;'}
+      %button#individual-player Play as Individual
+      %span Compete against others without a team
     .large-12.columns
       %button#spin Skip Carbon Races and Proceed to Prize Wheel
 
@@ -79,7 +82,7 @@
         You can amplify the impact of your offset by sharing on social networks
         %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
         .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
-
+#myModal.reveal-modal{"data-reveal" => ""}
 :javascript
   var spin;
   count = 0;
@@ -104,7 +107,8 @@
     count = 0;
     $('#spin-button').hide();
     $('#wheel').show();
-  })
+  });
+
 
   $('#spin').on('click',function() {
     $('#prize-wheel').show();
@@ -122,6 +126,12 @@
     $('#carbon-race').show();
     $('#join-team').insertBefore('#create-team')
   })
+
+  $('#individual-player').on("click", function() {
+    console.log('hey');
+    $("#myModal").html("#{j render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}}");
+    $("#myModal").foundation('reveal','open');
+  });
 
    $('#select-team').on('change', function() {
     console.log($(this));
