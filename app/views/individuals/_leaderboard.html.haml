@@ -1,0 +1,16 @@
+.row.team-leaderboard[team]
+  .large-3.medium-4.small-3.columns
+    %span.right=counter
+  .large-9.medium-8.small-9.columns
+
+    %h5=team.name
+    .stat
+      %label C02 Offset:
+      %p #{number_with_delimiter(team.pounds)} lbs
+    .stat
+      %label Number Offsets:
+      %p=team.count
+
+
+
+

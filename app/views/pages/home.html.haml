@@ -110,6 +110,15 @@
     -#.large-12.columns{:style=>'height:300px;'}
       -#%a.twitter-share-button{"data-count" => "none", "data-hashtags" => "fingerlakes", "data-text" => "Offset your carbon locally", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
       -#.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "300"}
+-if user_signed_in?
+  -if current_user.session_id
+
+    :javascript
+      $(document).on("ready", function() {
+        $('#user-offsets').foundation('reveal', 'open');
+        var button = $('#stripe');
+        $('#user-offsets').append(button);
+      });
 :javascript
 
   var el = document.getElementById('graph'); // get canvas

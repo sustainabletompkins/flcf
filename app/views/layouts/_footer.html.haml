@@ -10,7 +10,9 @@
         =image_tag('st-logo.png', :size=>'200', :style=>'margin: 7px;')
         %br
         Carbon offsets are deductible through Sustainable Tompkins 501(c)3
+        -if user_signed_in?
 
+          = link_to "Log out", destroy_session_path(:user), :method => :delete
 #calc.reveal-modal{"data-reveal" => ""}
   =render :partial => 'layouts/calculator'
 #myModal.reveal-modal{"data-reveal" => ""}
@@ -50,6 +52,7 @@
 -if current_user
 
   :javascript
+
     $('#stripe')[0].addEventListener('click', function(e) {
       total_cost=0;
       cost=0;
@@ -66,14 +69,7 @@
       });
       e.preventDefault();
     });
-  -if current_user.session_id
 
-    :javascript
-      $(document).on("ready", function() {
-        $('#user-offsets').foundation('reveal', 'open');
-        var button = $('#stripe');
-        $('#user-offsets').append(button);
-      });
 
 -else
   #login-status{:value=>"guest"}

@@ -25,11 +25,17 @@
 
 
   .large-6.medium-6.columns.purple-section
-    %h3 This Month's Leaderboard
+    %h3 Team Leaderboard
     .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
       -count = 1
       -@leaders.each do |t|
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
+        -count = count + 1
+    %h3 Individual Leaderboard
+    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
+      -count = 1
+      -@individual_leaders.each do |t|
+        =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
 %hr
 

@@ -131,6 +131,7 @@
     console.log('hey');
     $("#myModal").html("#{j render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}}");
     $("#myModal").foundation('reveal','open');
+    $('#joining-team').val('true');
   });
 
    $('#select-team').on('change', function() {

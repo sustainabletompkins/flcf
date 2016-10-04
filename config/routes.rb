@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users,
-    :controllers => { :sessions => "sessions" },
-    :controllers => { :registrations => "registrations" },
-    :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+    :controllers => { :registrations => "registrations", :sessions => "sessions",omniauth_callbacks: 'omniauth_callbacks' }
+
 
 
   resources :offsets, :only => [:create,:destroy,:show] do
@@ -29,4 +28,5 @@ Rails.application.routes.draw do
   get 'pages/:page_name' => 'pages#index', :as => :pages
   post 'offsets/add_name_and_zip/' => 'offsets#add_name_and_zip', :as => :add_user_data
   post '/save-prize' => 'prizes#save', :as => :prize_won
+
 end

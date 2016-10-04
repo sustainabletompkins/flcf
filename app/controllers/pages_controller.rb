@@ -29,9 +29,21 @@ class PagesController < ApplicationController
     elsif params[:page_name] == 'carbon-races'
       @teams = Team.all
       @leaders = Team.all.order(pounds: :desc)
+      @individual_leaders = Individual.all.order(pounds: :desc)
     end
 
     render params[:page_name], :layout => "full"
+  end
+
+  def prize_wheel
+    puts @msg
+    @teams = Team.all
+    @prizes = Prize.where('count > 0')
+    count = 0
+    @prizes.each do |p|
+      count = count+p.count
+    end
+    @empties = count*2
   end
 
   def offset_log

@@ -1,80 +1,50 @@
-%h4 You did it!
-%p{:style=>'display:inline-block;'}
-  Your contribution to the Climate Fund will help a local family improve their household energy efficiency and thus reduce carbon pollution.  For more info, check out some of
-  =link_to "our past climate fund awardees.", pages_path("portfolio")
-  As a special thanks for your contribution, you have earned a spin of the prize wheel where you can win gifts from local businesses.
 
--if @offset_data
-  .row#next-action
-    .large-12.columns
-      %h2 Now, it's time to play
-      %p<
-        Our
-        =link_to 'Carbon Races ', pages_path('carbon-races')
-        are a fun competition to see which business, club, neighborhood or other organization can offset the most carbon in a month's time.  You can join an existing team, or create one of your own.
+-if cookies[:joined]=="true"
 
-    .large-6.columns{:style=>'text-align:center;'}
-      %button#join Contribute to Team
-      %span Your offset will count towards the team stats
-    .large-6.columns{:style=>'text-align:center;'}
-      %button#create Create New Team
-      %span Found a new team and add your recent offset
-    .large-12.columns
-      %button#spin Skip Carbon Races and Proceed to Prize Wheel
+  %h4 You did it!
+  %p{:style=>'display:inline-block;'}
+    Thanks for joining the Carbon Race!  Now each time you make a new offset, you will rise up the leaderboards.
 
+    .row#prize-wheel
+      .large-12.columns
+        %h3 FLCF Prize Wheel
+      .large-6.medium-6.columns
+        %button#spin-button Spin Wheel
+        #wheel
+          .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
+            -@prizes.each do |p|
+              -@count=0
+              -p.count.times do
+                =render :partial => 'prizes/spot', :locals => {prize:p}
+                -@count = @count + 1
+            -@empties.times do
+              =image_tag('footprint.jpg', :'data-name'=>'Nothing')
+              -@count = @count + 1
+            :javascript
+              var total_spots = "#{@count}";
 
-
-  .row#prize-wheel
-    .large-12.columns
-      %h3 FLCF Prize Wheel
-    .large-6.medium-6.columns
-      %button#spin-button Spin Wheel
-      #wheel
-        .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
-          -@prizes.each do |p|
-            -p.count.times do
-              =render :partial => 'prizes/spot', :locals => {prize:p}
-          -@empties.times do
-            =image_tag('empty.png', :'data-name'=>'Nothing')
-
-    .large-6.medium-6.columns
-      #award{:style=>'display:none'}
-        you have won an award
-      #email-address{:style=>'display:none'}
-        To claim your prize, enter your email address
-        %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
-        How about a first name to share publicly?
-        %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
-        #claim-prize.button Claim Your Prize
-    .large-6.medium-6.columns
-
-
-  .row#carbon-race
-    .large-12.columns
-    .large-6.medium-6.columns
-      %h4 Create a  Team
-      %p Anyone can make a team for their organization and invite others to join it
-      =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
-        %label Team Name
-        =f.text_field :name
-
-        -#=f.file_field :image, :class => 'file-upload'
-        %label team members?
-        =f.number_field :members, :value => 20, :max=>500, :min=>5
-        %br
-        =f.submit 'submit', :class=>'button'
-
-    .large-6.medium-6.columns
-      %h4 Join a  Team
-      %p Are others in your organization already playing?  Join them!
-      =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name')
-  %hr
-%p<
-  You can amplify the impact of your offset by sharing on social networks
-  %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
-  .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
-
+      .large-6.medium-6.columns
+        #award{:style=>'display:none'}
+          you have won an award
+        #email-address{:style=>'display:none'}
+          To claim your prize, enter your email address
+          %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
+          How about a first name to share publicly?
+          %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
+          #claim-prize.button Claim Your Prize
+      .large-6.medium-6.columns
+    %hr
+    .row
+      .large-12.columns
+        %p<
+          You can amplify the impact of your offset by sharing on social networks
+          %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
+          .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
+  #myModal.reveal-modal{"data-reveal" => ""}
+-else
+  %h3 You may only spin once per offset
 :javascript
+
   var spin;
   count = 0;
   var prize_id;
@@ -98,17 +68,17 @@
     count = 0;
     $('#spin-button').hide();
     $('#wheel').show();
-  })
+    $.removeCookie('joined', { path: '/' });
+
+  });
+
 
   $('#spin').on('click',function() {
     $('#prize-wheel').show();
     $('#next-action').hide();
+    $('#carbon-race').hide();
   })
-  $('#create').on('click',function() {
-    $('#spin').hide();
-    $('#next-action').hide();
-    $('#carbon-race').show();
-  })
+
 
   $('#claim-prize').on('click', function() {
     $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
@@ -116,7 +86,9 @@
   function cycleWheel() {
     $('.cycle-slideshow').cycle('next');
     count++;
-    if(count == 5) {
+
+    if(count == 20) {
+
       clearInterval(spin);
       $('#award').show();
       val = $('.cycle-slideshow').data("cycle.opts").currSlide;
@@ -133,7 +105,3 @@
     }
   }
 
-:css
-  #prize-wheel {
-    display:none;
-  }

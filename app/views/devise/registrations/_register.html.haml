@@ -3,6 +3,7 @@
   = form_for(resource, as: resource_name, url: registration_path(resource_name), :id=>"sign-up") do |f|
     = devise_error_messages!
     = f.hidden_field :session_id, :value=> "dfgd", :id => "session-id"
+    = f.hidden_field :join_team, :value=> :false, :id => "joining-team"
     %div
       = f.label :email
       = f.email_field :email, autofocus: true
