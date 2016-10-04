@@ -17,7 +17,7 @@
     %label The Paw Family
     %span Grant Amount: $1,224
     %br
-    %span C02 Offset: 122,440lbs
+    %span C02 Offset: 122,440 lbs
     .more=link_to 'Find out more!', pages_path('portfolio')
 .row#your-impact
   .large-12.columns
@@ -81,6 +81,7 @@
       -@leaders.each do |t|
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
+      .more=link_to 'See full leaderboard', pages_path('carbon-races')
 
 .row.yellow-section
   .large-12.columns{:style=>'text-align:center;background-color: #dca600;'}

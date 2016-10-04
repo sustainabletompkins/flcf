@@ -82,7 +82,7 @@
         You can amplify the impact of your offset by sharing on social networks
         %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
         .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
-#myModal.reveal-modal{"data-reveal" => ""}
+#register.reveal-modal{"data-reveal" => ""}
 :javascript
   var spin;
   count = 0;
@@ -129,8 +129,8 @@
 
   $('#individual-player').on("click", function() {
     console.log('hey');
-    $("#myModal").html("#{j render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}}");
-    $("#myModal").foundation('reveal','open');
+    $("#register").html("#{j render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}}");
+    $("#register").foundation('reveal','open');
     $('#joining-team').val('true');
   });
 

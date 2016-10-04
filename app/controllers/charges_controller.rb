@@ -10,9 +10,8 @@ class ChargesController < ApplicationController
       current_user.save
     end
     @stat = Stat.all.first
-    puts @stat
     @offset_data = {:pounds=>0, :cost=>0}
-    Offset.where(:session_id=>params[:stripeSession]).each do |o|
+    Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE').each do |o|
       o.purchased = true
       o.email = params[:stripeEmail]
       o.save
