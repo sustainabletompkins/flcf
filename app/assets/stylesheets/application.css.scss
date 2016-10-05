@@ -596,22 +596,22 @@ a.more:hover {
 }
 .cycle-slideshow {
   img {
-    width: 200px;
-    height: 200px;
-    padding: 15px;
-    border:  1px solid #ccc;
-    background-color: #eee;
-    width:  200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     top:  0;
-    left: 0
+    left: 0;
+
   }
 }
 .cycle-slideshow {
-    height:  232px;
-    width:   232px;
+    height:  80%;
+    width:   80%;
+    margin: 10%;
     padding: 0;
     margin:  auto;
+}
+#custom-caption {
+  margin-top: 20px;
 }
 
 #wheel {

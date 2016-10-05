@@ -4,7 +4,15 @@
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
 .row#overview
   .large-4.medium-4.columns
-    animation goes here
+    %h3 How it Works
+    .cycle-slideshow{"data-cycle-caption" => "#custom-caption","data-speed"=>"1200","data-cycle-caption-template" => "{{cycleTitle}}", "data-cycle-fx" => "fadeout", "data-delay" => 3000, "data-cycle-timeout" => "5000"}
+      %img{"data-cycle-title" => "Take responsibility for some of your CO2 emissions from burning fossil fuels.", :src => "/assets/slide-1.png"}/
+      %img{"data-cycle-title" => "Use our calculator to estimate your emissions and then purchase a carbon offset.", :src => "/assets/slide-2.png"}/
+      %img{"data-cycle-title" => "Your donation helps low-income families pay for energy efficiency measures to cancel out your CO2 emissions.", :src => "/assets/slide-3.png"}/
+
+    / empty element for caption
+    #custom-caption.center
+
   .large-4.medium-4.columns
     %h3 Recent Offset Donors
     =image_tag('blake.jpg', :class=>'img-circle')

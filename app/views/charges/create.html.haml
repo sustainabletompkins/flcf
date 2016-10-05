@@ -37,7 +37,7 @@
           =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
           -#=f.file_field :image, :class => 'file-upload'
           %label team members?
-          =f.number_field :members, :value => 20, :max=>500, :min=>5
+          =f.number_field :members, :value => '', :min=>2
           %br
           =f.submit 'submit', :class=>'button'
 
