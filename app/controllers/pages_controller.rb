@@ -31,6 +31,9 @@ class PagesController < ApplicationController
       @leaders = Team.all.order(pounds: :desc)
       @individual_leaders = Individual.all.order(pounds: :desc)
       render params[:page_name], :layout => "full"
+    elsif params[:page_name] == 'portfolio'
+      @awardees = Awardee.all.order(id: :desc)
+      render params[:page_name]
     else
       render params[:page_name]
     end

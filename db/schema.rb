@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004123346) do
+ActiveRecord::Schema.define(version: 20161005222748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "awardees", force: true do |t|
+    t.string   "name"
+    t.text     "bio"
+    t.string   "video_id"
+    t.string   "img_url"
+    t.integer  "award_amount"
+    t.integer  "pounds_offset"
+    t.datetime "award_date"
+  end
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
