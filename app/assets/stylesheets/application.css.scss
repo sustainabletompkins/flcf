@@ -710,6 +710,14 @@ a.more:hover {
   }
 }
 
+.prize_winner, .prize {
+  img {
+    height: 65%;
+    width: 65%;
+    margin: 0 17%;
+  }
+}
+
 /* Smartphones (landscape) ----------- */
 @media only screen and (max-width : 768px) {}
 

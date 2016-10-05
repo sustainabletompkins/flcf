@@ -25,18 +25,20 @@ class PagesController < ApplicationController
         count = count+p.count
       end
       @empties = count*2
-
+      render params[:page_name], :layout => "full"
     elsif params[:page_name] == 'carbon-races'
       @teams = Team.all
       @leaders = Team.all.order(pounds: :desc)
       @individual_leaders = Individual.all.order(pounds: :desc)
+      render params[:page_name], :layout => "full"
+    else
+      render params[:page_name]
     end
 
-    render params[:page_name], :layout => "full"
+
   end
 
   def prize_wheel
-    puts @msg
     @teams = Team.all
     @prizes = Prize.where('count > 0')
     count = 0
