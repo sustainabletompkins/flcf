@@ -14,12 +14,12 @@
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
     =yield :head
-  -if current_user
+    -if current_user
 
-    :javascript
-      if($.cookie("joined")=="true") {
-        window.location.replace("#{pages_path('prize-wheel')}");
-      }
+      :javascript
+        if($.cookie("joined")=="true") {
+          window.location.replace("#{pages_path('prize-wheel')}");
+        }
 
   %body
     .off-canvas-wrap{"data-offcanvas" => ""}

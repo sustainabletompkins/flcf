@@ -4,19 +4,19 @@
 
 .row{:style=>'margin-top: 15px'}
   .large-6.medium-6.columns
-    %h3 What are Carbon Races?
+    %h3.purple-text What are Carbon Races?
     %p
     %hr
     #create-team
-      %h4 Create a  Team
+      %h4.purple-text Create a  Team
       %p Anyone can make a team for their organization and invite others to join it
       =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
         %label Team Name
         =f.text_field :name
-        %label team members?
-        =f.number_field :members, :value => 20, :max=>500, :min=>5
+        %label How Many Team Members
+        =f.number_field :members, :value => '', :min=>2
         %br
-        =f.submit 'submit', :class=>'button'
+        =f.submit 'Create Team', :class=>'button purple'
     #msg
     -##join-team
       -#%h4 Join a  Team
