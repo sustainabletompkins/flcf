@@ -13,9 +13,10 @@
 }
 
 #calculator-buttons {
-    -webkit-box-shadow: 0px 7px 7px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 7px 7px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 7px 7px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 7px 7px 0px rgba(0,0,0,0.75);
+  height: 44px;
 }
 
 .checkout {
@@ -33,6 +34,10 @@
 }
 
 #offset-buttons {
+  position: absolute;
+  top: 0px;
+  right: 45px;
+  left: 45px;
   .button {
     margin: 0px;
   }
@@ -61,7 +66,9 @@
 
 #air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart, #offset-choices {
   display: none;
-  position: relative;
+  position: absolute;
+  top: 45px;
+  width: 100%;
   hr {
     margin:12px 0;
   }

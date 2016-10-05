@@ -46,8 +46,6 @@
 -if @recently_paid
   #recently-paid
     %h2 you just paid
-  :javascript
-    alert("hey");
 
 -if current_user
 
@@ -106,6 +104,15 @@
   });
   $('.show-login').on("click", function() {
     $("#myModal").html("#{j render :partial => 'devise/sessions/login'}")
+  });
+  $('#login').on("click", function() {
+    $("#myModal").html("#{j render :partial => 'devise/sessions/login'}");
+    $("#myModal").foundation('reveal','open');
+  });
+  $('#menu').on("click", function() {
+    $("#mobile-menu").removeClass('show-for-small-only');
+    $("#mobile-menu").toggle();
+
   });
   var total_cost = 0;
   var cost = 0;

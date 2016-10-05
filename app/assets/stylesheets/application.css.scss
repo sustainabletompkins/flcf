@@ -43,6 +43,7 @@ body,h1,h2,h3,h4,h5, button, .button, input {
   margin-bottom: 15px;
 }
 
+
 .social {
   i {
     font-size: 25px;
@@ -181,6 +182,7 @@ body,h1,h2,h3,h4,h5, button, .button, input {
   &::after {
     content: '\25ba';
   }
+  height: 45px;
 }
 .blue-header-button {
   float: left;
@@ -261,6 +263,7 @@ background:hover;
   text-align:center;
   display: none;
   color: #2774ad;
+    height: 45px;
   i {
     color: #2774ad;
     font-size: 1.7em;
@@ -631,5 +634,89 @@ a.more:hover {
 }
 
 #home {
-  width: 40px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 45px;
+  height:45px;
+  background-color: #006893;
+  padding-top: 4px;
+  i {
+    font-size: 35px;
+    margin-left: 11px;
+  }
+  a {
+    color: #fff;
+  }
 }
+#login, #menu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 45px;
+  height:45px;
+  background-color: #006893;
+  padding-top: 4px;
+  i {
+    font-size: 35px;
+    margin-left: 11px;
+  }
+  a {
+    color: #fff;
+  }
+}
+
+#mobile-menu {
+  margin-top: 45px;
+  a {
+    padding: 8px 10px;
+    font-size: 1.2em;
+    border-bottom: 1px solid white;
+  }
+  display: none;
+}
+.mobile-menu {
+  padding: 5px 0;
+  a {
+    color: white;
+    display:block;
+  }
+
+}
+
+
+/* iPads (portrait) ----------- */
+@media only screen and (max-width : 1024px) {
+  #offset-buttons {
+    .button {
+      margin: 0px;
+    }
+    z-index: 1000;
+
+    font-size: 1em;
+
+    i.left-logo {
+      margin-right: 4px;
+      font-size: 20px;
+    }
+    i.arrow {
+      margin-left: 4px;
+      font-size: 20px;
+      height: 45px;
+    }
+    p {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (max-width : 768px) {}
+
+/* Big smartphones (portrait) (ie: Galaxy 3 has 360)*/
+@media only screen and (max-width : 640px) {}
+
+/* Smartphones (portrait) (ie: Galaxy 1) */
+@media only screen and (max-width : 321px) {}
+
+

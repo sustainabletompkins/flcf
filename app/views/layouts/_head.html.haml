@@ -1,12 +1,33 @@
 .contain-to-grid.fixed
   =render :partial => 'layouts/head_calc'
-
+.row.show-for-small-only
+  #mobile-menu
+    .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
+      .mobile-menu
+        =link_to "Home", root_path, :class => 'show-for-medium-up'
+      .mobile-menu
+        =link_to "How Do I Reduce My Emissions?", pages_path("reduce-emissions")
+      .mobile-menu
+        =link_to "Carbon Races", pages_path("carbon-races")
+      .mobile-menu
+        =link_to "Business and Event Offsets", pages_path("business-events-offsets")
+      .mobile-menu
+        =link_to "Grant Recipients", pages_path("portfolio")
+      .mobile-menu
+        =link_to "FAQ", pages_path("faq")
+      .mobile-menu
+        =link_to "About Us", pages_path("about"), :class => 'show-for-medium-up'
+      .mobile-menu
+        =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+          %i.fi-social-facebook
+        =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
+          %i.fi-social-twitter
 .row{:style => "padding:0px;margin-top: 45px;"}
   .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
     #banner
       =image_tag('carbon-offset-banner-1100.png')
 
-.row
+.row.hide-for-small
   .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
     .horizontal-menu.narrow
       =link_to "Home", root_path, :class => 'show-for-medium-up'

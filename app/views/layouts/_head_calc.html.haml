@@ -1,6 +1,14 @@
 .row.topbar
   .large-12.columns{:style => "padding:0px;position:relative;"}
     #calculator-buttons
+      #home
+        =link_to root_path do
+          %i.fi-home
+      #login.show-for-medium-up.show-login
+        %i.fi-torso-female
+      #menu.show-for-small-only
+        %i.fi-list
+
       #offset-buttons
         .hide-for-small
           #air-travel-button.air-travel-button.button.blue-header-button
@@ -18,6 +26,9 @@
           #quick-button.quick-button.button.purple-header-button
             =image_tag('quick.png', :size=>'30x30')
             quick offset
+          #total-cost.button.purple-header-button.checkout
+            %i.fi-shopping-cart
+            checkout
         .hide-for-medium-up
           #air-travel-button.air-travel-button.button.blue-header-button
             =image_tag('plane.png', :size=>'30x30')
@@ -30,14 +41,14 @@
           #home-energy-button.home-energy-button.button.yellow-header-button
             =image_tag('house.png', :size=>'30x30')
 
-          #quick-button.quick-button.button.purple-header-button
+          #quick-button.quick-button.button.purple-header-button.quick-button
             =image_tag('quick.png', :size=>'30x30')
 
 
 
-        #total-cost.button.purple-header-button.checkout
-          %i.fi-shopping-cart
-          checkout
+          #total-cost.button.purple-header-button.checkout
+            %i.fi-shopping-cart
+            checkout
 
 
       #calculator
