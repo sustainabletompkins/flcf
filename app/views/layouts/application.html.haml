@@ -24,8 +24,9 @@
   %body
     .off-canvas-wrap{"data-offcanvas" => ""}
       .inner-wrap
-        =render :partial => 'layouts/head'
+        #content
+          =render :partial => 'layouts/head'
 
-        =yield
+          =yield
 
-        =render :partial => 'layouts/footer'
+          =render :partial => 'layouts/footer'

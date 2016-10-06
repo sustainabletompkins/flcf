@@ -1,13 +1,14 @@
 .row.awardee[awardee]
-  .large-6.columns
+  .large-4.columns
     .embed-container
-      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "100%", :mozallowfullscreen => "", :src => "https://player.vimeo.com/video/#{awardee.video_id}", :webkitallowfullscreen => "", :width => "100%"}
+      -#%iframe{:allowfullscreen => "", :frameborder => "0", :height => "100%", :mozallowfullscreen => "", :src => "https://player.vimeo.com/video/#{awardee.video_id}", :webkitallowfullscreen => "", :width => "100%"}
+      =image_tag("#{awardee.name.gsub(' ', '-')}.jpg")
 
-  .large-6.columns
+  .large-8.columns
     %h4=awardee.name
     %label Grant Amount:
     %span #{number_to_currency(awardee.award_amount, :precision => 0)}
     %br
     %label C02 Offset:
-    %span #{number_with_delimiter(awardee.pounds_offset)} lbs
+    %span #{number_with_delimiter(awardee.pounds_offset)} tons
     .bio=awardee.bio.html_safe

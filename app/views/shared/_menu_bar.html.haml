@@ -1,0 +1,20 @@
+.row.hide-for-small
+  .large-12.columns{:style=>"background-color: #006893;padding: 0px;margin-bottom:7px;"}
+    .horizontal-menu.wide
+      =link_to "How Offsets Help Others", pages_path("portfolio")
+
+    .horizontal-menu.narrow
+      =link_to "Carbon Races", pages_path("carbon-races")
+    .horizontal-menu.wide
+      =link_to "Business and Event Offsets", pages_path("business-events-offsets")
+    .horizontal-menu.wide
+      =link_to "Reduce Your Emissions", pages_path("reduce-emissions")
+    .horizontal-menu.narrow
+      =link_to "FAQ", pages_path("faq")
+    .horizontal-menu.narrow
+      =link_to "About Us", pages_path("about"), :class => 'show-for-medium-up'
+    .horizontal-menu.wide
+      =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+        %i.fi-social-facebook
+      =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
+        %i.fi-social-twitter

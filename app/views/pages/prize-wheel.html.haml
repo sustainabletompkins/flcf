@@ -1,4 +1,5 @@
 
+=render :partial => 'shared/menu_bar'
 -if cookies[:joined]=="true"
 
   %h4 You did it!
@@ -9,7 +10,7 @@
       .large-12.columns
         %h3 FLCF Prize Wheel
       .large-6.medium-6.columns
-        %button#spin-button Spin Wheel
+        %button#spin-button.large Spin Wheel
         #wheel
           .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
             -@prizes.each do |p|
@@ -100,7 +101,7 @@
         $('#email-address').show();
       }
       else {
-        $('#award').html('Sorry, you did not win anything.');
+        $('#award').html('Sorry, you did not win anything, but you can try again next time you make an offset!');
       }
     }
   }

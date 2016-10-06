@@ -5,7 +5,10 @@
         =link_to root_path do
           %i.fi-home
       #login.show-for-medium-up.show-login
-        %i.fi-torso-female
+        -if user_signed_in?
+          %i.fi-door
+        -else
+          %i.fi-torso-female
       #menu.show-for-small-only
         %i.fi-list
 

@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       @prizes.each do |p|
         count = count+p.count
       end
-      @empties = count*2
+      @empties = count*4
       render params[:page_name], :layout => "full"
     elsif params[:page_name] == 'carbon-races'
       @teams = Team.all
