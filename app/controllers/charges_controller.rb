@@ -27,7 +27,7 @@ class ChargesController < ApplicationController
     @prizes.each do |p|
       count = count+p.count
     end
-    @empties = count
+    @empties = count*4
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
