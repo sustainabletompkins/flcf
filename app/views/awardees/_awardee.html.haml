@@ -1,8 +1,6 @@
 .row.awardee[awardee]
   .large-4.columns
-    .embed-container
-      -#%iframe{:allowfullscreen => "", :frameborder => "0", :height => "100%", :mozallowfullscreen => "", :src => "https://player.vimeo.com/video/#{awardee.video_id}", :webkitallowfullscreen => "", :width => "100%"}
-      =image_tag("#{awardee.name.gsub(' ', '-')}.jpg")
+    =image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :style=>'width:100%;margin-top: 20px')
 
   .large-8.columns
     %h4=awardee.name
