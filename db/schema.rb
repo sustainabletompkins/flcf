@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005222748) do
+ActiveRecord::Schema.define(version: 20161007121156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20161005222748) do
   create_table "teams", force: true do |t|
     t.string  "name"
     t.integer "members"
-    t.integer "pounds"
+    t.integer "pounds",             default: 0
     t.integer "count"
     t.float   "participation_rate"
   end
