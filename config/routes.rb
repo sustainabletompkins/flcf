@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   get 'pages/:page_name' => 'pages#index', :as => :pages
   post 'offsets/add_name_and_zip/' => 'offsets#add_name_and_zip', :as => :add_user_data
   post '/save-prize' => 'prizes#save', :as => :prize_won
+  get '/teams/:id', to: 'teams#show'
 
 end

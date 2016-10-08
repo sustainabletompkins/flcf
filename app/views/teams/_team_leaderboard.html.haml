@@ -6,7 +6,8 @@
     .frame=image_tag('team.png')
   .large-7.medium-9.small-10.columns
 
-    %h5=team.name
+    =link_to "/teams/#{team.id}" do
+      %h5=team.name
     .stat
       %label C02 Offset:
       %p #{number_with_delimiter(team.pounds)} lbs

@@ -17,10 +17,15 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:league_id])
     @pounds = params[:pounds]
     @team.increment!(:count, 1)
+    @team.increment!(:members, 1)
     @team.increment!(:pounds, params[:pounds].to_i)
     TeamMember.create(:email => params[:user_email], :offsets => 1, :team_id=>@team.id, :name=> params[:name])
     render 'team_joined_after_offset'
 
+  end
+
+  def show
+    @team = Team.find(params[:id])
   end
 
   private

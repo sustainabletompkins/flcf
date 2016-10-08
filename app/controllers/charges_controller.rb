@@ -14,6 +14,7 @@ class ChargesController < ApplicationController
     @player = TeamMember.where(:email=>params[:stripeEmail]).first
     if @player
       @team = Team.find(@player.team_id)
+      @player.increment!(:offsets)
     end
     Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE').each do |o|
       o.purchased = true
