@@ -11,13 +11,17 @@ class ChargesController < ApplicationController
     end
     @stat = Stat.all.first
     @offset_data = {:pounds=>0, :cost=>0}
+    @player = TeamMember.where(:email=>params[:stripeEmail]).first
+    if @player
+      @team = Team.find(@player.team_id)
+    end
     Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE').each do |o|
       o.purchased = true
       o.email = params[:stripeEmail]
       o.save
       @offset_data[:pounds] = @offset_data[:pounds] + o.pounds
       @offset_data[:cost] = @offset_data[:cost] + o.cost
-
+      @offset_data[:email] = params[:stripeEmail]
       @stat.increment!(:pounds, o.pounds)
       @stat.increment!(:dollars, o.cost)
     end

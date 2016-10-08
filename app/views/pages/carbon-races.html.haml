@@ -6,18 +6,29 @@
 .row{:style=>'margin-top: 15px'}
   .large-6.medium-6.columns
     %h3.purple-text What are Carbon Races?
-    %p
+
+    %p Everybody knows the clock is ticking when it comes to preventing extreme climate disruption.
+
+    %p We really are in a race against time to wean ourselves from fossil fuels.
+
+    %b Don’t you agree it will be much more fun to race together?
+
+    %p That's why we are hosting the Carbon Races this fall as part of our 'Seal the Cracks' campaign to take 500 tons of CO2 out of our atmosphere by adding insulation, sealing air leaks, and replacing inefficient heating equipment in the homes of local families in need.
+
+    %p Businesses, neighborhoods, churches, organizations - any group of people can form a team and combine their efforts as we move toward our goal of 500 tons by November 30.  Every week we will celebrate the top teams for pounds of CO2 offset, number of offsets, or number of players on the team.  Teams can also vie for top spots each month and for the overall campaign.
+
+    %p Plus everyone who makes an offset can spin the prize wheel for a chance to win one of dozens of great prizes from local businesses.  We think climate protection deserves a reward!
+
     %hr
     #create-team
       %h4.purple-text Create a  Team
-      %p Anyone can make a team for their organization and invite others to join it
-      =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
-        %label Team Name
-        =f.text_field :name
-        %label How Many Team Members
-        =f.number_field :members, :value => '', :min=>2
-        %br
-        =f.submit 'Create Team', :class=>'button purple'
+      %p Anyone can make a team for their organization and invite others to join it. To do so, start things off by using the menu bar at top to make an offset.  Once you have purchased your offset, you can create your team and your offset will be credited to the team tally.
+      %h3 Individual Leaderboard
+      .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
+        -count = 1
+        -@individual_leaders.each do |t|
+          =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
+          -count = count + 1
     #msg
     -##join-team
       -#%h4 Join a  Team
@@ -32,12 +43,7 @@
       -@leaders.each do |t|
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
-    %h3 Individual Leaderboard
-    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
-      -count = 1
-      -@individual_leaders.each do |t|
-        =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
-        -count = count + 1
+
 
 :javascript
 
