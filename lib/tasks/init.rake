@@ -3,10 +3,10 @@ namespace :init do
   task :seed_prizes => :environment do
     Prize.destroy_all
     Prize.create(:title=>'Cinemapolis', :description => 'Movie Pass',:count=>16)
-    Prize.create(:title=>'Ithaca Bakery', :description => '$5 Gift Certificate',:count=>8)
+    Prize.create(:title=>'Ithaca Bakery', :description => '$10 Gift Card',:count=>8)
     Prize.create(:title=>'Autumn Leaves', :description => '$5 Gift Certificate',:count=>4)
     Prize.create(:title=>'Waffle Frolic', :description => '$5 Gift Card',:count=>4)
-    Prize.create(:title=>'Fall Creek Brass Band', :description => 'CD',:count=>2)
+    Prize.create(:title=>'Fall Creek Brass Band', :description => 'Mad Fun CD',:count=>1)
 
   end
 
