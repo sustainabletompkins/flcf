@@ -26,6 +26,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @leaders = Team.all.order(pounds: :desc)
   end
 
   private

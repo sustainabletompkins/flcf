@@ -761,6 +761,35 @@ a.more:hover {
   height: 100%;
 }
 
+.team {
+  h4, h5 {
+    display:inline;
+  }
+  h4 {
+    margin-right: 15px;
+    margin-top: -2px;
+  }
+  h5 {
+    a {color: red;}
+  }
+  label, p { display:inline-block;}
+  p, label{
+    line-height: 1em;
+    margin: 0px;padding:0px;
+    font-size: 1.2em;
+  }
+  label {
+    font-weight: 300;
+  }
+  p{
+    font-weight: 500;
+  }
+}
+
+.team-members {
+  margin-left: 8px;
+}
+
 /* Smartphones (landscape) ----------- */
 @media only screen and (max-width : 768px) {}
 

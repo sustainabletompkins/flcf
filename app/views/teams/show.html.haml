@@ -1,13 +1,27 @@
-.row
-  .large-12.columns{:style=>'padding-top: 12px;'}
+.row.team
+  .large-6.columns{:style=>'padding-top: 12px;'}
     %h3 Team #{@team.name}
-    #msg
-    %p Score: #{@team.pounds}
-    %p Offsets: #{@team.count}
-    %h5 Team Members
-    =render @team.team_members
 
+    %br
+    %label Score:
+    %p #{@team.pounds}
+    %br
+    %label Offsets:
+    %p #{@team.count}
+    %br
+    %br
+    %h4 Team Members
+    %h5#msg
+    .team-members
+      =render @team.team_members
+  .large-6.columns{:style=>'padding-top: 12px;'}
+    %h4 Carbon Races Leaderboard
+    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
+      -count = 1
+      -@leaders.each do |t|
+        =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
+        -count = count + 1
 :javascript
   var formattedBody = "Hello Team #{@team.name.titleize}! \n\n I am off to the Carbon Races and I hope you will join my team. \n\n I thought you would want to join me in doing something about climate change right here in the Finger Lakes Region. \n\n I just made a carbon offset for some of my CO2 emissions from travel and building use with the Finger Lakes Climate Fund.  They will use my donation to help local lower-income families make home energy efficiency improvements.  So far, they have given out 18 grants to families worth more than $33,000 and taken 1,736 tons of carbon dioxide out of our atmosphere. \n\n Help us remove another 500 tons of CO2 this fall.  They are asking us to form teams to see who can pull the most carbon from the air and will announce weekly and monthly winners for both tonnage and participation.  Plus, every person who makes an offset gets to spin the prize wheel and has a chance to win one of dozens of prizes from local businesses. \n\n I am hoping you will join my team today and offset some of your recent or upcoming travel, or perhaps some of the fossil fuel use in your home or business. \n\n Just go to FingerLakesClimateFund.org and make a carbon offset.  When it asks you to join a team for the Carbon Races, select our team name and your offset will be added to our tally.  Then spin the prize wheel and see if you win!";
   var mailLink = 'mailto:?subject=Come join me for our local carbon races! (and help others in need)&body=' + encodeURIComponent(formattedBody);
-  $('#msg').html("<b><a href='"+mailLink+"'>Invite others to join this team</a>!</b>");
+  $('#msg').html("<b><a href='"+mailLink+"'>Invite others to join this team</a></b>");
