@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
     @league = Team.create(team_params)
     if team_params.has_key?(:pounds)
       @league.update_attribute(:count, 1)
+      @league.update_attribute(:members, 1)
       @league.increment!(:pounds, params[:pounds].to_i)
       render 'team_created_after_offset'
     else
