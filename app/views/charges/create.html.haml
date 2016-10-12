@@ -68,7 +68,9 @@
           =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
 
           #member-name
+            %label Your Name (for public display)
             =text_field_tag :name, nil, :id=> 'team-member-name'
+            #join-msg
             %button#submit-name Join Team
 
   .row#prize-wheel
@@ -157,7 +159,6 @@
 
   });
 
-
   $('#spin').on('click',function() {
     $('#prize-wheel').show();
     $('#next-action').hide();
@@ -191,8 +192,14 @@
     });
 
     $('#submit-name').on('click', function() {
-      team_data.name = $('#team-member-name').val();
-      $.post('#{join_teams_path}', team_data);
+      if(!$('#team-member-name').val()) {
+        $('#join-msg').text('Please provide your name.');
+      }
+      else {
+        team_data.name = $('#team-member-name').val();
+
+        $.post('#{join_teams_path}', team_data);
+      }
 
     });
 
