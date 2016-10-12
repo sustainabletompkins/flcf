@@ -6,7 +6,7 @@
     = f.hidden_field :join_team, :value=> :false, :id => "joining-team"
     %div
       = f.label :email
-      = f.email_field :email, autofocus: true
+      = f.email_field :email, autofocus: true, :id => 'user-email-address'
       = f.label :name
       = f.text_field :name
       = f.label :zipcode

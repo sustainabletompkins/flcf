@@ -16,6 +16,10 @@
     %h4 Your offset of #{@offset_data[:pounds]} has been added to the tally for Team #{@team.name}
     :javascript
       $('#prize-wheel').show();
+  -elsif @individual
+    %h4 Your offset of #{@offset_data[:pounds]} has been added to your individual tally
+    :javascript
+      $('#prize-wheel').show();
   -else
     :javascript
       $('#prize-wheel').hide();
@@ -100,6 +104,9 @@
   -if @team
     :javascript
       $('#prize-wheel').show();
+  -elsif @individual
+    :javascript
+      $('#prize-wheel').show();
   -else
     :javascript
       $('#prize-wheel').hide();
@@ -112,6 +119,7 @@
         %a.twitter-share-button{"data-count" => "none", "data-hashtags" => "carbonoffsets", "data-text" => "I just offset my carbon use locally with the Finger Lakes Climate Fund", "data-url" => "http://fingerlakesclimatefund.org", "data-via" => "FingerLakesClimateFund", :href => "https://twitter.com/share"} Tweet
         .fb-share-button{"data-href" => "http://fingerlakesclimatefund.org", "data-layout" => "button"}
 #register.reveal-modal{"data-reveal" => ""}
+  =render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}
 :javascript
   var spin;
   count = 0;
@@ -168,9 +176,10 @@
   })
 
   $('#individual-player').on("click", function() {
-    console.log('hey');
-    $("#register").html("#{j render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}}");
+    console.log($('#user_email').val());
+
     $("#register").foundation('reveal','open');
+    $('#user-email-address').val($('#user_email').val());
     $('#joining-team').val('true');
   });
 

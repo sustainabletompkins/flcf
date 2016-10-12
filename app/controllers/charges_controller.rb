@@ -16,6 +16,8 @@ class ChargesController < ApplicationController
       @team = Team.find(@player.team_id)
       @player.increment!(:offsets)
     end
+    @individual = Individual.where(:email=>params[:stripeEmail]).first
+
     Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE').each do |o|
       o.purchased = true
       o.email = params[:stripeEmail]
@@ -26,13 +28,17 @@ class ChargesController < ApplicationController
       @stat.increment!(:pounds, o.pounds)
       @stat.increment!(:dollars, o.cost)
     end
+    if @individual
+      @individual.increment!(:count)
+      @individual.increment!(:pounds,@offset_data[:pounds].to_i)
+    end
     @teams = Team.all
     @prizes = Prize.where('count > 0')
     count = 0
     @prizes.each do |p|
       count = count+p.count
     end
-    @empties = count*4
+    @empties = count*3
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],

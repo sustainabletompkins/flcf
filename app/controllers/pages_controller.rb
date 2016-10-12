@@ -48,7 +48,7 @@ class PagesController < ApplicationController
     @prizes.each do |p|
       count = count+p.count
     end
-    @empties = count*2
+    @empties = count*3
   end
 
   def offset_log
