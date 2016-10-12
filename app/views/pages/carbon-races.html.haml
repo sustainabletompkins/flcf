@@ -20,9 +20,11 @@
     %p Plus everyone who makes an offset can spin the prize wheel for a chance to win one of dozens of great prizes from local businesses.  We think climate protection deserves a reward!
 
     %hr
-    #create-team
-      %h4.purple-text Create a  Team
-      %p Anyone can make a team for their organization and invite others to join it. To do so, start things off by using the menu bar at top to make an offset.  Once you have purchased your offset, you can create your team and your offset will be credited to the team tally.
+    #run-solo
+      %h4.purple-text Run Solo
+      %p If you don't want to join or create a team for the Carbon Races, we invite you to compete solo against other individuals.  Just make a carbon offset and then register as an Individual and every offset you make will accrue to your account on our Leaderboard and give you another opportunity to win a prize from one of our supporting local businesses.
+
+    .purple-section
       %h3 Individual Leaderboard
       .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
         -count = 1
@@ -37,6 +39,10 @@
 
 
   .large-6.medium-6.columns.purple-section
+    #create-team
+      %h4.purple-text Create a Team
+      %p Anyone can make a team for their organization and invite others to join it. To do so, start things off by using the menu bar at top to make an offset.  Once you have purchased your offset, you can create your team and your offset will be credited to the team tally.
+
     %h3 Team Leaderboard
     .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
       -count = 1

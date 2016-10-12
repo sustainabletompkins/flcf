@@ -81,6 +81,14 @@
     -if user_signed_in?
       =link_to pages_path('carbon-races',:anchor => "join-team") do
         %button.large Join a Team
+    %h4 Individual Leaders By Tonnage
+    %hr
+    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
+      -count = 1
+      -@individual_leaders.each do |t|
+        =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
+        -count = count + 1
+      .more=link_to 'See full leaderboard', pages_path('carbon-races')
   .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
     %h4 Monthly Leaders By Tonnage
     %hr
