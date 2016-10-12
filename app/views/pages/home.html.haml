@@ -3,9 +3,9 @@
   %meta{:content => "http://fingerlakesclimatefund.org", :property => "og:url"}
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
 .row#overview
-  .large-4.medium-4.columns
+  .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 How it Works
-    .cycle-slideshow{"data-cycle-caption" => "#custom-caption","data-speed"=>"1200","data-cycle-caption-template" => "{{cycleTitle}}", "data-cycle-fx" => "fadeout", "data-delay" => 3000, "data-cycle-timeout" => "5000"}
+    .cycle-slideshow{"data-cycle-caption" => "#custom-caption","data-speed"=>"1200","data-cycle-caption-template" => "{{cycleTitle}}", "data-cycle-fx" => "fadeout", "data-delay" => 3000, "data-cycle-timeout" => "4000"}
       %img{"data-cycle-title" => "Take responsibility for some of your CO2 emissions from burning fossil fuels.", :src => "/assets/slide-1.png"}/
       %img{"data-cycle-title" => "Use our calculator to estimate your emissions and then purchase a carbon offset.", :src => "/assets/slide-2.png"}/
       %img{"data-cycle-title" => "Your donation helps low-income families pay for energy efficiency measures to cancel out your CO2 emissions.", :src => "/assets/slide-3.png"}/
@@ -13,13 +13,13 @@
     / empty element for caption
     #custom-caption.center
 
-  .large-4.medium-4.columns
+  .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Offset Donors
     =image_tag('blake.jpg', :class=>'img-circle')
     %label Blake Reid of Terrawatt
     %span He makes his customers' homes zero carbon by offsetting residual emissions.
     .more.show-calc=link_to 'Offset your carbon use', "#"
-  .large-4.medium-4.columns
+  .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Grant Awardees
     =image_tag('recent-awardee.jpg', :class=>'img-circle')
     %label The Paw Family
@@ -73,7 +73,7 @@
 .row.purple-section
   .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
     %h2.heading-text Carbon Races
-  .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+  .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
     %h3.purple-text Join the Race!
     %p Show the world how much your organization cares about the planet by participating in our Carbon Races.  Once you have created a team, encourage your colleagues to join you as you race against other teams to see who can offset the most carbon each week and month.
     =link_to pages_path('carbon-races',:anchor => "create-team" ) do
@@ -81,15 +81,7 @@
     -if user_signed_in?
       =link_to pages_path('carbon-races',:anchor => "join-team") do
         %button.large Join a Team
-    %h4 Individual Leaders By Tonnage
-    %hr
-    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
-      -count = 1
-      -@individual_leaders.each do |t|
-        =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
-        -count = count + 1
-      .more=link_to 'See full leaderboard', pages_path('carbon-races')
-  .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
+
     %h4 Team Leaders By Tonnage
     %hr
     .row.leader{:style=>'margin: 0px; padding: 0px;'}
@@ -98,6 +90,21 @@
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
       .more=link_to 'See full leaderboard', pages_path('carbon-races')
+  .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
+    %h3.purple-text Or, Run Solo!
+    %p You can compete in the Carbon Races as an individual or single entity as well.  This is perfect for the solo entrepreneur or anybody who isn't part of a larger team but also wants to take responsibility for their carbon emissions while helping those in need.
+    =link_to pages_path('carbon-races',:anchor => "run-solo" ) do
+      %button.large Compete as an Individual
+
+    %h4 Individual Leaders By Tonnage
+    %hr
+    .row.leader#leaders{:style=>'margin: 0px; padding: 0px;'}
+      -count = 1
+      -@individual_leaders.each do |t|
+        =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
+        -count = count + 1
+      .more=link_to 'See full leaderboard', pages_path('carbon-races')
+
 
 .row.yellow-section
   .large-12.columns{:style=>'text-align:center;background-color: #dca600;'}
