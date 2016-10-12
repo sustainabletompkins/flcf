@@ -127,6 +127,8 @@
   count = 0;
   var prize_id;
   var team_data;
+  $('#team-member-name').val("#{@offset_data[:name]}");
+  $('#public-name').val("#{@offset_data[:name]}");
   $.fn.shuffleChildren = function() {
       $.each(this.get(), function(index, el) {
           var $el = $(el);

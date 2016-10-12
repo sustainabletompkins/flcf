@@ -25,6 +25,7 @@
     %p Please provide your name and zipcode for our records
     %input{:type=> "text", :id=>"name",:placeholder => "your name"}
     %input{:type=> "text", :id=>"zipcode",:placeholder => "zipcode"}
+    #guest-msg
     %button#stripe.button
       %i.fi-shopping-cart
       pay now
@@ -72,19 +73,20 @@
 -else
   #login-status{:value=>"guest"}
   :javascript
-    $('#stripe')[0].addEventListener('click', function(e) {
-      console.log($('#name').val());
-      console.log($('#zipcode').val());
-      var data = {
-        name: $('#name').val(),
-        zipcode: $('#zipcode').val(),
-        session_id: $.cookie('session_id')
+    $('#stripe').on('click', function() {
+      if(!$('#name').val() || !$('#zipcode').val()) {
+        $('#guest-msg').html('Please provide a name and zipcode');
       }
-      $.post("#{add_user_data_path}", data, function() {
+      else {
+        var data = {
+          name: $('#name').val(),
+          zipcode: $('#zipcode').val(),
+          session_id: $.cookie('session_id')
+        }
+        $.post("#{add_user_data_path}", data, function() {
 
-      });
-
-      e.preventDefault();
+        });
+      }
     });
 
 :javascript

@@ -803,7 +803,11 @@ button#spin-button {
 
 }
 
-#form-msg, #join-msg {
+label {
+  cursor: default;
+}
+
+#form-msg, #join-msg, #guest-msg {
   color:red;
 }
 
