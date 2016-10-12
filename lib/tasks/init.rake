@@ -10,6 +10,15 @@ namespace :init do
 
   end
 
+  task :add_prizes => :environment do
+
+    p = Prize.create(:title=>'Gimme Coffee', :description => 'Free Drink Cards',:count=>8)
+    p.count.times do
+      code = (0...8).map { (65 + rand(26)).chr }.join
+      PrizeWinner.create(:code=>code, :prize_id=>p.id)
+    end
+  end
+
   task :set_codes => :environment do
     Prize.all.each do |p|
       p.count.times do
