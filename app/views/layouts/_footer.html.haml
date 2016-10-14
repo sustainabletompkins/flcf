@@ -119,8 +119,11 @@
   $('#try-calc').on('click',function() {
     $('#calc').foundation("reveal","open");
   });
+  $('.carbon-race').on('click', function() {
+    $('.arrow_box').show();
+  });
   $('.calc-button').on("click", function() {
-    console.log(calcDiv);
+
     $('#calc-div').empty();
     calcDiv = document.createElement('div');
     $('#calc-div').append("#{j render :partial => 'layouts/calculator'}");

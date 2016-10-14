@@ -76,11 +76,9 @@
   .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
     %h3.purple-text Join the Race!
     %p Show the world how much your organization cares about the planet by participating in our Carbon Races.  Once you have created a team, encourage your colleagues to join you as you race against other teams to see who can offset the most carbon each week and month.
-    =link_to pages_path('carbon-races',:anchor => "create-team" ) do
-      %button.large Create a Team
+    %button.large.carbon-race Create a Team
     -if user_signed_in?
-      =link_to pages_path('carbon-races',:anchor => "join-team") do
-        %button.large Join a Team
+      %button.large.carbon-race Join a Team
 
     %h4 Team Leaders By Tonnage
     %hr
@@ -93,8 +91,7 @@
   .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
     %h3.purple-text Or, Run Solo!
     %p You can compete in the Carbon Races as an individual or single entity as well.  This is perfect for the solo entrepreneur or anybody who isn't part of a larger team but also wants to take responsibility for their carbon emissions while helping those in need.
-    =link_to pages_path('carbon-races',:anchor => "run-solo" ) do
-      %button.large Compete as an Individual
+    %button.large.carbon-race Compete as an Individual
 
     %h4 Individual Leaders By Tonnage
     %hr
