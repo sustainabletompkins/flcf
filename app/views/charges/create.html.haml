@@ -10,7 +10,7 @@
   As a special thanks for your contribution, you have earned a spin of the prize wheel where you can win gifts from local businesses.
 
 
--if @offset_data
+-if @offset_data && !@donation_mode
 
   -if @team
     %h4 Your offset of #{@offset_data[:pounds]} has been added to the tally for Team #{@team.name}
@@ -107,6 +107,9 @@
     :javascript
       $('#prize-wheel').show();
   -elsif @individual
+    :javascript
+      $('#prize-wheel').show();
+  -elsif @donation_mode
     :javascript
       $('#prize-wheel').show();
   -else

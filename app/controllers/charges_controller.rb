@@ -18,17 +18,25 @@ class ChargesController < ApplicationController
     end
     @individual = Individual.where(:email=>params[:stripeEmail]).first
 
-    Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE').each do |o|
-      o.purchased = true
-      o.email = params[:stripeEmail]
-      o.save
-      @offset_data[:pounds] = @offset_data[:pounds] + o.pounds
-      @offset_data[:cost] = @offset_data[:cost] + o.cost
-      @offset_data[:email] = params[:stripeEmail]
-      @offset_data[:name] = o.name
-      @stat.increment!(:pounds, o.pounds)
-      @stat.increment!(:dollars, o.cost)
+    @offsets = Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE')
+    if @offsets.count > 0
+      @offsets.each do |o|
+        o.purchased = true
+        o.email = params[:stripeEmail]
+        o.save
+        @offset_data[:pounds] = @offset_data[:pounds] + o.pounds
+        @offset_data[:cost] = @offset_data[:cost] + o.cost
+        @offset_data[:email] = params[:stripeEmail]
+        @offset_data[:name] = o.name
+        @stat.increment!(:pounds, o.pounds)
+        @stat.increment!(:dollars, o.cost)
+      end
+    else
+      @donation_mode = true
+      puts 'its a donation'
     end
+
+
     if @individual
       @individual.increment!(:count)
       @individual.increment!(:pounds,@offset_data[:pounds].to_i)

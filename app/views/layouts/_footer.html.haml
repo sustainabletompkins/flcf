@@ -86,9 +86,35 @@
       }
     });
 
+
+
 :javascript
   var calcDiv;
 
+
+  $('#donate-button').on('click', function() {
+    $('#donate-form').show();
+  });
+  $('#donate').on('click', function() {
+    if(!$('#amount').val() > 0) {
+      $('#donate-msg').html('Please provide a donation amount.');
+    }
+    else {
+      var data = {
+        name: $('#name').val(),
+        zipcode: $('#zipcode').val(),
+        session_id: $.cookie('session_id')
+      }
+      total_cost=parseInt($('#amount').val());
+      cost = parseInt(total_cost*100);
+      handler.open({
+        name: 'Finger Lakes Climate Fund',
+        description: 'Carbon Offset ($'+total_cost+')',
+        amount: cost,
+        shippingAddress: false
+      });
+    }
+  });
 
   $('#try-calc').on('click',function() {
     $('#calc').foundation("reveal","open");

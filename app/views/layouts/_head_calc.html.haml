@@ -32,6 +32,7 @@
           #total-cost.button.purple-header-button.checkout
             %i.fi-shopping-cart
             checkout
+
         .hide-for-medium-up
           #air-travel-button.air-travel-button.button.blue-header-button
             =image_tag('plane.png', :size=>'30x30')
@@ -137,6 +138,14 @@
           #air-travel.quick.button{:value=>504, :title=>"Domestic Air Travel, 1 yr"} Domestic Air Travel, 1 trip
           #air-travel.quick.button{:value=>1268, :title=>"International Air Travel, 1 yr"} International Air Travel, 1 trip
           %p
+          .button.cancel
+            cancel
+        #donate-form.offset-form
+          %p How much would you like to donate (in USD)?
+          %input{:type=>'number',:id=>'amount', :style=>'width:100px;'}
+          %p#donate-msg
+          .button#donate
+            make donation
           .button.cancel
             cancel
         #cart

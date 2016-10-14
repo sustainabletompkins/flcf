@@ -64,7 +64,7 @@
 }
 
 
-#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart, #offset-choices {
+#air-travel-offset, #car-travel-offset, #home-energy-offset, #quick-offset, #saved-offsets, #cart, #offset-choices,#donate-form {
   display: none;
   position: absolute;
   top: 45px;
@@ -75,6 +75,10 @@
   z-index: 999;
   padding: 10px;
 
+}
+
+#donate-form {
+  background: #1767a3;
 }
 
 #offset-choices  {

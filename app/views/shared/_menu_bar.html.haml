@@ -14,7 +14,4 @@
     .horizontal-menu.narrow
       =link_to "About Us", pages_path("about"), :class => 'show-for-medium-up'
     .horizontal-menu.wide
-      =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social",:target => "_blank" do
-        %i.fi-social-facebook
-      =link_to "https://twitter.com/sustaintompkins", :class=>"social",:target => "_blank" do
-        %i.fi-social-twitter
+      =link_to "Make Donation", '#', :id=>'donate-button'
