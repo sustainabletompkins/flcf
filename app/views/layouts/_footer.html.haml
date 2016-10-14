@@ -79,6 +79,7 @@
           session_id: $.cookie('session_id')
         }
         $('#myModal').html("#{j render :partial=>'shared/checkout_message'}");
+        checkoutUser();
         $.post("#{add_user_data_path}", data, function() {
 
         });
