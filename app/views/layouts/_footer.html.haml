@@ -94,26 +94,33 @@
 
   $('#donate-button').on('click', function() {
     $('#donate-form').show();
+    $('#checkout-donate').hide();
   });
   $('#donate').on('click', function() {
-    if(!$('#amount').val() > 0) {
+    if(!$('#donation-amount').val() > 0) {
       $('#donate-msg').html('Please provide a donation amount.');
     }
     else {
       var data = {
-        name: $('#name').val(),
-        zipcode: $('#zipcode').val(),
+        name: $('#donation-name').val(),
+        zipcode: $('#donation-zipcode').val(),
+        cost: $('#donation-amount').val(),
         session_id: $.cookie('session_id')
       }
-      total_cost=parseInt($('#amount').val());
-      cost = parseInt(total_cost*100);
-      handler.open({
-        name: 'Finger Lakes Climate Fund',
-        description: 'Carbon Offset ($'+total_cost+')',
-        amount: cost,
-        shippingAddress: false
-      });
+      $.post('#{save_donation_path}',data);
     }
+  });
+  $('#checkout-donate').on('click', function() {
+
+    total_cost=parseInt($('#donation-amount').val());
+    cost = total_cost*100;
+    handler.open({
+      name: 'Finger Lakes Climate Fund',
+      description: 'Carbon Offset ($'+total_cost+')',
+      amount: cost,
+      shippingAddress: false
+    });
+
   });
 
   $('#try-calc').on('click',function() {

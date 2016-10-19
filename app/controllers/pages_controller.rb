@@ -42,6 +42,10 @@ class PagesController < ApplicationController
 
   end
 
+  def admin
+    @prizes = PrizeWinner.where.not(:email=>nil).order(updated_at: :desc)
+  end
+
   def prize_wheel
     @teams = Team.all
     @prizes = Prize.where('count > 0')

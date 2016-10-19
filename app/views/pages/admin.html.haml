@@ -1,0 +1,13 @@
+.row
+  .large-6.columns
+    %h4 Recent Prizes
+    =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
+  .large-6.columns
+    %h4 Add an offset
+    =form_for :offset, :url=>manual_create_offsets_path, :remote=>:true do |f|
+      =f.text_field :title, :placeholder => 'offset title'
+      =f.text_field :name, :placeholder => 'offsetter name'
+      =f.text_field :zipcode, :placeholder => 'zip code'
+      =f.text_field :cost, :placeholder => 'cost in USD'
+
+      =f.submit 'submit', :class=>'button'

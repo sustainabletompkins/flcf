@@ -21,6 +21,18 @@ class OffsetsController < ApplicationController
     end
   end
 
+  def manual_create
+    pounds = params[:offset][:cost].to_i * 80
+    @offset = Offset.create(:user_id=>'0',:title=>params[:offset][:title],:cost=>params[:offset][:cost],:pounds=>pounds)
+
+  end
+
+  def save_donation
+    @pounds = params[:cost].to_i * 80
+    @offset = Offset.create(:session_id => params[:session_id],:user_id=>'0',:title=>'Donation',:cost=>params[:cost],:name=>params[:name], :zipcode=>params[:zipcode],:pounds=>@pounds)
+
+  end
+
   def add_name_and_zip
     if user_signed_in?
       user_id = current_user.id

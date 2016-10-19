@@ -142,11 +142,19 @@
           .button.cancel
             cancel
         #donate-form.offset-form
-          %p How much would you like to donate (in USD)?
-          %input{:type=>'number',:id=>'amount', :style=>'width:100px;'}
+          %p Make a Donation
+          .donate-input
+            %label How much would you like to donate (in USD)?
+            %input{:type=>'number',:id=>'donation-amount', :style=>'width:100px;'}
+            %label Your Zipcode
+            %input{:type=>'number',:id=>'donation-zip', :style=>'width:100px;'}
+            %label Your Name
+            %input{:type=>'text',:id=>'donation-name', :style=>'width:100px;'}
           %p#donate-msg
           .button#donate
             make donation
+          .button#checkout-donate
+            pay now
           .button.cancel
             cancel
         #cart

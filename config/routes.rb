@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post 'duplicate'
       post 'populate_cart'
       post 'add_name_and_zip'
+      post 'manual_create'
     end
   end
 
@@ -30,5 +31,8 @@ Rails.application.routes.draw do
   post '/save-prize' => 'prizes#save', :as => :prize_won
   get '/teams/:id', to: 'teams#show'
   get '/awardees/video/:id' => 'awardees#show_video', :as => :awardee_video
+  get 'admin' => 'pages#admin', :as => :admin_path
+  post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
+
 
 end

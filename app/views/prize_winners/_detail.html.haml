@@ -1,0 +1,7 @@
+.row.winner[prize_winner]
+  .large-12.columns
+    %span=prize_winner.name
+    %label won a #{prize_winner.prize.description} from
+    %span=prize_winner.prize.title
+    on #{prize_winner.updated_at.strftime('%M/%d')}
+    =link_to prize_winner.email, 'mailto:alex@hey.com'

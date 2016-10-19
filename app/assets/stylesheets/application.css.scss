@@ -846,8 +846,13 @@ label {
 }
 
 
-#form-msg, #join-msg, #guest-msg, #donate-msg {
+#form-msg, #join-msg, #guest-msg {
   color:red;
+}
+
+#donate-msg {
+  font-size: 1.3em;
+  color: #eee;
 }
 
 /* Smartphones (landscape) ----------- */
