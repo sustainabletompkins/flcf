@@ -2,5 +2,5 @@ $("#offsets").html("#{escape_javascript render @user_offsets, :as=>:offset}");
 totalCart();
 if($('#cart .offset').length > 0) {
 $('#total-cost').show();
-$('#quick-button').hide();
+$('#offset-buttons').css('right','45px');
 }

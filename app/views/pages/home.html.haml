@@ -60,7 +60,7 @@
 
       %span
         .white We've raised
-        .green $#{@cracks_money.round}
+        .green $#{number_with_delimiter(@cracks_money.round)}
         .white of our
         .green{:style=>'font-size: 25px'} $12,500
         .white goal

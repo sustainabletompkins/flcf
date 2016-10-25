@@ -4,11 +4,8 @@
       #home
         =link_to root_path do
           %i.fi-home
-      #login.show-for-medium-up.show-login
-        -if user_signed_in?
-          %i.fi-door
-        -else
-          %i.fi-torso-female
+      #total-cost
+        %i.fi-shopping-cart
       #menu.show-for-small-only
         %i.fi-list
 
@@ -29,9 +26,7 @@
           #quick-button.quick-button.button.purple-header-button
             =image_tag('quick.png', :size=>'30x30')
             quick offset
-          #total-cost.button.purple-header-button.checkout
-            %i.fi-shopping-cart
-            checkout
+
 
         .hide-for-medium-up
           #air-travel-button.air-travel-button.button.blue-header-button
@@ -47,12 +42,6 @@
 
           #quick-button.quick-button.button.purple-header-button.quick-button
             =image_tag('quick.png', :size=>'30x30')
-
-
-
-          #total-cost.button.purple-header-button.checkout
-            %i.fi-shopping-cart
-            checkout
 
       .arrow_box
         To get started playing the carbon races, please start by offsetting your travel or home energy use.
@@ -174,12 +163,3 @@
           .new-offset.button
             %i.fi-plus
             new offset
-        -if user_signed_in?
-          #saved-offsets.offset-form
-            =render :partial => 'offsets/saved', :collection => @saved_offsets, :as=>:offset
-            .button.cancel
-              cancel
-          %form{:action => "http://fingerlakesclimatefund.org/process-cart-temp.php", :method => "post", :id=>"submit-cart"}
-            %input{:name => "label", :type => "hidden", :value => ""}
-            %input{:name => "weight", :type => "hidden", :value => ""}
-            %input{:name => "cost", :type => "hidden", :value => ""}

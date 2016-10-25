@@ -20,7 +20,7 @@
 }
 
 .checkout {
-  display: none;
+
   cursor:pointer;
 }
 .checkout.mobile {
@@ -36,7 +36,7 @@
 #offset-buttons {
   position: absolute;
   top: 0px;
-  right: 45px;
+  right: 0px;
   left: 45px;
   .button {
     margin: 0px;

@@ -272,20 +272,7 @@ background:hover;
   }
 }
 
-#total-cost {
-  background: #e0d238;
-  padding-top: 5px;
-  text-align:center;
-  display: none;
-  color: #2774ad;
-    height: 45px;
-  i {
-    color: #2774ad;
-    font-size: 1.7em;
-    margin-right: 6px;
-    vertical-align:middle;
-  }
-}
+
 
 #banner {
   background-color: gray;
@@ -670,7 +657,7 @@ a.more:hover {
     color: #000;
   }
 }
-#login, #menu {
+#total-cost, #menu {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -685,6 +672,16 @@ a.more:hover {
   }
   a {
     color: #000;
+  }
+}
+#total-cost {
+  background: #e0d238;
+  display: none;
+  i {
+    color: #2774ad;
+    font-size: 1.9em;
+
+    vertical-align:middle;
   }
 }
 

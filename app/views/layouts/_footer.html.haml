@@ -149,6 +149,11 @@
     $("#mobile-menu").toggle();
 
   });
+
+  $('#total-cost').on('click', function() {
+    $("#cart").fadeIn("slow");
+    $(".offset-form").fadeOut("slow");
+  });
   var total_cost = 0;
   var cost = 0;
   var key = '#{j Rails.configuration.stripe[:publishable_key]}';
