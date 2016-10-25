@@ -49,6 +49,8 @@ class PagesController < ApplicationController
     @prizes = PrizeWinner.where.not(:email=>nil).order(updated_at: :desc)
     @prize_list = Prize.all
     @offsetters = Offsetter.all
+    @teams = Team.all
+
   end
 
   def prize_wheel

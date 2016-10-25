@@ -7,6 +7,7 @@ class OffsetsController < ApplicationController
     end
 
     @offset = Offset.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id],:quantity=>params[:quantity],:units=>params[:units])
+
     if @offset.save
 
       if user_signed_in?
@@ -23,8 +24,17 @@ class OffsetsController < ApplicationController
 
   def manual_create
     pounds = params[:offset][:cost].to_i * 80
-    @offset = Offset.create(:user_id=>'0',:title=>params[:offset][:title],:cost=>params[:offset][:cost],:pounds=>pounds)
-
+    @offset = Offset.create(:purchased => 'TRUE',:user_id=>'0',:title=>params[:offset][:title],:cost=>params[:offset][:cost],:pounds=>pounds)
+    @stat = Stat.all.first
+    @stat.increment!(:pounds, params[:offset][:pounds].to_f)
+    @stat.increment!(:dollars, params[:offset][:cost].to_f)
+    if params[:team].to_i > 0
+      @team = Team.find(params[:team])
+      @team.update_attribute(:count, 1)
+      @team.update_attribute(:members, 1)
+      @team.increment!(:pounds, params[:pounds].to_i)
+      TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => 1, :team_id=>@team.id)
+    end
   end
 
   def save_donation

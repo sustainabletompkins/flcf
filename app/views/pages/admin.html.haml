@@ -10,8 +10,12 @@
       =f.text_field :title, :placeholder => 'offset title'
       =f.text_field :name, :placeholder => 'offsetter name'
       =f.text_field :zipcode, :placeholder => 'zip code'
-      =f.text_field :cost, :placeholder => 'cost in USD'
-
+      =f.number_field :cost, :placeholder => 'cost in USD'
+      %label assign to a team?
+      =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "No team", :id=>'team-select'
+      .player-info{:style=>'display:none'}
+        =text_field_tag :user_email,'', :placeholder => 'user email'
+        =text_field_tag :member_name, '',:placeholder => 'team member name'
       =f.submit 'submit', :class=>'button'
       #offset-msg
   %hr
@@ -47,3 +51,8 @@
           =f.submit 'Add Offsetter', :class=>'button'
       .large-7.columns
         =render :collection => @offsetters, :partial => 'offsetters/offsetter', :as => :offsetter
+
+:javascript
+  $('#team-select').on('change', function() {
+    $('.player-info').show();
+  });
