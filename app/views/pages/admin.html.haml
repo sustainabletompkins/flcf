@@ -1,8 +1,10 @@
 .row
-  .large-5.columns
+  .large-12.columns
     %h4 Recent Prizes
     =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
-  .large-7.columns
+
+  %hr
+  .large-12.columns
     %h4 Add an offset
     =form_for :offset, :url=>manual_create_offsets_path, :remote=>:true do |f|
       =f.text_field :title, :placeholder => 'offset title'
@@ -11,8 +13,9 @@
       =f.text_field :cost, :placeholder => 'cost in USD'
 
       =f.submit 'submit', :class=>'button'
-
-  .large-7.columns
+      #offset-msg
+  %hr
+  .large-12.columns
     %h4 Add a prize
     .row
       .large-5.columns
@@ -28,6 +31,8 @@
           =f.submit 'Add prize', :class=>'button'
       .large-7.columns
         =render :collection => @prize_list, :partial => 'prizes/prize', :as => :prize
+  %hr
+  .large-12.columns
     %h4 Add an offsetter
     .row
       .large-5.columns

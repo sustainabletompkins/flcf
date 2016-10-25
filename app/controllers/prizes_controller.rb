@@ -12,7 +12,7 @@ class PrizesController < ApplicationController
 
   def create
     Prize.create(prize_params)
-    redirect_to pages_path('admin')
+    redirect_to pages_path('/admin')
   end
 
   private

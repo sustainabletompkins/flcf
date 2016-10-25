@@ -20,15 +20,15 @@
       .mobile-menu
         =link_to "About Us", pages_path("about"), :class => 'show-for-medium-up'
       .mobile-menu
-        =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
-          %i.fi-social-facebook
-        =link_to "https://twitter.com/sustaintompkins", :class=>"social" do
-          %i.fi-social-twitter
+        =link_to "Make Donation", '#', :id=>'donate-button',:class=>'donate-button'
 .row{:style => "padding:0px;margin-top: 45px;"}
   .large-12.columns{:style=>"background-color: #006893;padding: 0px;"}
     #banner
       =link_to root_path do
         =image_tag('carbon-offset-banner-1100.png')
+    #facebook
+      =link_to "https://www.facebook.com/climatefund?ref=ts", :class=>"social" do
+        %i.fi-social-facebook
 
 =render :partial => 'shared/menu_bar'
 
