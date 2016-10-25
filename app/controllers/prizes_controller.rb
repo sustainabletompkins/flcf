@@ -10,4 +10,13 @@ class PrizesController < ApplicationController
     #PrizeMailer.send_prize_details(params[:email],rec.code,rec.prize.title,"this is a test")
   end
 
+  def create
+    Prize.create(prize_params)
+    redirect_to pages_path('admin')
+  end
+
+  private
+  def prize_params
+    params.require(:prize).permit(:title, :description, :count, :avatar,:expiration_date)
+  end
 end

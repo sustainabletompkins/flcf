@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   resources :charges
 
+  resources :prizes, :only => [:create, :update]
+
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root :to => 'pages#home'
   match '/offset-log' => 'pages#offset_log', via: [:get]

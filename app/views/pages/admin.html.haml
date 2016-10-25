@@ -1,8 +1,8 @@
 .row
-  .large-6.columns
+  .large-5.columns
     %h4 Recent Prizes
     =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
-  .large-6.columns
+  .large-7.columns
     %h4 Add an offset
     =form_for :offset, :url=>manual_create_offsets_path, :remote=>:true do |f|
       =f.text_field :title, :placeholder => 'offset title'
@@ -11,3 +11,20 @@
       =f.text_field :cost, :placeholder => 'cost in USD'
 
       =f.submit 'submit', :class=>'button'
+
+  .large-7.columns
+    %h4 Add a prize
+    .row
+      .large-5.columns
+
+        = form_for(:prize, url: prizes_path, multipart: true, remote: true) do |f|
+          %label prize title
+          =f.text_field :title
+          %label prize description
+          =f.text_field :description
+          %label how many?
+          =f.number_field :count, :value=>'1'
+          =f.file_field :avatar
+          =f.submit 'Add prize', :class=>'button'
+      .large-7.columns
+        =render :collection => @prize_list, :partial => 'prizes/prize', :as => :prize
