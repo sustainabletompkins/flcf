@@ -15,7 +15,8 @@ class PagesController < ApplicationController
     @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2016-09-01T21:00:00-06:00')).sum(:cost)
     @cracks_pct = (@cracks_money/125).round(1)
 
-    @offsetter = Offsetter.order("RANDOM()").limit(5).first
+    @offsetter = Offsetter.order(id: :desc).limit(5).sample
+    @awardee = Awardee.order(id: :desc).limit(3).sample
 
   end
 

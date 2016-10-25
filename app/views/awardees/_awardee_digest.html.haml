@@ -1,0 +1,6 @@
+=image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :class=>'img-circle')
+%label=awardee.name
+%span Grant Amount: #{number_to_currency(awardee.award_amount, :precision => 0)}
+%br
+%span C02 Offset: #{number_with_delimiter(awardee.pounds_offset)} lbs
+.more=link_to 'Find out more!', pages_path('portfolio')

@@ -15,16 +15,12 @@
 
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Offset Donors
-    =render @offsetter
+    -if @offsetter.present?
+      =render @offsetter
 
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Grant Awardees
-    =image_tag('recent-awardee.jpg', :class=>'img-circle')
-    %label The Paw Family
-    %span Grant Amount: $1,224
-    %br
-    %span C02 Offset: 122,440 lbs
-    .more=link_to 'Find out more!', pages_path('portfolio')
+    =render :partial=>'awardees/awardee_digest', :locals=>{awardee: @awardee}
 .row#your-impact
   .large-12.columns
     %h5 Our Impact
