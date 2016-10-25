@@ -15,10 +15,8 @@
 
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Offset Donors
-    =image_tag('blake.jpg', :class=>'img-circle')
-    %label Blake Reid of Terrawatt
-    %span He makes his customers' homes zero carbon by offsetting residual emissions.
-    .more.show-calc=link_to 'Offset your carbon use', "#"
+    =render @offsetter
+
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Grant Awardees
     =image_tag('recent-awardee.jpg', :class=>'img-circle')
