@@ -2,7 +2,28 @@
   #member-name {
     display:none;
   }
+  .btn {
+    background: #cb9900;
+    background-image: -webkit-linear-gradient(top, #cb9900, #dca600);
+    background-image: -moz-linear-gradient(top, #cb9900, #dca600);
+    background-image: -ms-linear-gradient(top, #cb9900, #dca600);
+    background-image: -o-linear-gradient(top, #cb9900, #dca600);
+    background-image: linear-gradient(to bottom, #cb9900, #dca600);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%px;
+    text-shadow: 1px 1px 3px #666666;
+    color: #ffffff;
+    padding: 10px 20px 10px 20px;
+    border: solid #aa830b 5px;
+    text-decoration: none;
+    text-align:center;
+  }
 
+  .btn:hover {
+    background: #006893;
+    text-decoration: none;
+  }
 =render :partial => 'shared/menu_bar'
 %h4 You did it!
 %p{:style=>'display:inline-block;'}
@@ -80,7 +101,10 @@
       %h3 Seal The Cracks Prize Wheel
       %p Spin the wheel after each offset and you could win fun prizes from local businesses!
     .large-6.medium-6.columns
-      %button#spin-button.large Spin Wheel
+      #spin-button.btn
+        Spin
+        %br
+        Wheel
       #wheel
         .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
           -@prizes.each do |p|
