@@ -26,14 +26,17 @@ class OffsetsController < ApplicationController
     pounds = params[:offset][:cost].to_i * 80
     @offset = Offset.create(:purchased => 'TRUE',:user_id=>'0',:title=>params[:offset][:title],:cost=>params[:offset][:cost],:pounds=>pounds)
     @stat = Stat.all.first
-    @stat.increment!(:pounds, params[:offset][:pounds].to_f)
+    @stat.increment!(:pounds, pounds)
     @stat.increment!(:dollars, params[:offset][:cost].to_f)
     if params[:team].to_i > 0
       @team = Team.find(params[:team])
       @team.update_attribute(:count, 1)
       @team.update_attribute(:members, 1)
-      @team.increment!(:pounds, params[:pounds].to_i)
+      @team.increment!(:pounds, pounds)
       TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => 1, :team_id=>@team.id)
+    elsif params[:member_name].length > 0
+      Individual.create(:email => params[:user_email], :name=> params[:member_name], :pounds => pounds, :count=>'1')
+
     end
   end
 
