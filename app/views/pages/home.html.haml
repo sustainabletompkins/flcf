@@ -47,16 +47,24 @@
     .cracks-logo=image_tag('seal-the-cracks-logo-1100.png')
     %h5 October 1 through November 30
     .row#cracks-impacts
-      .large-6.medium-6.columns{:style=>'text-align:right; font-size: 1.5em;line-height: 1.1em;'}
-        Your offsets during our annual drive will
-      .large-6.medium-6.columns{:style=>'text-align:left; '}
-        %ul
+      .large-6.medium-6.columns
+        .cracks-text Your offsets during our annual drive will
+      .large-6.medium-6.columns
+        %ul.cracks-list
           %li Help others in need
           %li Support local green jobs
           %li Help protect the climate
           %li Strengthen our local economy
-  .large-4.medium-4.columns.show-for-medium-up
-    #graph.chart{"data-percent" => "#{@cracks_pct}"}
+  .large-4.medium-4.columns{:style=>'min-height: 370px;'}
+    #graph.chart.show-for-medium-up{"data-percent" => "#{@cracks_pct}"}
+
+      %span
+        .white We've raised
+        .green $#{number_with_delimiter(@cracks_money.round)}
+        .white of our
+        .green{:style=>'font-size: 25px'} $12,500
+        .white goal
+    #mobile-graph.chart.show-for-small-only{"data-percent" => "#{@cracks_pct}"}
 
       %span
         .white We've raised
@@ -136,6 +144,48 @@
 :javascript
 
   var el = document.getElementById('graph'); // get canvas
+
+  var options = {
+      percent:  el.getAttribute('data-percent') || 25,
+      size: el.getAttribute('data-size') || 220,
+      lineWidth: el.getAttribute('data-line') || 20,
+      rotate: el.getAttribute('data-rotate') || 0
+  }
+
+  var canvas = document.createElement('canvas');
+  var span = document.createElement('span');
+  span.textContent = Math.round(options.percent) + '%';
+
+  if (typeof(G_vmlCanvasManager) !== 'undefined') {
+      G_vmlCanvasManager.initElement(canvas);
+  }
+
+  var ctx = canvas.getContext('2d');
+  canvas.width = canvas.height = options.size;
+
+  el.appendChild(canvas);
+
+  ctx.translate(options.size / 2, options.size / 2); // change center
+  ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
+
+  //imd = ctx.getImageData(0, 0, 240, 240);
+  var radius = (options.size - options.lineWidth) / 2;
+
+  var drawCircle = function(color, lineWidth, percent) {
+      percent = Math.min(Math.max(0, percent || 1), 1);
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
+      ctx.strokeStyle = color;
+          ctx.lineCap = 'round'; // butt, round or square
+      ctx.lineWidth = lineWidth
+      ctx.stroke();
+  };
+
+  drawCircle('#efefef', options.lineWidth, 100 / 100);
+  drawCircle('#5b922f', options.lineWidth, options.percent / 100);
+
+
+  var el = document.getElementById('mobile-graph'); // get canvas
 
   var options = {
       percent:  el.getAttribute('data-percent') || 25,
