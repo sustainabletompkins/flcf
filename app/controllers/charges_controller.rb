@@ -10,13 +10,8 @@ class ChargesController < ApplicationController
       current_user.save
     end
     @stat = Stat.all.first
-    @offset_data = {:pounds=>0, :cost=>0}
-    @player = TeamMember.where(:email=>params[:stripeEmail]).first
-    if @player
-      @team = Team.find(@player.team_id)
-      @player.increment!(:offsets)
-    end
-    @individual = Individual.where(:email=>params[:stripeEmail]).first
+    @offset_data = {:pounds=>0, :cost=>0, :count=>0}
+
 
     @offsets = Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE')
     if @offsets.count > 0
@@ -26,6 +21,7 @@ class ChargesController < ApplicationController
         o.save
         @offset_data[:pounds] = @offset_data[:pounds] + o.pounds
         @offset_data[:cost] = @offset_data[:cost] + o.cost
+        @offset_data[:count] = @offset_data[:count] + 1
         @offset_data[:email] = params[:stripeEmail]
         @offset_data[:name] = o.name
         @stat.increment!(:pounds, o.pounds)
@@ -35,7 +31,16 @@ class ChargesController < ApplicationController
       @donation_mode = true
       puts 'its a donation'
     end
+    @player = TeamMember.where(:email=>params[:stripeEmail]).first
+    if @player
 
+      @team = Team.find(@player.team_id)
+      @team.increment!(:count,@offset_data[:count].to_i)
+      @team.increment!(:pounds,@offset_data[:pounds].to_i)
+
+      @player.increment!(:offsets)
+    end
+    @individual = Individual.where(:email=>params[:stripeEmail]).first
 
     if @individual
       @individual.increment!(:count)

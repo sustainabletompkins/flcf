@@ -30,16 +30,16 @@
   Your contribution to the Climate Fund will help a local family improve their household energy efficiency and thus reduce carbon pollution.  For more info, check out some of
   =link_to "our past climate fund awardees.", pages_path("portfolio")
   As a special thanks for your contribution, you have earned a spin of the prize wheel where you can win gifts from local businesses.
+-puts @team
 
-
--if @offset_data && !@donation_mode
+-if @offset_data
 
   -if @team
-    %h4 Your offset of #{@offset_data[:pounds]} has been added to the tally for Team #{@team.name}
+    %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to the tally for Team '#{@team.name}'
     :javascript
       $('#prize-wheel').show();
   -elsif @individual
-    %h4 Your offset of #{@offset_data[:pounds]} has been added to your individual tally
+    %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to your individual tally
     :javascript
       $('#prize-wheel').show();
   -else
