@@ -78,6 +78,7 @@
             =text_field_tag :member_name, '', id: 'public-name'
             =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
             =hidden_field_tag :user_email, @offset_data[:email]
+            =hidden_field_tag :count, @offset_data[:count]
             -#=f.file_field :image, :class => 'file-upload'
             #form-msg
             %br

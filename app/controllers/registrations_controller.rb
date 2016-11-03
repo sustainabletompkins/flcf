@@ -17,7 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
         o.save
         pounds = pounds = o.pounds
       end
-      Individual.create(:name=>resource.name, :pounds=>pounds, :count=>1, :email => resource.email)
+      Individual.create(:name=>resource.name, :pounds=>pounds, :count=>@user_offsets.count, :email => resource.email)
       cookies[:joined] = "true"
 
     end

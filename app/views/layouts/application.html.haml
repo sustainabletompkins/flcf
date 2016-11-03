@@ -18,7 +18,9 @@
 
       :javascript
         if($.cookie("joined")=="true") {
+          $.cookie("joined","false");
           window.location.replace("#{pages_path('prize-wheel')}");
+
         }
 
   %body
