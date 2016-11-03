@@ -33,6 +33,32 @@ namespace :init do
     Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
   end
 
+  task :recalculate_race_data => :environment do
+    teams = Team.all
+    teams.each do |team|
+      team.update_attributes(:pounds=>0, :count=>0)
+    end
+    teams = Individual.all
+    teams.each do |team|
+      team.update_attributes(:pounds=>0, :count=>0)
+    end
+    offsets = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2016-09-01T21:00:00-06:00'))
+    offsets.each do |o|
+      player = TeamMember.where(:email=>o.email).first
+      if player.present?
+        team = player.team
+        team.increment!(:count)
+        team.increment!(:pounds, o.pounds)
+      else
+        player = Individual.where(:email=>o.email).first
+        if player.present?
+          player.increment!(:count)
+          player.increment!(:pounds, o.pounds)
+        end
+      end
+    end
+  end
+
   task :seed_awardees => :environment do
     Awardee.destroy_all
     Awardee.create(
