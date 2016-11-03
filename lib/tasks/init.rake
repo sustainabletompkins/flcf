@@ -49,11 +49,13 @@ namespace :init do
         team = player.team
         team.increment!(:count)
         team.increment!(:pounds, o.pounds)
+        o.update_attribute(:team_id, team.id)
       else
         player = Individual.where(:email=>o.email).first
         if player.present?
           player.increment!(:count)
           player.increment!(:pounds, o.pounds)
+          o.update_attribute(:individual_id, player.id)
         end
       end
     end
