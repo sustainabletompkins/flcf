@@ -24,6 +24,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'contact_us', '~> 0.5.1'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'best_in_place', '~> 3.0.1'
 
 gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
 gem 'aws-sdk', '~> 2.3'

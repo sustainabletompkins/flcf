@@ -1,0 +1,19 @@
+.row.awardee[awardee]
+  .large-4.columns
+    -if awardee.avatar_file_name.present?
+      =image_tag("#{awardee.avatar.url(:medium)}", :style=>'width:100%;margin-top: 20px')
+    -else
+      =image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :style=>'width:100%;margin-top: 20px')
+    %div{:style=>'text-align:center;margin-top: -40px;'}
+      %button
+        .play-video{:"data-video"=>"#{awardee.id}"} watch video
+  .large-8.columns
+    %h4=best_in_place awardee, :name
+    %label Grant Amount:
+    %span #{best_in_place awardee, :award_amount}
+    %br
+    %label C02 Offset:
+    %span #{best_in_place awardee, :pounds_offset}
+    %label video id
+    %span=best_in_place awardee, :video_id
+    .bio=best_in_place awardee, :bio, :as => :textarea
