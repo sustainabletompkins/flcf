@@ -59,7 +59,29 @@
             =f.submit 'Add Offsetter', :class=>'button', :id=>'add-offsetter'
         .large-7.columns
           =render :collection => @offsetters, :partial => 'offsetters/offsetter', :as => :offsetter
+  %hr
+  .large-12.columns
+    #add-awardee-section
+      %h4 Add an awardee
+      .row
+        .large-5.columns
 
+          = form_for(:awardee, url: awardees_path, multipart: true, remote: true) do |f|
+            %label prize title
+            =f.text_field :name
+            %label bio
+            =f.text_area :bio
+            %label vimeo video id
+            =f.number_field :video_id
+            %label award amount
+            =f.number_field :award_amount
+            %label pound offset
+            =f.number_field :pounds_offset
+            %label choose a picture (square, with face centered)
+            =f.file_field :avatar
+            =f.submit 'Add Awardee', :class=>'button', :id=>'add-awardee'
+        .large-7.columns
+          =render :collection => @awardees, :partial => 'awardees/awardee', :as => :awardee
 :javascript
   $('#team-select').on('change', function() {
     $('.player-info').show();

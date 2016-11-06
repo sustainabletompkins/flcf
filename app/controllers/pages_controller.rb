@@ -50,6 +50,7 @@ class PagesController < ApplicationController
     @prize_list = Prize.all
     @offsetters = Offsetter.all
     @teams = Team.all
+    @awardees = Awardee.all
 
   end
 
