@@ -54,6 +54,8 @@ class ChargesController < ApplicationController
     end
     @empties = count*2
 
+    OffsetMailer.send_offset_details(params[:stripeEmail],@offsets).deliver
+
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :card  => params[:stripeToken]
