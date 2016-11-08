@@ -1,4 +1,4 @@
-.row.winner[prize]
+.row.prize[prize]{:style=>'margin-bottom: 12px;'}
   .large-4.medium-5.small-5.columns
     -if prize.avatar_file_name.present?
       =image_tag("#{prize.avatar.url(:square)}")
@@ -7,3 +7,5 @@
   .large-8.medium-7.small-7.columns{:style=>'padding-top: 25px;'}
     %label=best_in_place prize, :description
     %span=best_in_place prize, :title
+  .large-12.columns
+    =link_to 'delete this', prize,  method: :delete, remote: :true, data: { confirm: 'Are you sure?' }

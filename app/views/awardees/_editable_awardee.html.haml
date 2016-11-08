@@ -17,3 +17,5 @@
     %label video id
     %span=best_in_place awardee, :video_id
     .bio=best_in_place awardee, :bio, :as => :textarea
+  %br
+  =link_to 'delete this', awardee,  method: :delete, remote: :true, data: { confirm: 'Are you sure?'}

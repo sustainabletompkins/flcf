@@ -24,6 +24,11 @@ class AwardeesController < ApplicationController
     end
   end
 
+  def destroy
+    Awardee.find(params[:id]).destroy
+    @id = params[:id]
+  end
+
   private
   def awardee_params
     params.require(:awardee).permit(:name, :bio, :video_id, :award_amount, :pounds_offset, :avatar)

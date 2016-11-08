@@ -18,6 +18,12 @@ class OffsettersController < ApplicationController
       end
     end
   end
+
+  def destroy
+    Offsetter.find(params[:id]).destroy
+    @id = params[:id]
+  end
+
   private
   def offsetter_params
     params.require(:offsetter).permit(:name, :description,:avatar)

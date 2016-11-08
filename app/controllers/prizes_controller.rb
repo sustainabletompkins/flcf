@@ -28,6 +28,11 @@ class PrizesController < ApplicationController
       end
     end
   end
+  def destroy
+    Prize.find(params[:id]).destroy
+    @id = params[:id]
+  end
+
 
   private
   def prize_params
