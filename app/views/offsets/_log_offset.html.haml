@@ -1,5 +1,5 @@
-%div{:style=>"margin: 10px; padding: 7px; background-color:#eee"}
-  %div{:style=>"clear:both;"}
+.offset[offset]
+  %div{:style=>"clear:both;margin: 10px; padding: 7px; background-color:#eee"}
     %label name
     =offset.name
     %br
@@ -17,7 +17,17 @@
     %br
     %label type
     =offset.title
-:css
-  label {
-    color: #444;
-  }
+    -unless offset.individual_id > 0 || offset.team_id > 0
+
+      .show-individual-form add as individual player
+      .add-to-individual
+        =form_for :individual, :url => add_to_individual_path, :method => :post, :remote => :true do |f|
+          %label player email
+          =f.text_field :email
+          %br
+          %label player public name
+          =f.text_field :name
+          =f.hidden_field :pounds, :value=>offset.pounds
+          =f.hidden_field :offset_id, :value=>offset.id
+          %br
+          =f.submit 'add as individual', :class => 'button small'

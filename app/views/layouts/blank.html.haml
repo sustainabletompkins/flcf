@@ -7,15 +7,13 @@
 
     %title Finger Lake Climate Fund
 
-    = stylesheet_link_tag "application"
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
-    = javascript_include_tag "http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=places,geometry"
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
     =yield :head
 
   %body{:style=>"background:#fff;"}
     =yield
-    =render :partial => 'layouts/footer'
+
 

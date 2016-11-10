@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :individual do
+    collection do
+      post 'add_to'
+    end
+  end
+
   resources :charges
 
   resources :prizes, :only => [:create, :update, :destroy]

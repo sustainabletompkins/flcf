@@ -1,2 +1,19 @@
 %h3 offset log
 =render :partial => 'offsets/log_offset', :collection => @offsets, :as => :offset
+:css
+  label {
+    color: #444;
+  }
+  .add-to-individual {
+    display: none;
+  }
+  .show-individual-form {
+    color: blue;
+    cursor: pointer;
+  }
+
+:javascript
+
+  $('.show-individual-form').on('click', function() {
+    $(this).next().show();
+  });

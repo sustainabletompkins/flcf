@@ -66,7 +66,7 @@ class PagesController < ApplicationController
 
   def offset_log
     @offsets = Offset.where(:purchased => :true).order(updated_at: :desc)
-    render 'offset_log', :layout => false
+    render 'offset_log', :layout => 'blank'
   end
 
   def calculator
