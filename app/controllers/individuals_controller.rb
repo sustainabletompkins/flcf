@@ -14,10 +14,22 @@ class IndividualsController < ApplicationController
       @offset.update_attribute(:individual_id, @i.id)
     end
   end
+  def update
+    @user = Individual.find(params[:id])
 
+    respond_to do |format|
+      if @user.update_attributes(team_params)
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@user) }
+      end
+    end
+  end
   private
   def team_params
-    params.require(:team).permit(:name, :pounds)
+    params.require(:individual).permit(:name, :pounds)
   end
 
 end

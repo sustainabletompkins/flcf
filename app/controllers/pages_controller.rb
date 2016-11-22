@@ -51,7 +51,8 @@ class PagesController < ApplicationController
     @offsetters = Offsetter.all
     @teams = Team.all
     @awardees = Awardee.all
-
+    @individuals = Individual.all
+    @teams = Team.all
   end
 
   def prize_wheel

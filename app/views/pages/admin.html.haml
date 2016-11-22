@@ -82,6 +82,16 @@
             =f.submit 'Add Awardee', :class=>'button', :id=>'add-awardee'
         .large-7.columns
           =render :collection => @awardees, :partial => 'awardees/editable_awardee', :as => :awardee
+
+    .large-12.columns
+      %h4 Carbon Races
+      .row
+        .large-6.columns
+          %h5 Individuals
+          =render :collection => @individuals, :partial => 'individuals/editable_player', :as => :individual
+        .large-6.columns
+          %h5 Teams
+          =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
 :javascript
    $(document).ready(function() {
     /* Activating Best In Place */

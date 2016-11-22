@@ -13,7 +13,19 @@ class TeamsController < ApplicationController
     end
     TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => params[:count].to_i, :founder=> "TRUE", :team_id=>@league.id)
   end
+  def update
+    @user = Team.find(params[:id])
 
+    respond_to do |format|
+      if @user.update_attributes(team_params)
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@user) }
+      end
+    end
+  end
   def join
     @team = Team.find(params[:league_id])
     @pounds = params[:pounds]

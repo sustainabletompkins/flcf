@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :individual do
+  resources :individuals, :only => [:update, :destroy] do
     collection do
       post 'add_to'
     end
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   resources :prizes, :only => [:create, :update, :destroy]
   resources :offsetters, :only => [:create, :update, :show, :destroy]
   resources :awardees, :only => [:create, :update, :show, :destroy]
+  resources :teams, :only => [:update]
+
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root :to => 'pages#home'

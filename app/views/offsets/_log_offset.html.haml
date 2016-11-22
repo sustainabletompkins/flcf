@@ -21,7 +21,7 @@
 
       .show-individual-form add as individual player
       .add-to-individual
-        =form_for :individual, :url => add_to_individual_path, :method => :post, :remote => :true do |f|
+        =form_for :individual, :url => add_to_individuals_path, :method => :post, :remote => :true do |f|
           %label player email
           =f.text_field :email
           %br
