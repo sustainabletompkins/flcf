@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103230707) do
+ActiveRecord::Schema.define(version: 20161205191919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20161103230707) do
     t.float   "dollars"
     t.integer "offsets"
     t.integer "awardees"
+    t.integer "wheel_spins", default: 0
   end
 
   create_table "team_members", force: true do |t|

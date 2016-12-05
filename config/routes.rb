@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get '/teams/:id', to: 'teams#show'
   get '/awardees/video/:id' => 'awardees#show_video', :as => :awardee_video
   get 'admin' => 'pages#admin', :as => :admin_path
+  get 'log-spin' => 'prizes#log', :as => :log_spin
   post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
 
 

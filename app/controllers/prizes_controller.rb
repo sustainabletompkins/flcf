@@ -30,6 +30,11 @@ class PrizesController < ApplicationController
     @id = params[:id]
   end
 
+  def log
+    s = Stat.find(1)
+    s.increment!(:wheel_spins)
+  end
+
 
   private
   def prize_params

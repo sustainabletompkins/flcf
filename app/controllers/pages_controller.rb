@@ -53,6 +53,7 @@ class PagesController < ApplicationController
     @awardees = Awardee.all
     @individuals = Individual.all
     @teams = Team.all
+    @stat = Stat.find(1)
   end
 
   def prize_wheel

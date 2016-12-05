@@ -165,6 +165,7 @@
   $('#spin-button').on('click',function() {
     spin = setInterval(cycleWheel, 250);
     count = 0;
+    $.get("#{log_spin_path}");
     $('#spin-button').hide();
     $('#wheel').show();
   });
