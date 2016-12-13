@@ -93,6 +93,17 @@
         .large-6.columns
           %h5 Teams
           =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
+  .large-12.columns
+    %h4 st offsets
+    -@st = Team.find(1).offsets
+    -@st.each do |o|
+      #{o.email} | #{o.title} | #{o.created_at.strftime('%m/%d')} | #{o.pounds}
+      %br
+    %h4 friends of ellen offsets
+    -@st = Team.find(8).offsets
+    -@st.each do |o|
+      #{o.email} | #{o.title} | #{o.created_at.strftime('%m/%d')} | #{o.pounds}
+      %br
 :javascript
    $(document).ready(function() {
     /* Activating Best In Place */

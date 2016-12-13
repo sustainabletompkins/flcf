@@ -61,6 +61,32 @@ namespace :init do
     end
   end
 
+  task :fix_st_data => :environment do
+    @offsets = Offset.where(:team_id=>1, :name=>nil, :email=>nil)
+    @offsets.each do |o|
+      o.team_id = 0
+      o.name = 'Manually Added'
+      o.save
+    end
+    @offsets = Offset.where(:name=>'Astrid Jirka', :purchased=>:true)
+    @offsets.each do |o|
+      o.team_id = 0
+      o.save
+    end
+  end
+
+  task :redo_team_data => :environment do
+    @teams = Team.all
+    @teams.each do |t|
+      total = t.offsets.sum(:pounds)
+      count = t.offsets.count
+      t.pounds = total
+      t.count = count
+      t.members = t.team_members.count
+      t.save
+    end
+  end
+
   task :seed_awardees => :environment do
     Awardee.destroy_all
     Awardee.create(
