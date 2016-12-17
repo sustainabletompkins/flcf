@@ -30,7 +30,6 @@ class OffsetsController < ApplicationController
     @stat.increment!(:dollars, params[:offset][:cost].to_f)
     if params[:team].to_i > 0
       @team = Team.find(params[:team])
-      @team.update_attribute(:count, 1)
       @team.update_attribute(:members, 1)
       @team.increment!(:pounds, pounds)
       TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => 1, :team_id=>@team.id)
