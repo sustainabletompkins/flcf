@@ -99,11 +99,7 @@
     -@st.each do |o|
       #{o.email} | #{o.title} | #{o.created_at.strftime('%m/%d')} | #{o.pounds}
       %br
-    %h4 friends of ellen offsets
-    -@st = Team.find(8).offsets
-    -@st.each do |o|
-      #{o.email} | #{o.title} | #{o.created_at.strftime('%m/%d')} | #{o.pounds}
-      %br
+
 :javascript
    $(document).ready(function() {
     /* Activating Best In Place */

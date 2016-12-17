@@ -17,6 +17,7 @@ class PagesController < ApplicationController
 
     @offsetter = Offsetter.order(id: :desc).limit(5).sample
     @awardee = Awardee.order(id: :desc).limit(3).sample
+    @awardee_count = Awardee.all.count
 
   end
 
