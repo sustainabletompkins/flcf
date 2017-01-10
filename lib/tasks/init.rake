@@ -87,6 +87,21 @@ namespace :init do
     end
   end
 
+  task :redo_awardee => :environment do
+
+    Awardee.create(
+      :id => 5,
+      :name=>'The Buckholtz Home',
+      :bio=>'<p>Max Buckholtz is a local up and coming composer with a busy schedule of teaching, composing, and performance.  His wife had purchased a ranch-style house in the Town of Ithaca about a decade ago, and they soon realized they had a difficult problem lurking below the house.  They heavy clay soil in the area was perpetually saturated and the moist environment in their crawlspace was rotting out the foundation, leaking tons of heat energy, and loading their indoor air with molds and mildew.  Max bravely took on much of the work himself, but the complexity of the project and ill health from hours in the crawlspace sent him to Snug Planet to get help with the project. </p> <p>The diagnosis was daunting because so much work was needed to rescue the situation, and the Buckholtz family lived on a modest income.  Snug Planet organized access to NYSERDA’s Assisted Home Performance Program and also suggested that Max apply to the Finger Lakes Climate Fund for assistance.  We calculated that the work being done under the house would result in carbon emissions reductions of about 88 tons, and we were delighted to send them our fifth grant award of $1, 751 to help cover the costs.</p><p>When we visited the worksite, Snug Planet’s staff was carefully cutting and fitting large sheets of insulation to build up a thick wall of protection under the entire floor of the house, as well as taking the time to insulate pipes and ductwork running through the crawlspace.  Max reports that the house is much more comfortable as winter gets underway, and both he and his older daughter are feeling much healthier now that they are breathing clean indoor air.  Kudos to the donors of the Climate Fund for helping make this possible, and to the dedicated and very hard-working crew at Snug Planet for tackling this difficult project.</p>',
+      :video_id => '86458762',
+      :img_url => '',
+      :award_amount => '1751',
+      :award_date => '',
+      :pounds_offset => '88'
+    )
+
+  end
+
   task :seed_awardees => :environment do
     Awardee.destroy_all
     Awardee.create(
