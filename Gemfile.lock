@@ -193,6 +193,8 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.4.4)
+    simple_captcha2 (0.4.0)
+      rails (>= 4.1)
     spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -241,6 +243,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_captcha2
   spring
   stripe!
   turbolinks

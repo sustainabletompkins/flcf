@@ -8,10 +8,14 @@ class PrizesController < ApplicationController
   end
 
   def create
-    Prize.create(prize_params)
-    redirect_to '/admin'
-  end
 
+    if simple_captcha_valid?
+      Prize.create(prize_params)
+      redirect_to 'admin'
+    else
+      render 'shared/captcha_failed'
+    end
+  end
   def update
     @user = Prize.find params[:id]
 
@@ -38,6 +42,6 @@ class PrizesController < ApplicationController
 
   private
   def prize_params
-    params.require(:prize).permit(:title, :description, :count, :avatar,:expiration_date)
+    params.require(:prize).permit(:title, :description, :count, :avatar,:expiration_date,:captcha, :captcha_key)
   end
 end

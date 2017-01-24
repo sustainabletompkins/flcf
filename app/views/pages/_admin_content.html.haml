@@ -23,6 +23,7 @@
         =text_field_tag :member_name, '',:placeholder => 'team member name'
       %br
       =f.submit 'submit', :class=>'button'
+      =show_simple_captcha(:label=>'Enter letters...')
       #offset-msg
   %hr
   .large-12.columns
@@ -32,7 +33,7 @@
       .row
         .large-5.columns
 
-          = form_for(:prize, url: prizes_path, multipart: true, remote: true) do |f|
+          = form_for(:prize, url: prizes_path, multipart: true, remote: true,:html => {:id => "add-prize-form"}) do |f|
             %label prize title
             =f.text_field :title
             %label prize description
@@ -40,7 +41,9 @@
             %label how many?
             =f.number_field :count, :value=>'1'
             =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
             =f.submit 'Add prize', :class=>'button', :id=>'add-prize'
+            .fail-notice
         .large-7.columns
           =render :collection => @prize_list, :partial => 'prizes/editable_prize', :as => :prize
   %hr
@@ -50,14 +53,16 @@
       .row
         .large-5.columns
 
-          = form_for(:offsetter, url: offsetters_path, multipart: true, remote: true) do |f|
+          = form_for(:offsetter, url: offsetters_path, multipart: true, remote: true,:html => {:id => "add-offsetter-form"}) do |f|
             %label prize title
             =f.text_field :name
             %label prize description
             =f.text_field :description
             %label choose a picture (square, with face centered)
             =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
             =f.submit 'Add Offsetter', :class=>'button', :id=>'add-offsetter'
+            .fail-notice
         .large-7.columns
           =render :collection => @offsetters, :partial => 'offsetters/editable_offsetter', :as => :offsetter
   %hr
@@ -67,7 +72,7 @@
       .row
         .large-5.columns
 
-          = form_for(:awardee, url: awardees_path, multipart: true, remote: true) do |f|
+          = form_for(:awardee, url: awardees_path, multipart: true, remote: true,:html => {:id => "add-awardee"}) do |f|
             %label prize title
             =f.text_field :name
             %label bio
@@ -80,7 +85,9 @@
             =f.number_field :pounds_offset
             %label choose a picture (square, with face centered)
             =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
             =f.submit 'Add Awardee', :class=>'button', :id=>'add-awardee'
+            .fail-notice
         .large-7.columns
           =render :collection => @awardees, :partial => 'awardees/editable_awardee', :as => :awardee
 
@@ -110,7 +117,7 @@
   });
 
   $('#add-prize').on('click', function() {
-    $('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
+    //$('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
   });
   $('#add-offsetter').on('click', function() {
     $('#add-offsetter-section').html('<h3>Upload in progress...</h3>');

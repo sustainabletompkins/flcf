@@ -2,8 +2,12 @@ class OffsettersController < ApplicationController
 
 
   def create
-    Offsetter.create(offsetter_params)
-    redirect_to '/admin'
+    if simple_captcha_valid?
+      Offsetter.create(offsetter_params)
+      redirect_to '/admin'
+    else
+      render 'shared/captcha_failed'
+    end
   end
   def update
     @user = Offsetter.find params[:id]
@@ -26,6 +30,6 @@ class OffsettersController < ApplicationController
 
   private
   def offsetter_params
-    params.require(:offsetter).permit(:name, :description,:avatar)
+    params.require(:offsetter).permit(:name, :description,:avatar,:captcha, :captcha_key)
   end
 end

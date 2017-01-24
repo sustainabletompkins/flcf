@@ -6,8 +6,12 @@ class AwardeesController < ApplicationController
   end
 
   def create
-    Awardee.create(awardee_params)
-    redirect_to '/admin'
+    if simple_captcha_valid?
+      Awardee.create(awardee_params)
+      render 'created'
+    else
+      render 'shared/captcha_failed'
+    end
   end
 
   def update
@@ -31,6 +35,6 @@ class AwardeesController < ApplicationController
 
   private
   def awardee_params
-    params.require(:awardee).permit(:name, :bio, :video_id, :award_amount, :pounds_offset, :avatar)
+    params.require(:awardee).permit(:name, :bio, :video_id, :award_amount, :pounds_offset, :avatar,:captcha, :captcha_key)
   end
 end
