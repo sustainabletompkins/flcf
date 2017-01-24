@@ -61,6 +61,149 @@ namespace :init do
     end
   end
 
+  task :set_pages => :environment do
+    Page.delete_all
+    Page.create(:title=>'faq',:body=>'
+
+      <div class="faq-nav">
+        <a href="#FAQ1">What are carbon offsets?</a>
+        <a href="#FAQ2">How does the Finger Lakes Climate Fund Work?</a>
+        <a href="#FAQ3">What does offsetting one ton of carbon emissions mean in everyday terms?</a>
+        <a href="#FAQ4">How are the projects chosen?</a>
+        <a href="#FAQ5">What are the advantages of local carbon offset projects?</a>
+        <a href="#FAQ6">Shouldn’t we reduce our emissions before buying carbon offsets?</a>
+      </div>
+      <p>
+        <span class="subhead"><a name="FAQ1"></a>What are carbon offsets?
+        </span>
+        <br>
+        Carbon offsets allow people to “cancel out” the carbon emissions associated with their lifestyles. The energy we use in our homes, the fuel we burn in our cars, and the pollution that comes from the airplanes we travel in all generate greenhouse gas emissions that contribute to climate change. By purchasing carbon offsets you are investing money in an energy efficiency project and helping to reduce carbon emissions.
+      </p>
+      <p>A carbon offset represents a reduction of one ton of carbon dioxide equivalent. This means that for every offset you purchase, one ton of carbon dioxide emissions will be reduced on your behalf from a local energy efficiency project.</p>
+      <p>What sets the Finger Lakes Climate Fund apart from other organizations offering carbon offsets is that we focus on local projects in the Finger Lakes region, ensuring that your money goes to work here in our own community. Also, by focusing on making low to moderate income households more energy efficient, our offset projects contribute to our local economy and support local families that need help.</p>
+      <p>
+        <span class="subhead"><a name="FAQ2"></a>How does the Finger Lakes Climate Fund Work?
+        </span>
+        <br>
+        You can donate to the Finger Lakes Climate Fund in order to offset the carbon emissions associated with your home energy use, vehicle travel, or airplane travel. The money you donate contributes to reducing carbon emissions through a local energy efficiency project that would not otherwise be possible, therefore offsetting, or cancelling out, your carbon emissions.
+      </p>
+      <p>Donations to the Finger Lakes Climate Fund are used for grants to pay for energy efficiency projects in low to moderate income households in the Finger Lakes region. These grants help pay for insulation, air sealing, energy efficient heating equipment, and other upgrades to reduce energy use and greenhouse gas emissions.</p>
+      <p>The energy efficiency upgrades are carried out by Building Performance Institute accredited contractors. Using guidelines provided by the New York State Energy Research and Development Authority, the contractors follow a strict protocol for accurately estimating the energy savings that will result from the energy renovations. The energy saving estimates for the projects are also verified by a third party organization that makes sure the carbon reduction calculations are accurate. This ensures that your carbon offset donations are resulting in actual greenhouse gas emission reductions.</p>
+      <p>Of course, the first step is to try to minimize your personal emissions first by using less energy at home, driving less, and traveling fewer miles by plane. For more information on reducing your personal greenhouse gas emissions please visit the Reduce Your Emissions webpage.</p>
+      <p>
+        <span class="subhead"><a name="FAQ3"></a>What does offsetting one ton of carbon emissions mean in everyday terms?
+        </span>
+        <br>
+        Offsetting one ton of carbon emissions is equivalent to saving 102 gallons of gas, planting 23 trees, taking an average car off the road for two months, or powering an average home for one month. For more information on finding the equivalent of your carbon offset, visit the EPA’s online
+        <a href="http://www.epa.gov/cleanrgy/energy-resources/calculator.html" target="_blank">Greenhouse Gas Equivalencies Calculator.</a>
+      </p>
+      <p>
+        <span class="subhead"><a name="FAQ4"></a>How are the projects chosen?
+        </span>
+        <br>
+        <a href="http://www.sustainabletompkins.org" target="_blank" title="Sustainable Tompkins">Sustainable Tompkins</a>
+        has an advisory committee to assist with approving offset projects that are funded through the Finger Lakes Climate Fund. NYSERDA Certified Energy contractors in our area are periodically invited to submit proposals for modest income families they are working with where a grant from the Climate Fund would add significant value to the projects The projects are vetted by the advisory committee and are approved by the Sustainable Tompkins Board of Directors. The projects must result in actual carbon reductions greater than or equal to the amount of the grant. Our goals for the projects are to reduce carbon emissions, help local families who need assistance, and strengthen our local economy.
+      </p>
+      <p>
+        <span class="subhead"><a name="FAQ5"></a>What are the advantages of local carbon offset projects?
+        </span>
+        <br>
+        Local carbon offsets allow you to see the results of your purchase right here in our community. Local offsets also help support the local economy by generating work for energy efficiency businesses. The Finger Lakes Climate Fund’s unique focus on low to moderate income households also has the benefit of helping people in our community who really need it. Other carbon offset suppliers don’t offer these kinds of local benefits that you’ll find with the Finger Lakes Climate Fund.
+      </p>
+
+    ')
+    Page.create(:title=>'Reduce Your Emissions', :body=>'
+      <p>There are many ways to reduce your carbon emissions. Below are some suggestions for several actions you can take and a list of resources that provide helpful information about saving energy and reducing your emissions.</p>
+      <h4>Reduce Your Home Emissions</h4>
+      <div class="embed-container">
+      <iframe allowfullscreen="" frameborder="0" height="352" mozallowfullscreen="" src="https://player.vimeo.com/video/54961331" webkitallowfullscreen="" width="640"></iframe>
+      </div>
+      <ul>
+      <li>Choose wisely when grocery shopping or eating out.  A plant-based diet releases far fewer greenhouse emissions than a meat-based diet and you can make a big difference simply by eating meat less often.  The type of meat and how it is produced also makes a big difference, and you can learn some simple rules for guiding your diet choices.</li>
+      <li>Participate in Home Performance with Energy Star: With this program a trained professional will evaluate your home in order to identify exactly what your house needs to become more energy efficient. They’ll make recommendations for energy improvements and provide you with an estimate of how much the work will cost and how much money you’ll save on your utility bills as a result of the work. This is an excellent way to reduce your greenhouse gas emissions, save money on your energy bills, and have a more comfortable house. There are even financial incentives available to help you pay for qualifying work.</li>
+      <li>Purchase Energy Star Appliances: When you’re shopping for new appliances make sure you look for the Energy Star label. This ensures that the product meets certain energy efficiency standards.</li>
+      <li>Turn down your thermostat: Use a programmable thermostat to lower your heat when you’re away from your house and while you’re sleeping. Also, try lowering the temperature a bit to see if you can have it slightly cooler in the winter.</li>
+      <li>Eliminate vampire load: Many appliances use electricity even when they’re turned off. This vampire load, or phantom load, adds up to a significant amount of energy. To eliminate this wasted energy, unplug your electrical equipment or use power strips and turn them off when you’re not using them.</li>
+      <li>Conserve electricity: Make sure to turn off your lights, computer, and other electrical equipment when not in use.</li>
+      <li>And consider offsetting your home’s carbon footprint through the Finger Lakes Climate Fund and putting those funds to work helping a local family to make our region more energy efficient. Watch Miranda Phillips talk about offsetting her family’s carbon footprint.</li>
+      </ul>
+      <h4>Reduce Your Vehicle Emissions</h4>
+      <div class="embed-container">
+      <iframe allowfullscreen="" frameborder="0" height="352" mozallowfullscreen="" src="https://player.vimeo.com/video/54468069" webkitallowfullscreen="" width="640"></iframe>
+      </div>
+      <ul>
+      <li>Buy a fuel efficient vehicle: When you’re in the market for a new automobile, make sure to compare the fuel economy of the vehicles. Buying a smaller car or a hybrid vehicle can considerably reduce your carbon emissions over the long term.</li>
+      <li>Drive less often: Look for opportunities to walk, bike, take the bus, or carpool. When you do have to drive, combine trips so you can save an extra trip and plan out your routes efficiently to drive fewer miles.</li>
+      <li>Drive to save fuel: Make sure to avoid excessive idling, speeding, and rapid acceleration and braking. Also make sure to check your tire pressure and maintain your vehicle regularly. These actions can significantly increase the fuel efficiency of your current vehicle.</li>
+      <li>Or consider offsetting your vehicle emissions through the Finger Lakes Climate Fund and putting those funds to work locally to make our region more energy efficient. Watch Nate Shinagawa talk about offsetting his commute.</li>
+      </ul>
+      <h4>Reduce Your Airplane Travel Emissions</h4>
+      <div class="embed-container">
+      <iframe allowfullscreen="" frameborder="0" height="352" mozallowfullscreen="" src="https://player.vimeo.com/video/54468068" webkitallowfullscreen="" width="640"></iframe>
+      </div>
+      <ul>
+      <li>Ride the bus, take a train, or carpool: If possible, take a little more time to get to your destination by using a bus line or train to travel. Driving a full, fuel efficient car can also be better than flying in terms of greenhouse gas emissions.</li>
+      <li>Participate in webinars and online conferences: Look for opportunities to avoid the trip altogether by participating in web-based meetings and conferences when possible.</li>
+      <li>And if you must travel, consider offsetting your carbon emissions through the Finger Lakes Climate Fund and putting those funds to work locally to make our region more energy efficient. This video shows how you can offset your carbon footprint right at the airport.</li>
+      </ul>
+    ')
+    Page.create(:title=>'About Us',:body=>'
+      <h5>Our Mission</h5>
+      <p>The Finger Lakes Climate Fund works to promote energy efficiency projects in the Finger Lakes area while strengthening our regional economy and assisting local families in need.</p>
+      <p>Carbon offset donations are used for grants to fund energy efficiency projects that would not otherwise be possible in low to moderate income households in the Finger Lakes region. These grants help pay for insulation, air sealing, energy efficient heating equipment, and other upgrades to reduce energy use and greenhouse gas emissions. The Finger Lakes Climate Fund is also investigating other cost-effective local carbon offset projects such as solar hot water, solar photovoltaic, biomass heating, and other renewable energy projects.</p>
+      <p>The Finger Lakes Climate Fund is a way for people to support our community while offsetting their home, plane, or vehicle pollution.</p>
+      <p>The Finger Lakes Climate Fund offers carbon offsets for individuals businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@sustainabletompkins.org or 607-272-1720.</p>
+      <h5>Sponsors &amp; Partners</h5>
+      <b>Program Administrator</b>
+      <p>The Finger Lakes Climate Fund is a project of
+      <a href="http://sustainabletompkins.org">Sustainable Tompkins </a>a sustainability focused non-profit organization based in Ithaca, NY. The Finger Lakes Climate Fund is administered by Sustainable Tompkins’ staff and directors. Social Ventures, Inc. serves as Sustainable Tompkins’ 501(c)3 non-profit sponsor.</p>
+      <b>Sponsors</b>
+      <p>We are grateful for the continuing support of the Finger Lakes Climate Fund from the Park Foundation. It was their generosity that made it possible for us to build the carbon offset calculator, launch the Climate Fund and make our first grant.</p>
+      <p>We’d also like to thank Bruce Lane, the Lane Family Fund of the Community Foundation of Tompkins County, and Purity Ice Cream for their generous gifts and offsets to the Climate Fund for the past several years. In addition, a $4000 check from a Carrot Mob organized by the Ithaca College Collective Impact fund and Purity Ice Cream gave us the resources we need to continue to promote the Climate Fund, find new users and make it possible for us to make several additional grants going forward. here’s the link to the<a href="http://sustainabletompkins.org/st-events/purity-ice-cream-and-ics-net-impact-club-donate-4000-to-finger-lakes-climate-fund/"> news story…</a></p>
+      <p>We’re also grateful to the Sustainable Newfield Fund for their extraordinary gift to increase our Climate Fund grants in their community. Started by one donor who wanted to help her fracktivist neighbors get off of fossil fuels, she set up a fund with the Community Foundation where neighbors and acquaintances can make their offsets and direct the grants to other neighbors through the Finger Lakes Climate Fund. (
+      <a href="http://sustainabletompkins.org/st-events/new-grant-fund-for-newfield-residents-announced/"> here’s the press release for this one</a>)</p>
+      <h5>Partners</h5>
+      <p>You can partner with the Finger Lakes Climate Fund as did the the Temple Beth El Green Team who have committed to raise one Climate Fund grant ($2000) from offsets from their Congregation; Center for A New American Dream Board–whose members offset their travel to their board retreat in California with the Finger Lakes Climate Fund; Tompkins County Chamber of Commerce Travel program who encourage all of the travelers in this program to offset their trips using the Climate Fund; the Congregation of Tikkun V’or who adopted the Finger Lakes Climate Fund as a Hannukah project and the upcoming Upstate NY Quaker Conference who have chosen the Finger Lakes Climate Fund to offset their car travel to their annual meeting.</p>
+      <h5>Media Center</h5>
+      Local Carbon Fund Supported by Cornell Conference
+      Lansing Star – May 26, 2011
+      <hr>
+      Energy security and climate protection are interwoven global issues with highly local solutions according to local nonprofit Sustainable Tompkins.
+      <a href="http://sustainabletompkins.org/st-events/purity-ice-cream-and-ics-net-impact-club-donate-4000-to-finger-lakes-climate-fund/">Read More</a>
+      <hr>
+      Partnerships drive Power of Climate Initiative
+      Press Connects – May 5, 2011
+      by Gary Stewart
+      Finger Lakes Climate Fund noted as key partner in Tompkins County Climate Protection Initiative.
+      <a href="http://www.pressconnects.com/article/20110506/VIEWPOINTS02/105060303/Partnerships-drive-power-climate-initiative/">Read More</a>
+      <hr>
+      Gay Nicholson gives a radio interview about launching
+      the Finger Lakes Climate Fund
+      <br>
+      <a href="http://fingerlakesclimatefund.org/wp-content/uploads/2010/02/GN-Interview-2-9-10.mp3">listen to the audio</a>
+      <hr>
+      Tompkins urges travelers to go ‘green’
+      Program rewards residents for cutting carbon emissions
+      <a href="http://sustainabletompkins.org/st-in-news/sustainable-tompkins-urges-travelers-to-go-green/">Read More</a>
+      <hr>
+      Climate Fund Launched
+      Tompkins Weekly – May 3, 2010
+      By Kitty Gifford
+      <hr>
+      Businesses, organizations, schools and individuals are able to offset their carbon emissions by purchasing carbon offsets from the newly created Finger Lakes Climate Fund.
+      <a href="http://sustainabletompkins.org/signs-of-sustainability/tompkins-weekly-column/climate-fund-launched/">Read More</a>
+    ')
+
+    Page.create(:title=>'How Offsets Help Others',:body=>'
+      <p>The Finger Lakes Climate Fund will initially fund residential energy efficiency projects for low to moderate income households in the Finger Lakes region. The fund will help pay for insulation, air sealing, energy efficient heating equipment, and other upgrades to reduce energy use and greenhouse gas emissions. The energy efficiency upgrades are carried out by Building Performance Institute accredited contractors using guidelines provided by the New York State Energy Research and Development Authority. These home energy efficiency projects reduce greenhouse gas emissions, support low income families, and help stimulate our local economy.</p>
+      <h4>Project Verification Process</h4>
+      <p>Verification ensures that carbon offset projects accurately calculate the amount of emissions that will be reduced as a result of the project. Through the Home Performance with Energy Star program, the residential energy efficiency projects follow industry best practices for estimating energy savings. Using guidelines provided by the New York State Energy Research and Development Authority (NYSERDA), the contractors follow a strict protocol for accurately predicting the long-term energy savings that will result from the home energy improvements. The energy saving estimates for the projects are also verified by a third party organization that makes sure the energy saving calculations are accurate. The Conservation Services Group partners with NYSERDA to review all energy saving calculations made by contractors to ensure that the calculations are accurate. This process ensures that your carbon offset donations are resulting in actual greenhouse gas emission reductions.</p>
+      <h4>Profiles</h4>
+      <p>We are proud to present these profiles of the home owners that have benefited from Finger Lakes Climate Fund grants. Thanks to the many donors to the Fund, these local families will be less vulnerable to rising fossil fuel prices and better positioned to remain stable and secure property owners. Over the long term, everyone benefits – the donors, the homeowners, local energy contractors, and the community.</p>
+    ')
+
+  end
+
   task :fix_st_data => :environment do
     @offsets = Offset.where(:team_id=>1, :name=>nil, :email=>nil)
     @offsets.each do |o|

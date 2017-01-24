@@ -1,0 +1,20 @@
+.row
+  .large-12.columns{:style=>'padding-top: 12px;'}
+    %h3=@page.title.titleize
+    %p=@page.body.html_safe
+    -if @page.title == 'How Offsets Help Others'
+      #awardees
+        -@awardees = @awardees = Awardee.all.order(id: :desc)
+        =render @awardees
+      :javascript
+        $('.bio').readmore({
+          speed: 75,
+          lessLink: '<a href="#">Read less</a>',
+          collapsedHeight: 150
+        });
+        $('.play-video').on('click', function() {
+          console.log($(this));
+          console.log($(this).data('video'));
+          $.get('/awardees/video/' + $(this).data('video'));
+
+        });

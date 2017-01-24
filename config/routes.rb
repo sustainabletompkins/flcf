@@ -3,7 +3,6 @@ Rails.application.routes.draw do
     :controllers => { :registrations => "registrations", :sessions => "sessions",omniauth_callbacks: 'omniauth_callbacks' }
 
 
-
   resources :offsets, :only => [:create,:destroy,:show] do
     collection do
       get 'process_purchased'

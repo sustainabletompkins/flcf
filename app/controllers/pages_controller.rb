@@ -22,6 +22,11 @@ class PagesController < ApplicationController
   end
 
   def index
+    @page = Page.find_by_title(params[:page_name])
+
+  end
+
+  def index2
     if params[:page_name] == 'prize-wheel'
       @teams = Team.all
       @prizes = Prize.where('count > 0')

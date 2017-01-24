@@ -861,6 +861,21 @@ a.more:hover {
   cursor:pointer;
 }
 
+#awardees label {
+  font-size: 1.2em;
+  display: inline-block;
+}
+#awardees span {
+  font-size: 1.3em;
+  color: #8012b3;
+}
+.bio {
+  margin-top: 8px;
+}
+.awardee {
+  margin-bottom: 18px !important;
+}
+
 button#spin-button {
   background-color: #c29300 !important;
   font-weight: 600;
