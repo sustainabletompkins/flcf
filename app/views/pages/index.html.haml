@@ -1,6 +1,6 @@
 .row
   .large-12.columns{:style=>'padding-top: 12px;'}
-    %h3=@page.title.titleize
+    %h3=@page.title.upcase
     %p=@page.body.html_safe
     -if @page.title == 'How Offsets Help Others'
       #awardees

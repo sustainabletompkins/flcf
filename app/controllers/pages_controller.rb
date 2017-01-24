@@ -22,31 +22,42 @@ class PagesController < ApplicationController
   end
 
   def index
-    @page = Page.find_by_title(params[:page_name])
+    @page = Page.where(:slug=>params[:page_name]).first
+    if @page.present?
+      render 'index'
+    else
+      if params[:page_name] == 'prize-wheel'
+        @teams = Team.all
+        @prizes = Prize.where('count > 0')
+        count = 0
+        @prizes.each do |p|
+          count = count+p.count
+        end
+        @empties = count*4
+        render params[:page_name], :layout => "full"
+      elsif params[:page_name] == 'carbon-races'
+        @teams = Team.all
+        @leaders = Team.where('pounds > 0').order(pounds: :desc)
+        @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc)
+        render params[:page_name], :layout => "full"
+      else
+        render params[:page_name]
+      end
+    end
 
   end
 
-  def index2
-    if params[:page_name] == 'prize-wheel'
-      @teams = Team.all
-      @prizes = Prize.where('count > 0')
-      count = 0
-      @prizes.each do |p|
-        count = count+p.count
-      end
-      @empties = count*4
-      render params[:page_name], :layout => "full"
-    elsif params[:page_name] == 'carbon-races'
-      @teams = Team.all
-      @leaders = Team.where('pounds > 0').order(pounds: :desc)
-      @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc)
-      render params[:page_name], :layout => "full"
-    elsif params[:page_name] == 'portfolio'
-      @awardees = Awardee.all.order(id: :desc)
-      render params[:page_name]
+  def update
+    @page = Page.find(params[:id])
+    if @page.update_attributes(page_params)
+      render 'saved'
     else
-      render params[:page_name]
+      render 'edit'
     end
+  end
+
+  def index2
+
 
 
   end
@@ -81,4 +92,7 @@ class PagesController < ApplicationController
     render 'calculator', :layout => "blank"
   end
 
+  def page_params
+    params.require(:page).permit(:body, :title)
+  end
 end

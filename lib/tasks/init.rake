@@ -63,7 +63,7 @@ namespace :init do
 
   task :set_pages => :environment do
     Page.delete_all
-    Page.create(:title=>'faq',:body=>'
+    Page.create(:title=>'faq', :slug=>'faq',:body=>'
 
       <div class="faq-nav">
         <a href="#FAQ1">What are carbon offsets?</a>
@@ -112,7 +112,7 @@ namespace :init do
       </p>
 
     ')
-    Page.create(:title=>'Reduce Your Emissions', :body=>'
+    Page.create(:title=>'Reduce Your Emissions', :slug=>'reduce-emissions', :body=>'
       <p>There are many ways to reduce your carbon emissions. Below are some suggestions for several actions you can take and a list of resources that provide helpful information about saving energy and reducing your emissions.</p>
       <h4>Reduce Your Home Emissions</h4>
       <div class="embed-container">
@@ -147,7 +147,7 @@ namespace :init do
       <li>And if you must travel, consider offsetting your carbon emissions through the Finger Lakes Climate Fund and putting those funds to work locally to make our region more energy efficient. This video shows how you can offset your carbon footprint right at the airport.</li>
       </ul>
     ')
-    Page.create(:title=>'About Us',:body=>'
+    Page.create(:title=>'About Us', :slug=>'about-us', :body=>'
       <h5>Our Mission</h5>
       <p>The Finger Lakes Climate Fund works to promote energy efficiency projects in the Finger Lakes area while strengthening our regional economy and assisting local families in need.</p>
       <p>Carbon offset donations are used for grants to fund energy efficiency projects that would not otherwise be possible in low to moderate income households in the Finger Lakes region. These grants help pay for insulation, air sealing, energy efficient heating equipment, and other upgrades to reduce energy use and greenhouse gas emissions. The Finger Lakes Climate Fund is also investigating other cost-effective local carbon offset projects such as solar hot water, solar photovoltaic, biomass heating, and other renewable energy projects.</p>
@@ -194,7 +194,7 @@ namespace :init do
       <a href="http://sustainabletompkins.org/signs-of-sustainability/tompkins-weekly-column/climate-fund-launched/">Read More</a>
     ')
 
-    Page.create(:title=>'How Offsets Help Others',:body=>'
+    Page.create(:title=>'How Offsets Help Others', :slug=>'portfolio', :body=>'
       <p>The Finger Lakes Climate Fund will initially fund residential energy efficiency projects for low to moderate income households in the Finger Lakes region. The fund will help pay for insulation, air sealing, energy efficient heating equipment, and other upgrades to reduce energy use and greenhouse gas emissions. The energy efficiency upgrades are carried out by Building Performance Institute accredited contractors using guidelines provided by the New York State Energy Research and Development Authority. These home energy efficiency projects reduce greenhouse gas emissions, support low income families, and help stimulate our local economy.</p>
       <h4>Project Verification Process</h4>
       <p>Verification ensures that carbon offset projects accurately calculate the amount of emissions that will be reduced as a result of the project. Through the Home Performance with Energy Star program, the residential energy efficiency projects follow industry best practices for estimating energy savings. Using guidelines provided by the New York State Energy Research and Development Authority (NYSERDA), the contractors follow a strict protocol for accurately predicting the long-term energy savings that will result from the home energy improvements. The energy saving estimates for the projects are also verified by a third party organization that makes sure the energy saving calculations are accurate. The Conservation Services Group partners with NYSERDA to review all energy saving calculations made by contractors to ensure that the calculations are accurate. This process ensures that your carbon offset donations are resulting in actual greenhouse gas emission reductions.</p>
@@ -202,6 +202,10 @@ namespace :init do
       <p>We are proud to present these profiles of the home owners that have benefited from Finger Lakes Climate Fund grants. Thanks to the many donors to the Fund, these local families will be less vulnerable to rising fossil fuel prices and better positioned to remain stable and secure property owners. Over the long term, everyone benefits – the donors, the homeowners, local energy contractors, and the community.</p>
     ')
 
+    Page.create(:title=>'Business And Event Offsets', :slug=>'business-event-offsets', :body=> '
+      <p>The Finger Lakes Climate Fund also offers carbon offsets for businesses, non-profits, academic institutions, and special events. For more information on purchasing carbon offsets for your organization or special event please contact us at info@sustainabletompkins.org or 607-272-1720.</p>
+      <h4>A few examples...</h4>
+    ')
   end
 
   task :fix_st_data => :environment do

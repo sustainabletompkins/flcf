@@ -1,4 +1,15 @@
+=tinymce_assets
 .row
+  .large-12.columns
+
+    -@pages = Page.all
+    =form_for @pages.first do |f|
+      =f.label :title
+      =f.text_field :title
+      =f.text_area :body, :class=>'tinymce', :size=>'120x40'
+
+      =f.submit 'save'
+      %hr
   .large-12.columns
     %h4 Recent Prizes
     =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
@@ -100,12 +111,7 @@
         .large-6.columns
           %h5 Teams
           =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
-  .large-12.columns
-    %h4 st offsets
-    -@st = Team.find(1).offsets
-    -@st.each do |o|
-      #{o.email} | #{o.title} | #{o.created_at.strftime('%m/%d')} | #{o.pounds}
-      %br
+
 
 :javascript
    $(document).ready(function() {
@@ -143,4 +149,9 @@
       $('.player-info').hide();
       $('.team-info').hide();
     }
+  });
+
+  tinyMCE.init({
+    selector: 'textarea.tinymce',
+    plugins : 'advlist autolink link image lists charmap print preview'
   });

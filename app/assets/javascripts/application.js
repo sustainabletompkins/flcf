@@ -18,6 +18,7 @@
 //= require helpers/jquery.fancybox-media
 //= require_tree .
 //= require best_in_place
+//= require tinymce
 $(document).on('ready page:load', function(){
   window.fbAsyncInit = function() {
     FB.init({
