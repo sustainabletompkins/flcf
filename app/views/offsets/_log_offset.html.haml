@@ -3,6 +3,9 @@
     %label name
     =offset.name
     %br
+    %label email
+    =offset.email
+    %br
     %label zipcode
     =offset.zipcode
     %br
@@ -17,7 +20,7 @@
     %br
     %label type
     =offset.title
-    -unless offset.individual_id > 0 || offset.team_id > 0
+    -unless offset.individual_id.present? || offset.team_id.present?
 
       .show-individual-form add as individual player
       .add-to-individual

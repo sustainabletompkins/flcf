@@ -12,9 +12,10 @@
   %hr
   .large-12.columns
     %h4 Add an offset
-    =form_for :offset, :url=>manual_create_offsets_path, :remote=>:true do |f|
+    =form_for :offset, :url=>manual_create_offsets_path, :html=>{:id=>'create-offset-form'},:remote=>:true do |f|
       =f.text_field :title, :placeholder => 'offset title'
       =f.text_field :name, :placeholder => 'offsetter name'
+      =f.text_field :email, :placeholder => 'offsetter email'
       =f.text_field :zipcode, :placeholder => 'zip code'
       =f.number_field :cost, :placeholder => 'cost in USD'
       %label assign to carbon races?
@@ -28,8 +29,9 @@
         =text_field_tag :user_email,'', :placeholder => 'user email'
         =text_field_tag :member_name, '',:placeholder => 'team member name'
       %br
-      =f.submit 'submit', :class=>'button'
       =show_simple_captcha(:label=>'Enter letters...')
+      =f.submit 'submit', :class=>'button'
+
       #offset-msg
   %hr
   .large-12.columns
