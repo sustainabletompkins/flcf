@@ -934,6 +934,17 @@ label {
   color: #eee;
 }
 
+.load-page {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.load-page:hover {
+  font-weight: 600;
+}
+.page-editor {
+  display:none;
+}
+
 /* Smartphones (landscape) ----------- */
 @media only screen and (max-width : 768px) {
   .cracks-text {

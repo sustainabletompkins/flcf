@@ -1,0 +1,6 @@
+$('#page-admin').html("#{j render :partial=>'pages/page_admin'}");
+tinyMCE.init({
+selector: 'textarea.tinymce',
+plugins : 'advlist autolink link image lists charmap print preview',
+height : 400
+});

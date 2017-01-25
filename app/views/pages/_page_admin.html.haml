@@ -1,0 +1,17 @@
+.large-3.columns
+  %h3 Pages Admin
+  -@pages = Page.all
+  -@pages.each do |p|
+    .load-page{:'data-id'=>p.id}=p.title
+
+
+.large-9.columns#page-editor
+  -@pages.each do |p|
+    .page-editor{:class=>"page-editor-#{p.id}"}
+      =form_for p, :remote=>:true do |f|
+        =f.label :title
+        =f.text_field :title
+        =f.text_area :body, :class=>'tinymce'
+
+        =f.submit 'save', :class=>'save'
+  #save-notice

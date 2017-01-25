@@ -50,12 +50,22 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(page_params)
+      @page.update_attribute(:slug,params[:page][:title].downcase.gsub(' ','-'))
       render 'saved'
     else
       render 'edit'
     end
   end
-
+  def create
+    @page = Page.new(page_params)
+    @page.slug = params[:page][:title].downcase.gsub(' ','-')
+    if @page.save
+      @url = "http://fingerlakesclimatefund.org/pages/"+@page.slug
+      render 'created'
+    else
+      render 'error'
+    end
+  end
   def index2
 
 

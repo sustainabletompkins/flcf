@@ -1,15 +1,10 @@
 =tinymce_assets
 .row
+  #page-admin
+    =render :partial=>'pages/page_admin'
   .large-12.columns
-
-    -@pages = Page.all
-    =form_for @pages.first do |f|
-      =f.label :title
-      =f.text_field :title
-      =f.text_area :body, :class=>'tinymce', :size=>'120x40'
-
-      =f.submit 'save'
-      %hr
+    %button.btn#new-page add a page
+  %hr
   .large-12.columns
     %h4 Recent Prizes
     =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
@@ -151,7 +146,29 @@
     }
   });
 
+  $(document).on('click', '.load-page',function() {
+    $('#save-notice').empty();
+    var id = $(this).data('id');
+    $('.page-editor').hide();
+    $('.page-editor-'+id).toggle();
+
+  });
+  $('.save').on('click', function() {
+    $('#save-notice').empty();
+
+  });
+
+  $('#new-page').on('click', function() {
+    $('#page-editor').html("#{j render :partial=>'pages/new'}");
+    tinyMCE.init({
+      selector: 'textarea#new-page-form',
+      plugins : 'advlist autolink link image lists charmap print preview',
+      height : 400
+    });
+  });
+
   tinyMCE.init({
     selector: 'textarea.tinymce',
-    plugins : 'advlist autolink link image lists charmap print preview'
+    plugins : 'advlist autolink link image lists charmap print preview',
+    height : 400
   });
