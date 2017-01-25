@@ -3,8 +3,8 @@
     %h3=@page.title.upcase
     %p=@page.body.html_safe
     -if @page.title == 'How Offsets Help Others'
-      #awardees
-        -@awardees = @awardees = Awardee.all.order(id: :desc)
+      #awardees.test
+        -@awardees = Awardee.all.order(id: :desc)
         =render @awardees
       :javascript
         $('.bio').readmore({
@@ -18,3 +18,4 @@
           $.get('/awardees/video/' + $(this).data('video'));
 
         });
+#video.reveal-modal{"data-reveal" => ""}

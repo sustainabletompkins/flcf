@@ -50,7 +50,6 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(page_params)
-      @page.update_attribute(:slug,params[:page][:title].downcase.gsub(' ','-'))
       render 'saved'
     else
       render 'edit'

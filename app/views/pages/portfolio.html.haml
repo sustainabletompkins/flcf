@@ -1,18 +1,4 @@
-:css
-  #awardees label {
-    font-size: 1.2em;
-    display: inline-block;
-  }
-  #awardees span {
-    font-size: 1.3em;
-    color: #8012b3;
-  }
-  .bio {
-    margin-top: 8px;
-  }
-  .awardee {
-    margin-bottom: 18px !important;
-  }
+
 .row
   .large-12.columns{:style=>'padding-top: 12px;'}
     %h3 Residential Energy Efficiency
@@ -26,17 +12,6 @@
     #awardees
       =render @awardees
 
-#video.reveal-modal{"data-reveal" => ""}
 
-:javascript
-  $('.bio').readmore({
-    speed: 75,
-    lessLink: '<a href="#">Read less</a>',
-    collapsedHeight: 150
-  });
-  $('.play-video').on('click', function() {
-    console.log($(this));
-    console.log($(this).data('video'));
-    $.get('/awardees/video/' + $(this).data('video'));
 
-  });
+
