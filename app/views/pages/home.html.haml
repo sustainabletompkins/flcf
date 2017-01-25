@@ -2,7 +2,7 @@
   %meta{:content => "Finger Lakes Climate Fund", :property => "og:title"}
   %meta{:content => "http://fingerlakesclimatefund.org", :property => "og:url"}
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
-.row#overview
+.row.with-border#overview
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 How it Works
     .cycle-slideshow{"data-cycle-caption" => "#custom-caption","data-speed"=>"1200","data-cycle-caption-template" => "{{cycleTitle}}", "data-cycle-fx" => "fadeout", "data-delay" => 3000, "data-cycle-timeout" => "4000"}
@@ -21,7 +21,7 @@
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Grant Awardees
     =render :partial=>'awardees/awardee_digest', :locals=>{awardee: @awardee}
-.row#your-impact
+.row.with-border#your-impact
   .large-12.columns
     %h5 Our Impact
 
@@ -41,7 +41,7 @@
 
     %span=@awardee_count
     %label grants awarded
-.row#seal-the-cracks{:style=>"padding:0px;"}
+.row.with-border#seal-the-cracks{:style=>"padding:0px;"}
   .large-8.medium-8.columns{:style=>'padding-top: 15px;'}
     %h4 Help us
     .cracks-logo=image_tag('seal-the-cracks-logo-1100.png')
@@ -71,7 +71,7 @@
         .white of our
         .green{:style=>'font-size: 25px'} $12,500
         .white goal
-.row.purple-section
+.row.with-border.purple-section
   .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
     %h2.heading-text Carbon Races
   .large-6.medium-6.columns{:style=>'padding:10px 10px 0 25px;'}
@@ -103,7 +103,7 @@
       .more=link_to 'See full leaderboard', pages_path('carbon-races')
 
 
-.row.yellow-section
+.row.with-border.yellow-section
   .large-12.columns{:style=>'text-align:center;background-color: #dca600;'}
     %h3.heading-text Win Prizes
   .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
@@ -114,7 +114,7 @@
     %h4.left Available Prizes
     %hr
     =render @prizes
-%section.main-section
+%section.with-border.main-section
   .row{:style => "background-color: #fff"}
     .large-12.columns
       -if alert

@@ -342,7 +342,7 @@ background:hover;
   hr {
     border: 2px solid #8012b3;
   }
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .yellow-section {
 
@@ -363,7 +363,7 @@ background:hover;
   label {
 
   }
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .leader {
@@ -932,6 +932,11 @@ label {
 #donate-msg {
   font-size: 1.3em;
   color: #eee;
+}
+
+.with-border {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .load-page {
