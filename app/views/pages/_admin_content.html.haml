@@ -67,7 +67,7 @@
             %label prize description
             =f.text_field :description
             %label choose a picture (square, with face centered)
-            =f.file_field :avatar
+            =f.file_field :pic
             =show_simple_captcha(:label=>'Enter letters...')
             =f.submit 'Add Offsetter', :class=>'button', :id=>'add-offsetter'
             .fail-notice

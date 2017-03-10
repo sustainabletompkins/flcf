@@ -55,6 +55,7 @@ class PagesController < ApplicationController
       render 'edit'
     end
   end
+
   def create
     @page = Page.new(page_params)
     @page.slug = params[:page][:title].downcase.gsub(' ','-')

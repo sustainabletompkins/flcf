@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
     if @league.present?
       render 'creation_failed'
     else
-      Team.create(team_params)
+      @league=Team.create(team_params)
       if team_params.has_key?(:pounds)
         @league.update_attribute(:count, params[:count].to_i)
         @league.update_attribute(:members, 1)

@@ -118,7 +118,7 @@
             =text_field_tag :member_name, '', id: 'public-name'
             =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
             =hidden_field_tag :user_email, @offset_data[:email]
-            =hidden_field_tag :count, @offset_data[:count]
+            =hidden_field_tag :count, @offset_data[:count], :id=>'count'
             -#=f.file_field :image, :class => 'file-upload'
             #form-msg
             %br
@@ -202,7 +202,7 @@
 
    $('#select-team').on('change', function() {
 
-      team_data =  {league_id: $(this).val(), pounds:$('#pounds').val(), user_email: $('#user_email').val()};
+      team_data =  {league_id: $(this).val(), pounds:$('#pounds').val(), user_email: $('#user_email').val(), count: $('#count').val()};
       $('#member-name').show();
 
     });
