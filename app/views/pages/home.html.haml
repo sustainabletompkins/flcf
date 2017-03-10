@@ -87,7 +87,7 @@
       -@leaders.each do |t|
         =render :partial => 'teams/team_leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
-      .more=link_to 'See full leaderboard', pages_path('carbon-races')
+      .more=link_to 'See full leaderboard', '/pages/carbon-races'
   .large-6.medium-6.columns{:style=>'padding:10px 25px 0 10px;'}
     %h3.purple-text Or, Run Solo!
     %p You can compete in the Carbon Races as an individual or single entity as well.  This is perfect for the solo entrepreneur or anybody who isn't part of a larger team but also wants to take responsibility for their carbon emissions while helping those in need.
@@ -100,7 +100,7 @@
       -@individual_leaders.each do |t|
         =render :partial => 'individuals/leaderboard', :locals=>{counter: count, team: t}
         -count = count + 1
-      .more=link_to 'See full leaderboard', pages_path('carbon-races')
+      .more=link_to 'See full leaderboard', '/pages/carbon-races'
 
 
 .row.with-border.yellow-section
