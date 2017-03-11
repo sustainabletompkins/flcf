@@ -33,6 +33,7 @@ class OffsetsController < ApplicationController
         @team = Team.find(params[:team])
         @team.update_attribute(:members, 1)
         @team.increment!(:pounds, pounds)
+        @team.increment!(:count, 1)
         TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => 1, :team_id=>@team.id)
         @offset.update_attribute(:team_id,@team.id)
         @offset.update_attribute(:name,params[:member_name])
