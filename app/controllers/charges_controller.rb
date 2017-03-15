@@ -37,7 +37,7 @@ class ChargesController < ApplicationController
       @team = Team.find(@player.team_id)
       @team.increment!(:count,@offset_data[:count].to_i)
       @team.increment!(:pounds,@offset_data[:pounds].to_i)
-
+      TeamMailer.send_thanks(@player.email, @player.team).deliver
       @player.increment!(:offsets)
     end
     @individual = Individual.where(:email=>params[:stripeEmail]).first
