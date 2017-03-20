@@ -80,8 +80,8 @@
       .row
         .large-5.columns
 
-          = form_for(:awardee, url: awardees_path, multipart: true, remote: true,:html => {:id => "add-awardee"}) do |f|
-            %label prize title
+          = form_for(:awardee, url: awardees_path, multipart: true, :html => {:id => "add-awardee"}) do |f|
+            %label awardee title
             =f.text_field :name
             %label bio
             =f.text_area :bio

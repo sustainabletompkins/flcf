@@ -8,7 +8,7 @@ class AwardeesController < ApplicationController
   def create
     if simple_captcha_valid?
       Awardee.create(awardee_params)
-      render 'created'
+      redirect_to '/admin'
     else
       render 'shared/captcha_failed'
     end

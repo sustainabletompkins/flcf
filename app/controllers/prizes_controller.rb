@@ -11,7 +11,7 @@ class PrizesController < ApplicationController
 
     if simple_captcha_valid?
       Prize.create(prize_params)
-      redirect_to 'admin'
+      redirect_to '/admin'
     else
       render 'shared/captcha_failed'
     end
