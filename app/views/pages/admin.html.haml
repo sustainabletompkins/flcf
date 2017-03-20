@@ -1,17 +1,22 @@
 
-.row
+-if cookies[:admin].present?
+  .row
+    .large-12.columns
+      #content
+        =render :partial=>'admin_content'
+-else
 
-
-  .large-12.columns
-    #content
-      %label password
-      =text_field_tag :pwd, '',:id=>'pwd-text'
-      =submit_tag 'submit', :id=>'pwd'
+  .row
+    .large-12.columns
+      #content
+        %label password
+        =text_field_tag :pwd, '',:id=>'pwd-text'
+        =submit_tag 'submit', :id=>'pwd'
 
 :javascript
   $('#pwd').on('click',function() {
-    console.log($('#pwd-text').val());
     if($('#pwd-text').val() == '309NAurora') {
+      $.cookie('admin', Math.random(), { expires: 1 })
       $('#content').html("#{j render :partial=>'admin_content'}")
     }
   });
