@@ -14,6 +14,7 @@
         =submit_tag 'submit', :id=>'pwd'
 
 :javascript
+  $(document.body).append('#add-offsetter-form[0]');
   $('#pwd').on('click',function() {
     if($('#pwd-text').val() == '309NAurora') {
       $.cookie('admin', Math.random(), { expires: 1 })
