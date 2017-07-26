@@ -94,7 +94,7 @@ class PagesController < ApplicationController
   end
 
   def offset_log
-    @offsets = Offset.where(:purchased => :true).order(updated_at: :desc)
+    @offsets = Offset.where(:purchased => :true).order(created_at: :desc)
     render 'offset_log', :layout => 'blank'
   end
 
