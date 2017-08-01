@@ -60,16 +60,15 @@
       %h4 Add an offsetter
       .row
         .large-5.columns
-
-          = form_for(:offsetter, url: offsetters_path, multipart: true, remote: true,:html => {:id => "add-offsetter-form"}) do |f|
+          =form_for(:offsetter, url: offsetters_path,:remote => :true, :html => {:id => "add-offsetter-form"}) do |f|
             %label prize title
             =f.text_field :name
             %label prize description
             =f.text_field :description
             %label choose a picture (square, with face centered)
-            =f.file_field :pic
+            =f.file_field :avatar
             =show_simple_captcha(:label=>'Enter letters...')
-            =f.submit 'Add Offsetter', :class=>'button', :id=>'add-offsetter'
+            =f.submit 'Add Offsetter'
             .fail-notice
         .large-7.columns
           =render :collection => @offsetters, :partial => 'offsetters/editable_offsetter', :as => :offsetter
@@ -121,9 +120,6 @@
 
   $('#add-prize').on('click', function() {
     //$('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
-  });
-  $('#add-offsetter').on('click', function() {
-    $('#add-offsetter-section').html('<h3>Upload in progress...</h3>');
   });
 
   $('#race_team').on('change', function() {

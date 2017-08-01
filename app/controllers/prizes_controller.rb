@@ -16,6 +16,7 @@ class PrizesController < ApplicationController
       render 'shared/captcha_failed'
     end
   end
+
   def update
     @user = Prize.find params[:id]
 
@@ -29,6 +30,7 @@ class PrizesController < ApplicationController
       end
     end
   end
+
   def destroy
     Prize.find(params[:id]).destroy
     @id = params[:id]
