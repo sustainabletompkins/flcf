@@ -76,7 +76,7 @@ class ChargesController < ApplicationController
       require 'json'
       uri = URI.parse("https://sustainabletompkins.littlegreenlight.com/integrations/e43d9598-3876-47a8-9411-9a6afdff1647/listener")
 
-      data = {:email=>params[:stripeEmail],:amount=>params[:stripeCharge].to_i/100.round(2),:name => @offset_data[:name], :zip_code => @offset_data[:zip_code] || 12314, :date => Date.today, :fund => 'Finger Lakes Climate Fund'}
+      data = {:payment_type => 'Credit Card', :email=>params[:stripeEmail],:amount=>params[:stripeCharge].to_i/100.round(2),:name => @offset_data[:name], :zip_code => @offset_data[:zip_code] || 12314, :date => Date.today, :fund => 'Finger Lakes Climate Fund'}
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.post(uri, data.to_json, {"Content-Type" => "application/json", "Accept" => "application/json"})
