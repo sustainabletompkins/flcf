@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     end
     @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
 
-    @recent_prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :desc)
+    @recent_prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :desc).last(7)
     @prizes = Prize.all.order(count: :asc)
     @stats = Stat.first
     @leaders = Team.where('pounds > 0').order(pounds: :desc).limit(3)
