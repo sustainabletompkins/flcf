@@ -4,9 +4,10 @@
       =image_tag("#{awardee.avatar.url(:medium)}", :style=>'width:100%;margin-top: 20px')
     -else
       =image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :style=>'width:100%;margin-top: 20px')
-    %div{:style=>'text-align:center;margin-top: -40px;'}
-      %button
-        .play-video{:"data-video"=>"#{awardee.id}"} watch video
+    -if awardee.video_id.length > 0
+      %div{:style=>'text-align:center;margin-top: -40px;'}
+        %button
+          .play-video{:"data-video"=>"#{awardee.id}"} watch video
   .large-8.columns
     %h4=awardee.name
     %label Grant Amount:
