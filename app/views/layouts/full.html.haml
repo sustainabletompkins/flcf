@@ -5,12 +5,13 @@
 
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
 
-    %title Finger Lake Climate Fund
+    = display_meta_tags
 
     = stylesheet_link_tag "application"
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = javascript_include_tag "http://maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=places,geometry"
+    = javascript_include_tag "https://cloud.tinymce.com/stable/tinymce.min.js"
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
     =yield :head
@@ -29,4 +30,3 @@
               #content
                 =yield
         =render :partial => 'layouts/footer'
-

@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   def check_for_offsets
     @offsets = Offset.all
+    set_meta_tags title: 'Finger Lakes Climate Fund - Local Carbon Offsets', description: 'Your carbon offsets help fund home efficiency upgrades around Tompkins County',keywords: 'carbon, offsets, calculator, climate, change, grants, award, fund, program'
   end
 
 

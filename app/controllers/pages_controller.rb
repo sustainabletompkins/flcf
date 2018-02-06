@@ -27,6 +27,7 @@ class PagesController < ApplicationController
       render 'index'
     else
       if params[:page_name] == 'prize-wheel'
+        set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
         @teams = Team.all
         @prizes = Prize.where('count > 0')
         count = 0
@@ -36,6 +37,8 @@ class PagesController < ApplicationController
         @empties = count*4
         render params[:page_name], :layout => "full"
       elsif params[:page_name] == 'carbon-races'
+        set_meta_tags title: 'Carbon Races | Finger Lakes Climate Fund', description: 'Compete with other teams around the Finger Lakes to see who offsets the most carbon',keywords: 'carbon, offsets, race, game, competition'
+
         @teams = Team.all
         @leaders = Team.where('pounds > 0').order(pounds: :desc)
         @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc)
@@ -81,9 +84,11 @@ class PagesController < ApplicationController
     @individuals = Individual.all
     @teams = Team.all
     @stat = Stat.find(1)
+    render :layout=>"full"
   end
 
   def prize_wheel
+    set_meta_tags title: 'Carbon Races | Finger Lakes Climate Fund', description: 'Compete with other teams around the Finger Lakes to see who offsets the most carbon',keywords: 'carbon, offsets, race, game, competition'
     @teams = Team.all
     @prizes = Prize.where('count > 0')
     count = 0

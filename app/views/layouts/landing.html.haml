@@ -13,23 +13,13 @@
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyA_C7hQIHn3LK83BsLKrcMLN069o3u7j0M&v=3.13&sensor=false&libraries=places,geometry"
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
-
     =yield :head
-    -if current_user
 
-      :javascript
-        if($.cookie("joined")=="true") {
-          $.cookie("joined","false");
-          window.location.replace("#{pages_path('prize-wheel')}");
-
-        }
 
   %body
-    .off-canvas-wrap{"data-offcanvas" => ""}
-      .inner-wrap
-        #content
-          =render :partial => 'layouts/head'
 
-          =yield
+    =render :partial => 'shared/mini_head'
+    #content
+      =yield
 
-          =render :partial => 'layouts/footer'
+    =render :partial => 'shared/footer'

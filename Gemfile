@@ -31,6 +31,7 @@ gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523b
 gem 'aws-sdk', '~> 2.3'
 
 gem 'sitemap_generator'
+gem 'meta-tags'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'

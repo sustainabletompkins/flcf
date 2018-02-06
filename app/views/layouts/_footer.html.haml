@@ -9,10 +9,13 @@
         %br
         =image_tag('st-logo.png', :size=>'200', :style=>'margin: 7px;')
         %br
-        Carbon offsets are deductible through Sustainable Tompkins 501(c)3
+        serving Ithaca, Tompkins County, Seneca County & the Finger Lakes region of NY
+        %hr
+        Carbon offsets and donation are deductible through Sustainable Tompkins 501(c)3
         -if user_signed_in?
 
           = link_to "Log out", destroy_session_path(:user), :method => :delete
+
 #calc.reveal-modal{"data-reveal" => ""}
   =render :partial => 'layouts/calculator'
 #myModal.reveal-modal{"data-reveal" => ""}
@@ -182,8 +185,3 @@
     });
   };
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-
-
-
-
