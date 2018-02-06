@@ -222,6 +222,8 @@ GEM
     sexp_processor (4.10.0)
     simple_captcha2 (0.4.3)
       rails (>= 4.1)
+    sitemap_generator (6.0.1)
+      builder (~> 3.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (2.12.4)
@@ -275,6 +277,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   simple_captcha2
+  sitemap_generator
   spring
   stripe!
   tinymce-rails

@@ -30,6 +30,7 @@ gem 'tinymce-rails'
 gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
 gem 'aws-sdk', '~> 2.3'
 
+gem 'sitemap_generator'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'
