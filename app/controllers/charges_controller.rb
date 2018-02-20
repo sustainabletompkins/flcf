@@ -24,6 +24,7 @@ class ChargesController < ApplicationController
           @offset_data[:count] = @offset_data[:count] + 1
           @offset_data[:email] = params[:stripeEmail]
           @offset_data[:name] = o.name
+          @offset_data[:id] = o.id
           @stat.increment!(:pounds, o.pounds)
           @stat.increment!(:dollars, o.cost)
         end

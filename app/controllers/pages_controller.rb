@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list]
+  
   def home
     if user_signed_in?
       @saved_offsets = current_user.offsets.where(:purchased=>:true)

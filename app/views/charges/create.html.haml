@@ -78,7 +78,7 @@
   =render :partial => 'devise/registrations/register', :locals=>{data:@offset_data}
 #carbon-race.reveal-modal{"data-reveal" => ""}
   .row
-    .large-12.columns
+    .large-12.columns#overview
       %h2 Play the Carbon Race
       %p<
         Our
@@ -86,8 +86,23 @@
         are a fun competition to see which business, club, neighborhood or other organization can offset the most carbon in a month's time.  You can join an existing team, or create one of your own.
 
     -if @team
+      .large-12.columns#change-team{:style=>'display:none'}
+        %h4 Change your team
+        =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name', @team.id), id: 'select-new-team', prompt: 'Which team?'
+        #new-team-msg
       .large-12.columns
         %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to the tally for Team '#{@team.name}'
+        %p=link_to "Click here to change the team you are playing for", "#", :class => 'change-team'
+
+        :javascript
+
+          $('#select-new-team').on('change', function() {
+
+             team_data =  {new_team_id: $(this).val(), old_team_id: '#{@team.id}', offset_id: '#{@offset_data[:id]}'};
+             $.post('#{change_teams_path}', team_data);
+
+           });
+
     -elsif @individual
       .large-12.columns
         %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to your individual tally
@@ -102,39 +117,39 @@
         .large-4.columns{:style=>'text-align:center;'}
           %button#individual-player Play as Individual
           %span Compete against others without a team
+    -if @team.present?
+
+    -else
+      .row
+        .large-12.columns#msg
+        #team-actions{:style=>'display:none'}
+          .large-6.medium-6.columns#create-team
+            %h4 Create a  Team
+            %p Anyone can make a team for their organization and invite others to join it
+            =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
+              %label Team Name
+              =f.text_field :name, id: 'team-name'
+              %label Your Name (for public display)
+              =text_field_tag :member_name, '', id: 'public-name'
+              =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
+              =hidden_field_tag :user_email, @offset_data[:email]
+              =hidden_field_tag :count, @offset_data[:count], :id=>'count'
+              -#=f.file_field :image, :class => 'file-upload'
+              #form-msg
+              %br
+              =f.submit 'submit', :class=>'button'
 
 
+          .large-6.medium-6.columns#join-team
+            %h4 Join a  Team
+            %p Are others in your organization already playing?  Join them!
+            =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
 
-    .row
-      .large-12.columns#msg
-      #team-actions{:style=>'display:none'}
-        .large-6.medium-6.columns#create-team
-          %h4 Create a  Team
-          %p Anyone can make a team for their organization and invite others to join it
-          =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
-            %label Team Name
-            =f.text_field :name, id: 'team-name'
-            %label Your Name (for public display)
-            =text_field_tag :member_name, '', id: 'public-name'
-            =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
-            =hidden_field_tag :user_email, @offset_data[:email]
-            =hidden_field_tag :count, @offset_data[:count], :id=>'count'
-            -#=f.file_field :image, :class => 'file-upload'
-            #form-msg
-            %br
-            =f.submit 'submit', :class=>'button'
-
-
-        .large-6.medium-6.columns#join-team
-          %h4 Join a  Team
-          %p Are others in your organization already playing?  Join them!
-          =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
-
-          #member-name
-            %label Your Name (for public display)
-            =text_field_tag :name, nil, :id=> 'team-member-name'
-            #join-msg
-            %button#submit-name Join Team
+            #member-name
+              %label Your Name (for public display)
+              =text_field_tag :name, nil, :id=> 'team-member-name'
+              #join-msg
+              %button#submit-name Join Team
     .large-12.columns
       %button#spin Skip this and spin Prize Wheel
 
@@ -169,6 +184,11 @@
     $('#spin-button').hide();
     $('#wheel').show();
   });
+
+  $('.change-team').on('click',function() {
+    $('#race-actions').hide();
+    $('#change-team').show();
+  })
 
   $('#new-team').submit(function(event) {
 
@@ -207,6 +227,7 @@
 
     });
 
+
     $('#submit-name').on('click', function() {
       if(!$('#team-member-name').val()) {
         $('#join-msg').text('Please provide your name.');
@@ -243,5 +264,3 @@
       }
     }
   }
-
-

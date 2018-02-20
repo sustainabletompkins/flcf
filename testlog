@@ -1,0 +1,3 @@
+2018-02-20 14:17:11.509 GMT [893] LOG:  skipping missing configuration file "/usr/local/var/postgres/postgresql.auto.conf"
+2018-02-20 14:17:11.510 GMT [893] FATAL:  database files are incompatible with server
+2018-02-20 14:17:11.510 GMT [893] DETAIL:  The data directory was initialized by PostgreSQL version 9.1, which is not compatible with this version 10.1.

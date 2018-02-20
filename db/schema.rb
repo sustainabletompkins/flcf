@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "awardees", force: true do |t|
+  create_table "awardees", force: :cascade do |t|
     t.string   "name"
     t.text     "bio"
     t.string   "video_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "identities", force: true do |t|
+  create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(version: 20170124220409) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "individuals", force: true do |t|
+  create_table "individuals", force: :cascade do |t|
     t.string  "name"
     t.integer "pounds"
     t.integer "count"
     t.string  "email"
   end
 
-  create_table "offsets", force: true do |t|
+  create_table "offsets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
     t.float    "pounds"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.integer  "individual_id", default: 0
   end
 
-  create_table "offsetters", force: true do |t|
+  create_table "offsetters", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "avatar_file_name"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "pages", force: true do |t|
+  create_table "pages", force: :cascade do |t|
     t.text     "body"
     t.string   "title"
     t.boolean  "published"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.text     "slug"
   end
 
-  create_table "prize_winners", force: true do |t|
+  create_table "prize_winners", force: :cascade do |t|
     t.string   "email"
     t.integer  "prize_id"
     t.string   "code"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "updated_at"
   end
 
-  create_table "prizes", force: true do |t|
+  create_table "prizes", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "count"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "simple_captcha_data", force: true do |t|
+  create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
     t.string   "value",      limit: 6
     t.datetime "created_at"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
 
   add_index "simple_captcha_data", ["key"], name: "idx_key", using: :btree
 
-  create_table "stats", force: true do |t|
+  create_table "stats", force: :cascade do |t|
     t.integer "pounds"
     t.float   "dollars"
     t.integer "offsets"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.integer "wheel_spins", default: 0
   end
 
-  create_table "team_members", force: true do |t|
+  create_table "team_members", force: :cascade do |t|
     t.string   "email"
     t.string   "name"
     t.integer  "offsets"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "updated_at"
   end
 
-  create_table "teams", force: true do |t|
+  create_table "teams", force: :cascade do |t|
     t.string  "name"
     t.integer "members"
     t.integer "pounds",             default: 0
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.float   "participation_rate"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "", null: false

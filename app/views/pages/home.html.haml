@@ -20,7 +20,8 @@
 
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 Recent Grant Awardees
-    =render :partial=>'awardees/awardee_digest', :locals=>{awardee: @awardee}
+    -if @awardee
+      =render :partial=>'awardees/awardee_digest', :locals=>{awardee: @awardee}
 .row.with-border#your-impact
   .large-12.columns
     %h5 Our Impact

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resource :teams, :only => [:create, :show] do
     member do
       post 'join'
+      post 'change'
     end
   end
 
