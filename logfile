@@ -15,3 +15,5 @@ Run initdb or pg_basebackup to initialize a PostgreSQL data directory.
 2018-02-20 14:16:15.694 GMT [876] DETAIL:  The data directory was initialized by PostgreSQL version 9.1, which is not compatible with this version 10.1.
 2018-02-20 09:26:51.370 EST [1143] FATAL:  role "swidjit" does not exist
 2018-02-20 09:28:35.041 EST [1285] FATAL:  database "flcf_development" does not exist
+2018-02-22 11:58:36.061 EST [8633] ERROR:  column "poundsexit" does not exist at character 12
+2018-02-22 11:58:36.061 EST [8633] STATEMENT:  SELECT SUM(poundsexit) FROM "offsets" WHERE "offsets"."id" IN (1, 2, 3)

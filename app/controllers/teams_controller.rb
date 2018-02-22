@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.where(:name=>team_params[:name]).first
-    if @team.present? || team_params[:name].length == 0 
+    if @team.present? || team_params[:name].length == 0
       render 'creation_failed'
     else
       @team=Team.create(team_params)
@@ -48,11 +48,16 @@ class TeamsController < ApplicationController
   def change
     @new_team = Team.find(params[:new_team_id])
     @old_team = Team.find(params[:old_team_id])
-    @offset = Offset.find(params[:offset_id])
-    @team.increment!(:count, params[:count].to_i)
-    @team.increment!(:members, 1)
-    @team.increment!(:pounds, params[:pounds].to_i)
-    #TeamMember.create(:email => params[:user_email], :offsets => params[:count].to_i, :team_id=>@team.id, :name=> params[:name])
+
+    @offsets = Offset.where(:id=>Array(params[:offset_ids]))
+    @new_team.increment!(:count, @offsets.count)
+    @new_team.increment!(:members, 1)
+    @new_team.increment!(:pounds, @offsets.sum(:pounds))
+    @old_team.decrement!(:count, @offsets.count)
+    @old_team.decrement!(:members, 1)
+    @old_team.decrement!(:pounds, @offsets.sum(:pounds))
+    tm = TeamMember.find_by_email(params[:offset_email])
+    TeamMember.create(:email => params[:offset_email], :offsets => @offsets.count, :team_id=>@new_team.id, :name=> tm.name)
     #TeamMailer.send_thanks(params[:user_email], @team).deliver
     render 'team_changed'
 

@@ -15,6 +15,7 @@ class ChargesController < ApplicationController
 
       @offsets = Offset.where(:session_id=>params[:stripeSession]).where('purchased = FALSE')
       if @offsets.count > 0
+        @offset_data[:ids] = []
         @offsets.each do |o|
           o.purchased = true
           o.email = params[:stripeEmail]
@@ -24,15 +25,16 @@ class ChargesController < ApplicationController
           @offset_data[:count] = @offset_data[:count] + 1
           @offset_data[:email] = params[:stripeEmail]
           @offset_data[:name] = o.name
-          @offset_data[:id] = o.id
+          @offset_data[:ids] << o.id
           @stat.increment!(:pounds, o.pounds)
           @stat.increment!(:dollars, o.cost)
         end
+        @offset_data[:ids] = @offset_data[:ids].join(',')
       else
         @donation_mode = true
         puts 'its a donation'
       end
-      @player = TeamMember.where(:email=>params[:stripeEmail]).first
+      @player = TeamMember.where(:email=>params[:stripeEmail]).last
       if @player
 
         @team = Team.find(@player.team_id)

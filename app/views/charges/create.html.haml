@@ -91,14 +91,14 @@
         =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name', @team.id), id: 'select-new-team', prompt: 'Which team?'
         #new-team-msg
       .large-12.columns
-        %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to the tally for Team '#{@team.name}'
+        %h4.team-msg Your offset of #{@offset_data[:pounds]} lbs has been added to the tally for Team '#{@team.name}'
         %p=link_to "Click here to change the team you are playing for", "#", :class => 'change-team'
 
         :javascript
 
           $('#select-new-team').on('change', function() {
 
-             team_data =  {new_team_id: $(this).val(), old_team_id: '#{@team.id}', offset_id: '#{@offset_data[:id]}'};
+             team_data =  {new_team_id: $(this).val(), old_team_id: '#{@team.id}', offset_ids: '#{@offset_data[:ids]}', offset_email: '#{@offset_data[:email]}'};
              $.post('#{change_teams_path}', team_data);
 
            });
