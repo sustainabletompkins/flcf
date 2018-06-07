@@ -17,3 +17,16 @@ Run initdb or pg_basebackup to initialize a PostgreSQL data directory.
 2018-02-20 09:28:35.041 EST [1285] FATAL:  database "flcf_development" does not exist
 2018-02-22 11:58:36.061 EST [8633] ERROR:  column "poundsexit" does not exist at character 12
 2018-02-22 11:58:36.061 EST [8633] STATEMENT:  SELECT SUM(poundsexit) FROM "offsets" WHERE "offsets"."id" IN (1, 2, 3)
+2018-02-23 10:06:32.550 EST [15538] FATAL:  role "postgres" does not exist
+2018-02-23 10:06:33.039 EST [15541] FATAL:  role "postgres" does not exist
+2018-02-23 10:07:36.681 EST [15561] FATAL:  role "postgres" does not exist
+2018-02-23 10:07:36.683 EST [15562] FATAL:  role "postgres" does not exist
+2018-02-23 10:08:56.332 EST [15592] FATAL:  database "sflx_development" does not exist
+2018-02-23 10:10:30.725 EST [15639] ERROR:  function pg_last_xlog_receive_location() does not exist at character 283
+2018-02-23 10:10:30.725 EST [15639] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2018-02-23 10:10:30.725 EST [15639] STATEMENT:  SELECT usecreatedb, usesuper, CASE WHEN usesuper THEN pg_postmaster_start_time() ELSE NULL END as upsince, CASE WHEN usesuper THEN pg_conf_load_time() ELSE NULL END as confloadedsince, CASE WHEN usesuper THEN pg_is_in_recovery() ELSE NULL END as inrecovery, CASE WHEN usesuper THEN pg_last_xlog_receive_location() ELSE NULL END as receiveloc, CASE WHEN usesuper THEN pg_last_xlog_replay_location() ELSE NULL END as replayloc, CASE WHEN usesuper THEN pg_last_xact_replay_timestamp() ELSE NULL END as replay_timestamp, CASE WHEN usesuper AND pg_is_in_recovery() THEN pg_is_xlog_replay_paused() ELSE NULL END as isreplaypaused
+	  FROM pg_user WHERE usename=current_user
+2018-04-02 22:56:14.574 EDT [766] LOG:  received smart shutdown request
+2018-04-02 22:56:14.576 EDT [766] LOG:  worker process: logical replication launcher (PID 773) exited with exit code 1
+2018-04-02 22:56:14.576 EDT [768] LOG:  shutting down
+2018-04-02 22:56:14.588 EDT [766] LOG:  database system is shut down
