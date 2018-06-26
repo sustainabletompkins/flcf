@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   get 'log-spin' => 'prizes#log', :as => :log_spin
   post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
 
-  get '.well-known/pki-validation/' => 'pages#verification'
+  get '.well-known/pki-validation/:filename' => 'pages#verification'
 
 
 end
