@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list]
-  
+
   def home
     if user_signed_in?
       @saved_offsets = current_user.offsets.where(:purchased=>:true)
@@ -111,5 +111,9 @@ class PagesController < ApplicationController
 
   def page_params
     params.require(:page).permit(:body, :title)
+  end
+
+  def verification
+    send_file 'lib/D8ED1EF714439F15DBADDE1BD9534EC2.txt'
   end
 end
