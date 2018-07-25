@@ -1,5 +1,5 @@
 -if awardee.avatar_file_name.present?
-  =image_tag("#{awardee.avatar.url(:square)}", :class=>'img-circle')
+  =image_tag("#{awardee.avatar.url(:square).gsub('http','https')}", :class=>'img-circle')
 -else
   =image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :class=>'img-circle')
 

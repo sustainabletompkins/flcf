@@ -1,7 +1,7 @@
 .row.awardee[awardee]
   .large-4.columns
     -if awardee.avatar_file_name.present?
-      =image_tag("#{awardee.avatar.url(:medium)}", :style=>'width:100%;margin-top: 20px')
+      =image_tag("#{awardee.avatar.url(:medium).gsub('http','https')}", :style=>'width:100%;margin-top: 20px')
     -else
       =image_tag("#{awardee.name.gsub(' ', '-')}.jpg", :style=>'width:100%;margin-top: 20px')
     -if awardee.video_id.length > 0

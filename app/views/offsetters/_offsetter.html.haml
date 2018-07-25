@@ -1,4 +1,4 @@
-=image_tag("#{offsetter.avatar.url(:square)}", :class=>'img-circle')
+=image_tag("#{offsetter.avatar.url(:square).gsub('http','https')}", :class=>'img-circle')
 %label=offsetter.name
 %span=offsetter.description
 .more.show-calc=link_to 'Offset your carbon use', "#"

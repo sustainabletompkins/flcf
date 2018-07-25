@@ -1,5 +1,5 @@
 .offsetter[offsetter]
-  =image_tag("#{offsetter.avatar.url(:square)}", :class=>'img-circle')
+  =image_tag("#{offsetter.avatar.url(:square).gsub('http','https')}", :class=>'img-circle')
   %label=best_in_place offsetter, :name
   %span=best_in_place offsetter, :description
   %br
