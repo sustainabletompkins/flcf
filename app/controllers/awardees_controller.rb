@@ -3,6 +3,13 @@ class AwardeesController < ApplicationController
   def show_video
     @awardee = Awardee.find(params[:id])
     @video_id = @awardee.video_id
+    if @video_id.match(/[A-z]/)
+      #this is a youtube video
+      render 'show_youtube_video'
+    else
+      render 'show_video'  
+    end
+
   end
 
   def create

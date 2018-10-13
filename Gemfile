@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-
+ruby '2.4.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.8'
+gem 'rails', '~> 5.1.2'
 # Use sqlite3 as the database for Active Record
-gem 'pg', '~> 0.21'
+gem 'pg'
 gem 'newrelic_rpm'
 gem 'haml-rails'
 # Use jquery as the JavaScript library
@@ -16,7 +16,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'formtastic', '~> 3.0'
 
-gem 'foundation-rails', '5.4.5'
+gem 'foundation-rails', '= 5.4.5'
+gem 'autoprefixer-rails', '8.6.5'
 gem 'foundation-icons-sass-rails'
 gem 'devise'
 gem 'omniauth', '~> 1.3.2'
@@ -32,13 +33,11 @@ gem 'aws-sdk', '~> 2.3'
 
 gem 'sitemap_generator'
 gem 'meta-tags'
-
-group :assets do
-  gem 'sass-rails', '~> 4.0.3'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '>= 1.3.0'
-
-end
+gem 'sass-rails', '= 5.0.7'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
