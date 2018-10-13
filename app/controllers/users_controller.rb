@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :find_user_by_id
+  before_action :find_user_by_id
 
   def show
 
