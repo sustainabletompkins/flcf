@@ -1,1 +1,173 @@
-=render :partial=>'admin_content'
+=tinymce_assets
+.row
+  #page-admin
+    =render :partial=>'pages/page_admin'
+  .large-12.columns
+    %button.btn#new-page add a page
+  %hr
+  .large-12.columns
+    %h4 Recent Prizes
+    =render :partial => 'prize_winners/detail', :collection => @prizes, :as => :prize_winner
+
+  %hr
+  .large-12.columns
+    %h4 Add an offset
+    =form_for :offset, :url=>manual_create_offsets_path, :html=>{:id=>'create-offset-form'},:remote=>:true do |f|
+      =f.text_field :title, :placeholder => 'offset title'
+      =f.text_field :name, :placeholder => 'offsetter name'
+      =f.text_field :email, :placeholder => 'offsetter email'
+      =f.text_field :zipcode, :placeholder => 'zip code'
+      =f.number_field :cost, :placeholder => 'cost in USD'
+      %label assign to carbon races?
+      =radio_button_tag :race, 'team'
+      =label_tag(:race_team, "sign up on team")
+      =radio_button_tag :race, 'individual'
+      =label_tag(:race_individual, "sign up as individual")
+      .team-info{:style=>'display:none'}
+        =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "No team", :id=>'team-select'
+      .player-info{:style=>'display:none'}
+        =text_field_tag :user_email,'', :placeholder => 'user email'
+        =text_field_tag :member_name, '',:placeholder => 'team member name'
+      %br
+      =show_simple_captcha(:label=>'Enter letters...')
+      =f.submit 'submit', :class=>'button'
+
+      #offset-msg
+  %hr
+  .large-12.columns
+    #add-prize-section
+      %h4 Add a prize
+      %h5 Total spins since 12/5: #{@stat.wheel_spins}
+      .row
+        .large-5.columns
+
+          = form_for(:prize, url: prizes_path, multipart: true, remote: true,:html => {:id => "add-prize-form"}) do |f|
+            %label prize title
+            =f.text_field :title
+            %label prize description
+            =f.text_field :description
+            %label how many?
+            =f.number_field :count, :value=>'1'
+            =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
+            =f.submit 'Add prize', :class=>'button', :id=>'add-prize'
+            .fail-notice
+        .large-7.columns
+          =render :collection => @prize_list, :partial => 'prizes/editable_prize', :as => :prize
+  %hr
+  .large-12.columns
+    #add-offsetter-section
+      %h4 Add an offsetter
+      .row
+        .large-5.columns
+          =form_for(:offsetter, url: offsetters_path,:remote => :true, :html => {:id => "add-offsetter-form"}) do |f|
+            %label prize title
+            =f.text_field :name
+            %label prize description
+            =f.text_field :description
+            %label choose a picture (square, with face centered)
+            =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
+            =f.submit 'Add Offsetter'
+            .fail-notice
+        .large-7.columns
+          =render :collection => @offsetters, :partial => 'offsetters/editable_offsetter', :as => :offsetter
+  %hr
+  .large-12.columns
+    #add-awardee-section
+      %h4 Add an awardee
+      .row
+        .large-5.columns
+
+          = form_for(:awardee, url: awardees_path, multipart: true, :html => {:id => "add-awardee"}) do |f|
+            %label awardee title
+            =f.text_field :name
+            %label bio
+            =f.text_area :bio
+            %label vimeo/youtube video id
+            =f.text_field :video_id
+            %label award amount
+            =f.number_field :award_amount
+            %label pound offset
+            =f.number_field :pounds_offset
+            %label choose a picture (square, with face centered)
+            =f.file_field :avatar
+            =show_simple_captcha(:label=>'Enter letters...')
+            =f.submit 'Add Awardee', :class=>'button', :id=>'add-awardee'
+            .fail-notice
+        .large-7.columns
+          =render :collection => @awardees, :partial => 'awardees/editable_awardee', :as => :awardee
+
+    .large-12.columns
+      %h4 Carbon Races
+      .row
+        .large-6.columns
+          %h5 Individuals
+          =render :collection => @individuals, :partial => 'individuals/editable_player', :as => :individual
+        .large-6.columns
+          %h5 Teams
+          =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
+
+
+:javascript
+   $(document).ready(function() {
+    /* Activating Best In Place */
+    console.log('sdfsdfsdf');
+    jQuery(".best_in_place").best_in_place();
+  });
+  $('#team-select').on('change', function() {
+    $('.player-info').show();
+  });
+
+  $('#add-prize').on('click', function() {
+    //$('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
+  });
+
+  $('#race_team').on('change', function() {
+    if($('#race_team').is(':checked')) {
+      $('.player-info').show();
+      $('.team-info').show();
+    }
+    else {
+      $('.player-info').hide();
+      $('.team-info').hide();
+    }
+
+  });
+  $('#race_individual').on('change', function() {
+    if($('#race_individual').is(':checked')) {
+      $('.player-info').show();
+      $('.team-info').hide();
+    }
+    else {
+      $('.player-info').hide();
+      $('.team-info').hide();
+    }
+  });
+
+  $(document).on('click', '.load-page',function() {
+    $('#save-notice').empty();
+    var id = $(this).data('id');
+    $('.page-editor').hide();
+    $('.page-editor-'+id).toggle();
+
+  });
+  $('.save').on('click', function() {
+    $('#save-notice').empty();
+
+  });
+
+  $('#new-page').on('click', function() {
+    $('#page-editor').html("#{j render :partial=>'pages/new'}");
+    tinyMCE.init({
+      selector: 'textarea#new-page-form',
+      plugins : 'advlist autolink link image lists charmap print preview',
+      height : 400
+    });
+  });
+
+  tinyMCE.init({
+    selector: 'textarea.tinymce',
+    plugins : 'advlist autolink link image lists charmap print preview',
+    height : 400
+  });
