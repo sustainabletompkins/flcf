@@ -55,8 +55,7 @@ $ ->
 
     place = autocomplete1.getPlace()
     origin = place.geometry.location
-
-
+    
   setDestination = ->
 
     place = autocomplete2.getPlace()
@@ -257,7 +256,6 @@ $ ->
   $("#calculate-car-offset").on "click", ->
     miles = undefined
     mpg = parseInt($('#mpg').val())
-    console.log mpg
     unless parseInt($("#car-miles").val()) > 0
       request =
         origin: origin
@@ -270,14 +268,13 @@ $ ->
 
 
       directionsService.route request, (response, status) ->
-
-        miles = response.routes[0].legs[0].distance.value / 1000
+        miles = response.routes[0].legs[0].distance.text.split(' ')[0]
         if $("#car-travel-offset input[type=checkbox]")[0].checked
           miles = miles*2
           offset_title += " (RT)"
         calculateCarOffset miles
     else
-      miles = parseInt($("#car-miles").val())
+      miles = parseFloat($("#car-miles").val())
       offset_title = "Car Trip"
       if $("#car-travel-offset input[type=checkbox]")[0].checked
         miles = miles*2
@@ -339,4 +336,3 @@ $ ->
     $('#offset-buttons').css('right','45px')
     $.post "/offsets", data
     return
-
