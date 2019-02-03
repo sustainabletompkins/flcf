@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  constraints CanAccessRailsAdmin do
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  end
+  
   devise_for :users,
     :controllers => { :registrations => "registrations", :sessions => "sessions",omniauth_callbacks: 'omniauth_callbacks' }
 
@@ -43,7 +48,7 @@ Rails.application.routes.draw do
   post '/save-prize' => 'prizes#save', :as => :prize_won
   get '/teams/:id', to: 'teams#show'
   get '/awardees/video/:id' => 'awardees#show_video', :as => :awardee_video
-  get 'admin' => 'pages#admin', :as => :admin_path
+  get '/calc-admin' => 'pages#admin', :as => :admin_path
   get 'log-spin' => 'prizes#log', :as => :log_spin
   post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
 

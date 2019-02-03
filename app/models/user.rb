@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def is_admin?
+    return (self.email == "gaynicholson@gmail.com" ||  self.email == "info@sustainabletompkins.org" ||  self.email == "playwithyourmind@gmail.com")
+  end
+
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end

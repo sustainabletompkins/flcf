@@ -13,6 +13,8 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+gem 'rails_admin', '~> 1.3'
+gem "cancan"
 
 gem 'formtastic', '~> 3.0'
 
