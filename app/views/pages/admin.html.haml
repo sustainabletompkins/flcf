@@ -25,9 +25,11 @@
       =label_tag(:race_individual, "sign up as individual")
       .team-info{:style=>'display:none'}
         =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "No team", :id=>'team-select'
+      #team-member-info{:style=>'display:none'}
+        =select_tag :team_member,'',:include_blank => "new player", :id=>'team-member-select'
+
       .player-info{:style=>'display:none'}
-        =text_field_tag :user_email,'', :placeholder => 'user email'
-        =text_field_tag :member_name, '',:placeholder => 'team member name'
+        ok, we will credit to individual player acct
       %br
       =show_simple_captcha(:label=>'Enter letters...')
       =f.submit 'submit', :class=>'button'
@@ -116,8 +118,29 @@
     jQuery(".best_in_place").best_in_place();
   });
   $('#team-select').on('change', function() {
+    $('#team-member-info').show();
+    $select = $('#team-member-select');
+
+    $.get("#{members_teams_path}", {id: $(this).val()}, function(data) {
+      $select.find('option').remove();
+      $select.append('<option value="0">select exiting player or add new below</option>');
+      $.each(data,function(key, value)
+      {
+        $select.append('<option value=' + value["id"] + '>' + value["name"] + '</option>');
+      });
+    })
     $('.player-info').show();
+    $('.team-member-info').show();
   });
+
+  $('#team-member-select').on('change',function() {
+    if($(this).val() == 0) {
+      $('.player-info').show();
+    }
+    else {
+      $('.player-info').hide();
+    }
+  })
 
   $('#add-prize').on('click', function() {
     //$('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
@@ -125,7 +148,7 @@
 
   $('#race_team').on('change', function() {
     if($('#race_team').is(':checked')) {
-      $('.player-info').show();
+      $('.player-info').hide();
       $('.team-info').show();
     }
     else {

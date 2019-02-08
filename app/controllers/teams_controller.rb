@@ -45,6 +45,11 @@ class TeamsController < ApplicationController
 
   end
 
+  def members
+    @team = Team.find(params[:id])
+    render :json=>@team.team_members.to_json
+  end
+
   def change
     @new_team = Team.find(params[:new_team_id])
     @old_team = Team.find(params[:old_team_id])

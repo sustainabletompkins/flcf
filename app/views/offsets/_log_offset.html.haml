@@ -1,25 +1,18 @@
 .offset[offset]
-  %div{:style=>"clear:both;margin: 10px; padding: 7px; background-color:#eee"}
-    %label name
-    =offset.name
-    %br
-    %label email
-    =offset.email
-    %br
-    %label zipcode
-    =offset.zipcode
-    %br
-    %label date
-    =offset.created_at.strftime('%m/%d/%y')
-    %br
-    %label price
-    =offset.cost
-    %br
-    %label pounds CO2
-    =offset.pounds
-    %br
-    %label type
-    =offset.title
+  .large-4.medium-4.small-6.columns
+    =offset.title || '--'
+  .large-3.medium-3.small-6.columns
+    -if (offset.email && offset.email.length > 1)
+      =offset.email
+    -else
+      no email
+  .large-2.medium-2.small-6.columns
+    =offset.pounds || '--'
+  .large-2.medium-2.small-6.columns
+    =offset.cost || '--'
+  .large-1.medium-1.small-6.columns
+    =offset.created_at.strftime('%m/%d/%y') || '--'
+  .large-12.columns
     -unless offset.individual_id.present? || offset.team_id.present?
 
       .show-individual-form add as individual player

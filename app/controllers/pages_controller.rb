@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list]
+  http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list, :offset_log]
 
   def home
     if user_signed_in?
@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
     @offsetter = Offsetter.order(id: :desc).limit(5).sample
     @awardee = Awardee.order(id: :desc).limit(3).sample
-    @awardee_count = Awardee.all.count+2
+    @awardee_count = Awardee.all.count+1
 
   end
 

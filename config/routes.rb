@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   constraints CanAccessRailsAdmin do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   end
-  
+
   devise_for :users,
     :controllers => { :registrations => "registrations", :sessions => "sessions",omniauth_callbacks: 'omniauth_callbacks' }
 
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :offsets, :only => [:create,:destroy,:show] do
     collection do
       get 'process_purchased'
+      get 'filter'
       post 'duplicate'
       post 'populate_cart'
       post 'add_name_and_zip'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
     member do
       post 'join'
       post 'change'
+      get 'members'
     end
   end
 
