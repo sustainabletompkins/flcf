@@ -30,7 +30,21 @@ namespace :init do
   end
 
   task :set_stats => :environment do
-    Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
+    #Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
+    Stat.create(:pounds=>'1622300' , :dollars => '16223', :awardees => '18')
+
+  end
+
+  task :fix_stats => :environment do
+    #as of 3/26/15, before first online offset
+    # $16,223/20 = 811 * $20/ton --> 1,622,300
+    Stat.destroy_all
+    s = Stat.create(:pounds=>'1622300', :dollars => '16223', :awardees => '18')
+    Offset.where(:purchased=>true).each do |o|
+      s.increment!(:pounds,o.pounds)
+      s.increment!(:dollars,o.cost)
+    end
+    puts s.inspect
   end
 
   task :recalculate_race_data => :environment do

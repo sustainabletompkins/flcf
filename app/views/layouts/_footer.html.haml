@@ -7,11 +7,14 @@
       .large-12.columns
         The Finger Lakes Climate Fund is a program of
         %br
-        =image_tag('st-logo.png', :size=>'200', :style=>'margin: 7px;')
+        =link_to 'https://sustainabletompkins.org/' do
+          =image_tag('st-logo.png', :size=>'200', :style=>'margin: 7px;')
         %br
-        serving Ithaca, Tompkins County, Seneca County & the Finger Lakes region of NY
+        serving the Finger Lakes Region of New York State
         %hr
         Carbon offsets and donation are deductible through Sustainable Tompkins 501(c)3
+        %br
+        If you wish to pay for offsets with a check, make it out to Sustainable Tompkins with 'FLCF' in the memo line, and mail to 309 N Aurora St, Ithaca, NY 14850
         -if user_signed_in?
 
           = link_to "Log out", destroy_session_path(:user), :method => :delete
