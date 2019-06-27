@@ -116,6 +116,6 @@ class PagesController < ApplicationController
   end
 
   def verification
-    send_file 'lib/61AA9A211617DDC979ED20A4C75E6EC6.txt'
+    render :plain => '42806DFBDBEA5D72C93DAFE325324011FF886DFA6FB0329F0108906D9543846C comodoca.com 5d140cf495510'
   end
 end
