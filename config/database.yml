@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: flcf_development
   pool: 5
-  username: swidjit
-  password: password
+  username: postgres
+  password: postgres
   min_messages: warning
   host: localhost

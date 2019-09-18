@@ -1,4 +1,4 @@
-class CreatePrizeWinners < ActiveRecord::Migration
+class CreatePrizeWinners < ActiveRecord::Migration[5.1]
   def change
     create_table :prize_winners do |t|
       t.string :email

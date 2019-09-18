@@ -1,4 +1,4 @@
-class AddAvatarToPrizes < ActiveRecord::Migration
+class AddAvatarToPrizes < ActiveRecord::Migration[5.1]
   def self.up
     add_attachment :prizes, :avatar
   end

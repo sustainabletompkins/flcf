@@ -1,4 +1,4 @@
-class AddFieldsToOffsets < ActiveRecord::Migration
+class AddFieldsToOffsets < ActiveRecord::Migration[5.1]
   def change
     add_column :offsets, :name, :string
     add_column :offsets, :zipcode, :integer

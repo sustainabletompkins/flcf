@@ -1,4 +1,4 @@
-class AddAvatarToOffsetters < ActiveRecord::Migration
+class AddAvatarToOffsetters < ActiveRecord::Migration[5.1]
   def self.up
     add_attachment :offsetters, :avatar
   end

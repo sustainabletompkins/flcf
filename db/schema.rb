@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20170124220409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "awardees", id: :serial, force: :cascade do |t|
+  create_table "awardees", force: :cascade do |t|
     t.string "name"
     t.text "bio"
     t.string "video_id"
@@ -29,24 +29,24 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "identities", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
+  create_table "identities", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "provider"
     t.string "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
-  create_table "individuals", id: :serial, force: :cascade do |t|
+  create_table "individuals", force: :cascade do |t|
     t.string "name"
     t.integer "pounds"
     t.integer "count"
     t.string "email"
   end
 
-  create_table "offsets", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
+  create_table "offsets", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "title"
     t.float "pounds"
     t.float "cost"
@@ -61,9 +61,10 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.string "email"
     t.integer "team_id", default: 0
     t.integer "individual_id", default: 0
+    t.index ["user_id"], name: "index_offsets_on_user_id"
   end
 
-  create_table "offsetters", id: :serial, force: :cascade do |t|
+  create_table "offsetters", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "avatar_file_name"
@@ -72,27 +73,28 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "pages", id: :serial, force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.text "body"
     t.string "title"
     t.boolean "published"
     t.boolean "menu"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "slug"
   end
 
-  create_table "prize_winners", id: :serial, force: :cascade do |t|
+  create_table "prize_winners", force: :cascade do |t|
     t.string "email"
-    t.integer "prize_id"
+    t.bigint "prize_id"
     t.string "code"
     t.boolean "claimed", default: false
     t.string "name", default: "Anonymous"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prize_id"], name: "index_prize_winners_on_prize_id"
   end
 
-  create_table "prizes", id: :serial, force: :cascade do |t|
+  create_table "prizes", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.integer "count"
@@ -103,15 +105,15 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "simple_captcha_data", id: :serial, force: :cascade do |t|
+  create_table "simple_captcha_data", force: :cascade do |t|
     t.string "key", limit: 40
     t.string "value", limit: 6
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["key"], name: "idx_key"
   end
 
-  create_table "stats", id: :serial, force: :cascade do |t|
+  create_table "stats", force: :cascade do |t|
     t.integer "pounds"
     t.float "dollars"
     t.integer "offsets"
@@ -119,18 +121,18 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.integer "wheel_spins", default: 0
   end
 
-  create_table "team_members", id: :serial, force: :cascade do |t|
+  create_table "team_members", force: :cascade do |t|
     t.string "email"
     t.string "name"
     t.integer "offsets"
     t.integer "team_id"
     t.boolean "founder"
     t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "teams", id: :serial, force: :cascade do |t|
+  create_table "teams", force: :cascade do |t|
     t.string "name"
     t.integer "members"
     t.integer "pounds", default: 0
@@ -138,9 +140,9 @@ ActiveRecord::Schema.define(version: 20170124220409) do
     t.float "participation_rate"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
