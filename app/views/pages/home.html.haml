@@ -23,25 +23,30 @@
     -if @awardee
       =render :partial=>'awardees/awardee_digest', :locals=>{awardee: @awardee}
 .row.with-border#your-impact
-  .large-12.columns
+
+  .large-4.medium-4.columns
     %h5 Our Impact
 
-  .large-3.medium-3.columns.impact
+    .large-12.medium-12.columns.impact
 
-    %span=number_with_delimiter(@stats.pounds)
-    %label lbs C02 offset
-  .large-3.medium-3.columns.impact
+      %span=number_with_delimiter(@stats.pounds)
+      %label lbs C02 offset
+    .large-12.medium-12.columns.impact
 
-    %span=number_with_delimiter(@stats.pounds/20)
-    %label gallons gas avoided
-  .large-3.medium-3.columns.impact
+      %span=number_with_delimiter(@stats.pounds/20)
+      %label gallons gas avoided
+    .large-12.medium-12.columns.impact
 
-    %span=number_to_currency(@stats.dollars, :precision => 0)
-    %label in offsets raised
-  .large-3.medium-3.columns.impact
+      %span=number_to_currency(@stats.dollars, :precision => 0)
+      %label in offsets raised
+    .large-12.medium-12.columns.impact
 
-    %span=@awardee_count
-    %label grants awarded
+      %span=@awardee_count
+      %label grants awarded
+  .large-8.medium-8.columns{:style=>"padding-right: 15px;"}
+    .container
+      %iframe.video{:allow => "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", :allowfullscreen => "", :frameborder => "0", :src => "https://www.youtube.com/embed/97yatiY4lFc", :width => "100%"}
+
 .row.with-border#seal-the-cracks{:style=>"padding:0px;"}
   .large-8.medium-8.columns{:style=>'padding-top: 15px;'}
     %h4 Help us

@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     @leaders = Team.where('pounds > 0').order(pounds: :desc).limit(3)
     @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc).limit(3)
 
-    @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2018-09-01T21:00:00-06:00')).sum(:cost)
+    @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2019-09-01T21:00:00-06:00')).sum(:cost)
     @cracks_pct = (@cracks_money/125).round(1)
 
     @offsetter = Offsetter.order(id: :desc).limit(5).sample
