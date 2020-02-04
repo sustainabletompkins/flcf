@@ -67,7 +67,7 @@
         .white We've raised
         .green $#{number_with_delimiter(@cracks_money.round)}
         .white since
-        .green{:style=>'font-size: 25px'} 9/1/19
+        .green{:style=>'font-size: 25px'} 1/1/20
 
     #mobile-graph.chart.show-for-small-only{"data-percent" => "#{@cracks_pct}"}
 
@@ -78,16 +78,18 @@
         .green{:style=>'font-size: 25px'} $12,500
         .white goal
 .row.with-border.blue-section
-  .large-12.columns
+  .large-4.columns
+    =image_tag('heatsmart.png', :style=>'margin-top:1em;')
+  .large-8.columns
     %p{:style=>"font-size: 1.2rem;"} Do you need help making your home more energy efficient?  You might be income eligible for a grant from the Climate Fund, and for a limited time, we also can award significant incentives for heat pumps.
     %p{:style=>"font-size: 1.2rem;"}<
       To find out if you qualify, ask your NYSERDA-certified installer to apply on your behalf.  Find a contractor and get a free energy audit at:
       &nbsp;
-      =link_to 'HeatSmartTompkins.org', "https://www.solartompkins.org/"
+      =link_to 'HeatSmartTompkins.org', "https://www.solartompkins.org/climatefund.html"
       ,&nbsp;
-      =link_to 'HeatSmartCNY.org', "https://www.solartompkins.org/"
+      =link_to 'HeatSmartCNY.org', "https://heatsmartcny.org/"
       , or&nbsp;
-      =link_to 'HeatSmartSouthernTier.org', "https://www.solartompkins.org/"
+      =link_to 'HeatSmartSouthernTier.org', "https://heatsmartsoutherntier.org/"
 .row.with-border.purple-section
   .large-12.columns{:style=>'text-align:center;background-color: #8012b3'}
     %h2.heading-text Carbon Races

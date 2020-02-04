@@ -12,13 +12,13 @@ class PagesController < ApplicationController
     @prizes = Prize.all.order(count: :asc)
     @stats = Stat.first
     @leaders = Team.where('pounds > 0').order(pounds: :desc).limit(3)
-    @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc).limit(3)
+    @individual_leaders = Individual.where('pounds > 0').where.not(:name=>"Anonymous").order(pounds: :desc).limit(3)
 
-    @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2019-09-01T21:00:00-06:00')).sum(:cost)
+    @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2020-01-01T12:00:00-06:00')).sum(:cost)
     @cracks_pct = (@cracks_money/125).round(1)
 
-    @offsetter = Offsetter.order(id: :desc).limit(5).sample
-    @awardee = Awardee.order(id: :desc).limit(3).sample
+    @offsetter = Offsetter.order(id: :desc).limit(6).sample
+    @awardee = Awardee.order(id: :desc).limit(6).sample
     @awardee_count = Awardee.all.count+1
 
   end
@@ -43,7 +43,7 @@ class PagesController < ApplicationController
 
         @teams = Team.all
         @leaders = Team.where('pounds > 0').order(pounds: :desc)
-        @individual_leaders = Individual.where('pounds > 0').order(pounds: :desc)
+        @individual_leaders = Individual.where('pounds > 0').where.not(:name=>"Anonymous").order(pounds: :desc)
         render params[:page_name], :layout => "full"
       else
         render params[:page_name]
