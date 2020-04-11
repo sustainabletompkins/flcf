@@ -79,14 +79,13 @@ class PagesController < ApplicationController
 
   def admin
     puts 'skjdkladlas'
-    @prizes = PrizeWinner.where.not(:email=>nil).order(updated_at: :desc)
+    @prizes = PrizeWinner.where.not(:email=>nil).order(updated_at: :desc).last(15)
     @prize_list = Prize.all
     @offsetters = Offsetter.all
     @teams = Team.all
-    puts @teams
     @awardees = Awardee.all
-    @individuals = Individual.all
-    @teams = Team.all
+    @individuals = Individual.all.order(pounds: :desc)
+    @teams = Team.all.order(pounds: :desc)
     @stat = Stat.find(1)
     render :layout=>"full"
   end

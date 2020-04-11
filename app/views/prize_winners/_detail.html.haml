@@ -4,4 +4,6 @@
     %label won a #{prize_winner.prize.description} from
     %span=prize_winner.prize.title
     on #{prize_winner.updated_at.strftime('%m/%d')}
-    =link_to prize_winner.email, 'mailto:alex@hey.com'
+    =link_to prize_winner.email, "mailto:#{prize_winner.email}"
+    %br
+    =link_to 'delete this', prize_winner,  method: :delete, remote: :true, data: { confirm: 'Are you sure?' }

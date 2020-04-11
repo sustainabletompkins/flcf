@@ -2,6 +2,8 @@
   %meta{:content => "Finger Lakes Climate Fund", :property => "og:title"}
   %meta{:content => "https://fingerlakesclimatefund.org", :property => "og:url"}
   %meta{:content => "Offset your carbon locally in the finger lakes", :property => "og:description"}
+
+
 .row.with-border#overview
   .large-4.medium-4.columns{:style=>'margin-bottom: 30px;'}
     %h3 How it Works
@@ -45,7 +47,16 @@
       %label grants awarded
   .large-8.medium-8.columns{:style=>"padding-right: 15px;"}
     .container
-      %iframe.video{:allow => "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", :allowfullscreen => "", :frameborder => "0", :src => "https://www.youtube.com/embed/97yatiY4lFc", :width => "100%"}
+      .video-slider
+        / SLIDE 1
+        .slide
+          %iframe{:allow => "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/videoseries?list=PLbpi6ZahtOH6Blw3RGYpWkSByi_T7Rygb", :width => "560"}
+
+
+        .slide-arrow.left
+        .slide-arrow.right
+
+    -#%iframe.video{:allow => "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", :allowfullscreen => "", :frameborder => "0", :src => "https://www.youtube.com/embed/97yatiY4lFc", :width => "100%", :onended=>"nextVideo()"}
 
 .row.with-border#seal-the-cracks{:style=>"padding:0px;"}
   .large-8.medium-8.columns{:style=>'padding-top: 15px;'}
@@ -159,6 +170,8 @@
         var button = $('#stripe');
         $('#user-offsets').append(button);
       });
+
+%script{:src => "https://www.youtube.com/iframe_api"}
 :javascript
 
   var el = document.getElementById('graph'); // get canvas
@@ -243,3 +256,72 @@
 
   drawCircle('#efefef', options.lineWidth, 100 / 100);
   drawCircle('#5b922f', options.lineWidth, options.percent / 100);
+
+  $(window).load(function() {
+    var pos = 0,
+    slides = $('.slide'),
+    numOfSlides = slides.length;
+    console.log(slides);
+    function nextSlide() {
+      // `[]` returns a vanilla DOM object from a jQuery object/collection
+      $var = slides[pos].video
+      console.log($var);
+      $var.stopVideo();
+      slides.eq(pos).animate({ left: '-100%' }, 500);
+      pos = (pos >= numOfSlides - 1 ? 0 : ++pos);
+      slides.eq(pos).css({ left: '100%' }).animate({ left: 0 }, 500);
+    }
+
+    function previousSlide() {
+      slides[pos].video.stop();
+      slides.eq(pos).animate({ left: '100%' }, 500);
+      pos = (pos == 0 ? numOfSlides - 1 : --pos);
+      slides.eq(pos).css({ left: '-100%' }).animate({ left: 0 }, 500);
+    }
+
+    $('.left').click(previousSlide);
+    $('.right').click(nextSlide);
+  })
+
+  function onYouTubeIframeAPIReady() {
+
+    $('.slide').each(function (index, slide) {
+      // Get the `.video` element inside each `.slide`
+      var iframe = $(slide).find('.video')[0]
+      // Create a new YT.Player from the iFrame, and store it on the `.slide` DOM object
+      slide.video = new YT.Player(iframe);
+      console.log(slide.video);
+    })
+  }
+
+:css
+  .slide-arrow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 45%;
+    width: 15%;
+    cursor: pointer;
+    opacity: .2;
+  }
+  .slide-arrow:hover{
+    opacity: 1;
+  }
+  .slide-arrow:after{
+    content: "\003c";
+    text-align: center;
+    display: block;
+    height: 10%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 3em;
+  }
+  .slide-arrow.right:after{
+    content: "\003e";
+  }
+  .slide-arrow.right{
+    left: auto;
+    right: 0;
+  }

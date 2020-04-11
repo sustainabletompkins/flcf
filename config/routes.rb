@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :charges
 
   resources :prizes, :only => [:create, :update, :destroy]
+  resources :prize_winners, :only => [:destroy]
   resources :offsetters, :only => [:create, :update, :show, :destroy]
   resources :awardees, :only => [:create, :update, :show, :destroy]
   resources :teams, :only => [:update]
