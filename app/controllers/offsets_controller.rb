@@ -31,7 +31,7 @@ class OffsetsController < ApplicationController
     when 'log-pounds'
       @offsets = Offset.where(:purchased => :true).order(pounds: params[:dir])
     when 'log-cost'
-      @offsets = Offset.where(:purchased => :true).order(cost: params[:dir])  
+      @offsets = Offset.where(:purchased => :true).order(cost: params[:dir])
     when 'log-date'
       @offsets = Offset.where(:purchased => :true).order(created_at: params[:dir])
     end
@@ -49,7 +49,8 @@ class OffsetsController < ApplicationController
         @team.update_attribute(:members, 1)
         @team.increment!(:pounds, pounds)
         @team.increment!(:count, 1)
-        if params.has_key?(:team_member)
+        # on front-end there is a 0 option inserted for default placeholder text
+        if (params.has_key?(:team_member) && params[:team_member].to_i != 0)
           @member = TeamMember.where(:id=> params[:team_member]).first
           @member.increment!(:offsets)
         else
@@ -58,6 +59,11 @@ class OffsetsController < ApplicationController
         end
         @offset.update_attribute(:team_id,@team.id)
         @offset.update_attribute(:name,params[:offset][:name])
+      elsif params[:offset][:new_team_name].length > 0
+        # admin is assigning user to a new team
+        @team = Team.create(:name=>params[:offset][:new_team_name], :pounds=>pounds, :count=>1)
+        TeamMember.create(:email => params[:offset][:email], :name=> params[:offset][:name], :offsets => 1, :team_id=>@team.id)
+
       else
         @i=Individual.where(:email=> params[:offset][:email]).first
         if @i.present?
