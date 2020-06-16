@@ -5,9 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.3'
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.7'
+ruby '2.6.5'
+gem 'rails', '~> 5.2.4.3'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'newrelic_rpm'
@@ -21,7 +20,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'rails_admin', '~> 1.3'
 gem "cancan"
 
-gem 'formtastic', '~> 3.0'
+gem 'formtastic'
 
 gem 'foundation-rails', '= 5.4.5'
 gem 'autoprefixer-rails', '8.6.5'
@@ -35,7 +34,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'best_in_place'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'tinymce-rails'
-gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
+gem 'paperclip'
 gem 'aws-sdk', '~> 2.3'
 gem 'rails_12factor'
 gem 'sitemap_generator'
@@ -45,7 +44,7 @@ gem 'sass-rails', '= 5.0.7'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
-
+gem 'dotenv-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
