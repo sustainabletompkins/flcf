@@ -115,6 +115,6 @@ class PagesController < ApplicationController
   end
 
   def verification
-    render :plain => '42806DFBDBEA5D72C93DAFE325324011FF886DFA6FB0329F0108906D9543846C comodoca.com 5d140cf495510'
+    render :plain => '870E0E2346D565F9BE3056DD58219B8914AF9F9A994D08FDD3612C9FB227BC96 comodoca.com 5efc06b064907'
   end
 end
