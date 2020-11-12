@@ -52,6 +52,10 @@ class PagesController < ApplicationController
 
   end
 
+  def card_error
+    
+  end
+
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(page_params)
@@ -79,7 +83,7 @@ class PagesController < ApplicationController
 
   def admin
     puts 'skjdkladlas'
-    @prizes = PrizeWinner.where.not(:email=>nil).order(updated_at: :desc).last(15)
+    @prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :asc).last(15).reverse
     @prize_list = Prize.all
     @offsetters = Offsetter.all
     @teams = Team.all

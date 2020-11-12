@@ -57,7 +57,7 @@ class ChargesController < ApplicationController
       end
       @empties = count*2
 
-      OffsetMailer.send_offset_details(params[:stripeEmail],@offsets).deliver
+      
 
       customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
@@ -70,6 +70,9 @@ class ChargesController < ApplicationController
         :description => 'Carbon offset',
         :currency    => 'usd'
       )
+
+      OffsetMailer.send_offset_details(params[:stripeEmail],@offsets).deliver
+
       @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
       @teams = Team.all
 
@@ -90,7 +93,8 @@ class ChargesController < ApplicationController
     end
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to charges_path
+    # fix this so it goes to an error page
+    redirect_to '/error'
   end
 
 
