@@ -4,6 +4,15 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   end
 
+  namespace :api do
+    namespace :v1 do
+      get 'calculator/air', to: 'offsets#air'
+      get 'calculator/car', to: 'offsets#car'
+      get 'calculator/home', to: 'offsets#home_energy'
+      get 'calculator/quick', to: 'offsets#quick'
+    end
+  end
+
   devise_for :users,
     :controllers => { :registrations => "registrations", :sessions => "sessions",omniauth_callbacks: 'omniauth_callbacks' }
 
