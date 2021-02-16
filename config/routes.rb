@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       get 'calculator/car', to: 'offsets#car'
       get 'calculator/home', to: 'offsets#home_energy'
       get 'calculator/quick', to: 'offsets#quick'
+      get 'races/leaderboard', to: 'carbon_races#leaderboard'
+      get 'races/team', to: 'carbon_races#team'
+      get 'prizes/list', to: 'prizes#list'
+      get 'prizes/winners', to: 'prizes#winners'
     end
   end
 
