@@ -111,7 +111,7 @@ class PagesController < ApplicationController
   end
 
   def calculator
-    render 'calculator', :layout => "blank"
+    render 'calculator', :layout => "iframe"
   end
 
   def page_params

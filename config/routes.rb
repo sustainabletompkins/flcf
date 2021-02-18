@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
 
   get '/error', to: 'pages#card_error'
+  get '/calculator', to: 'pages#calculator'
 
   get '.well-known/pki-validation/:filename' => 'pages#verification'
 
