@@ -71,16 +71,19 @@ class ChargesController < ApplicationController
         :currency    => 'usd'
       )
 
+      #send offset info to little green light
+      # put this above the offset mailer, in case that runs into a problem
+      require 'net/http'
+      require 'uri'
+      require 'json'
+      uri = URI.parse("https://sustainabletompkins.littlegreenlight.com/integrations/e43d9598-3876-47a8-9411-9a6afdff1647/listener")
+
       OffsetMailer.send_offset_details(params[:stripeEmail],@offsets).deliver
 
       @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
       @teams = Team.all
 
-      #send offset info to little green light
-      require 'net/http'
-      require 'uri'
-      require 'json'
-      uri = URI.parse("https://sustainabletompkins.littlegreenlight.com/integrations/e43d9598-3876-47a8-9411-9a6afdff1647/listener")
+
 
       data = {:payment_type => 'Credit Card', :email=>params[:stripeEmail],:amount=>params[:stripeCharge].to_i/100.round(2),:name => @offset_data[:name], :zip_code => @offset_data[:zip_code] || 12314, :date => Date.today, :fund => 'Finger Lakes Climate Fund'}
       http = Net::HTTP.new(uri.host, uri.port)
