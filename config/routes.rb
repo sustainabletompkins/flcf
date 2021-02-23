@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get 'races/team', to: 'carbon_races#team'
       get 'prizes/list', to: 'prizes#list'
       get 'prizes/winners', to: 'prizes#winners'
+      get 'offsets/list', to: 'offsets#list'
+      get 'offsets/summary', to: 'offsets#summary'
     end
   end
 

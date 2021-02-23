@@ -13,7 +13,14 @@ class Api::V1::PrizesController < ApplicationController
     def winners
         # TO DO: filter by time range and region
         winners = PrizeWinner.where.not(:email=>nil).order(created_at: :desc)
-        render json: winners.to_json(include: :prize)
+        if params.has_key?(:start_date)
+            winners = winners.where('created_at > ?', params[:start_date])
+        end
+        if params.has_key?(:end_date)
+            winners = winners.where('created_at < ?', params[:end_date])
+        end
+        serializable_response = ActiveModelSerializers::SerializableResource.new(winners, each_serializer: PrizeWinnerSerializer).to_json
+        render json: serializable_response
     end
 
     def list

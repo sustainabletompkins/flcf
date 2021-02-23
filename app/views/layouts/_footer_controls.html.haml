@@ -1,5 +1,28 @@
 
 #login-status{:value=>"guest"}
+#myModal.reveal-modal{"data-reveal" => ""}
+  %h2 OK, ready for checkout.
+  #user-info
+    %p Please provide your name and zipcode for our records
+    %input{:type=> "text", :id=>"name",:placeholder => "your name"}
+    %input{:type=> "text", :id=>"zipcode",:placeholder => "zipcode"}
+    #guest-msg
+    %button#stripe.button
+      %i.fi-shopping-cart
+      pay now
+  %a.close-reveal-modal ×
+
+#user-offsets.reveal-modal{"data-reveal" => ""}
+  %h3 Your account has been created
+  %p Ok, let's get back to offsetting your carbon use.
+  #offset-checkout
+#checkout-form
+  = form_tag charges_path, id: 'chargeForm' do
+    %script{:src => "https://checkout.stripe.com/checkout.js"}
+    = hidden_field_tag 'stripeToken'
+    = hidden_field_tag 'stripeEmail'
+    = hidden_field_tag 'stripeCharge'
+    = hidden_field_tag 'stripeSession'
 
 :javascript
   $('#stripe').on('click', function() {

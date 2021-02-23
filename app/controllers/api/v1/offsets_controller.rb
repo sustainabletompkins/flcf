@@ -26,4 +26,28 @@ class Api::V1::OffsetsController < ApplicationController
         render json: Offset.from_quick_entry(params[:offset_mode], params[:months])
     end
 
+    def summary
+        @offsets = Offset.where(:purchased => :true)
+        if params.has_key?(:start_date)
+            @offsets = @offsets.where('created_at > ?', params[:start_date])
+        end
+        if params.has_key?(:end_date)
+            @offsets = @offsets.where('created_at < ?', params[:end_date])
+        end
+        render json: {pounds: @offsets.sum(:pounds).round(0), co2: (@offsets.sum(:pounds)/20).round(0), dollars: @offsets.sum(:cost).round(2)}
+    end
+
+    def list 
+        @offsets = Offset.where(:purchased => :true)
+        if params.has_key?(:start_date)
+            @offsets = @offsets.where('created_at > ?', params[:start_date])
+        end
+        if params.has_key?(:end_date)
+            @offsets = @offsets.where('created_at < ?', params[:end_date])
+        end
+        @offsets = @offsets.order(created_at: :desc)
+        serializable_response = ActiveModelSerializers::SerializableResource.new(@offsets, each_serializer: OffsetSerializer).to_json
+        render json: serializable_response
+    end
+
 end
