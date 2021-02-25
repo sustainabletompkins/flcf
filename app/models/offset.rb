@@ -1,6 +1,9 @@
 class Offset < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :team, optional: true
+  belongs_to :individual, optional: true
+  
   validates_numericality_of :cost, :pounds
 
   COST_PER_POUND = 0.0125

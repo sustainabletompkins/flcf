@@ -12,6 +12,8 @@ class TeamsController < ApplicationController
         @team.update_attribute(:count, params[:count].to_i)
         @team.update_attribute(:members, 1)
         @team.increment!(:pounds, params[:pounds].to_i)
+        @offsets = Offset.where('id in (?)',params[:offset_ids].split(','))
+        @offsets.update_all(:team_id => @team.id)
         render 'team_created_after_offset'
       else
         @count = Team.all.count
@@ -39,6 +41,8 @@ class TeamsController < ApplicationController
     @team.increment!(:count, params[:count].to_i)
     @team.increment!(:members, 1)
     @team.increment!(:pounds, params[:pounds].to_i)
+    @offsets = Offset.where('id in (?)',params[:offset_ids].split(','))
+    @offsets.update_all(:team_id => @team.id)
     TeamMember.create(:email => params[:user_email], :offsets => params[:count].to_i, :team_id=>@team.id, :name=> params[:name])
     TeamMailer.send_thanks(params[:user_email], @team).deliver
     render 'team_joined_after_offset'
@@ -61,6 +65,7 @@ class TeamsController < ApplicationController
     @old_team.decrement!(:count, @offsets.count)
     @old_team.decrement!(:members, 1)
     @old_team.decrement!(:pounds, @offsets.sum(:pounds))
+    # change offsets
     tm = TeamMember.find_by_email(params[:offset_email])
     TeamMember.create(:email => params[:offset_email], :offsets => @offsets.count, :team_id=>@new_team.id, :name=> tm.name)
     #TeamMailer.send_thanks(params[:user_email], @team).deliver

@@ -89,6 +89,7 @@
       .large-12.columns#change-team{:style=>'display:none'}
         %h4 Change your team
         =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name', @team.id), id: 'select-new-team', prompt: 'Which team?'
+        
         #new-team-msg
       .large-12.columns
         %h4.team-msg Your offset of #{@offset_data[:pounds]} lbs has been added to the tally for Team '#{@team.name}'
@@ -134,6 +135,7 @@
               =f.hidden_field :pounds, :value => @offset_data[:pounds], :id=>'pounds'
               =hidden_field_tag :user_email, @offset_data[:email]
               =hidden_field_tag :count, @offset_data[:count], :id=>'count'
+              =hidden_field_tag :offset_ids, @offset_data[:ids], multiple: true
               -#=f.file_field :image, :class => 'file-upload'
               #form-msg
               %br
@@ -144,7 +146,7 @@
             %h4 Join a  Team
             %p Are others in your organization already playing?  Join them!
             =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
-
+            =hidden_field_tag :offset_ids, @offset_data[:ids], multiple: true
             #member-name
               %label Your Name (for public display)
               =text_field_tag :name, nil, :id=> 'team-member-name'
@@ -222,7 +224,7 @@
 
    $('#select-team').on('change', function() {
 
-      team_data =  {league_id: $(this).val(), pounds:$('#pounds').val(), user_email: $('#user_email').val(), count: $('#count').val()};
+      team_data =  {league_id: $(this).val(), pounds:$('#pounds').val(), user_email: $('#user_email').val(), count: $('#count').val(), offsets: $('#offset_ids').val()};
       $('#member-name').show();
 
     });
@@ -234,7 +236,7 @@
       }
       else {
         team_data.name = $('#team-member-name').val();
-
+        team_data.offset_ids = $('#offset_ids').val();
         $.post('#{join_teams_path}', team_data);
       }
 
