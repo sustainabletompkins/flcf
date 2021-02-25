@@ -45,8 +45,32 @@ namespace :init do
       region.update_attribute(:zipcodes, zips)
     end
     
-    
+  end
 
+  task :assign_content_to_regions => :environment do
+    # OFFSETS
+    regions = Region.all
+    Offset.where(:purchased=>true).each do |offset|
+      regions.each do |region|
+        if region.zipcodes.include? offset.zipcode.to_s
+          offset.update_attribute(:region, region)
+        end
+      end
+    end
+
+    # PRIZES, TEAMS, INDIVIDUALS, AWARDEES
+    Prize.all.each do |prize|
+      prize.update_attribute(:region_id, 1)
+    end
+    Team.all.each do |prize|
+      prize.update_attribute(:region_id, 1)
+    end
+    Individual.all.each do |prize|
+      prize.update_attribute(:region_id, 1)
+    end
+    Awardee.all.each do |prize|
+      prize.update_attribute(:region_id, 1)
+    end
   end
 
   task :set_stats => :environment do
