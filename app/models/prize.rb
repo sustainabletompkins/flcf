@@ -1,5 +1,7 @@
 class Prize < ActiveRecord::Base
 
+  belongs_to :region
+  
   has_many :prize_winners, dependent: :destroy
   has_attached_file :avatar, styles: {
     thumb: '100x100>',

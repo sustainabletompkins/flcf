@@ -29,6 +29,26 @@ namespace :init do
     end
   end
 
+  task :set_regions => :environment do
+
+    Region.create(:name=>'Finger Lakes East', :counties=>'Tompkins, Schuyler, Chemung, Steuben, Seneca', :zipcodes=> [])
+    Region.create(:name=>'Finger Lakes West', :counties=>'Yates, Ontario, Monroe, Livingston', :zipcodes=> [])
+    Region.create(:name=>'Central New York', :counties=>'Cayuga, Cortland, Onondaga, Madison', :zipcodes=> [])
+    Region.create(:name=>'Southern Tier', :counties=>'Tioga, Broome, Chenango, Delaware', :zipcodes=> [])
+
+    Region.all.each do |region|
+      zips = []
+      text=File.open("lib/assets/zipcodes/#{region.name}.txt").read
+      text.each_line do |line|
+        zips << line.strip
+      end
+      region.update_attribute(:zipcodes, zips)
+    end
+    
+    
+
+  end
+
   task :set_stats => :environment do
     #Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
     Stat.create(:pounds=>'1622300' , :dollars => '16223', :awardees => '18')

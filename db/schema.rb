@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_223209) do
+ActiveRecord::Schema.define(version: 2021_02_25_200858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.string "avatar_content_type", limit: 255
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_awardees_on_region_id"
   end
 
   create_table "identities", id: :serial, force: :cascade do |t|
@@ -43,6 +45,8 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.integer "pounds"
     t.integer "count"
     t.string "email", limit: 255
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_individuals_on_region_id"
   end
 
   create_table "offsets", id: :serial, force: :cascade do |t|
@@ -61,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.string "email", limit: 255
     t.integer "team_id", default: 0
     t.integer "individual_id", default: 0
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_offsets_on_region_id"
   end
 
   create_table "offsetters", id: :serial, force: :cascade do |t|
@@ -101,6 +107,14 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.string "avatar_content_type", limit: 255
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_prizes_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.string "counties"
+    t.text "zipcodes", default: [], array: true
   end
 
   create_table "simple_captcha_data", id: :serial, force: :cascade do |t|
@@ -136,6 +150,8 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.integer "pounds", default: 0
     t.integer "count"
     t.float "participation_rate"
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_teams_on_region_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -162,4 +178,9 @@ ActiveRecord::Schema.define(version: 2020_12_24_223209) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "awardees", "regions"
+  add_foreign_key "individuals", "regions"
+  add_foreign_key "offsets", "regions"
+  add_foreign_key "prizes", "regions"
+  add_foreign_key "teams", "regions"
 end
