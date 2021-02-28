@@ -34,11 +34,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :teams, :only => [:create, :show] do
+  resources :teams, :only => [:update, :index, :show, :create] do
     member do
       post 'join'
       post 'change'
-      get 'members'
+      get 'detail'
     end
   end
 
@@ -50,11 +50,10 @@ Rails.application.routes.draw do
 
   resources :charges
 
-  resources :prizes, :only => [:create, :update, :destroy]
+  resources :prizes, :only => [:create, :update, :destroy, :index]
   resources :prize_winners, :only => [:destroy]
   resources :offsetters, :only => [:create, :update, :show, :destroy]
   resources :awardees, :only => [:create, :update, :show, :destroy]
-  resources :teams, :only => [:update]
   resources :pages,  :only => [:create, :update, :destroy]
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
@@ -64,7 +63,6 @@ Rails.application.routes.draw do
   get 'pages/:page_name' => 'pages#index'
   post 'offsets/add_name_and_zip/' => 'offsets#add_name_and_zip', :as => :add_user_data
   post '/save-prize' => 'prizes#save', :as => :prize_won
-  get '/teams/:id', to: 'teams#show'
   get '/awardees/video/:id' => 'awardees#show_video', :as => :awardee_video
   get '/calc-admin' => 'pages#admin', :as => :admin_path
   get 'log-spin' => 'prizes#log', :as => :log_spin

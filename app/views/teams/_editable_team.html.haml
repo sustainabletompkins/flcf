@@ -1,5 +1,9 @@
 .row.team[team]
   .large-8.columns
     =best_in_place team, :name
-  .large-4.columns
+  .large-3.columns
     =best_in_place team, :pounds
+  .large-1.columns.show-details{"data-team" => team.id, :style=>'cursor:pointer;'}
+    >
+  .large-12.columns.details{:style=>'padding:5px; display:none;'}
+    =render :partial => 'teams/team_details', :locals => {team: team}

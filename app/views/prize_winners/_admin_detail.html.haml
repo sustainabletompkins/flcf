@@ -1,0 +1,8 @@
+.row.winner[prize_winner]
+  .large-12.columns
+    %span=prize_winner.name
+    %span won a #{prize_winner.prize.description} from
+    %span=prize_winner.prize.title
+    %span on #{prize_winner.updated_at.strftime('%m/%d')}
+    %span=link_to prize_winner.email, "mailto:#{prize_winner.email}"
+    %span{:style=>"margin-left: 8px;background:light-gray;padding:2px;font:bold;"}=link_to 'X', prize_winner,  method: :delete, remote: :true, data: { confirm: 'Are you sure?' }

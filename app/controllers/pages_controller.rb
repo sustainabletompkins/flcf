@@ -84,7 +84,7 @@ class PagesController < ApplicationController
   def admin
     puts 'skjdkladlas'
     @prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :asc).last(15).reverse
-    @prize_list = Prize.all
+    @prize_list = Prize.where(:region_id=>1)
     @offsetters = Offsetter.all
     @teams = Team.all
     @awardees = Awardee.all

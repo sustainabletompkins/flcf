@@ -1,0 +1,38 @@
+.large-6.columns
+    %h3 Prizes
+.large-6.columns{:style=>"text-align: right;"}
+    %h5 Total spins since 12/5: #{@stat.wheel_spins}
+.large-12.columns
+    .row
+        .large-5.columns
+            %h5 Add Prize
+
+            = form_for(:prize, url: prizes_path, multipart: true, remote: true,:html => {:id => "add-prize-form"}) do |f|
+                %label prize title
+                =f.text_field :title
+                %label prize description
+                =f.text_area :description
+                %label region
+                =f.select :region, options_from_collection_for_select(Region.all, 'id', 'name')
+                %label how many?
+                =f.number_field :count, :value=>'1', :min=>1
+                =f.file_field :avatar
+                =show_simple_captcha(:label=>'Enter letters...')
+                %hr
+                =f.submit 'Add prize', :class=>'button', :id=>'add-prize'
+                .fail-notice
+        .large-7.column
+            .large-6.columns
+                %h5 Prize List
+            .large-6.columns    
+                =select_tag :region, options_from_collection_for_select(Region.all.order(id: :asc), 'id', 'name')
+            #prize-list
+                =render :collection => @prize_list, :partial => 'prizes/editable_prize', :as => :prize
+        .large-12.columns
+            %h4 Recent Prizes
+            =render :partial => 'prize_winners/admin_detail', :collection => @prizes, :as => :prize_winner
+
+:javascript
+    $('#region').on('change', function() {
+        $.get("prizes", {region: $(this).val()});
+    })

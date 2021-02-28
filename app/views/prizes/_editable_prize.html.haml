@@ -1,12 +1,13 @@
 .row.prize[prize]{:style=>'margin-bottom: 12px;'}
-  .large-4.medium-5.small-5.columns
+  .large-4.medium-5.small-5.columns{:style=>'padding-top: 10px;'}
     -if prize.avatar_file_name.present?
       =image_tag("#{prize.avatar.url(:square).gsub('http','https')}")
     -else
       =image_tag("#{prize.title.gsub(' ', '-')}.png")
-  .large-8.medium-7.small-7.columns{:style=>'padding-top: 25px;'}
+  .large-7.medium-7.small-7.columns
     %label=best_in_place prize, :description
     %span=best_in_place prize, :title
     %div=best_in_place prize, :count
-  .large-12.columns
-    =link_to 'delete this', prize,  method: :delete, remote: :true, data: { confirm: 'Are you sure?' }
+    %div=best_in_place prize, :region_id, :as => :select, :collection => Region.all.map { |i| [i.id, i.name] }
+  .large-1.columns
+    =link_to 'X', prize,  method: :delete, remote: :true, data: { confirm: 'Are you sure?' }

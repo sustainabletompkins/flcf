@@ -41,9 +41,18 @@ class PrizesController < ApplicationController
     s.increment!(:wheel_spins)
   end
 
+  def index
+    if params.has_key?(:region)
+      @prizes = Prize.where(:region_id=>params[:region])
+    else
+      @prizes = Prize.all
+    end
+    render 'list'
+  end
+
 
   private
   def prize_params
-    params.require(:prize).permit(:title, :description, :count, :avatar,:expiration_date,:captcha, :captcha_key)
+    params.require(:prize).permit(:title, :description, :count, :region_id, :avatar,:expiration_date,:captcha, :captcha_key)
   end
 end

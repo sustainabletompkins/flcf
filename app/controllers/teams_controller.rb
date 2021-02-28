@@ -78,6 +78,19 @@ class TeamsController < ApplicationController
     @leaders = Team.all.order(pounds: :desc)
   end
 
+  def index
+    if params.has_key?(:region)
+      @teams = Team.where(:region_id=>params[:region]).order(pounds: :desc)
+    else
+      @teams = Team.all.order(pounds: :desc)
+    end
+    render 'list'
+  end
+
+  def detail
+    @team = Team.find(params[:id])
+  end
+
   private
   def team_params
     params.require(:team).permit(:name, :pounds)

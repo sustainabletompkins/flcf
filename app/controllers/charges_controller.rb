@@ -1,6 +1,20 @@
 class ChargesController < ApplicationController
 
   def new
+    @session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: [
+        price_data: {
+          product: 'Carbon Offset',
+          unit_amount: 1500,
+          currency: 'usd',
+        },
+        quantity: 1,
+      ],
+      mode: 'payment',
+      success_url: 'https://localhost:3000/charges/create',
+      cancel_url: 'https://example.com/cancel',
+    })
   end
 
   def create

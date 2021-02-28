@@ -12,22 +12,29 @@
   %hr
   .large-12.columns
     %h4 Add an offset
+
     =form_for :offset, :url=>manual_create_offsets_path, :html=>{:id=>'create-offset-form'},:remote=>:true do |f|
+      %div{:style=>"margin: 0 10px 0 10px;"}
+        %label assign to carbon races?
+        =radio_button_tag :race, 'team'
+        =label_tag(:race_team, "sign up on team")
+        =radio_button_tag :race, 'individual'
+        =label_tag(:race_individual, "sign up as individual")
+        .team-info{:style=>'display:none'}
+          =f.text_field :new_team_name, :placeholder => 'new team name'
+          #team-selector
+            =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "Select existing team", :id=>'team-select'
+            #team-member-info{:style=>'display:none'}
+              =select_tag :team_member,'',:include_blank => "new player", :id=>'team-member-select'
+
+        .player-info{:style=>'display:none'}
+          ok, we will credit to individual player acct
       =f.text_field :title, :placeholder => 'offset title'
       =f.text_field :name, :placeholder => 'offsetter name'
       =f.text_field :email, :placeholder => 'offsetter email'
       =f.text_field :zipcode, :placeholder => 'zip code'
       =f.number_field :cost, :placeholder => 'cost in USD'
-      %label assign to carbon races?
-      =radio_button_tag :race, 'team'
-      =label_tag(:race_team, "sign up on team")
-      =radio_button_tag :race, 'individual'
-      =label_tag(:race_individual, "sign up as individual")
-      .team-info{:style=>'display:none'}
-        =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "No team", :id=>'team-select'
-      .player-info{:style=>'display:none'}
-        =text_field_tag :user_email,'', :placeholder => 'user email'
-        =text_field_tag :member_name, '',:placeholder => 'team member name'
+
       %br
       =show_simple_captcha(:label=>'Enter letters...')
       =f.submit 'submit', :class=>'button'
@@ -36,7 +43,7 @@
   %hr
   .large-12.columns
     #add-prize-section
-      %h4 Add a prizess
+      %h4 Add a prizes
       %h5 Total spins since 12/5: #{@stat.wheel_spins}
       .row
         .large-5.columns
@@ -47,7 +54,7 @@
             %label prize description
             =f.text_field :description
             %label region
-            =f.select :region, :options_from_collection_for_select(Region.all, 'id', 'name')
+            =f.select :region_id, options_from_collection_for_select(Region.all, 'id', 'name')
             %label how many?
             =f.number_field :count, :value=>'1'
             =f.file_field :avatar
@@ -112,14 +119,40 @@
 
 
 :javascript
+  var members = [];
    $(document).ready(function() {
     /* Activating Best In Place */
-    console.log('sdfsdfsdf');
     jQuery(".best_in_place").best_in_place();
   });
   $('#team-select').on('change', function() {
+    $('#team-member-info').show();
+    $select = $('#team-member-select');
+
+    $.get("#{members_teams_path}", {id: $(this).val()}, function(data) {
+      members = [];
+      $select.find('option').remove();
+      $select.append('<option value="0">select existing player or leave blank</option>');
+      $.each(data,function(key, value)
+      {
+        members[value["id"]] = {name:value["name"], email:value["email"]}
+        $select.append('<option value=' + value["id"] + '>' + value["name"] + '</option>');
+      });
+    })
     $('.player-info').show();
+    $('.team-member-info').show();
   });
+
+  $('#team-member-select').on('change',function() {
+    if($(this).val() == 0) {
+      $('.player-info').show();
+
+    }
+    else {
+      $('.player-info').hide();
+      $("#offset_name").val(members[$(this).val()].name);
+      $("#offset_email").val(members[$(this).val()].email);
+    }
+  })
 
   $('#add-prize').on('click', function() {
     //$('#add-prize-section').html('<h3>Prize upload in progress...</h3>');
@@ -127,7 +160,7 @@
 
   $('#race_team').on('change', function() {
     if($('#race_team').is(':checked')) {
-      $('.player-info').show();
+      $('.player-info').hide();
       $('.team-info').show();
     }
     else {
@@ -158,6 +191,15 @@
     $('#save-notice').empty();
 
   });
+
+  $('#offset_new_team_name').keyup(function() {
+    if($('#offset_new_team_name').val().length > 1) {
+      $('#team-selector').hide();
+    }
+    else {
+      $('#team-selector').show();
+    }
+  })
 
   $('#new-page').on('click', function() {
     $('#page-editor').html("#{j render :partial=>'pages/new'}");

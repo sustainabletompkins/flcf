@@ -1,0 +1,20 @@
+%h3 Carbon Races
+=select_tag :region, options_from_collection_for_select(Region.all.order(id: :asc), 'id', 'name')
+.large-12.columns
+    %h4 Carbon Races
+    .row
+        .large-6.columns
+            %h5 Individuals
+            =render :collection => @individuals, :partial => 'individuals/editable_player', :as => :individual
+        .large-6.columns
+            %h5 Teams
+            #team-list
+                =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
+
+:javascript
+    $('#region').on('change', function() {
+        $.get("teams", {region: $(this).val()});
+    }) 
+    $('.show-details').on('click', function(e) {
+        $("#team_"+e.target.getAttribute('data-team')+" .details").toggle();  
+    })            

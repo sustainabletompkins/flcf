@@ -1,0 +1,51 @@
+%h3 Offsets
+.large-12.columns
+    %h4 Add an offset
+    =form_for :offset, :url=>manual_create_offsets_path, :html=>{:id=>'create-offset-form'},:remote=>:true do |f|
+        =f.text_field :title, :placeholder => 'offset title'
+        =f.text_field :name, :placeholder => 'offsetter name'
+        =f.text_field :email, :placeholder => 'offsetter email'
+        =f.text_field :zipcode, :placeholder => 'zip code'
+        =f.number_field :cost, :placeholder => 'cost in USD'
+        %label assign to carbon races?
+        =radio_button_tag :race, 'team'
+        =label_tag(:race_team, "sign up on team")
+        =radio_button_tag :race, 'individual'
+        =label_tag(:race_individual, "sign up as individual")
+        .team-info{:style=>'display:none'}
+            =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'),:include_blank => "No team", :id=>'team-select'
+        .player-info{:style=>'display:none'}
+            =text_field_tag :user_email,'', :placeholder => 'user email'
+            =text_field_tag :member_name, '',:placeholder => 'team member name'
+        %br
+        =show_simple_captcha(:label=>'Enter letters...')
+        =f.submit 'submit', :class=>'button'
+
+        #offset-msg
+
+:javascript
+    $('#team-select').on('change', function() {
+        $('.player-info').show();
+    });
+
+    $('#race_team').on('change', function() {
+        if($('#race_team').is(':checked')) {
+            $('.player-info').show();
+            $('.team-info').show();
+        }
+        else {
+            $('.player-info').hide();
+            $('.team-info').hide();
+        }
+
+    });
+    $('#race_individual').on('change', function() {
+        if($('#race_individual').is(':checked')) {
+            $('.player-info').show();
+            $('.team-info').hide();
+        }
+        else {
+            $('.player-info').hide();
+            $('.team-info').hide();
+        }
+    });
