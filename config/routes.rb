@@ -71,6 +71,9 @@ Rails.application.routes.draw do
   get '/error', to: 'pages#card_error'
   get '/calculator', to: 'pages#calculator'
   get '/charges/success', to: 'charges#success'
+  get '/charges/subscribe', to: 'charges#subscribe'
+  get '/checkout-session', to: 'charges#get_session'
+  post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
 
 

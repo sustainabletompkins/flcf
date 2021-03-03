@@ -8,25 +8,52 @@ class ChargesController < ApplicationController
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: [
-        price_data: {
-          product: 'prod_J2jmxsA5QQ6O8u',
-          unit_amount: 1500,
-          currency: 'usd',
+        {        
+
+          price: 'price_1IQwLIL1SWXeEQ2faV393hoU',
+          quantity: 1,
         },
-        quantity: 1,
+        {        
+
+          price_data: {
+            product: 'prod_J2jmxsA5QQ6O8u',
+            unit_amount: 3250,
+            currency: 'usd',
+          },
+          quantity: 1,
+        },
+
       ],
-      mode: 'payment',
+      mode: 'subscription',
       success_url: 'http://localhost:3000/charges/success?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3000/charges/failure',
     })
-    puts @session.inspect
   end
 
-  def success
-    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    @customer = Stripe::Customer.retrieve(@session.customer)
-    puts @session.inspect
-    puts @customer.inspect
+  def manage
+    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+    # Typically this is stored alongside the authenticated user in your database.
+    checkout_session_id = params['sessionId']
+    checkout_session = Stripe::Checkout::Session.retrieve(checkout_session_id)
+
+    # This is the URL to which users will be redirected after they are done
+    # managing their billing.
+    return_url = ENV['DOMAIN']
+
+    session = Stripe::BillingPortal::Session.create({
+      customer: checkout_session['customer'],
+      return_url: return_url
+    })
+
+    render json: session
+  end
+
+  def get_session
+    session_id = params[:sessionId]
+
+    session = Stripe::Checkout::Session.retrieve(session_id)
+    puts session
+    render json: session
   end
 
   def create
