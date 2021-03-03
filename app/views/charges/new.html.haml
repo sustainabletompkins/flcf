@@ -3,7 +3,7 @@
 
 =form_with url: '/subscribe', method: :get do |form|
   =form.select :mode, options_for_select([ "", "home energy", "car commute", "air travel" ], "")
-  =form.select :time_period, options_for_select([ "", "home energy", "car commute", "air travel" ], "")
+  =form.select :time_period, options_for_select([ "", "month", "quarter", "year" ], "")
   =form.select :frequency, options_for_select([ "one-time", "recurring" ], "one-time")
   =form.submit 'add to cart'
 

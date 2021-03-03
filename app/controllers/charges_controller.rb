@@ -5,30 +5,23 @@ class ChargesController < ApplicationController
   end
 
   def new
+    products = []
+    product_info = {"home_energy" => {"one_time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IQwLIL1SWXeEQ2faV393hoU', "year" => 'price_1IQwLIL1SWXeEQ2fyzMxB5YQ'}, "car_commute" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
+    payment_mode = 'payment'
+    params[:products].each do |p|
+      products << {price: product_info[p["type"]][p["period"]], quantity: 1}
+      payment_mode = 'subscription' if ['month','quarter','year'].include?(p["period"])
+    end
+    puts payment_mode.upcase
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
-      line_items: [
-        {        
-
-          price: 'price_1IQwLIL1SWXeEQ2faV393hoU',
-          quantity: 1,
-        },
-        {        
-
-          price_data: {
-            product: 'prod_J2jmxsA5QQ6O8u',
-            unit_amount: 3250,
-            currency: 'usd',
-          },
-          quantity: 1,
-        },
-
-      ],
-      mode: 'subscription',
+      line_items: products,
+      mode: payment_mode,
       success_url: 'http://localhost:3000/charges/success?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3000/charges/failure',
     })
   end
+  
 
   def manage
     # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
