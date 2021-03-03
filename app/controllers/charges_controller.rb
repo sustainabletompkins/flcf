@@ -1,20 +1,32 @@
 class ChargesController < ApplicationController
 
+  def stripe_test
+
+  end
+
   def new
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: [
         price_data: {
-          product: 'Carbon Offset',
+          product: 'prod_J2jmxsA5QQ6O8u',
           unit_amount: 1500,
           currency: 'usd',
         },
         quantity: 1,
       ],
       mode: 'payment',
-      success_url: 'https://localhost:3000/charges/create',
-      cancel_url: 'https://example.com/cancel',
+      success_url: 'http://localhost:3000/charges/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3000/charges/failure',
     })
+    puts @session.inspect
+  end
+
+  def success
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @customer = Stripe::Customer.retrieve(@session.customer)
+    puts @session.inspect
+    puts @customer.inspect
   end
 
   def create
@@ -84,7 +96,7 @@ class ChargesController < ApplicationController
         :description => 'Carbon offset',
         :currency    => 'usd'
       )
-      
+      puts charge.inspect
       #send offset info to little green light
       # put this above the offset mailer, in case that runs into a problem
       # only do if live transaction

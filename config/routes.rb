@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :charges
+  resources :charges, :only => [:create, :new]
 
   resources :prizes, :only => [:create, :update, :destroy, :index]
   resources :prize_winners, :only => [:destroy]
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
 
   get '/error', to: 'pages#card_error'
   get '/calculator', to: 'pages#calculator'
-
+  get '/charges/success', to: 'charges#success'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
 
 

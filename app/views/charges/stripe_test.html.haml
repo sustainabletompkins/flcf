@@ -1,0 +1,9 @@
+.row
+    .large-12.columns
+        %button#test test
+
+:javascript 
+
+    $('#test').on('click', function() {
+        $.post('/charges/test', {email: 'alex@test.com'})
+    })
