@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_200858) do
+ActiveRecord::Schema.define(version: 2021_03_03_171720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 2021_02_25_200858) do
     t.datetime "avatar_updated_at"
     t.bigint "region_id"
     t.index ["region_id"], name: "index_awardees_on_region_id"
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.string "title"
+    t.float "cost"
+    t.float "pounds"
+    t.bigint "user_id"
+    t.integer "session_id"
+    t.string "checkout_session_id"
+    t.string "price_id"
+    t.string "schedule"
+    t.boolean "purchased", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
 
   create_table "identities", id: :serial, force: :cascade do |t|
@@ -179,6 +194,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_200858) do
   end
 
   add_foreign_key "awardees", "regions"
+  add_foreign_key "cart_items", "users"
   add_foreign_key "individuals", "regions"
   add_foreign_key "offsets", "regions"
   add_foreign_key "prizes", "regions"

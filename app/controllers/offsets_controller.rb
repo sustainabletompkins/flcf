@@ -6,14 +6,14 @@ class OffsetsController < ApplicationController
     else user_id = 0
     end
 
-    @offset = Offset.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id],:quantity=>params[:quantity],:units=>params[:units])
+    @cart_items = CartItem.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id])
 
     if @offset.save
 
       if user_signed_in?
         @offsets = current_user.offsets.where(:purchased=>:false)
       else
-        @offsets = Offset.where(:session_id => params[:session_id],:purchased=>:false)
+        @offsets = CartItem.where(:session_id => params[:session_id],:purchased=>:false)
       end
 
       respond_to do |format|
@@ -117,15 +117,6 @@ class OffsetsController < ApplicationController
       @offsets = current_user.offsets.where(:purchased=>:false)
       respond_to do |format|
         format.js {render 'offset-saved'}
-      end
-    end
-  end
-
-  def populate_cart
-    @user_offsets = Offset.where(:session_id=>params[:session_id], :purchased=>:false)
-    if @user_offsets.present?
-      respond_to do |format|
-        format.js {render 'populate_cart'}
       end
     end
   end

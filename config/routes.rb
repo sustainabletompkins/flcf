@@ -28,7 +28,6 @@ Rails.application.routes.draw do
       get 'process_purchased'
       get 'filter'
       post 'duplicate'
-      post 'populate_cart'
       post 'add_name_and_zip'
       post 'manual_create'
     end
@@ -39,6 +38,12 @@ Rails.application.routes.draw do
       post 'join'
       post 'change'
       get 'detail'
+    end
+  end
+  
+  resources :cart_items, :only => [:create, :destroy] do
+    collection do
+      post 'populate_cart'
     end
   end
 

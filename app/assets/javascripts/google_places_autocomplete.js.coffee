@@ -334,5 +334,5 @@ $ ->
     $('#checkout').css("display","inline")
     $('#total-cost').show()
     $('#offset-buttons').css('right','45px')
-    $.post "/offsets", data
+    $.post "/cart_items", data
     return

@@ -53,7 +53,7 @@ $(document).on('ready page:load', function(){
 	var data = {
 		session_id: $.cookie("session_id")
 	}
-	$.post("/offsets/populate_cart", data);
+	$.post("/cart_items/populate_cart", data);
 
 
 })
