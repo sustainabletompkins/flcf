@@ -1,5 +1,5 @@
 .row.topbar
-  .large-12.columns{:style => "padding:0px;position:relative;"}
+  .large-12.columns{:style => "padding:0px;position:relative;height:450px;"}
     #calculator-buttons
       #home
         =link_to root_path do
@@ -125,7 +125,7 @@
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #quick-offset.offset-form
           %p choose a quick offset
-          #home-month.quick.button{:value=>1240, :title=>"Home Energy, 1 mo", :offset_type=>'home_energy', :offset_interval=>'month'} Avg NYS Home Energy, 1mo
+          #home-month.quick.button{:value=>1240, :title=>"Home Energy, 1 mo"} Avg NY Home Energy, 1mo
           #home-year.quick.button{:value=>14962, :title=>"Home Energy, 1 yr"} Avg NY Home Energy, 1yr
           #commute-month.quick.button{:value=>722, :title=>"Car Commute, 1 mo"} Avg US Car Commute, 1mo
           #commute-year.quick.button{:value=>8660, :title=>"Car Commute, 1 yr"} Avg US Car Commute, 1yr

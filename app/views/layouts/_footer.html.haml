@@ -1,4 +1,4 @@
-
+%script{:src => "https://js.stripe.com/v3/"}
 
 %footer.row.with-border{:style => "background-color: #006893; padding:5px; color: #fff;text-align:center;"}
 
@@ -159,6 +159,27 @@
   $('#total-cost').on('click', function() {
     $("#cart").fadeIn("slow");
     $(".offset-form").fadeOut("slow");
+    alert('yoyp')
+    $.get('/init-checkout-session', {session: $.cookie('session_id')}, function(data) {
+        alert(data.id);
+        var stripe = Stripe("#{ENV['PUBLISHABLE_KEY']}");
+
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function() {
+          stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as argument here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+            sessionId: data.id
+          }).then(function (result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+          });
+        });
+    })
+
   });
   var total_cost = 0;
   var cost = 0;

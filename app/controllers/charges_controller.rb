@@ -21,6 +21,36 @@ class ChargesController < ApplicationController
       cancel_url: 'http://localhost:3000/charges/failure',
     })
   end
+
+  def init_checkout
+    products = []
+    product_info = {"home_energy" => {"one_time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IQwLIL1SWXeEQ2faV393hoU', "year" => 'price_1IQwLIL1SWXeEQ2fyzMxB5YQ'}, "car_commute" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
+    payment_mode = 'payment'
+    CartItem.where(:session_id=>params[:session]).each do |p|
+      if p["offset_type"].nil?
+        products << {    
+          price_data: {
+            product: 'prod_J2jmxsA5QQ6O8u',
+            unit_amount: (p["cost"]*100).to_i,
+            currency: 'usd',
+          },
+          quantity: 1
+        }
+      else
+        products << {price: product_info[p["offset_type"]][p["offset_interval"]], quantity: 1}
+        payment_mode = 'subscription' if ['month','quarter','year'].include?(p["offset_interval"])
+      end
+
+    end
+    @session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: products,
+      mode: payment_mode,
+      success_url: 'http://localhost:3000/charges/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3000/charges/failure',
+    })
+    render json: @session
+  end
   
 
   def manage

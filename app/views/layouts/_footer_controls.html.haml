@@ -1,141 +1,69 @@
-
-#login-status{:value=>"guest"}
-#myModal.reveal-modal{"data-reveal" => ""}
-  %h2 OK, ready for checkout.
-  #user-info
-    %p Please provide your name and zipcode for our records
-    %input{:type=> "text", :id=>"name",:placeholder => "your name"}
-    %input{:type=> "text", :id=>"zipcode",:placeholder => "zipcode"}
-    #guest-msg
-    %button#stripe.button
-      %i.fi-shopping-cart
-      pay now
-  %a.close-reveal-modal ×
-
-#user-offsets.reveal-modal{"data-reveal" => ""}
-  %h3 Your account has been created
-  %p Ok, let's get back to offsetting your carbon use.
-  #offset-checkout
-#checkout-form
-  = form_tag charges_path, id: 'chargeForm' do
-    %script{:src => "https://checkout.stripe.com/checkout.js"}
-    = hidden_field_tag 'stripeToken'
-    = hidden_field_tag 'stripeEmail'
-    = hidden_field_tag 'stripeCharge'
-    = hidden_field_tag 'stripeSession'
+%script{:src => "https://js.stripe.com/v3/"}
 
 :javascript
-  $('#stripe').on('click', function() {
-    if(!$('#name').val() || !$('#zipcode').val()) {
-      $('#guest-msg').html('Please provide a name and zipcode');
-    }
-    else {
-      var data = {
-        name: $('#name').val(),
-        zipcode: $('#zipcode').val(),
-        sessioid: $.cookie('session_id')
-      }
-      $('#myModal').html("#{j render :partial=>'shared/checkout_message'}");
-      checkoutUser();
-      $.post("#{add_user_data_path}", data, function() {
 
-      });
-    }
-  });
-
-
-
-:javascript
-  var calcDiv;
-
-
-  $('.donate-button').on('click', function() {
-    $('#donate-form').show();
-    $('#checkout-donate').hide();
-  });
-  $('#donate').on('click', function() {
-    if(!$('#donation-amount').val() > 0) {
-      $('#donate-msg').html('Please provide a donation amount.');
-    }
-    else {
-      var data = {
-        name: $('#donation-name').val(),
-        zipcode: $('#donation-zipcode').val(),
-        cost: $('#donation-amount').val(),
-        session_id: $.cookie('session_id')
-      }
-      $.post('#{save_donation_path}',data);
-    }
-  });
-  $('#checkout-donate').on('click', function() {
-
-    total_cost=parseInt($('#donation-amount').val());
-    cost = total_cost*100;
-    handler.open({
-      name: 'Finger Lakes Climate Fund',
-      description: 'Carbon Offset ($'+total_cost+')',
-      amount: cost,
-      shippingAddress: false
-    });
-
-  });
-
-  $('#try-calc').on('click',function() {
-    $('#calc').foundation("reveal","open");
-  });
-  $('.carbon-race').on('click', function() {
-    $('.arrow_box').show();
-  });
-  $('.calc-button').on("click", function() {
-
-    $('#calc-div').empty();
-    calcDiv = document.createElement('div');
-    $('#calc-div').append("#{j render :partial => 'layouts/calculator'}");
-    $(this).append(calcDiv);
-
-  });
-  $('.show-login').on("click", function() {
-    $("#myModal").html("#{j render :partial => 'devise/sessions/login'}")
-  });
-  $('#login').on("click", function() {
-    $("#myModal").html("#{j render :partial => 'devise/sessions/login'}");
-    $("#myModal").foundation('reveal','open');
-  });
-  $('#menu').on("click", function() {
-    $("#mobile-menu").removeClass('show-for-small-only');
-    $("#mobile-menu").toggle();
-
-  });
-
-  $('#total-cost').on('click', function() {
+    $('#total-cost').on('click', function() {
     $("#cart").fadeIn("slow");
     $(".offset-form").fadeOut("slow");
-  });
-  var total_cost = 0;
-  var cost = 0;
-  var key = '#{j Rails.configuration.stripe[:publishable_key]}';
-  var handler = StripeCheckout.configure({
-    key: key,
-    token: function(token, args) {
-          document.getElementById("stripeToken").value = token.id;
-          document.getElementById("stripeEmail").value = token.email;
-          document.getElementById("stripeCharge").value = cost;
-          document.getElementById("stripeSession").value = $.cookie('session_id');
-          document.getElementById("chargeForm").submit();
+    $.get('/init-checkout-session', {session: $.cookie('session_id')}, function(data) {
+        var stripe = Stripe("#{ENV['PUBLISHABLE_KEY']}");
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function() {
+          stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as argument here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+            sessionId: data.id
+          }).then(function (result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+          });
+        });
+      })
+    });
+
+    // handling donations 
+
+    $('.donate-button').on('click', function() {
+      $('#donate-form').show();
+      $('#checkout-donate').hide();
+    });
+
+    $('#donate').on('click', function() {
+      if(!$('#donation-amount').val() > 0) {
+        $('#donate-msg').html('Please provide a donation amount.');
+      }
+      else {
+        var data = {
+          name: $('#donation-name').val(),
+          zipcode: $('#donation-zipcode').val(),
+          cost: $('#donation-amount').val(),
+          session_id: $.cookie('session_id')
         }
+        $.post('#{save_donation_path}',data);
+      }
     });
-  function checkoutUser() {
-    total_cost=0;
-    cost=0;
-    $('#cart .cost').each(function() {
-      total_cost += parseFloat($(this).text());
+
+    $('#checkout-donate').on('click', function() {
+
+      total_cost=parseInt($('#donation-amount').val());
+      cost = total_cost*100;
+      
+      // add item to cart
+
     });
-    cost = parseInt(total_cost*100);
-    handler.open({
-      name: 'Finger Lakes Climate Fund',
-      description: 'Carbon Offset ($'+total_cost+')',
-      amount: cost,
-      shippingAddress: false
+
+    $('#login').on("click", function() {
+      $("#myModal").html("#{j render :partial => 'devise/sessions/login'}");
+      $("#myModal").foundation('reveal','open');
     });
-  };
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+    // for mobile menu
+
+    $('#menu').on("click", function() {
+      $("#mobile-menu").removeClass('show-for-small-only');
+      $("#mobile-menu").toggle();
+
+    });

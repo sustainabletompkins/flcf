@@ -28,7 +28,9 @@ $yellow:#fcaf17;
 body,h1,h2,h3,h4,h5, button, .button, input {
   font-family: 'Ropa Sans', sans-serif;
 }
-
+.row {
+  max-width: 90%;
+}
 h3,h4,h5 {
   color: #006893;
 }
@@ -794,6 +796,11 @@ a.more:hover {
     display:block;
   }
 
+}
+
+.row.cart_item {
+  margin-bottom: 10px;
+  color: #bf2e1a;
 }
 
 

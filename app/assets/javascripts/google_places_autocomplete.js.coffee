@@ -213,12 +213,15 @@ $ ->
     offset_weight = parseInt($(this).attr("value"))
     offset_cost = offset_weight * cost_per_pound
     offset_title = $(this).attr("title")
+    alert('hey')
     data =
       pounds: offset_weight
       cost: offset_cost
       title: offset_title
       session_id: $.cookie('session_id')
-
+      offset_type: $(this).attr("offset_type")
+      offset_interval: $(this).attr("offset_interval")
+    console.log(data)
     saveOffset data
     return
 

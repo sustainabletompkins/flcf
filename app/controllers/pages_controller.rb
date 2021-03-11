@@ -3,24 +3,7 @@ class PagesController < ApplicationController
   http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list, :offset_log]
 
   def home
-    if user_signed_in?
-      @saved_offsets = current_user.offsets.where(:purchased=>:true)
-    end
-    @recent_offsets = Offset.where(:purchased=>:true).order(id: :desc).limit(5)
-
-    @recent_prizes = PrizeWinner.where.not(:email=>nil).order(created_at: :desc).first(7)
-    @prizes = Prize.all.order(count: :asc)
-    @stats = Stat.first
-    @leaders = Team.where('pounds > 0').order(pounds: :desc).limit(3)
-    @individual_leaders = Individual.where('pounds > 0').where.not(:name=>"Anonymous").order(pounds: :desc).limit(3)
-
-    @cracks_money = Offset.where(:purchased=>:true).where('created_at > ?',DateTime.parse('2020-01-01T12:00:00-06:00')).sum(:cost)
-    @cracks_pct = (@cracks_money/125).round(1)
-
-    @offsetter = Offsetter.order(id: :desc).limit(6).sample
-    @awardee = Awardee.order(id: :desc).limit(6).sample
-    @awardee_count = Awardee.all.count+1
-
+    render 'spa/app'
   end
 
   def index

@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   get '/charges/success', to: 'charges#success'
   get '/charges/subscribe', to: 'charges#subscribe'
   get '/checkout-session', to: 'charges#get_session'
+  get '/init-checkout-session', to: 'charges#init_checkout'
   post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
 

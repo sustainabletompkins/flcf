@@ -1,0 +1,32 @@
+  .row#prize-wheel
+    .large-12.columns
+      %hr
+      %h3 Seal The Cracks Prize Wheel
+      %p Spin the wheel after each offset and you could win fun prizes from local businesses!
+    .large-6.medium-6.columns
+      #spin-button.btn
+        Spin
+        %br
+        Wheel
+      #wheel
+        .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
+          -@prizes.each do |p|
+            -@count=0
+            -p.count.times do
+              =render :partial => 'prizes/spot', :locals => {prize:p}
+              -@count = @count + 1
+          -@empties.times do
+            =image_tag('footprint.jpg', :'data-name'=>'Nothing')
+            -@count = @count + 1
+          :javascript
+            var total_spots = "#{@count}";
+
+    .large-6.medium-6.columns
+      #award{:style=>'display:none'}
+        you have won an award
+      #email-address{:style=>'display:none'}
+        To claim your prize, enter your email address
+        %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
+        How about a first name to share publicly?
+        %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
+        #claim-prize.button Claim Your Prize

@@ -1,6 +1,6 @@
 $("#cart-items").html("#{escape_javascript render @user_offsets, :as=>:cart_item}");
 totalCart();
-if($('#cart .offset').length > 0) {
+if($('#cart .cart_item').length > 0) {
 $('#total-cost').show();
 $('#offset-buttons').css('right','45px');
 }

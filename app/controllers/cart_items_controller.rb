@@ -6,7 +6,7 @@ class CartItemsController < ApplicationController
       @cart_item = CartItem.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id])
 
     else user_id = 0
-      @cart_item = CartItem.new(:user_id=>nil,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id])
+      @cart_item = CartItem.new(:user_id=>nil,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:offset_type=>params[:offset_type],:offset_interval=>params[:offset_interval],:session_id => params[:session_id])
 
     end
 
@@ -24,6 +24,7 @@ class CartItemsController < ApplicationController
 
   def populate_cart
     @user_offsets = CartItem.where(:session_id=>params[:session_id], :purchased=>:false)
+    puts @user_offsets.inspect
     if @user_offsets.present?
       respond_to do |format|
         format.js {render 'populate_cart'}
@@ -34,7 +35,7 @@ class CartItemsController < ApplicationController
   def destroy
     @offset = CartItem.find(params[:id])
     @id = @offset.id
-
+    @offset.destroy
   end
 
 end

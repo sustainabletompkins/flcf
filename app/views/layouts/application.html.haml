@@ -15,21 +15,8 @@
     = csrf_meta_tag
 
     =yield :head
-    -if current_user
-
-      :javascript
-        if($.cookie("joined")=="true") {
-          $.cookie("joined","false");
-          window.location.replace("#{pages_path('prize-wheel')}");
-
-        }
 
   %body
-    .off-canvas-wrap{"data-offcanvas" => ""}
-      .inner-wrap
-        #content
-          =render :partial => 'layouts/head'
-
-          =yield
-
-          =render :partial => 'layouts/footer'
+    #content
+      =yield
+      =render :partial => 'layouts/footer_controls'
