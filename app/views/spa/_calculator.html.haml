@@ -124,18 +124,24 @@
           .check-msg{:style => "display:inline;color:white;margin-left: 15px;"}
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #quick-offset.offset-form
-          %p choose a quick offset
-          #home-month.quick.button{:value=>1240, :title=>"Home Energy, 1 mo"} Avg NY Home Energy, 1mo
-          #home-year.quick.button{:value=>14962, :title=>"Home Energy, 1 yr"} Avg NY Home Energy, 1yr
-          #commute-month.quick.button{:value=>722, :title=>"Car Commute, 1 mo"} Avg US Car Commute, 1mo
-          #commute-year.quick.button{:value=>8660, :title=>"Car Commute, 1 yr"} Avg US Car Commute, 1yr
-          #air-travel.quick.button{:value=>504, :title=>"Domestic Air Travel, 1 yr"} Domestic Air Travel, 1 trip
-          #air-travel.quick.button{:value=>1268, :title=>"International Air Travel, 1 yr"} International Air Travel, 1 trip
-          %p
-          .button.cancel
-            cancel
-          .check-msg{:style => "display:inline;color:white;margin-left: 15px;"}
-            Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
+          %h5 choose a quick offset
+          =form_with url: '/cart_items', method: :post do |form|
+            .row
+              .large-4.medium-4.small-12.columns
+                %label What To Offset?
+                =form.select :offset_type, options_for_select([ "", "home energy", "car commute", "air travel" ], ""), {}, :id => 'offset_type'
+              .large-4.medium-4.small-12.columns
+                %label For What Period?
+                =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], ""), {}, :id => 'offset_interval'
+              .large-4.medium-4.small-12.columns
+                %label How Frequently?
+                =form.select :offset_frequency, options_for_select([ "one-time", "recurring" ], "one-time"), {}, :id => 'offset_frequency'
+            .row
+              .large-12.columns
+                #save-offset.button 'add to cart' 
+            .row
+              .offset_title.large-6.small-6.columns
+              .offset_cost.large-6.small-6.columns{:style => 'text-align: right;'}
         #donate-form.offset-form
           %p Make a Donation
           .donate-input

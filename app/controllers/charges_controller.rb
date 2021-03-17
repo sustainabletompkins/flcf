@@ -12,7 +12,6 @@ class ChargesController < ApplicationController
       products << {price: product_info[p["type"]][p["period"]], quantity: 1}
       payment_mode = 'subscription' if ['month','quarter','year'].include?(p["period"])
     end
-    puts payment_mode.upcase
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: products,
@@ -24,9 +23,10 @@ class ChargesController < ApplicationController
 
   def init_checkout
     products = []
-    product_info = {"home_energy" => {"one_time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IQwLIL1SWXeEQ2faV393hoU', "year" => 'price_1IQwLIL1SWXeEQ2fyzMxB5YQ'}, "car_commute" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
+    product_info = {"home energy" => {"one-time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IW12sL1SWXeEQ2fPa1BkryP', "quarter" => 'price_1IW13LL1SWXeEQ2ft4svzOQI', "year" => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'}, "car travel" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
     payment_mode = 'payment'
     CartItem.where(:session_id=>params[:session]).each do |p|
+      puts p.inspect
       if p["offset_type"].nil?
         products << {    
           price_data: {
@@ -37,11 +37,15 @@ class ChargesController < ApplicationController
           quantity: 1
         }
       else
+        puts 'hey'
         products << {price: product_info[p["offset_type"]][p["offset_interval"]], quantity: 1}
+        puts p["offset_interval"]
         payment_mode = 'subscription' if ['month','quarter','year'].include?(p["offset_interval"])
+        puts payment_mode
       end
 
     end
+    puts products.inspect
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: products,

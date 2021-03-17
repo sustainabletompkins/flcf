@@ -25,6 +25,13 @@ $ ->
   offset_units = undefined
   offset_title = undefined
 
+  monthly_avgs = {}
+  monthly_avgs["home energy"] = 1240
+  monthly_avgs["car travel"] = 722
+  
+  offset_costs = {}
+  offset_costs["home energy"] = 35.32
+
   $("#donation-value").focus()
 
   initialize = () ->
@@ -112,6 +119,42 @@ $ ->
       session_id: $.cookie('session_id')
 
     saveOffset data
+
+  saveOffset = (data) ->
+    
+    $('#checkout').css("display","inline")
+    $('#total-cost').show()
+    $('#offset-buttons').css('right','45px')
+    $.post "/cart_items", (data)
+    return
+
+  titleCartItem = ->
+    cart_item_title = "$" + offset_cost + " (" + offset_weight + "lbs.)"
+    if ($("#offset_frequency").val() == 'recurring') 
+      cart_item_title += " - " + $("#offset_interval").val() + "ly"
+    switch ($("#offset_interval").val()) 
+      when 'month'
+        offset_title = $("#offset_type").val() + " - 1 Month" 
+      when 'quarter'
+        offset_title = $("#offset_type").val() + " - 3 Months"
+      when 'year'
+        offset_title = $("#offset_type").val() + " - 1 Year"
+    $('.offset_title').html(cart_item_title)
+    $('.offset_cost').html(offset_title)
+    return
+
+  saveCartItem = ->
+    data =
+      pounds: offset_weight.toFixed(2)
+      cost: offset_cost.toFixed(2)
+      title: offset_title
+      offset_type: $("#offset_type").val()
+      offset_interval: $("#offset_interval").val()
+      frequency: $("#offset_frequency").val()
+      session_id: $.cookie('session_id')
+
+    saveOffset data
+    return
 
   $('.clearer').on "click", ->
 
@@ -209,21 +252,31 @@ $ ->
     $("#user-info").fadeIn "fast"
     $(".show-login").fadeOut "fast"
 
-  $(".quick").on "click", ->
-    offset_weight = parseInt($(this).attr("value"))
-    offset_cost = offset_weight * cost_per_pound
-    offset_title = $(this).attr("title")
-    alert('hey')
-    data =
-      pounds: offset_weight
-      cost: offset_cost
-      title: offset_title
-      session_id: $.cookie('session_id')
-      offset_type: $(this).attr("offset_type")
-      offset_interval: $(this).attr("offset_interval")
-    console.log(data)
-    saveOffset data
+  $("#save-offset").on "click", ->
+    saveCartItem()
     return
+
+  $("#offset_type").change ->
+    offset_weight = monthly_avgs[$("#offset_type").val()]
+    offset_cost = offset_weight * cost_per_pound
+    titleCartItem()
+    return  
+
+  $("#offset_interval").change ->
+    switch ($("#offset_interval").val()) 
+      when 'month'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 1
+      when 'quarter'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 3
+      when 'year'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 12 
+    offset_cost = offset_weight * cost_per_pound  
+    titleCartItem()
+    return
+
+  $("#offset_frequency").change ->
+    titleCartItem()
+    return    
 
   $(".new-offset").on "click", ->
     $("#cart").hide()
@@ -333,9 +386,3 @@ $ ->
       offset_id: parseInt($(this).attr("value"))    }
     $.post "offsets/duplicate", data
 
-  saveOffset = (data) ->
-    $('#checkout').css("display","inline")
-    $('#total-cost').show()
-    $('#offset-buttons').css('right','45px')
-    $.post "/cart_items", data
-    return
