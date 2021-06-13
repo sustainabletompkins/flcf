@@ -1,32 +1,97 @@
-  .row#prize-wheel
-    .large-12.columns
-      %hr
-      %h3 Seal The Cracks Prize Wheel
-      %p Spin the wheel after each offset and you could win fun prizes from local businesses!
-    .large-6.medium-6.columns
-      #spin-button.btn
-        Spin
-        %br
-        Wheel
-      #wheel
-        .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
-          -@prizes.each do |p|
-            -@count=0
-            -p.count.times do
-              =render :partial => 'prizes/spot', :locals => {prize:p}
-              -@count = @count + 1
-          -@empties.times do
-            =image_tag('footprint.jpg', :'data-name'=>'Nothing')
+.row#prize-wheel
+  .large-12.columns
+    %hr
+    %h3 Seal The Cracks Prize Wheel
+    %p Spin the wheel after each offset and you could win fun prizes from local businesses!
+  .large-6.medium-6.columns
+    #spin-button.btn
+      Spin
+      %br
+      Wheel
+    #wheel
+      .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
+        -@prizes.each do |p|
+          -@count=0
+          -p.count.times do
+            =render :partial => 'prizes/spot', :locals => {prize:p}
             -@count = @count + 1
-          :javascript
-            var total_spots = "#{@count}";
+        -@empties.times do
+          =image_tag('footprint.jpg', :'data-name'=>'Nothing')
+          -@count = @count + 1
+        :javascript
+          var total_spots = "#{@count}";
 
-    .large-6.medium-6.columns
-      #award{:style=>'display:none'}
-        you have won an award
-      #email-address{:style=>'display:none'}
-        To claim your prize, enter your email address
-        %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
-        How about a first name to share publicly?
-        %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
-        #claim-prize.button Claim Your Prize
+  .large-6.medium-6.columns
+    #award{:style=>'display:none'}
+      you have won an award
+    #email-address{:style=>'display:none'}
+      To claim your prize, enter your email address
+      %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
+      How about a first name to share publicly?
+      %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
+      #claim-prize.button Claim Your Prize
+    #carbon-race-button.button Contribue To Carbon Race
+
+:javascript
+  var spin;
+  count = 0;
+  var prize_id;
+
+  $.fn.shuffleChildren = function() {
+      $.each(this.get(), function(index, el) {
+          var $el = $(el);
+          var $find = $el.children();
+
+          $find.sort(function() {
+              return 0.5 - Math.random();
+          });
+
+          $el.empty();
+          $find.appendTo($el);
+      });
+  };
+  $('.cycle-slideshow').shuffleChildren();
+
+  $('#spin-button').on('click',function() {
+    spin = setInterval(cycleWheel, 250);
+    count = 0;
+    $.get("#{log_spin_path}");
+    $('#spin-button').hide();
+    $('#wheel').show();
+  });
+
+  $('#spin').on('click',function() {
+    $('#carbon-race').foundation('reveal','close');
+  })
+  
+  $('#claim-prize').on('click', function() {
+    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
+  })
+
+  $('#caron-race-button").on('click', function() {
+    $('#app').html("#{ j render :partial=>'spa/carbon_races'}");
+  })
+
+  function cycleWheel() {
+    $('.cycle-slideshow').cycle('next');
+    count++;
+
+    if(count == 20) {
+
+      clearInterval(spin);
+      $('#award').show();
+      val = $('.cycle-slideshow').data("cycle.opts").currSlide;
+      prize_id = parseInt($('.cycle-slide-active').data('prize-id'));
+      if(prize_id > 0) {
+        prize_id = $('.cycle-slide-active').data('prize-id');
+        $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '!');
+
+        $('#email-address').show();
+        $('#carbon-race-button').show();
+      }
+      else {
+        $('#award').html('Sorry, you did not win anything, but you can try again next time you make an offset!');
+        $('#carbon-race-button').show();
+      }
+    }
+  }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_130721) do
+ActiveRecord::Schema.define(version: 2021_03_18_151438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,10 +74,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_130721) do
     t.string "title", limit: 255
     t.float "pounds"
     t.float "cost"
-    t.string "units", limit: 255
-    t.float "quantity"
-    t.boolean "purchased", default: false
-    t.string "session_id", limit: 255
     t.string "name", limit: 255
     t.integer "zipcode"
     t.datetime "created_at"
@@ -86,6 +82,9 @@ ActiveRecord::Schema.define(version: 2021_03_16_130721) do
     t.integer "team_id", default: 0
     t.integer "individual_id", default: 0
     t.bigint "region_id"
+    t.string "checkout_session_id"
+    t.string "offset_type"
+    t.string "offset_interval"
     t.index ["region_id"], name: "index_offsets_on_region_id"
   end
 

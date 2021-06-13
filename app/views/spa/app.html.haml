@@ -1,3 +1,8 @@
 .row
-    .large-12.columns
-        =render :partial => 'spa/calculator'
+    #app.large-12.columns
+        -if @app_mode == 'calculator'
+            =render :partial => 'spa/calculator'
+        -elsif @app_mode == 'prize wheel'
+            =render :partial => 'spa/prize_wheel'
+        -elsif @app_mode == 'carbon races'
+            =render :partial => 'spa/purchased'

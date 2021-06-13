@@ -25,8 +25,8 @@ class ChargesController < ApplicationController
     products = []
     product_info = {"home energy" => {"one-time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IW12sL1SWXeEQ2fPa1BkryP', "quarter" => 'price_1IW13LL1SWXeEQ2ft4svzOQI', "year" => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'}, "car travel" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
     payment_mode = 'payment'
-    CartItem.where(:session_id=>params[:session]).each do |p|
-      puts p.inspect
+    cart_items = CartItem.where(:session_id=>params[:session])
+    cart_items.each do |p|
       if p["offset_type"].nil?
         products << {    
           price_data: {
@@ -37,22 +37,26 @@ class ChargesController < ApplicationController
           quantity: 1
         }
       else
-        puts 'hey'
+
         products << {price: product_info[p["offset_type"]][p["offset_interval"]], quantity: 1}
-        puts p["offset_interval"]
+
         payment_mode = 'subscription' if ['month','quarter','year'].include?(p["offset_interval"])
-        puts payment_mode
+
       end
 
     end
-    puts products.inspect
+
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
+      billing_address_collection: 'auto',
       line_items: products,
       mode: payment_mode,
-      success_url: 'http://localhost:3000/charges/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/charges/failure',
+      success_url: 'http://localhost:3000?checkout_session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3000/',
     })
+    
+    cart_items.update_all(:checkout_session_id => @session.id)
+  
     render json: @session
   end
   

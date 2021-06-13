@@ -3,7 +3,58 @@ class PagesController < ApplicationController
   http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list, :offset_log]
 
   def home
+    if params.has_key?('checkout_session_id')
+      # create the offset objects
+      session_id = params[:checkout_session_id]
+      zipcode = nil
+      session = Stripe::Checkout::Session.retrieve(session_id)
+      puts session.inspect
+      if session.payment_intent
+        paymentIntent = Stripe::PaymentIntent.retrieve(
+          session.payment_intent
+        )
+        
+        paymentMethod = Stripe::PaymentMethod.retrieve(
+          paymentIntent.payment_method,
+        )
+        zipcode = paymentMethod["billing_details"]["address"]["postal_code"]
+      else
+        cards = Stripe::Customer.list_sources(
+          session.customer,
+          {object: 'card', limit: 3}
+        )
+        customer = Stripe::Customer.retrieve(session.customer)
+        puts customer.inspect
+        puts cards.inspect
+      end
+
+      @offsets = []
+      CartItem.where(:checkout_session_id=> params[:checkout_session_id]).each do |item|
+        @offsets << Offset.create(:user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => params[:checkout_session_id])
+      end
+      @checkout_session = params["checkout_session_id"]
+      
+      has_prize_choices = true
+      region = Region.get_by_zip(zipcode)
+      if has_prize_choices
+        set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
+        @teams = Team.all
+        
+        @prizes = region.prizes.where('count > 0').where(:)
+        count = 0
+        @prizes.each do |p|
+          count = count+p.count
+        end
+        @empties = count*4
+        @app_mode = "prize wheel"
+      else
+        @app_mode = "carbon races"
+      end
+    else
+      @app_mode = "calculator"
+    end
     render 'spa/app'
+    
   end
 
   def index
