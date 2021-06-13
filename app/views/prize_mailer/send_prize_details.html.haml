@@ -1,8 +1,8 @@
 
-%p Thank you so much for making a carbon offset with the Finger Lakes Climate Fund!  Our whole community benefits when we act to protect our climate.
-
-%p As a gesture of our gratitude, we've recruited some of our favorite local businesses to share their products and services as prizes for participating in our 'Seal the Cracks' campaign this fall.
+%p=MessageTemplate.where(:name=>'Prize Winner').first.body
 
 %p You have won #{@description} from #{@business}.  You can claim your prize by forwarding this email to info@sustainabletompkins.org.  We'll be in touch to arrange pickup or mailing of your prize voucher.
 
 %h5 Claim code: #{@code}
+
+=render :partial=>'shared/email_footer'

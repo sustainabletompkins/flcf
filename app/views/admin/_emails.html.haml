@@ -1,0 +1,13 @@
+.large-12.columns
+    %h3 Emails
+.large-12.columns
+    .row
+        .large-12.columns
+            .large-12.columns
+                #prize-list
+                    =render :collection => @message_templates, :partial => 'message_templates/editable_template', :as => :template
+
+:javascript
+    $('#region').on('change', function() {
+        $.get("prizes", {region: $(this).val()});
+    })

@@ -1,13 +1,7 @@
-%h4 Thanks so much for your contribution to the Finger Lakes Climate Fund!  We hope you will share your offset story with friends and colleagues and encourage others to make carbon offsetting part of their lifestyle.
-
+%h4=MessageTemplate.where(:name=>'Offset Complete').first.body
 %ul
   %h5 Your offsets
   -@offsets.each do |o|
     %li #{o.title} - #{o.pounds} lbs for $#{o.cost}
 
-%p<
-  Offset your carbon use locally at &nbsp;
-  =link_to 'FingerLakesClimateFund.org', 'http://fingerlakesclimatefund.org'
-%p<
-  Connect with us on &nbsp;
-  =link_to 'Facebook', 'https://www.facebook.com/climatefund/'
+=render :partial=>'shared/email_footer'

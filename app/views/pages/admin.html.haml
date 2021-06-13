@@ -6,6 +6,7 @@
       %li.menu-option{"data-option" => "offsets"} Offsets
       %li.menu-option{"data-option" => "prizes"} Prizes
       %li.menu-option{"data-option" => "races"} Races
+      %li.menu-option{"data-option" => "emails"} Emails
   .large-10.columns#content-area
     =render :partial => 'admin/main'
 :javascript
@@ -22,7 +23,10 @@
         break;
       case 'offsets':
         $('#content-area').html("#{j render :partial => 'admin/offsets'}")
-        break;    
+        break; 
+      case 'emails':
+        $('#content-area').html("#{j render :partial => 'admin/emails'}")
+        break;      
     }
     
   });

@@ -40,7 +40,7 @@ class PagesController < ApplicationController
         set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
         @teams = Team.all
         
-        @prizes = region.prizes.where('count > 0').where(:)
+        @prizes = region.prizes.where('count > 0')
         count = 0
         @prizes.each do |p|
           count = count+p.count
@@ -122,6 +122,7 @@ class PagesController < ApplicationController
     @teams = Team.all
     @awardees = Awardee.all
     @individuals = Individual.all.order(pounds: :desc)
+    @message_templates = MessageTemplate.all
     @teams = Team.all.order(pounds: :desc)
     @stat = Stat.find(1)
     render :layout=>"full"

@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   resources :offsetters, :only => [:create, :update, :show, :destroy]
   resources :awardees, :only => [:create, :update, :show, :destroy]
   resources :pages,  :only => [:create, :update, :destroy]
+  resources :message_templates, :only => [:update, :index]
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root :to => 'pages#home'
@@ -81,6 +82,5 @@ Rails.application.routes.draw do
   get '/init-checkout-session', to: 'charges#init_checkout'
   post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
-
 
 end

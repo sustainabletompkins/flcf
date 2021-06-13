@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_151438) do
+ActiveRecord::Schema.define(version: 2021_06_13_221408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(version: 2021_03_18_151438) do
     t.string "email", limit: 255
     t.bigint "region_id"
     t.index ["region_id"], name: "index_individuals_on_region_id"
+  end
+
+  create_table "message_templates", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.boolean "active"
   end
 
   create_table "offsets", id: :serial, force: :cascade do |t|
