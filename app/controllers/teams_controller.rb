@@ -6,25 +6,25 @@ class TeamsController < ApplicationController
       render 'creation_failed'
     else
       @team=Team.create(team_params)
-      TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :offsets => params[:count].to_i, :founder=> "TRUE", :team_id=>@team.id)
-      TeamMailer.send_thanks(params[:user_email], @team).deliver
-      if team_params.has_key?(:pounds)
-        @team.update_attribute(:count, params[:count].to_i)
-        @team.update_attribute(:members, 1)
-        @team.increment!(:pounds, params[:pounds].to_i)
-        @offsets = Offset.where('id in (?)',params[:offset_ids].split(','))
-        @offsets.update_all(:team_id => @team.id)
+      TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :founder=> "TRUE", :team_id=>@team.id)
+      
+      if params.has_key?(:checkout_session_id)
+        offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
+        offsets.update_all(:team_id => @team.id)
         render 'team_created_after_offset'
       else
+        # team is not being created through checkout process
         @count = Team.all.count
         render 'team_created'
       end
 
+      TeamMailer.send_thanks(params[:user_email], @team).deliver
+
     end
   end
+
   def update
     @user = Team.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(team_params)
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
@@ -35,17 +35,19 @@ class TeamsController < ApplicationController
       end
     end
   end
+
   def join
-    @team = Team.find(params[:league_id])
-    @pounds = params[:pounds]
-    @team.increment!(:count, params[:count].to_i)
-    @team.increment!(:members, 1)
-    @team.increment!(:pounds, params[:pounds].to_i)
-    @offsets = Offset.where('id in (?)',params[:offset_ids].split(','))
-    @offsets.update_all(:team_id => @team.id)
-    TeamMember.create(:email => params[:user_email], :offsets => params[:count].to_i, :team_id=>@team.id, :name=> params[:name])
-    TeamMailer.send_thanks(params[:user_email], @team).deliver
-    render 'team_joined_after_offset'
+    
+    if params.has_key?(:checkout_session_id)
+      @team = Team.find(params[:id])
+      offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
+      offsets.update_all(:team_id => @team.id)
+      TeamMember.create(:email => offsets.first.email, :team_id=>@team.id, :name=> params[:name])
+      TeamMailer.send_thanks(params[:user_email], @team).deliver
+      render 'team_joined_after_offset'
+    else
+
+    end
 
   end
 
@@ -58,16 +60,22 @@ class TeamsController < ApplicationController
     @new_team = Team.find(params[:new_team_id])
     @old_team = Team.find(params[:old_team_id])
 
-    @offsets = Offset.where(:id=>Array(params[:offset_ids]))
-    @new_team.increment!(:count, @offsets.count)
-    @new_team.increment!(:members, 1)
-    @new_team.increment!(:pounds, @offsets.sum(:pounds))
-    @old_team.decrement!(:count, @offsets.count)
-    @old_team.decrement!(:members, 1)
-    @old_team.decrement!(:pounds, @offsets.sum(:pounds))
     # change offsets
-    tm = TeamMember.find_by_email(params[:offset_email])
-    TeamMember.create(:email => params[:offset_email], :offsets => @offsets.count, :team_id=>@new_team.id, :name=> tm.name)
+    offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
+    offsets.update_all(:team_id => @new_team.id)
+    
+    tm = TeamMember.find_by_email(offsets.first.email)
+    puts tm.inspect
+    # change default team
+    member = TeamMember.where(:email => tm.email, :team_id=>@new_team.id).first
+    if member.present?
+      # make this the most recently updated team member entry
+      member.save
+    else
+      member = TeamMember.create(:email => tm.email, :team_id=>@new_team.id, :name=> tm.name)
+    end
+
+    puts member.inspect
     #TeamMailer.send_thanks(params[:user_email], @team).deliver
     render 'team_changed'
 

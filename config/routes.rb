@@ -36,8 +36,10 @@ Rails.application.routes.draw do
   resources :teams, :only => [:update, :index, :show, :create] do
     member do
       post 'join'
-      post 'change'
       get 'detail'
+    end
+    collection do
+      post 'change'
     end
   end
   

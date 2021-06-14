@@ -5,9 +5,9 @@ class PagesController < ApplicationController
   def home
     if params.has_key?('checkout_session_id')
       # create the offset objects
-      session_id = params[:checkout_session_id]
+      @checkout_session = params["checkout_session_id"]
       zipcode = nil
-      session = Stripe::Checkout::Session.retrieve(session_id)
+      session = Stripe::Checkout::Session.retrieve(@checkout_session)
       puts session.inspect
       if session.payment_intent
         paymentIntent = Stripe::PaymentIntent.retrieve(
@@ -18,6 +18,8 @@ class PagesController < ApplicationController
           paymentIntent.payment_method,
         )
         zipcode = paymentMethod["billing_details"]["address"]["postal_code"]
+        puts paymentMethod.inspect
+        puts paymentIntent.inspect
       else
         cards = Stripe::Customer.list_sources(
           session.customer,
@@ -25,17 +27,19 @@ class PagesController < ApplicationController
         )
         customer = Stripe::Customer.retrieve(session.customer)
         puts customer.inspect
+        puts 'hey hey key'
         puts cards.inspect
       end
 
       @offsets = []
-      CartItem.where(:checkout_session_id=> params[:checkout_session_id]).each do |item|
-        @offsets << Offset.create(:user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => params[:checkout_session_id])
+      CartItem.where(:checkout_session_id=> @checkout_session).each do |item|
+        @offsets << Offset.create(:user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>session["customer_email"])
       end
-      @checkout_session = params["checkout_session_id"]
-      
+
       has_prize_choices = true
       region = Region.get_by_zip(zipcode)
+      has_prize_choices = region && region.prizes.where('count > 0').first.present?
+      has_prize_choices = false
       if has_prize_choices
         set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
         @teams = Team.all
@@ -49,10 +53,18 @@ class PagesController < ApplicationController
         @app_mode = "prize wheel"
       else
         @app_mode = "carbon races"
+        # does this email address already belong to a team
+        team_member = TeamMember.where(:email => @offsets.first.email).order('updated_at DESC').first
+        if team_member.present?
+          @team = team_member.team
+        end
+        puts @team.inspect
+        @teams = Team.all
       end
     else
       @app_mode = "calculator"
     end
+    puts @app_mode
     render 'spa/app'
     
   end

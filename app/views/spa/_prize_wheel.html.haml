@@ -68,10 +68,6 @@
     $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
   })
 
-  $('#caron-race-button").on('click', function() {
-    $('#app').html("#{ j render :partial=>'spa/carbon_races'}");
-  })
-
   function cycleWheel() {
     $('.cycle-slideshow').cycle('next');
     count++;
