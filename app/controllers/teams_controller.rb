@@ -65,7 +65,6 @@ class TeamsController < ApplicationController
     offsets.update_all(:team_id => @new_team.id)
     
     tm = TeamMember.find_by_email(offsets.first.email)
-    puts tm.inspect
     # change default team
     member = TeamMember.where(:email => tm.email, :team_id=>@new_team.id).first
     if member.present?
@@ -74,8 +73,6 @@ class TeamsController < ApplicationController
     else
       member = TeamMember.create(:email => tm.email, :team_id=>@new_team.id, :name=> tm.name)
     end
-
-    puts member.inspect
     #TeamMailer.send_thanks(params[:user_email], @team).deliver
     render 'team_changed'
 

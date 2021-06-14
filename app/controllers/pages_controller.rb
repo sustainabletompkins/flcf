@@ -7,6 +7,8 @@ class PagesController < ApplicationController
       # create the offset objects
       @checkout_session = params["checkout_session_id"]
       zipcode = nil
+      name = nil
+      email = nil
       session = Stripe::Checkout::Session.retrieve(@checkout_session)
       puts session.inspect
       if session.payment_intent
@@ -18,6 +20,8 @@ class PagesController < ApplicationController
           paymentIntent.payment_method,
         )
         zipcode = paymentMethod["billing_details"]["address"]["postal_code"]
+        name = paymentMethod["billing_details"]["name"]
+        email = paymentMethod["billing_details"]["email"]
         puts paymentMethod.inspect
         puts paymentIntent.inspect
       else
@@ -29,11 +33,13 @@ class PagesController < ApplicationController
         puts customer.inspect
         puts 'hey hey key'
         puts cards.inspect
+        # TO DO: get zip and name
       end
 
       @offsets = []
       CartItem.where(:checkout_session_id=> @checkout_session).each do |item|
-        @offsets << Offset.create(:user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>session["customer_email"])
+        @offsets << Offset.create(:name => name, :user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>email)
+        item.update_attribute(:purchased, true)
       end
 
       has_prize_choices = true

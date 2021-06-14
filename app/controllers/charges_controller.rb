@@ -51,8 +51,7 @@ class ChargesController < ApplicationController
       line_items: products,
       mode: payment_mode,
       success_url: 'http://localhost:3000?checkout_session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/',
-      customer_email: 'john.doe@codexworld.com'
+      cancel_url: 'http://localhost:3000/'
     })
     
     cart_items.update_all(:checkout_session_id => @session.id)

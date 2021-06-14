@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :individuals, :only => [:update, :destroy] do
+  resources :individuals, :only => [:create, :update, :destroy] do
     collection do
       post 'add_to'
     end
