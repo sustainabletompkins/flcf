@@ -8,7 +8,6 @@ class Region < ActiveRecord::Base
     def self.get_by_zip(zip)
         region = nil
         Region.all.each do |r|
-            puts r.zipcodes
             if r.zipcodes.include? zip.to_s
                 region = r
             end

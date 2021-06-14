@@ -27,12 +27,15 @@ class Api::V1::OffsetsController < ApplicationController
     end
 
     def summary
-        @offsets = Offset.where(:purchased => :true)
+        @offsets = Offset.all
         if params.has_key?(:start_date)
             @offsets = @offsets.where('created_at > ?', params[:start_date])
         end
         if params.has_key?(:end_date)
             @offsets = @offsets.where('created_at < ?', params[:end_date])
+        end
+        if params.has_key?(:region)
+            @offsets = @offsets.where(:region => Region.where(:name=>params[:region]).first)
         end
         render json: {pounds: @offsets.sum(:pounds).round(0), co2: (@offsets.sum(:pounds)/20).round(0), dollars: @offsets.sum(:cost).round(2)}
     end

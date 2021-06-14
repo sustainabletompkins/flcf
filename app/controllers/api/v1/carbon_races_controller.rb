@@ -11,16 +11,14 @@ class Api::V1::CarbonRacesController < ApplicationController
     end
 
     def leaderboard
-        if params[:list] == 'individuals'
-            # insert filters here: date range, region
-            leaders = Individual.where('pounds > 0').where.not(:name=>"Anonymous").order(pounds: :desc)
+        leaders = Team.generate_leaderboard(params[:start_date], params[:end_date], params[:region], false)
+        case params[:order] 
+        when 'name'
+            leaders.sort_by! { |k| k[:team] }
+        when 'count'
+            leaders.sort_by! { |k| k[:count] }.reverse
         else
-            leaders = Team.where('pounds > 0')
-        end
-        if params.has_key?(:order) && params[:order] == 'offset_count'
-            leaders = leaders.order(count: :desc)
-        else
-            leaders = leaders.order(pounds: :desc)
+            leaders.sort_by! { |k| k[:pounds] }.reverse
         end
         render json: leaders
     end
