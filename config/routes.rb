@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   resources :charges, :only => [:create, :new]
 
   resources :prizes, :only => [:create, :update, :destroy, :index]
-  resources :prize_winners, :only => [:destroy]
+  resources :prize_winners, :only => [:destroy, :create]
   resources :offsetters, :only => [:create, :update, :show, :destroy]
   resources :awardees, :only => [:create, :update, :show, :destroy]
   resources :pages,  :only => [:create, :update, :destroy]
@@ -70,7 +70,6 @@ Rails.application.routes.draw do
   match '/calculator' => 'pages#calculator', via: [:get]
   get 'pages/:page_name' => 'pages#index'
   post 'offsets/add_name_and_zip/' => 'offsets#add_name_and_zip', :as => :add_user_data
-  post '/save-prize' => 'prizes#save', :as => :prize_won
   get '/awardees/video/:id' => 'awardees#show_video', :as => :awardee_video
   get '/calc-admin' => 'pages#admin', :as => :admin_path
   get 'log-spin' => 'prizes#log', :as => :log_spin

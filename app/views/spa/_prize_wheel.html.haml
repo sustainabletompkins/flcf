@@ -1,13 +1,13 @@
 .row#prize-wheel
-  .large-12.columns
-    %hr
-    %h3 Seal The Cracks Prize Wheel
-    %p Spin the wheel after each offset and you could win fun prizes from local businesses!
   .large-6.medium-6.columns
-    #spin-button.btn
-      Spin
-      %br
-      Wheel
+    %h3 Prize Wheel
+    %p Spin after each offset for a shot at prizes from local businesses!
+    #spin
+      Spin Wheel
+    #award{:style=>'display:none'}
+      you have won an award
+  .large-6.medium-6.columns
+
     #wheel
       .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
         -@prizes.each do |p|
@@ -22,15 +22,8 @@
           var total_spots = "#{@count}";
 
   .large-6.medium-6.columns
-    #award{:style=>'display:none'}
-      you have won an award
-    #email-address{:style=>'display:none'}
-      To claim your prize, enter your email address
-      %input{:type=>'text', :placeholder=>'your email', :id=>'email'}
-      How about a first name to share publicly?
-      %input{:type=>'text', :placeholder=>'your first name', :id=>'name'}
-      #claim-prize.button Claim Your Prize
-    #carbon-race-button.button Contribue To Carbon Race
+
+
 
 :javascript
   var spin;
@@ -52,21 +45,13 @@
   };
   $('.cycle-slideshow').shuffleChildren();
 
-  $('#spin-button').on('click',function() {
+  $('#spin').on('click',function() {
     spin = setInterval(cycleWheel, 250);
     count = 0;
     $.get("#{log_spin_path}");
-    $('#spin-button').hide();
+    $('#spin').hide();
     $('#wheel').show();
   });
-
-  $('#spin').on('click',function() {
-    $('#carbon-race').foundation('reveal','close');
-  })
-  
-  $('#claim-prize').on('click', function() {
-    $.post('#{prize_won_path}', {prize: $('.cycle-slide-active').data('prize-id'), email:$('#email').val(), name:$('#name').val()});
-  })
 
   function cycleWheel() {
     $('.cycle-slideshow').cycle('next');
@@ -80,10 +65,10 @@
       prize_id = parseInt($('.cycle-slide-active').data('prize-id'));
       if(prize_id > 0) {
         prize_id = $('.cycle-slide-active').data('prize-id');
-        $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '!');
-
-        $('#email-address').show();
-        $('#carbon-race-button').show();
+        
+        $.post('#{prize_winners_path}', {prize: $('.cycle-slide-active').data('prize-id'), checkout_session_id: "#{@checkout_session}"}, function() {
+          $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '! Check your email for details on claiming prize.');        
+        });
       }
       else {
         $('#award').html('Sorry, you did not win anything, but you can try again next time you make an offset!');

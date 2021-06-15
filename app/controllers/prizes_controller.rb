@@ -1,12 +1,5 @@
 class PrizesController < ApplicationController
 
-  def save
-    rec = PrizeWinner.create(:prize_id=>params[:prize], :email=>params[:email], :name=> params[:name])
-    prize = rec.prize
-    prize.decrement!(:count)
-    #PrizeMailer.send_prize_details(params[:email],rec.code,rec.prize.title,"this is a test")
-  end
-
   def create
 
     if simple_captcha_valid?

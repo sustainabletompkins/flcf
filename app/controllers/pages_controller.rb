@@ -45,7 +45,7 @@ class PagesController < ApplicationController
       has_prize_choices = true
       region = Region.get_by_zip(zipcode)
       has_prize_choices = region && region.prizes.where('count > 0').first.present?
-      has_prize_choices = false
+      #has_prize_choices = false
       if has_prize_choices
         set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
         @teams = Team.all
