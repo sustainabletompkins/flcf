@@ -42,37 +42,36 @@ class PagesController < ApplicationController
         item.update_attribute(:purchased, true)
       end
 
-      has_prize_choices = true
       region = Region.get_by_zip(zipcode)
-      has_prize_choices = region && region.prizes.where('count > 0').first.present?
-      #has_prize_choices = false
-      if has_prize_choices
-        set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
-        @teams = Team.all
-        
+      @has_prize_choices = region && region.prizes.where('count > 0').first.present?
+      #@has_prize_choices = false
+      if @has_prize_choices
         @prizes = region.prizes.where('count > 0')
         count = 0
         @prizes.each do |p|
           count = count+p.count
         end
         @empties = count*4
-        @app_mode = "prize wheel"
-      else
-        @app_mode = "carbon races"
-        # does this email address already belong to a team
-        team_member = TeamMember.where(:email => @offsets.first.email).order('updated_at DESC').first
-        if team_member.present?
-          @team = team_member.team
-        end
-        puts @team.inspect
-        @teams = Team.all
       end
+      
+      # does this email address already belong to a team
+      @app_mode = "carbon races"
+      @teams = Team.all
+      team_member = TeamMember.where(:email => @offsets.first.email).order('updated_at DESC').first
+      player = Individual.where(:email => @offsets.first.email).first
+      if team_member.present?
+        @team = team_member.team
+        @offsets.update_all(:team_id => @team.id)
+      elsif player.present?
+        @team = player
+        @offsets.update_all(:individual_id => @player.id)
+      end
+
     else
       @app_mode = "calculator"
     end
     puts @app_mode
     render 'spa/app'
-    
   end
 
   def index
