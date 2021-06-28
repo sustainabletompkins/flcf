@@ -54,6 +54,7 @@ class PagesController < ApplicationController
   end
 
   def index
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://hyadev.com/"
     if params.has_key?('checkout_session_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\
