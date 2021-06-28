@@ -2,7 +2,7 @@
     #app.large-12.columns
         -if @app_mode == 'calculator'
             =render :partial => 'spa/calculator'
-        -elsif @app_mode == 'prize wheel'
-            =render :partial => 'spa/prize_wheel'
         -elsif @app_mode == 'carbon races'
             =render :partial => 'spa/carbon_races'
+        -else
+            %h3 Sorry, something went wrong.  Please check for email receipt to confirm transaction was successful

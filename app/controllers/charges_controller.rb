@@ -50,7 +50,7 @@ class ChargesController < ApplicationController
       payment_method_types: ['card'],
       line_items: products,
       mode: payment_mode,
-      success_url: 'http://localhost:3000?checkout_session_id={CHECKOUT_SESSION_ID}',
+      success_url: 'http://localhost:3000/payment-success?checkout_session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3000/'
     })
     

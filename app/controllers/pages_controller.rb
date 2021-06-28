@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   http_basic_authenticate_with :name => "admin", :password => "309NAurora", :only => [:admin, :list, :offset_log]
 
-  def home
+  def payment_success
     if params.has_key?('checkout_session_id')
       # create the offset objects
       @checkout_session = params["checkout_session_id"]
@@ -36,15 +36,36 @@ class PagesController < ApplicationController
         # TO DO: get zip and name
       end
 
-      @offsets = []
+      # convert cart items into completed offsets
       CartItem.where(:checkout_session_id=> @checkout_session).each do |item|
-        @offsets << Offset.create(:name => name, :user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>email)
+        Offset.create(:name => name, :user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>email)
         item.update_attribute(:purchased, true)
       end
 
+      # redirect to index & include checkout session id
+      redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
+
+    else
+      # there was no checkout session id
+      # show them some kind of error
+      @app_mode = "error"
+      render 'spa/app'
+    end
+  end
+
+  def index
+    if params.has_key?('checkout_session_id')
+      # user has just completed a checkout
+      # handle carbon races and prize wheel\
+
+      # start by getting offsets associated with checkout session
+      @offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
+      zipcode = @offsets.first.zipcode
+
+      # check to see if this region has any prize choices
+      # if not, we will later skip prize wheel
       region = Region.get_by_zip(zipcode)
       @has_prize_choices = region && region.prizes.where('count > 0').first.present?
-      #@has_prize_choices = false
       if @has_prize_choices
         @prizes = region.prizes.where('count > 0')
         count = 0
@@ -54,8 +75,7 @@ class PagesController < ApplicationController
         @empties = count*4
       end
       
-      # does this email address already belong to a team
-      @app_mode = "carbon races"
+      # does this email address already belong to a team?  if so, automatically assign offsets to that team
       @teams = Team.all
       team_member = TeamMember.where(:email => @offsets.first.email).order('updated_at DESC').first
       player = Individual.where(:email => @offsets.first.email).first
@@ -67,44 +87,14 @@ class PagesController < ApplicationController
         @offsets.update_all(:individual_id => @player.id)
       end
 
+      # set app to carbon race mode
+      @app_mode = 'carbon races'
     else
-      @app_mode = "calculator"
+      @app_mode = 'calculator'
     end
-    puts @app_mode
-    render 'spa/app'
-  end
-
-  def index
-    @page = Page.where(:slug=>params[:page_name]).first
-    if @page.present?
-      render 'index'
-    else
-      if params[:page_name] == 'prize-wheel'
-        set_meta_tags title: 'Carbon Offset Prize Wheel | Finger Lakes Climate Fund', description: 'Thanks for your carbon offset!  Now, try your luck on the wheel to win prizes from local businesses',keywords: 'carbon, offsets, race, game, competition'
-        @teams = Team.all
-        @prizes = Prize.where('count > 0')
-        count = 0
-        @prizes.each do |p|
-          count = count+p.count
-        end
-        @empties = count*4
-        render params[:page_name], :layout => "full"
-      elsif params[:page_name] == 'carbon-races'
-        set_meta_tags title: 'Carbon Races | Finger Lakes Climate Fund', description: 'Compete with other teams around the Finger Lakes to see who offsets the most carbon',keywords: 'carbon, offsets, race, game, competition'
-
-        @teams = Team.all
-        @leaders = Team.where('pounds > 0').order(pounds: :desc)
-        @individual_leaders = Individual.where('pounds > 0').where.not(:name=>"Anonymous").order(pounds: :desc)
-        render params[:page_name], :layout => "full"
-      else
-        render params[:page_name]
-      end
-    end
-
-  end
-
-  def card_error
     
+    render 'spa/app'
+
   end
 
   def update
@@ -125,11 +115,6 @@ class PagesController < ApplicationController
     else
       render 'error'
     end
-  end
-  def index2
-
-
-
   end
 
   def admin

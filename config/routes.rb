@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   resources :message_templates, :only => [:update, :index]
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  root :to => 'pages#home'
+  root :to => 'pages#index'
   match '/offset-log' => 'pages#offset_log', via: [:get]
   match '/calculator' => 'pages#calculator', via: [:get]
   get 'pages/:page_name' => 'pages#index'
@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   get '/charges/success', to: 'charges#success'
   get '/charges/subscribe', to: 'charges#subscribe'
   get '/checkout-session', to: 'charges#get_session'
+  get '/payment-success', to: 'pages#payment_success'
   get '/init-checkout-session', to: 'charges#init_checkout'
   post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
