@@ -85,4 +85,7 @@ Rails.application.routes.draw do
   post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
 
+  get 'exports/awardees', to: 'awardees#csv'
+  get 'exports/offsetters', to: 'offsetters#csv'
+
 end

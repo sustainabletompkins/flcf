@@ -28,6 +28,18 @@ class OffsettersController < ApplicationController
     @id = params[:id]
   end
 
+  def csv
+    headers = %w(Name Description Image)
+
+    csv_data = CSV.generate(headers: true) do |csv|
+      csv << headers
+      Offsetter.all.order(id: :asc).each do |item|
+        csv << [item.name, item.description, item.avatar_file_name]
+      end
+    end
+    send_data csv_data, filename: "offsetters.csv", disposition: :attachment
+  end
+
   private
   def offsetter_params
     params.require(:offsetter).permit(:name, :description,:avatar,:captcha, :captcha_key)

@@ -13,13 +13,13 @@ class Awardee < ActiveRecord::Base
 
   def self.to_csv
     require 'csv'
-    CSV.open("awardees.csv", "w") do |csv|
-      column_names = %w(Name Description Image Video Amount Pounds)
-      csv << column_names
-      all.each do |awardee|
-        csv << [awardee.name, awardee.bio, awardee.avatar_file_name, awardee.video_id, awardee.award_amount, awardee.pounds_offset]
-      end
+    csv = []
+    column_names = %w(Name Description Image Video Amount Pounds)
+    csv << column_names
+    all.each do |awardee|
+      csv << [awardee.name, awardee.bio, awardee.avatar_file_name, awardee.video_id, awardee.award_amount, awardee.pounds_offset]
     end
+    return csv
   end
 
 end

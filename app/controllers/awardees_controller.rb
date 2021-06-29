@@ -40,6 +40,18 @@ class AwardeesController < ApplicationController
     @id = params[:id]
   end
 
+  def csv
+    headers = %w(Name Description Image Video Amount Pounds)
+
+    csv_data = CSV.generate(headers: true) do |csv|
+      csv << headers
+      Awardee.all.order(id: :asc).each do |awardee|
+        csv << [awardee.name, awardee.bio, awardee.avatar_file_name, awardee.video_id, awardee.award_amount, awardee.pounds_offset]
+      end
+    end
+    send_data csv_data, filename: "awardees.csv", disposition: :attachment
+  end
+
   private
   def awardee_params
     params.require(:awardee).permit(:name, :bio, :video_id, :award_amount, :pounds_offset, :avatar,:captcha, :captcha_key)
