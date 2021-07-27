@@ -1,0 +1,19 @@
+#donate.button donate
+#iframe
+:javascript
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const checkout_session = urlParams.get('checkout_session_id');
+    if(checkout_session) {
+        html='<iframe src="https://flcf-staging.herokuapp.com/?checkout_session_id='+checkout_session+'" frameBorder="0" title="description"></iframe>'
+
+    } else {
+        html= '<iframe src="https://flcf-staging.herokuapp.com/" frameBorder="0" title="description"></iframe>' 
+
+    }        
+    $('#iframe').html(html);
+
+    $('#donate').on('click', function() {
+        html= '<iframe src="https://flcf-staging.herokuapp.com?mode=donate" frameBorder="0" title="description"></iframe>' 
+        $('#iframe').html(html);
+    })

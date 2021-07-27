@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   get 'log-spin' => 'prizes#log', :as => :log_spin
   post '/offsets/make-donation' => 'offsets#save_donation', :as => :save_donation
 
+  get 'test', to: 'pages#js_test'
   get '/error', to: 'pages#card_error'
   get '/calculator', to: 'pages#calculator'
   get '/charges/success', to: 'charges#success'
