@@ -379,28 +379,6 @@ label {
   display:none;
 }
 
-/* Smartphones (landscape) ----------- */
-@media only screen and (max-width : 768px) {
-  .cracks-text {
-    text-align:center; font-size: 1.3em;line-height: 1.4em;
-  }
-  .cracks-list {
-    text-align:center;
-    font-size: 1.1em;
-  }
-}
-
-/* Big smartphones (portrait) (ie: Galaxy 3 has 360)*/
-@media only screen and (max-width : 640px) {
-  .cracks-text {
-    text-align:center; font-size: 1.3em;line-height: 1.4em;
-  }
-  .cracks-list {
-    margin-top: 12px;
-    text-align:center;
-    font-size: 1.1em;
-  }
-}
 
 /* Smartphones (portrait) (ie: Galaxy 1) */
 @media only screen and (max-width : 321px) {}

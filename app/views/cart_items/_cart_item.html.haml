@@ -1,13 +1,13 @@
 .row{:class=>"cart_item cart_item-#{cart_item.id}"}
-  .large-9.columns{:style=>'text-align:left; font-size:1.2em;margin-top: 2px; color: #0b629d;'}
+  .large-9.medium-9.small-8.columns{:style=>'text-align:left; font-size:1.2em;margin-top: 2px; color: #0b629d;'}
     =cart_item.title
-  .large-3.columns{:style=>'text-align:right;'}
+  .large-3.medium-3.small-4.columns{:style=>'text-align:right;'}
     .delete
       =link_to cart_item_path(cart_item), :method=>:delete, :remote=>:true do
         %i.fi-trash
-  .large-9.columns{:style=>'text-align:left;'}
+  .large-9.medium-9.small-8.columns{:style=>'text-align:left;'}
     .cost 
       $#{cart_item.cost}
-  .large-3.columns{:style=>'text-align:right;'}
+  .large-3.medium-3.small-4.columns{:style=>'text-align:right;'}
     .weight 
       #{cart_item.pounds}lbs
