@@ -43,7 +43,8 @@ class PagesController < ApplicationController
       end
 
       # redirect to index & include checkout session id
-      redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
+      #redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
+      redirect_to "https://hyadev.com/fingerlakes/iframe?checkout_session_id=#{@checkout_session}"
 
     else
       # there was no checkout session id
@@ -140,6 +141,10 @@ class PagesController < ApplicationController
       count = count+p.count
     end
     @empties = count*3
+  end
+
+  def js_test
+
   end
 
   def offset_log

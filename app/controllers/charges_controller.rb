@@ -6,7 +6,7 @@ class ChargesController < ApplicationController
 
   def new
     products = []
-    product_info = {"home_energy" => {"one_time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IQwLIL1SWXeEQ2faV393hoU', "year" => 'price_1IQwLIL1SWXeEQ2fyzMxB5YQ'}, "car_commute" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
+    product_info = {"home energy" => {"one-time"=> 'price_1IW12sL1SWXeEQ2fPa1BkryP', "month" => 'price_1IW12sL1SWXeEQ2fPa1BkryP', "quarter" => 'price_1IW13LL1SWXeEQ2ft4svzOQI', "year" => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'}, "car travel" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "quarter" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', "year" => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'}, "air travel" => {"one_time" => 'price_1JHtmeL1SWXeEQ2f71eQeV4I', "month" => 'price_1JHtxwL1SWXeEQ2flUeNjBjE', "quarter" => 'price_1JHtmeL1SWXeEQ2fKDf45m4q', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
     payment_mode = 'payment'
     params[:products].each do |p|
       products << {price: product_info[p["type"]][p["period"]], quantity: 1}
@@ -23,7 +23,7 @@ class ChargesController < ApplicationController
 
   def init_checkout
     products = []
-    product_info = {"home energy" => {"one-time"=> 'price_1IQwLIL1SWXeEQ2ffMtPQDxf', "month" => 'price_1IW12sL1SWXeEQ2fPa1BkryP', "quarter" => 'price_1IW13LL1SWXeEQ2ft4svzOQI', "year" => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'}, "car travel" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
+    product_info = {"home energy" => {"one-time"=> 'price_1IW12sL1SWXeEQ2fPa1BkryP', "month" => 'price_1IW12sL1SWXeEQ2fPa1BkryP', "quarter" => 'price_1IW13LL1SWXeEQ2ft4svzOQI', "year" => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'}, "car travel" => {"one_time" => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', "month" => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', "quarter" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', "year" => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'}, "air travel" => {"one_time" => 'price_1JHtmeL1SWXeEQ2f71eQeV4I', "month" => 'price_1JHtxwL1SWXeEQ2flUeNjBjE', "quarter" => 'price_1JHtmeL1SWXeEQ2fKDf45m4q', "year" => 'price_1IQy23L1SWXeEQ2fHzm9oQl0'}}
     payment_mode = 'payment'
     cart_items = CartItem.where(:session_id=>params[:session])
     cart_items.each do |p|
