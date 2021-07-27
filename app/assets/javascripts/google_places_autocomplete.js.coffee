@@ -28,6 +28,7 @@ $ ->
   monthly_avgs = {}
   monthly_avgs["home energy"] = 1240
   monthly_avgs["car travel"] = 722
+  monthly_avgs["air travel"] = 600
   
   offset_costs = {}
   offset_costs["home energy"] = 35.32

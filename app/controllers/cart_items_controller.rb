@@ -5,7 +5,7 @@ class CartItemsController < ApplicationController
       user_id = current_user.id
       @cart_item = CartItem.new(:user_id=>user_id,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:session_id => params[:session_id])
     else
-      @cart_item = CartItem.new(:user_id=>nil,:title=>params[:title],:cost=>params[:cost],:pounds=>params[:pounds],:offset_type=>params[:offset_type],:offset_interval=>params[:offset_interval],:frequency=>params[:frequency],:session_id => params[:session_id])
+      @cart_item = CartItem.new(:user_id=>nil,:title=>params[:title].titleize,:cost=>params[:cost],:pounds=>params[:pounds],:offset_type=>params[:offset_type],:offset_interval=>params[:offset_interval],:frequency=>params[:frequency],:session_id => params[:session_id])
 
     end
 
