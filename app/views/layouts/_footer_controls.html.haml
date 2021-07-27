@@ -2,6 +2,15 @@
 
 :javascript
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const mode = urlParams.get('mode');
+    if(mode == 'donate') {
+        $('#donate-form').show();
+        $('#air-travel-offset').hide();
+    } else {
+      $('.air-travel-button').addClass('selected_btn');
+    }
     function initCheckout() {
       $.get('/init-checkout-session', {session: $.cookie('session_id')}, function(data) {
           var stripe = Stripe("#{ENV['PUBLISHABLE_KEY']}");
@@ -23,41 +32,17 @@
     }
 
     $('#total-cost').on('click', function() {
-      $("#cart").fadeIn("slow");
-      $(".offset-form").fadeOut("slow");
+      $(".offset-form").fadeOut("fast");
+      $("#cart").fadeIn("fast");
+      
       initCheckout();
 
     });
 
     // handling donations 
 
-    $('.donate-button').on('click', function() {
-      $('#donate-form').show();
-      $('#checkout-donate').hide();
-    });
-
     $('#donate').on('click', function() {
-      if(!$('#donation-amount').val() > 0) {
-        $('#donate-msg').html('Please provide a donation amount.');
-      }
-      else {
-        var data = {
-          name: $('#donation-name').val(),
-          zipcode: $('#donation-zipcode').val(),
-          cost: $('#donation-amount').val(),
-          session_id: $.cookie('session_id')
-        }
-        $.post('#{save_donation_path}',data);
-      }
-    });
-
-    $('#checkout-donate').on('click', function() {
-
-      total_cost=parseInt($('#donation-amount').val());
-      cost = total_cost*100;
-      
-      // add item to cart
-
+      // integrate into stripe
     });
 
     $('#login').on("click", function() {

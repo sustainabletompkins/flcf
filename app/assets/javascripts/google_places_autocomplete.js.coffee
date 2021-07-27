@@ -172,8 +172,8 @@ $ ->
     $("#cart").hide()
     $(".offset-form").hide()
     $("#air-travel-offset").show()
-    $(".offset-form").css('background-color','#2774ad')
-
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
     return
 
   $(".car-travel-button").on "click", ->
@@ -181,8 +181,9 @@ $ ->
     $('.arrow_box').hide()
     $(".offset-form").hide()
     $("#cart").hide()
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
     $("#car-travel-offset").show()
-    $(".offset-form").css('background-color','#5b922f')
 
     return
   $(".saved-button").on "click", ->
@@ -190,16 +191,17 @@ $ ->
     $(".offset-form").hide()
     $("#cart").hide()
     $("#saved-offsets").show()
-    $(".offset-form").css('background-color','#2774ad')
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
 
     return
   $(".home-energy-button").on "click", ->
     $('.arrow_box').hide()
     $(".offset-form").hide()
     $("#cart").hide()
-    $("#home-energy-offset").show()
-    $(".offset-form").css('background-color','#dca600')
-
+    $("#home-energy-offset").show() 
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
     $("#home-energy-offset input").val("")
     return
 
@@ -207,8 +209,19 @@ $ ->
     $('.arrow_box').hide()
     $(".offset-form").hide()
     $("#cart").hide()
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
     $("#quick-offset").fadeIn "fast"
-    $(".offset-form").css('background-color','#8012b3')
+
+    return
+
+  $(".donate-button").on "click", ->
+    $('.arrow_box').hide()
+    $(".offset-form").hide()
+    $("#cart").hide()
+    $(".button").removeClass('selected_btn')
+    $(this).addClass('selected_btn')
+    $("#donate-form").fadeIn "fast"
 
     return
 
@@ -245,9 +258,6 @@ $ ->
 
     return
 
-  $('.cart').on "click", ->
-    $("#cart").fadeIn "fast"
-    $("#offset-buttons").fadeOut "fast"
   $('#guest-checkout').on "click", ->
     $("#user-info").fadeIn "fast"
     $(".show-login").fadeOut "fast"
@@ -280,7 +290,7 @@ $ ->
 
   $(".new-offset").on "click", ->
     $("#cart").hide()
-    $("#offset-choices").show()
+    $("#air-travel-offset").show()
     $("#donation-value").focus()
     return
 

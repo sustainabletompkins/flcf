@@ -11,21 +11,25 @@
 
       #offset-buttons
         .hide-for-small
-          #air-travel-button.air-travel-button.button.blue-header-button
+          #air-travel-button.air-travel-button.button
             =image_tag('plane.png', :size=>'30x30')
-            air travel
+            Air Travel
 
-          #car-travel-button.button.car-travel-button.green-header-button
+          #car-travel-button.button.car-travel-button
             =image_tag('car.png', :size=>'30x30')
-            car travel
+            Car Travel
 
-          #home-energy-button.home-energy-button.button.yellow-header-button
+          #home-energy-button.home-energy-button.button
             =image_tag('house.png', :size=>'30x30')
-            building energy
+            Building Energy
 
-          #quick-button.quick-button.button.purple-header-button
+          #quick-button.quick-button.button
             =image_tag('quick.png', :size=>'30x30')
-            quick offset
+            Quick Offset
+
+          #donate-button.donate-button.button
+            =image_tag('quick.png', :size=>'30x30')
+            Donation
 
 
         .hide-for-medium-up
@@ -47,84 +51,76 @@
         To get started playing the carbon races, please start by offsetting your travel or home energy use.
 
       #calculator
-        #offset-choices.offset-form
-          %p What would you like to offset?
-          .air-travel-button.button
-            =image_tag('plane.png', :size=>'30x30')
-            air travel
-
-          .car-travel-button.button
-            =image_tag('car.png', :size=>'30x30')
-            car travel
-
-          .home-energy-button.button
-            =image_tag('house.png', :size=>'30x30')
-            building energy
-
-          .quick-button.button
-            =image_tag('quick.png', :size=>'30x30')
-            quick offset
-
-          -if user_signed_in?
-            #saved-button.button
-              =image_tag('disk.png', :size=>'30x30')
-              saved offsets
-              %i.fi-arrow-right.arrow
         #air-travel-offset.offset-form
-          %label how many travelers?
-          %input.traveler-count.clearer{:type=>"number",:min => 1, :value => 1}
-          %hr
-          %label enter your trip mileage
-          %input.clearable{:placeholder => "total miles", :id=>"air-miles"}
-          %hr
-          %label or, let us calculate it for you:
-          %input.starting-air-city.clearer{:placeholder => "starting location"}
-          %input.ending-air-city.clearer{:placeholder => "end location"}
-          %hr
-
+          .col-20
+            How many travelers?
+            %br
+            %input.traveler-count{:type=>"number",:min => 1, :value => 1}
+          .col-20
+            Enter trip mileage
+            %br
+            %input{:placeholder => "total miles", :id=>"air-miles"}
+          .col-30
+            Or, let us calculate it for you
+            %br
+            %input.starting-air-city{:placeholder => "starting location"}
+            
+          .col-30
+            %br
+            %input.ending-air-city{:placeholder => "end location"}
           .round-trip
-            %label round trip?
+            round trip?
             %input{:checked=>:true,:type => "checkbox"}
-          #calculate-air-offset.button
-            calculate offset
-          .button.cancel
-            cancel
-          .check-msg{:style => "display:inline;color:white;margin-left: 15px;"}
+          #calculate-air-offset.custom_btn.custom_btnline
+            Calculate Offset
+          .custom_btn.custom_btnline.cancel
+            Cancel
+          .check-msg{:style => "margin-left: 15px;display:inline;"}
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #car-travel-offset.offset-form
-          %label enter your trip mileage
-          %input.clearable{:placeholder => "total miles", :id=>"car-miles"}
-          %hr
-          %label or, let us calculate it for you:
-          %input.starting-car-city.clearer{:placeholder => "starting location"}
-          %input.ending-car-city.clearer{:placeholder => "end location"}
-          %hr
-          %label car mpg (optional)
-          %input{:value => "25", :id => "mpg"}
+          .col-20
+            Enter your trip mileage
+            %br
+            %input{:placeholder => "total miles", :id=>"car-miles"}
+          .col-30
+            Or, let us calculate it for you:
+            %br
+            %input.starting-car-city{:placeholder => "starting location"}
+          .col-30
+            %input.ending-car-city{:placeholder => "end location"}
+          .col-20
+            Car mpg (optional)
+            %br
+            %input{:type=>"number",:value => "25", :id => "mpg"}
           .round-trip
-            %label round trip?
+            round trip?
             %input{:checked=>:true,:type => "checkbox"}
-          %hr
-          #calculate-car-offset.button
-            calculate offset
-          .button.cancel
-            cancel
-          .check-msg{:style => "display:inline;color:white;margin-left: 15px;"}
+          #calculate-car-offset.custom_btn.custom_btnline
+            Calculate Offset
+          .custom_btn.custom_btnline.cancel
+            Cancel
+          .check-msg{:style => "margin-left: 15px;display:inline;"}
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #home-energy-offset.offset-form
-          %p enter your energy use
-          %input.clearable{:id=>"propane",:placeholder => "propane (gallons)"}
-          %input.clearable{:id=>"natural-gas",:placeholder => "natural gas (therms)"}
-          %input.clearable{:id=>"electricity",:placeholder => "electricity (kWh)"}
-          %input.clearable{:id=>"fuel-oil",:placeholder => "fuel oil (gallons)"}
-          #calculate-home-offset.button
-            calculate offset
-          .button.cancel
-            cancel
-          .check-msg{:style => "display:inline;color:white;margin-left: 15px;"}
+          Enter your energy use
+          %br
+          .col-25
+            %input.clearable{:id=>"propane",:placeholder => "propane (gallons)"}
+          .col-25
+            %input.clearable{:id=>"natural-gas",:placeholder => "natural gas (therms)"}
+          .col-25
+            %input.clearable{:id=>"electricity",:placeholder => "electricity (kWh)"}
+          .col-25
+            %input.clearable{:id=>"fuel-oil",:placeholder => "fuel oil (gallons)"}
+          %br
+          %br
+          #calculate-home-offset.custom_btn.custom_btnline
+            Calculate Offset
+          .custom_btn.custom_btnline.cancel
+            Cancel
+          .check-msg{:style => "margin-left: 15px;display:inline;"}
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #quick-offset.offset-form
-          %h5 choose a quick offset
           =form_with url: '/cart_items', method: :post do |form|
             .row
               .large-4.medium-4.small-12.columns
@@ -136,43 +132,27 @@
               .large-4.medium-4.small-12.columns
                 %label How Frequently?
                 =form.select :offset_frequency, options_for_select([ "one-time", "recurring" ], "one-time"), {}, :id => 'offset_frequency'
-            .row
-              .large-12.columns
-                #save-offset.button 'add to cart' 
-            .row
-              .offset_title.large-6.small-6.columns
-              .offset_cost.large-6.small-6.columns{:style => 'text-align: right;'}
+            #save-offset.custom_btn.custom_btnline Add to Cart
         #donate-form.offset-form
           %p Make a Donation
-          .donate-input
-            %label How much would you like to donate (in USD)?
-            %input{:type=>'number',:id=>'donation-amount', :style=>'width:100px;'}
-            %label Your Zipcode
-            %input{:type=>'number',:id=>'donation-zip', :style=>'width:100px;'}
-            %label Your Name
-            %input{:type=>'text',:id=>'donation-name', :style=>'width:100px;'}
-          %p#donate-msg
-          .button#donate
-            make donation
-          .button#checkout-donate
-            pay now
-          .button.cancel
+          .donate-buttons
+            .donate-link
+              =link_to "https://buy.stripe.com/test_cN2bMx6XZ4eU4g0cMM" do
+                %button $20
+            .donate-link
+              =link_to "https://buy.stripe.com/test_cN2bMx6XZ4eU4g0cMM" do
+                %button $50    
+          %br
+          .custom_btn.custom_btnline
             cancel
         #cart
 
           #cart-items
-          %hr
-          -if user_signed_in?
-            %button#stripe.button
-              %i.fi-shopping-cart
-              checkout
-          -else
-            #checkout-button.button
-              %i.fi-shopping-cart
-              checkout
 
-          .new-offset.button
-            %i.fi-plus
+          #checkout-button.custom_btn.custom_btnline
+            checkout
+
+          .new-offset.custom_btn.custom_btnline
             new offset
           .check-msg{:style => "display:inline;color:black;margin-left: 15px;"}
             Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
