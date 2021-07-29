@@ -126,13 +126,13 @@
             .row
               .large-4.medium-4.small-12.columns
                 %label What To Offset?
-                =form.select :offset_type, options_for_select([ "", "home energy", "car commute", "air travel" ], ""), {}, :id => 'offset_type'
+                =form.select :offset_type, options_for_select([ "", "home energy", "car travel", "air travel" ], ""), {}, :id => 'offset_type'
               .large-4.medium-4.small-12.columns
                 %label For What Period?
                 =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], ""), {}, :id => 'offset_interval'
               .large-4.medium-4.small-12.columns
                 %label How Frequently?
-                =form.select :offset_frequency, options_for_select([ "one-time", "recurring" ], "one-time"), {}, :id => 'offset_frequency'
+                =form.select :offset_frequency, options_for_select([ "one-time" ], "one-time"), {}, :id => 'offset_frequency'
             #save-offset.custom_btn.custom_btnline Add to Cart
         #donate-form.offset-form
           %p Make a Donation
