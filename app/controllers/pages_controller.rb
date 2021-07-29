@@ -62,7 +62,7 @@ class PagesController < ApplicationController
     if params.has_key?('checkout_session_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\
-
+      @checkout_session = params["checkout_session_id"]
       # start by getting offsets associated with checkout session
       @offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
       zipcode = @offsets.first.zipcode

@@ -52,7 +52,7 @@
           %h4 Join a  Team
           %p Are others in your organization already playing?  Join them!
           =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name'), id: 'select-team', prompt: 'Select a team to join'
-          =hidden_field_tag :offset_ids, @offsets.collect(&:id), multiple: true
+          =hidden_field_tag :checkout_session_id, @checkout_session
           #member-name
             %label Your Name (for public display)
             =text_field_tag :name, nil, :id=> 'team-member-name'
@@ -62,7 +62,7 @@
         .large-12.columns
           %h4 Play Solo
           %p Rise up the charts each time you offset
-          =hidden_field_tag :offset_ids, @offsets.collect(&:id), multiple: true
+          =hidden_field_tag :checkout_session_id, @checkout_session
           %label Your Name (for public display)
           =text_field_tag :name, nil, :id=> 'player-name'
           %button#new-player Register 
@@ -152,7 +152,6 @@
       team_data = {}
       team_data.name = $('#team-member-name').val();
       team_data.checkout_session_id = checkout_session_id;
-      console.log("jdjsdslksld");
       $.post('/teams/'+ $('#select-team').val() + '/join', team_data);
     }
 
