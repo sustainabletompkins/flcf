@@ -17,16 +17,10 @@
     =yield :head
 
   %body
-    .off-canvas-wrap{"data-offcanvas" => ""}
-      .inner-wrap
-        =render :partial => 'layouts/bannerless_head'
+    .row{:style => "background-color: #fff;padding:0px;"}
 
 
-        %section.main-section
-          .row{:style => "background-color: #fff;padding:0px;"}
+      .large-12.columns{:style=>"padding-top: 8px;"}
+        #content
+          =yield
 
-
-            .large-12.columns{:style=>"padding-top: 8px;"}
-              #content
-                =yield
-        =render :partial => 'layouts/footer'

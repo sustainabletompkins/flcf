@@ -7,7 +7,8 @@ class IndividualsController < ApplicationController
     if @i.present?
       
     else
-      @i=Individual.create(:name=>params[:individual][:name], :email => offsets.first.email)
+      region = Region.get_by_zip(offsets.first.zipcode)
+      @i=Individual.create(:name=>params[:individual][:name], :email => offsets.first.email, :region=>region)
     end
     offsets.update_all(:individual_id => @i.id)
     # redirect to standings

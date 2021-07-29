@@ -5,15 +5,21 @@ class TeamsController < ApplicationController
     if @team.present? || team_params[:name].length == 0
       render 'creation_failed'
     else
-      @team=Team.create(team_params)
-      TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :founder=> "TRUE", :team_id=>@team.id)
       
       if params.has_key?(:checkout_session_id)
         offsets = Offset.where(:checkout_session_id => params[:checkout_session_id])
+        region = Region.get_by_zip(offsets.first.zipcode)
+        @team=Team.create(team_params)
+        @team.update_attribute(:region_id,region.id)
+        TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :founder=> "TRUE", :team_id=>@team.id)
+      
         offsets.update_all(:team_id => @team.id)
         render 'team_created_after_offset'
       else
         # team is not being created through checkout process
+        @team=Team.create(team_params)
+        TeamMember.create(:email => params[:user_email], :name=> params[:member_name], :founder=> "TRUE", :team_id=>@team.id)
+      
         @count = Team.all.count
         render 'team_created'
       end

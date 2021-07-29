@@ -36,9 +36,11 @@ class PagesController < ApplicationController
         # TO DO: get zip and name
       end
 
+      region = Region.get_by_zip(zipcode)
+
       # convert cart items into completed offsets
       CartItem.where(:checkout_session_id=> @checkout_session).each do |item|
-        Offset.create(:name => name, :user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :checkout_session_id => @checkout_session, :email=>email)
+        Offset.create(:name => name, :user_id=>item.user_id,:title=>item.title,:cost=>item.cost,:pounds=>item.pounds,:offset_type=>item.offset_type,:offset_interval=>item.offset_interval, :zipcode => zipcode, :region=>region, :checkout_session_id => @checkout_session, :email=>email)
         item.update_attribute(:purchased, true)
       end
 
@@ -55,6 +57,7 @@ class PagesController < ApplicationController
   end
 
   def index
+    puts 'sasdasadjdhaskj'
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://hyadev.com/"
     if params.has_key?('checkout_session_id')
       # user has just completed a checkout
