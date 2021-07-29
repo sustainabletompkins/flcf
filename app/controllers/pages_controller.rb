@@ -44,7 +44,7 @@ class PagesController < ApplicationController
 
       # redirect to index & include checkout session id
       #redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
-      redirect_to "https://hyadev.com/fingerlakes/iframe?checkout_session_id=#{@checkout_session}"
+      redirect_to "https://hyadev.com/fingerlakes/iframe?c_id=#{@checkout_session}"
 
     else
       # there was no checkout session id
