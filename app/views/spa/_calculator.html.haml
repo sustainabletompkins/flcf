@@ -45,6 +45,8 @@
 
           #quick-button.quick-button.button.mobile-button.quick-button
             =image_tag('quick.png', :size=>'30x30')
+          #donate-button.donate-button.button.mobile-button
+            =image_tag('quick.png', :size=>'30x30')
 
       .arrow_box
         To get started playing the carbon races, please start by offsetting your travel or home energy use.
@@ -124,15 +126,12 @@
         #quick-offset.offset-form
           =form_with url: '/cart_items', method: :post do |form|
             .row
-              .large-4.medium-4.small-12.columns
+              .large-6.medium-6.small-12.columns
                 %label What To Offset?
                 =form.select :offset_type, options_for_select([ "", "home energy", "car travel", "air travel" ], ""), {}, :id => 'offset_type'
-              .large-4.medium-4.small-12.columns
+              .large-6.medium-6.small-12.columns
                 %label For What Period?
                 =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], ""), {}, :id => 'offset_interval'
-              .large-4.medium-4.small-12.columns
-                %label How Frequently?
-                =form.select :offset_frequency, options_for_select([ "one-time" ], "one-time"), {}, :id => 'offset_frequency'
             #save-offset.custom_btn.custom_btnline Add to Cart
         #donate-form.offset-form
           %p Make a Donation

@@ -2,8 +2,8 @@ $ ->
   cost_per_pound = .0125
   propane_rate = 12.17
   fuel_oil_rate = 22.37
-  natural_gas_rate = 11
-  electricity_rate = 0.7208
+  natural_gas_rate = 25.2
+  electricity_rate = 0.233
   lbs_co2_per_gallon = 19.64
   mpg = 25
   miles_per_meter = 0.000621371
@@ -145,6 +145,15 @@ $ ->
     return
 
   saveCartItem = ->
+    switch ($("#offset_interval").val()) 
+      when 'month'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 1
+      when 'quarter'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 3
+      when 'year'
+        offset_weight = monthly_avgs[$("#offset_type").val()] * 12 
+    offset_cost = offset_weight * cost_per_pound  
+
     data =
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)

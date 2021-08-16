@@ -57,3 +57,9 @@
       $("#mobile-menu").toggle();
 
     });
+
+    // highlighting clicked button
+    $('.button').on('click', function() {
+      $('.button').removeClass('selected-button');
+      $(this).addClass('selected-button');
+    })
