@@ -20,7 +20,7 @@ class ChargesController < ApplicationController
 
   def init_checkout
     products = []
-    product_info = { 'home energy' => { 'one_time' => 'price_1JHuI7L1SWXeEQ2feQqPHIOL', 'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP', 'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI', 'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib' }, 'car travel' => { 'one_time' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', 'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', 'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', 'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA' }, 'air travel' => { 'one_time' => 'price_1JHtmeL1SWXeEQ2f71eQeV4I', 'month' => 'price_1JHtxwL1SWXeEQ2flUeNjBjE', 'quarter' => 'price_1JHtmeL1SWXeEQ2fKDf45m4q', 'year' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0' } }
+    product_info = { 'home energy' => { 'one_time' => 'price_1JHuI7L1SWXeEQ2feQqPHIOL', 'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP', 'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI', 'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib' }, 'car travel' => { 'one_time' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', 'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', 'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', 'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA' }, 'air travel' => { 'one_time' => 'price_1JQueHL1SWXeEQ2fMkllhTdA', 'month' => 'price_1JQucnL1SWXeEQ2fIgRYcEvm', 'quarter' => 'price_1JQudKL1SWXeEQ2fVHEUrFf9', 'year' => 'price_1JHtmeL1SWXeEQ2ffsYWUBLO' } }
     payment_mode = 'payment'
     cart_items = CartItem.where(session_id: params[:session], purchased: false)
     cart_items.each do |p|
