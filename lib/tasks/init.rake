@@ -66,6 +66,22 @@ namespace :init do
     end
   end
 
+  task reassign_offsets: :environment do
+    Team.all.each do |t|
+      count = 0
+      t.team_members.each do |tm|
+        offsets = Offset.where(email: tm.email)
+        offsets.each do |off|
+          if off.created_at > (tm.created_at - 1.hour)
+            off.update_attribute(:team, t)
+            count += 1
+          end
+        end
+      end
+      t.update_attribute(:count, count)
+    end
+  end
+
   task set_stats: :environment do
     # Stat.create(:pounds=>'3472400' , :dollars => '33092', :awardees => '18')
     Stat.create(pounds: '1622300', dollars: '16223', awardees: '18')
