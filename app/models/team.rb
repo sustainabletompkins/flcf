@@ -6,8 +6,16 @@ class Team < ActiveRecord::Base
 
   def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, solo_mode = nil)
     results = []
-    start_date = Time.now - 20.years if start_date.nil?
-    end_date = Time.now if end_date.nil?
+    start_date = if start_date.nil?
+                   Time.now - 20.years
+                 else
+                   start_date.to_datetime
+                 end
+    end_date = if end_date.nil?
+                 Time.now
+               else
+                 end_date.to_datetime
+               end
 
     if solo_mode
       Individual.all.each do |team|

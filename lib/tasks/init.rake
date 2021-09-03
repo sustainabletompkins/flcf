@@ -70,6 +70,8 @@ namespace :init do
     Team.all.each do |t|
       count = 0
       t.team_members.each do |tm|
+        next if tm.email
+
         offsets = Offset.where(email: tm.email)
         offsets.each do |off|
           if off.created_at > (tm.created_at - 1.hour)
