@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
   belongs_to :region
   validates :name, uniqueness: true
 
-  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, solo_mode = nil)
+  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, solo_mode = nil)
     results = []
     start_date = if start_date.nil?
                    Time.now - 20.years
@@ -34,7 +34,8 @@ class Team < ActiveRecord::Base
         results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count, region: team.region.name }
       end
     end
-    puts region.inspect
+    results = results.sort_by { |k| k[:pounds] }.reverse
+    results = results[offset..(offset + limit - 1)] if limit > 0
     results
   end
 end
