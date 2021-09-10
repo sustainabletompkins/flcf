@@ -21,7 +21,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  # config.active_storage.service = :amazon
+  config.active_storage.service = :amazon
   config.require_master_key = true
 
   config.app_domain = 'boiling-spire-1619.herokuapp.com'
