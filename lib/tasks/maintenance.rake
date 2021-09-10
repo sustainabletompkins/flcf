@@ -8,7 +8,6 @@ namespace :maintenance do
   end
 
   task reassign_prize_images: :environment do
-    # Prize.find_by_title('Café DeWitt').update_attribute(:title, 'Cafe DeWitt')
     Dir.foreach('lib/assets/images') do |filename|
       if filename.match?(/(jpeg|png)/)
         prize = filename.split('.')[0].gsub('_', ' ')

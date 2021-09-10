@@ -2,6 +2,6 @@ class PrizeSerializer < ActiveModel::Serializer
   attributes :title, :description, :image
 
   def image
-    'https:' + object.avatar.url
+    object.image.service_url.split('?').first
   end
 end
