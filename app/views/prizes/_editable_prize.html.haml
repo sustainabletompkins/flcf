@@ -1,9 +1,7 @@
 .row.prize[prize]{:style=>'margin-bottom: 12px;'}
   .large-4.medium-5.small-5.columns{:style=>'padding-top: 10px;'}
-    -if prize.avatar_file_name.present?
-      =image_tag("#{prize.avatar.url(:square).gsub('http','https')}")
-    -else
-      =image_tag("#{prize.title.gsub(' ', '-')}.png")
+    -if prize.image.attached?
+      =image_tag url_for(prize.image)
   .large-7.medium-7.small-7.columns
     %label=best_in_place prize, :description
     %span=best_in_place prize, :title

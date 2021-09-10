@@ -1,25 +1,28 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_API_USER'],
-    :password       => ENV['SENDGRID_API_KEY'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
+    address: 'smtp.sendgrid.net',
+    port: '587',
+    authentication: :plain,
+    user_name: ENV['SENDGRID_API_USER'],
+    password: ENV['SENDGRID_API_KEY'],
+    domain: 'heroku.com',
+    enable_starttls_auto: true
   }
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['S3_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-      :s3_region => ENV['AWS_REGION']
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+      s3_region: ENV['AWS_REGION']
     }
   }
   # Code is not reloaded between requests.
   config.cache_classes = true
+
+  # config.active_storage.service = :amazon
+  config.require_master_key = true
 
   config.app_domain = 'boiling-spire-1619.herokuapp.com'
 

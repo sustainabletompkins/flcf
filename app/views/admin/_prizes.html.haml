@@ -13,10 +13,10 @@
                 %label prize description
                 =f.text_area :description
                 %label region
-                =f.select :region, options_from_collection_for_select(Region.all, 'id', 'name')
+                =f.select :region_id, options_from_collection_for_select(Region.all, 'id', 'name')
                 %label how many?
                 =f.number_field :count, :value=>'1', :min=>1
-                =f.file_field :avatar
+                =f.file_field :image
                 =show_simple_captcha(:label=>'Enter letters...')
                 %hr
                 =f.submit 'Add prize', :class=>'button', :id=>'add-prize'
