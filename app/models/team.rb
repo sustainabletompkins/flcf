@@ -5,6 +5,8 @@ class Team < ActiveRecord::Base
   validates :name, uniqueness: true
   has_one_attached :image
 
+  include Rails.application.routes.url_helpers
+
   def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, solo_mode = nil)
     results = []
     start_date = if start_date.nil?
@@ -32,11 +34,15 @@ class Team < ActiveRecord::Base
                     team.offsets
                   end
         offsets = offsets.where(region: Region.where(name: region).first) if region.present?
-        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count, region: team.region.name }
+        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count, region: team.region.name, image: team.image.attached? ? Rails.application.routes.url_helpers.url_for(team.image) : '' }
       end
     end
     results = results.sort_by { |k| k[:pounds] }.reverse
     results = results[offset..(offset + limit - 1)] if limit > 0
     results
+  end
+
+  def cover_url
+    rails_blob_path(image, disposition: 'attachment', host: 'http://localhost:3000')
   end
 end

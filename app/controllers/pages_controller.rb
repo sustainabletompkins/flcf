@@ -53,10 +53,12 @@ class PagesController < ApplicationController
 
   def index
     # response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM http://gayn.sg-host.com/, https://hyadev.com/'
-    if params.has_key?('c_id')
+    puts params
+    puts 'heyskjahakjaldj'
+    if params.has_key?('checkout_session_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\
-      @checkout_session = params['c_id']
+      @checkout_session = params['checkout_session_id']
       # start by getting offsets associated with checkout session
       @offsets = Offset.where(checkout_session_id: @checkout_session)
       zipcode = @offsets.first.zipcode

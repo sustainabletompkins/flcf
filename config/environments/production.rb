@@ -23,6 +23,7 @@ Rails.application.configure do
 
   config.active_storage.service = :amazon
   config.require_master_key = true
+  Rails.application.routes.default_url_options[:host] = 'https://flcf-staging.herokuapp.com'
 
   config.app_domain = 'boiling-spire-1619.herokuapp.com'
 
