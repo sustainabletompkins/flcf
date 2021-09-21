@@ -3,6 +3,7 @@ class Team < ActiveRecord::Base
   has_many :team_members
   belongs_to :region
   validates :name, uniqueness: true
+  has_one_attached :image
 
   def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, solo_mode = nil)
     results = []

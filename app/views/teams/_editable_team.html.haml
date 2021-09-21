@@ -1,9 +1,14 @@
 .row.team[team]
   .large-8.columns
-    =best_in_place team, :name
+    =team.name
   .large-3.columns
-    =best_in_place team, :pounds
-  .large-1.columns.show-details{"data-team" => team.id, :style=>'cursor:pointer;'}
-    >
+    =team.pounds
+  .large-1.columns
+    %span.show-details{"data-team" => team.id, :style=>'cursor:pointer;'}
+      >
+    %span.show-edit{"data-team" => team.id, :style=>'cursor:pointer;'}
+      e
   .large-12.columns.details{:style=>'padding:5px; display:none;'}
     =render :partial => 'teams/team_details', :locals => {team: team}
+  .large-12.columns.edit{:style=>'padding:5px; display:none;'}
+    =render :partial => 'teams/edit', :locals => {team: team}  

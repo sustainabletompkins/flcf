@@ -17,4 +17,7 @@
     }) 
     $('.show-details').on('click', function(e) {
         $("#team_"+e.target.getAttribute('data-team')+" .details").toggle();  
+    }) 
+    $('.show-edit').on('click', function(e) {
+        $("#team_"+e.target.getAttribute('data-team')+" .edit").toggle();  
     })            
