@@ -131,7 +131,8 @@
                 =form.select :offset_type, options_for_select([ "", "home energy", "car travel", "air travel" ], ""), {}, :id => 'offset_type'
               .large-6.medium-6.small-12.columns
                 %label For What Period?
-                =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], ""), {}, :id => 'offset_interval'
+                .optgroup
+                  =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], "year"), {}, :id => 'offset_interval'
             #save-offset.custom_btn.custom_btnline Add to Cart
         #donate-form.offset-form
           %p Make a Donation

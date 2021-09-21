@@ -42,7 +42,6 @@
             %label Your Name (for public display)
             =text_field_tag :member_name, '', id: 'public-name'
             =hidden_field_tag :checkout_session_id, @checkout_session
-            -#=f.file_field :image, :class => 'file-upload'
             #form-msg
             %br
             =f.submit 'submit', :class=>'button'

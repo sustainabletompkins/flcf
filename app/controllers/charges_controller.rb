@@ -1,26 +1,44 @@
 class ChargesController < ApplicationController
-  def stripe_test; end
-
-  def new
-    products = []
-    product_info = { 'home energy' => { 'one-time' => 'price_1IW12sL1SWXeEQ2fPa1BkryP', 'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP', 'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI', 'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib' }, 'car travel' => { 'one_time' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', 'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', 'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', 'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA' }, 'air travel' => { 'one_time' => 'price_1JHtmeL1SWXeEQ2f71eQeV4I', 'month' => 'price_1JHtxwL1SWXeEQ2flUeNjBjE', 'quarter' => 'price_1JHtmeL1SWXeEQ2fKDf45m4q', 'year' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0' } }
-    payment_mode = 'payment'
-    params[:products].each do |p|
-      products << { price: product_info[p['type']][p['period']], quantity: 1 }
-      payment_mode = 'subscription' if %w[month quarter year].include?(p['period'])
-    end
-    @session = Stripe::Checkout::Session.create({
-                                                  payment_method_types: ['card'],
-                                                  line_items: products,
-                                                  mode: payment_mode,
-                                                  success_url: 'http://flcf-staging.herokuapp.com/charges/success?session_id={CHECKOUT_SESSION_ID}',
-                                                  cancel_url: 'https://hyadev.com/fingerlakes/iframe/'
-                                                })
-  end
-
   def init_checkout
     products = []
-    product_info = { 'home energy' => { 'one_time' => 'price_1JHuI7L1SWXeEQ2feQqPHIOL', 'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP', 'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI', 'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib' }, 'car travel' => { 'one_time' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O', 'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO', 'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0', 'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA' }, 'air travel' => { 'one_time' => 'price_1JQueHL1SWXeEQ2fMkllhTdA', 'month' => 'price_1JQucnL1SWXeEQ2fIgRYcEvm', 'quarter' => 'price_1JQudKL1SWXeEQ2fVHEUrFf9', 'year' => 'price_1JHtmeL1SWXeEQ2ffsYWUBLO' } }
+    product_info = {
+      'home energy' => {
+        'one_time' => {
+          'month' => 'price_1JHuI7L1SWXeEQ2feQqPHIOL',
+          'quarter' => 'price_1JcBukL1SWXeEQ2fZnNENAWK',
+          'year' => 'price_1JcBv2L1SWXeEQ2fOO9EQZHQ'
+        },
+        'recurring' => {
+          'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP',
+          'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI',
+          'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'
+        }
+      },
+      'car travel' => {
+        'one_time' => {
+          'month' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O',
+          'quarter' => 'price_1JcC33L1SWXeEQ2fjLsFf9mA',
+          'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'
+        },
+        'recurring' => {
+          'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO',
+          'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0',
+          'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'
+        }
+      },
+      'air travel' => {
+        'one_time' => {
+          'month' => 'price_1JQueHL1SWXeEQ2fMkllhTdA',
+          'quarter' => 'price_1JcC4NL1SWXeEQ2foH7qYmPd',
+          'year' => 'price_1JcC4iL1SWXeEQ2fGWXPXkLv'
+        },
+        'recurring' => {
+          'month' => 'price_1JQucnL1SWXeEQ2fIgRYcEvm',
+          'quarter' => 'price_1JQudKL1SWXeEQ2fVHEUrFf9',
+          'year' => 'price_1JHtmeL1SWXeEQ2ffsYWUBLO'
+        }
+      }
+    }
     payment_mode = 'payment'
     cart_items = CartItem.where(session_id: params[:session], purchased: false)
     cart_items.each do |p|
@@ -36,9 +54,9 @@ class ChargesController < ApplicationController
       else
         puts p.inspect
         puts product_info[p['offset_type']]
-        products << { price: product_info[p['offset_type']][p['offset_interval']], quantity: 1 }
+        products << { price: product_info[p['offset_type']][p['frequency']][p['offset_interval']], quantity: 1 }
         puts products
-        payment_mode = 'subscription' if %w[month quarter year].include?(p['offset_interval'])
+        payment_mode = 'subscription' if p['frequency'] == 'recurring'
 
       end
     end

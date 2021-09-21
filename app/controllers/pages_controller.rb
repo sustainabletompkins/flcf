@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   http_basic_authenticate_with name: 'admin', password: '309NAurora', only: %i[admin list offset_log]
 
   def payment_success
+    puts 'asdkljskldjaklsjdalks'
     if params.has_key?('checkout_session_id')
       # create the offset objects
       @checkout_session = params['checkout_session_id']
@@ -9,7 +10,6 @@ class PagesController < ApplicationController
       name = nil
       email = nil
       session = Stripe::Checkout::Session.retrieve(@checkout_session)
-      puts session.inspect
       if session.payment_intent
         paymentIntent = Stripe::PaymentIntent.retrieve(
           session.payment_intent
@@ -21,17 +21,12 @@ class PagesController < ApplicationController
         zipcode = paymentMethod['billing_details']['address']['postal_code']
         name = paymentMethod['billing_details']['name']
         email = paymentMethod['billing_details']['email']
-        puts paymentMethod.inspect
-        puts paymentIntent.inspect
       else
         cards = Stripe::Customer.list_sources(
           session.customer,
           { object: 'card', limit: 3 }
         )
         customer = Stripe::Customer.retrieve(session.customer)
-        puts customer.inspect
-        puts 'hey hey key'
-        puts cards.inspect
         # TO DO: get zip and name
       end
 
@@ -45,6 +40,7 @@ class PagesController < ApplicationController
 
       # redirect to index & include checkout session id
       # redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
+      # redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
       redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
 
     else
@@ -56,14 +52,13 @@ class PagesController < ApplicationController
   end
 
   def index
-    puts 'sasdasadjdhaskj'
-    response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM https://hyadev.com/'
-    if params.has_key?('checkout_session_id')
+    # response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM http://gayn.sg-host.com/, https://hyadev.com/'
+    if params.has_key?('c_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\
-      @checkout_session = params['checkout_session_id']
+      @checkout_session = params['c_id']
       # start by getting offsets associated with checkout session
-      @offsets = Offset.where(checkout_session_id: params[:checkout_session_id])
+      @offsets = Offset.where(checkout_session_id: @checkout_session)
       zipcode = @offsets.first.zipcode
 
       # check to see if this region has any prize choices
