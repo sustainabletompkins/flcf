@@ -29,9 +29,10 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @user = Team.find(params[:id])
+    @team = Team.find(params[:id])
     puts team_params
-    if @user.update_attributes(team_params)
+    if @team.update_attributes(team_params)
+      @team.offsets.update_all(region_id: @team.region_id)
       redirect_to '/calc-admin'
     else
       # error
