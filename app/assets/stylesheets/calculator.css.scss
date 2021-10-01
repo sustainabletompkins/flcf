@@ -3,12 +3,15 @@
     color: black;
     input {
       font-size: 1.2em;
-      width:80%; 
+      width:90%; 
       margin-top: 5px; 
       padding: 4px; 
     }
     input[type='number']{
         display:inline-block;
+        font-size: 1.2em;
+        padding: 6px; 
+        height: 1.8em;
     } 
     input[type='checkbox']{
         display:inline-block;
@@ -133,8 +136,17 @@
       background-color: #000;
   }
 
+  .offset-form {
+    padding: 1em;
+
+    select {
+      font-size: 1.1em;
+      height: 1.8em;
+    }
+  }
+
   .custom_btn {
-    font-size: 18px;
+    font-size: 1.1em;
     font-family: Avenir;
     font-weight: 600;
     background-color: #3D9D14;
@@ -164,7 +176,7 @@
   
   .round-trip {
       font-size: 1.2em;
-      margin: 7px 0 5px 0;
+      margin: 5px 0 5px 0;
     label,input {
       display:inline;
     }

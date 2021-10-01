@@ -66,7 +66,7 @@ class ChargesController < ApplicationController
                                                   line_items: products,
                                                   mode: payment_mode,
                                                   success_url: 'http://flcf-staging.herokuapp.com/payment-success?checkout_session_id={CHECKOUT_SESSION_ID}',
-                                                  cancel_url: 'https://hyadev.com/fingerlakes/iframe/'
+                                                  cancel_url: 'https://fingerlakesclimatefund.org'
                                                 })
 
     cart_items.update_all(checkout_session_id: @session.id)

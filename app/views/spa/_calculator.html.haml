@@ -8,7 +8,7 @@
         %i.fi-shopping-cart
 
       #offset-buttons
-        .hide-for-small
+        .show-for-large-up
           #air-travel-button.air-travel-button.button
             =image_tag('plane.png', :size=>'30x30')
             Air Travel
@@ -30,8 +30,29 @@
             =image_tag('quick.png', :size=>'30x30')
             Donation
 
+        .show-for-medium-only
+          #air-travel-button.air-travel-button.button
+            =image_tag('plane.png', :size=>'30x30')
+            Air
 
-        .hide-for-medium-up
+          #car-travel-button.button.car-travel-button
+            =image_tag('car.png', :size=>'30x30')
+            Car
+
+          #home-energy-button.home-energy-button.button
+            =image_tag('house.png', :size=>'30x30')
+            Home
+            
+
+          #quick-button.quick-button.button
+            =image_tag('quick.png', :size=>'30x30')
+            Quick
+
+          #donate-button.donate-button.button
+            =image_tag('quick.png', :size=>'30x30')
+            Donate
+
+        .show-for-small-only
           #air-travel-button.air-travel-button.button.mobile-button
             =image_tag('plane.png', :size=>'30x30')
 
@@ -58,12 +79,12 @@
               How many travelers?
               %br
               %input.traveler-count{:type=>"number",:min => 1, :value => 1}
-            .large-3.medium-6.small-12.columns
+            .large-3.medium-6.small-12.columns{:style=>"margin-bottom:1em"}
               Enter trip mileage
               %br
               %input{:placeholder => "total miles", :id=>"air-miles"}
             .large-3.medium-6.small-12.columns
-              Or, let us calculate it for you
+              Or, let us calculate it
               %br
               %input.starting-air-city{:placeholder => "starting location"}
               
@@ -74,36 +95,37 @@
             round trip?
             %input{:checked=>:true,:type => "checkbox"}
           .row
-            .large-3.medium-12.small-12.columns
+            .large-4.medium-4.small-12.columns
               #calculate-air-offset.custom_btn.custom_btnline
                 Calculate Offset
-            .large-9.medium-12.small-12.columns{:style=>"margin-top:7px;"}
+            .large-8.medium-8.small-12.columns{:style=>"margin-top:7px;"}
               Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #car-travel-offset.offset-form
           .row
-            .large-3.medium-6.small-12.columns
+            .large-4.medium-4.small-12.columns{:style=>"margin-bottom:5px"}
               Enter your trip mileage
               %br
               %input{:placeholder => "total miles", :id=>"car-miles"}
-            .large-3.medium-6.small-12.columns
-              Or, let us calculate it for you:
+              %div{:style=>"margin-top:1em"}
+                Car mpg (optional)
+                %br
+                %input{:type=>"number",:value => "25", :id => "mpg"}
+            .large-4.medium-4.small-12.columns
+              Or, let us calculate it
               %br
               %input.starting-car-city{:placeholder => "starting location"}
-            .large-3.medium-6.small-12.columns
+            .large-4.medium-4.small-12.columns{:style=>"margin-bottom:1em"}
               %br
               %input.ending-car-city{:placeholder => "end location"}
-            .large-3.medium-6.small-12.columns
-              Car mpg (optional)
-              %br
-              %input{:type=>"number",:value => "25", :id => "mpg"}
+
           .round-trip
             round trip?
             %input{:checked=>:true,:type => "checkbox"}
           .row
-            .large-3.medium-12.small-12.columns
+            .large-4.medium-4.small-12.columns
               #calculate-car-offset.custom_btn.custom_btnline
                 Calculate Offset
-            .large-9.medium-12.small-12.columns{:style=>"margin-top:7px;"}
+            .large-8.medium-8.small-12.columns
               Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #home-energy-offset.offset-form
           Enter your energy use
@@ -118,25 +140,25 @@
               %input.clearable{:id=>"fuel-oil",:placeholder => "fuel oil (gallons)"}
           %br
           .row
-            .large-3.medium-12.small-12.columns
+            .large-4.medium-4.small-12.columns
               #calculate-home-offset.custom_btn.custom_btnline
                 Calculate Offset
-            .large-9.medium-12.small-12.columns{:style=>"margin-top:7px;"}
+            .large-8.medium-8.small-12.columns
               Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
         #quick-offset.offset-form
           =form_with url: '/cart_items', method: :post do |form|
             .row
               .large-6.medium-6.small-12.columns
-                %label What To Offset?
+                What To Offset?
                 =form.select :offset_type, options_for_select([ "", "home energy", "car travel", "air travel" ], ""), {}, :id => 'offset_type'
               .large-6.medium-6.small-12.columns
-                %label For What Period?
+                For What Period?
                 .optgroup
                   =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], "year"), {}, :id => 'offset_interval'
             #save-offset.custom_btn.custom_btnline Add to Cart
         #donate-form.offset-form
-          %p Make a Donation
-          .donate-buttons
+          Make a Donation
+          .donate-buttons{:style=>'margin-top: 1em;'}
             .donate-link
               =link_to "https://buy.stripe.com/test_eVa9Ep3LN4eU5k4fZ0" do
                 %button $25

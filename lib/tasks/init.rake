@@ -29,7 +29,7 @@ namespace :init do
   task set_regions: :environment do
     Region.create(name: 'Finger Lakes East', counties: 'Tompkins, Schuyler, Chemung, Steuben, Seneca', zipcodes: [])
     Region.create(name: 'Finger Lakes West', counties: 'Yates, Ontario, Monroe, Livingston', zipcodes: [])
-    Region.create(name: 'Central New York', counties: 'Cayuga, Cortland, Onondaga, Madison', zipcodes: [])
+    Region.create(name: 'Central NY', counties: 'Cayuga, Cortland, Onondaga, Madison', zipcodes: [])
     Region.create(name: 'Southern Tier', counties: 'Tioga, Broome, Chenango, Delaware', zipcodes: [])
 
     Region.all.each do |region|
