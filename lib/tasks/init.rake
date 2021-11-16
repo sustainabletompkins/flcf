@@ -42,31 +42,119 @@ namespace :init do
     end
   end
 
+  task import_regions: :environment do
+    Region.all.each do |r|
+      r.update_attribute(:zipcodes, [])
+    end
+    Dir.foreach('lib/assets/zipcodes') do |filename|
+      next if (filename == '.') || (filename == '..')
+
+      county = filename.split('.')[0]
+      zips = File.readlines('lib/assets/zipcodes/' + filename)
+      zips.map! { |z| z.strip }
+      puts county
+      Region.create!(name: county, zipcodes: zips)
+    end
+  end
+
   task assign_content_to_regions: :environment do
     # OFFSETS
     regions = Region.all
-    Offset.where.not(zipcode: nil).each do |offset|
-      regions.each do |region|
-        offset.update_attribute(:region, region) if region.zipcodes.include? offset.zipcode.to_s
+    Offset.all.each do |offset|
+      if offset.zipcode.nil?
+        offset.update_attribute(:region, Region.find_by_name('Tompkins'))
+      else
+        assigned = false
+        regions.each do |region|
+          if region.zipcodes.include? offset.zipcode.to_s
+            offset.update_attribute(:region, region)
+            assigned = true
+          end
+        end
+        offset.update_attribute(:region, Region.find_by_name('Tompkins')) unless assigned
       end
     end
 
     # PRIZES, TEAMS, INDIVIDUALS, AWARDEES
     Prize.all.each do |prize|
-      prize.update_attribute(:region_id, 1)
+      prize.update_attribute(:region, Region.find_by_name('Tompkins'))
     end
-    Team.all.each do |prize|
-      prize.update_attribute(:region_id, 1)
+    Team.all.each do |team|
+      assigned = false
+      founder = team.team_members.where.not(founder: nil).first
+      if founder.present?
+
+        offsets = Offset.where(email: founder.email)
+        zip = nil
+        offsets.each do |offset|
+          next unless zip.nil?
+
+          zip = offset.zipcode.to_s if offset.zipcode.present?
+        end
+        next unless zip.present?
+
+        regions.each do |region|
+          if region.zipcodes.include? zip
+            team.update_attribute(:region, region)
+            assigned = true
+          end
+        end
+      end
+
+      team.update_attribute(:region, Region.find_by_name('Tompkins')) unless assigned
     end
-    Individual.all.each do |prize|
-      prize.update_attribute(:region_id, 1)
+    Individual.all.each do |team|
+      assigned = false
+      offsets = Offset.where(email: team.email)
+      zip = nil
+      offsets.each do |offset|
+        next unless zip.nil?
+
+        zip = offset.zipcode.to_s if offset.zipcode.present?
+      end
+      next unless zip.present?
+
+      regions.each do |region|
+        if region.zipcodes.include? zip
+          team.update_attribute(:region, region)
+          assigned = true
+        end
+      end
+      team.update_attribute(:region, Region.find_by_name('Tompkins')) unless assigned
     end
     Awardee.all.each do |prize|
-      prize.update_attribute(:region_id, 1)
+      prize.update_attribute(:region, Region.find_by_name('Tompkins'))
+    end
+
+    # destroy old regions after reassignment
+    Region.where.not(counties: nil).destroy_all
+  end
+
+  task assign_teams_to_regions: :environment do
+    regions = Region.all
+    Individual.all.each do |team|
+      assigned = false
+      offsets = Offset.where(email: team.email)
+      zip = nil
+      offsets.each do |offset|
+        next unless zip.nil?
+
+        zip = offset.zipcode.to_s if offset.zipcode.present?
+      end
+      next unless zip.present?
+
+      regions.each do |region|
+        if region.zipcodes.include? zip
+          team.update_attribute(:region, region)
+          assigned = true
+        end
+      end
+      team.update_attribute(:region, Region.find_by_name('Tompkins')) unless assigned
     end
   end
 
   task reassign_offsets: :environment do
+    regions = Region.all
     Team.all.each do |t|
       count = 0
       t.team_members.each do |tm|
