@@ -41,7 +41,7 @@ class PagesController < ApplicationController
       # redirect to index & include checkout session id
       # redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
       # redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
-      redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
+      redirect_to "https://fingerlakesclimatefund.org/?c_id=#{@checkout_session}"
 
     else
       # there was no checkout session id
