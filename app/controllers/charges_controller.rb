@@ -45,7 +45,7 @@ class ChargesController < ApplicationController
       if p['offset_type'].nil?
         products << {
           price_data: {
-            product: 'prod_J2jmxsA5QQ6O8u',
+            product: 'prod_J2jl3voKP5Slaa',
             unit_amount: (p['cost'] * 100).to_i,
             currency: 'usd'
           },
