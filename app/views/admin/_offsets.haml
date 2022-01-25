@@ -18,7 +18,6 @@
             =text_field_tag :user_email,'', :placeholder => 'user email'
             =text_field_tag :member_name, '',:placeholder => 'team member name'
         %br
-        =show_simple_captcha(:label=>'Enter letters...')
         =f.submit 'submit', :class=>'button'
 
         #offset-msg
