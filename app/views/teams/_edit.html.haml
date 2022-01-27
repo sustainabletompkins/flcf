@@ -2,7 +2,7 @@
     =form_for team  do |f|
         =f.text_field :name
         =f.number_field :pounds
-        =f.select :region_id, options_from_collection_for_select(Region.all, 'id', 'name', team.region_id)
+        =f.select :region_id, options_from_collection_for_select(Region.all.order('name ASC'), 'id', 'name', team.region_id)
         -if team.image.attached?
             =image_tag(team.image)
         =f.file_field :image

@@ -38,7 +38,8 @@ class OffsetsController < ApplicationController
 
   def manual_create
     pounds = params[:offset][:cost].to_i * 80
-    @offset = Offset.create(user_id: '0', name: params[:offset][:name], title: params[:offset][:title], cost: params[:offset][:cost], pounds: pounds, email: params[:offset][:email], zipcode: params[:offset][:zipcode])
+    email = params[:offset][:email].strip
+    @offset = Offset.create(user_id: '0', name: params[:offset][:name], title: params[:offset][:title], cost: params[:offset][:cost], pounds: pounds, email: email, zipcode: params[:offset][:zipcode])
     @stat = Stat.all.first
     @stat.increment!(:pounds, pounds)
     @stat.increment!(:dollars, params[:offset][:cost].to_f)
@@ -48,7 +49,7 @@ class OffsetsController < ApplicationController
       if params.has_key?(:team_member) && params[:team_member].to_i != 0
         # we don't need to keep track of offets this way any more
       else
-        TeamMember.create(email: params[:offset][:email], name: params[:offset][:name], offsets: 1, team_id: @team.id)
+        TeamMember.create(email: email, name: params[:offset][:name], offsets: 1, team_id: @team.id)
 
       end
       @offset.update_attribute(:team_id, @team.id)
@@ -56,14 +57,14 @@ class OffsetsController < ApplicationController
     elsif params[:offset][:new_team_name] && params[:offset][:new_team_name].length > 0
       # admin is assigning user to a new team
       @team = Team.create(name: params[:offset][:new_team_name], pounds: pounds, count: 1)
-      TeamMember.create(email: params[:offset][:email], name: params[:offset][:name], offsets: 1, team_id: @team.id)
+      TeamMember.create(email: email, name: params[:offset][:name], offsets: 1, team_id: @team.id)
       @offset.update_attribute(:team_id, @team.id)
     else
-      @i = Individual.where(email: params[:offset][:email]).first
+      @i = Individual.where(email: email).first
       if @i.present?
 
       else
-        @i = Individual.create(email: params[:offset][:email], name: params[:offset][:name], pounds: pounds, count: '1')
+        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: '1')
 
       end
       @offset.update_attribute(:individual_id, @i.id)

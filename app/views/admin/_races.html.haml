@@ -12,12 +12,12 @@
                 =render :collection => @teams, :partial => 'teams/editable_team', :as => :team
 
 :javascript
-    $('#region').on('change', function() {
+    $(document).on('change', '#region', function() {
         $.get("teams", {region: $(this).val()});
     }) 
-    $('.show-details').on('click', function(e) {
+    $(document).on('click', '.show-details', function(e) {
         $("#team_"+e.target.getAttribute('data-team')+" .details").toggle();  
     }) 
-    $('.show-edit').on('click', function(e) {
+    $(document).on('click', '.show-edit', function(e) {
         $("#team_"+e.target.getAttribute('data-team')+" .edit").toggle();  
     })            
