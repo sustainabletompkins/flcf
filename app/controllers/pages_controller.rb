@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   http_basic_authenticate_with name: 'admin', password: '309NAurora', only: %i[admin list offset_log]
 
   def payment_success
-    puts 'asdkljskldjaklsjdalks'
     if params.has_key?('checkout_session_id')
       # create the offset objects
       @checkout_session = params['checkout_session_id']
@@ -53,8 +52,6 @@ class PagesController < ApplicationController
 
   def index
     # response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM http://gayn.sg-host.com/, https://hyadev.com/'
-    puts params
-    puts 'heyskjahakjaldj'
     if params.has_key?('checkout_session_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\

@@ -1,5 +1,5 @@
 .row
-    #app.large-12.columns
+    #app.large-12.columns{:data => {:session_id => "#{@flcf_cookie}"}}
         -if @app_mode == 'calculator'
             =render :partial => 'spa/calculator'
         -elsif @app_mode == 'carbon races'

@@ -4,38 +4,38 @@ class ChargesController < ApplicationController
     product_info = {
       'home energy' => {
         'one_time' => {
-          'month' => 'price_1JHuI7L1SWXeEQ2feQqPHIOL',
-          'quarter' => 'price_1JcBukL1SWXeEQ2fZnNENAWK',
-          'year' => 'price_1JcBv2L1SWXeEQ2fOO9EQZHQ'
+          'month' => 'price_1KK7hDL1SWXeEQ2ft1ojQYFW',
+          'quarter' => 'price_1KK7hDL1SWXeEQ2fP1DI1amK',
+          'year' => 'price_1KK7hDL1SWXeEQ2ff5OUI266'
         },
         'recurring' => {
-          'month' => 'price_1IW12sL1SWXeEQ2fPa1BkryP',
-          'quarter' => 'price_1IW13LL1SWXeEQ2ft4svzOQI',
-          'year' => 'price_1IW13tL1SWXeEQ2fIzGnG7ib'
+          'month' => 'price_1KK7hDL1SWXeEQ2fCloc9eyC',
+          'quarter' => 'price_1KK7hDL1SWXeEQ2frBEzX54S',
+          'year' => 'price_1KK7hDL1SWXeEQ2fXz9rf6N2'
         }
       },
       'car travel' => {
         'one_time' => {
-          'month' => 'price_1IQy2PL1SWXeEQ2fxHGWf41O',
-          'quarter' => 'price_1JcC33L1SWXeEQ2fjLsFf9mA',
-          'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'
+          'month' => 'price_1KK7hWL1SWXeEQ2fPrCS2PrA',
+          'quarter' => 'price_1KK7hWL1SWXeEQ2f23cuStwb',
+          'year' => 'price_1KK7hWL1SWXeEQ2f5Vepbkjq'
         },
         'recurring' => {
-          'month' => 'price_1IQy23L1SWXeEQ2fgJFdSDUO',
-          'quarter' => 'price_1IQy23L1SWXeEQ2fHzm9oQl0',
-          'year' => 'price_1JHuEpL1SWXeEQ2fuFAIsJFA'
+          'month' => 'price_1KK7hWL1SWXeEQ2fab1EMRoI',
+          'quarter' => 'price_1KK7hWL1SWXeEQ2f53cyhCed',
+          'year' => 'price_1KK7hWL1SWXeEQ2f6pxfY3Oh'
         }
       },
       'air travel' => {
         'one_time' => {
-          'month' => 'price_1JQueHL1SWXeEQ2fMkllhTdA',
-          'quarter' => 'price_1JcC4NL1SWXeEQ2foH7qYmPd',
-          'year' => 'price_1JcC4iL1SWXeEQ2fGWXPXkLv'
+          'month' => 'price_1KK7hLL1SWXeEQ2f6MtnzCse',
+          'quarter' => 'price_1KK7hLL1SWXeEQ2fdvO0EUX6',
+          'year' => 'price_1KK7hLL1SWXeEQ2fea8at0ng'
         },
         'recurring' => {
-          'month' => 'price_1JQucnL1SWXeEQ2fIgRYcEvm',
-          'quarter' => 'price_1JQudKL1SWXeEQ2fVHEUrFf9',
-          'year' => 'price_1JHtmeL1SWXeEQ2ffsYWUBLO'
+          'month' => 'price_1KK7hLL1SWXeEQ2frPNGGgu4',
+          'quarter' => 'price_1KK7hLL1SWXeEQ2ftb4gkVv9',
+          'year' => 'price_1KK7hLL1SWXeEQ2fiLwH9kJ6'
         }
       }
     }
@@ -52,15 +52,11 @@ class ChargesController < ApplicationController
           quantity: 1
         }
       else
-        puts p.inspect
-        puts product_info[p['offset_type']]
         products << { price: product_info[p['offset_type']][p['frequency']][p['offset_interval']], quantity: 1 }
-        puts products
         payment_mode = 'subscription' if p['frequency'] == 'recurring'
 
       end
     end
-
     @session = Stripe::Checkout::Session.create({
                                                   payment_method_types: ['card'],
                                                   line_items: products,

@@ -49,6 +49,8 @@
       calculate offset
     .button.cancel
       cancel
+    #cookie-info
+      hey
 
   #car-travel-offset.offset-form
     %label enter your trip mileage
@@ -116,3 +118,5 @@
       %input{:name => "label", :type => "hidden", :value => ""}
       %input{:name => "weight", :type => "hidden", :value => ""}
       %input{:name => "cost", :type => "hidden", :value => ""}
+:javascript
+  $('$cookie-info').text($.cookie('session_id'))

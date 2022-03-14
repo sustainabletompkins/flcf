@@ -24,6 +24,8 @@ $ ->
   offset_quantity = undefined
   offset_units = undefined
   offset_title = undefined
+  urlParams = new URLSearchParams(window.location.search);
+  session_id = urlParams.get('session_cookie');
 
   monthly_avgs = {}
   monthly_avgs["home energy"] = 1240
@@ -96,7 +98,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
 
@@ -117,7 +119,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
 
@@ -161,7 +163,7 @@ $ ->
       offset_type: $("#offset_type").val()
       offset_interval: $("#offset_interval").val()
       frequency: $("#offset_frequency").val()
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
     return
@@ -325,7 +327,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
 
@@ -392,7 +394,7 @@ $ ->
         pounds: offset_weight.toFixed(2)
         cost: offset_cost.toFixed(2)
         title: offset_title
-        session_id: $.cookie('session_id')
+        session_id: session_id
 
       saveOffset data
 
