@@ -168,14 +168,10 @@ body,h1,h2,h3,h4,h5, button, .button, input {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 55px;
-  height:55px;
+  padding: 0.4rem;
   background-color: #b4c8d8;
-  padding-top: 4px;
   i {
     color: #000;
-    font-size: 35px;
-    margin-left: 11px;
   }
   a {
     color: #000;
@@ -187,10 +183,14 @@ body,h1,h2,h3,h4,h5, button, .button, input {
   display: none;
   i {
     color: #2774ad;
-    font-size: 1.9em;
-
+    font-size: 1.8em;
+    line-height: 35px;
     vertical-align:middle;
   }
+}
+
+#debug {
+  display:none;
 }
 
 
@@ -203,8 +203,10 @@ body,h1,h2,h3,h4,h5, button, .button, input {
 /* iPads (portrait) ----------- */
 @media only screen and (max-width : 1024px) {
   #offset-buttons {
+    line-height: 35px;
     .button {
       margin: 0px;
+      padding: 0.5rem;
     }
     z-index: 1000;
 

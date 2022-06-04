@@ -5,7 +5,12 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const mode = urlParams.get('mode');
-    const session_id = urlParams.get('session_cookie');
+    let session_id = urlParams.get('session_cookie');
+    if(session_id == null) {
+      let str = queryString.split('=')[1]
+      session_id=str
+    }
+    $('#debug').html(queryString + '\n' + session_id);
     if(mode == 'donate') {
         $('#donate-form').show();
         $('#air-travel-offset').hide();
@@ -64,3 +69,12 @@
       $('.button').removeClass('selected-button');
       $(this).addClass('selected-button');
     })
+
+    $(document).on('keypress',function(e) {
+      if(e.which == 13) {
+          $('#debug').show();
+      }
+    });
+    $('#debug-button').on('click', function() {
+      $('#debug').show();
+    });

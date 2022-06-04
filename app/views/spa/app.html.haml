@@ -2,6 +2,9 @@
     #app.large-12.columns{:data => {:session_id => "#{@flcf_cookie}"}}
         -if @app_mode == 'calculator'
             =render :partial => 'spa/calculator'
+            #debug-button
+            #debug
+                this is a test
         -elsif @app_mode == 'carbon races'
             =render :partial => 'spa/carbon_races'
         -else
