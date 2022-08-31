@@ -10,7 +10,7 @@ class Api::V1::CarbonRacesController < ApplicationController
   end
 
   def leaderboard
-    leaders = Team.generate_leaderboard(params[:start_date], params[:end_date], params[:region], params[:limit].to_i, params[:offset].to_i, false)
+    leaders = Team.generate_leaderboard(params[:start_date], params[:end_date], params[:region], params[:limit].to_i, params[:offset].to_i, params[:leaderboard])
     render json: leaders
   end
 

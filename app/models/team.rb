@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers
 
-  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, solo_mode = nil)
+  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, mode = nil)
     results = []
     puts region
     region = Region.where(name: region).first
@@ -23,7 +23,7 @@ class Team < ActiveRecord::Base
                  end_date.to_datetime
                end
 
-    if solo_mode
+    if mode == 'individual'
       Individual.all.each do |team|
         offsets = team.offsets.where('created_at > ? and created_at < ?', start_date, end_date)
         offsets = offsets.where(region: region) if region.present?
