@@ -27,7 +27,7 @@ class Team < ActiveRecord::Base
       Individual.all.each do |team|
         offsets = team.offsets.where('created_at > ? and created_at < ?', start_date, end_date)
         offsets = offsets.where(region: region) if region.present?
-        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count }
+        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count, region: team.region.name }
       end
     else
       Team.all.each do |team|

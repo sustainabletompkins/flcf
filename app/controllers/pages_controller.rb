@@ -30,12 +30,25 @@ class PagesController < ApplicationController
       end
 
       region = Region.get_by_zip(zipcode)
-
+      total_cost = 0
       # convert cart items into completed offsets
       CartItem.where(checkout_session_id: @checkout_session).each do |item|
         Offset.create(name: name, user_id: item.user_id, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email)
         item.update_attribute(:purchased, true)
+        total_cost += item.cost
       end
+
+      # post to LGL
+      require 'net/http'
+      require 'uri'
+      require 'json'
+      uri = URI.parse('https://sustainabletompkins.littlegreenlight.com/integrations/e43d9598-3876-47a8-9411-9a6afdff1647/listener')
+      data = { payment_type: 'Credit Card', email: email, amount: total_cost, name: name, zip_code: zipcode || 12_314, date: Date.today, fund: 'Finger Lakes Climate Fund' }
+      http = Net::HTTP.new(uri.host, uri.port)
+      puts 'posting to lgl'
+      puts data
+      http.use_ssl = true
+      http.post(uri, data.to_json, { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
 
       # redirect to index & include checkout session id
       # redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session

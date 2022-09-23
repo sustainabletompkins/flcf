@@ -43,6 +43,7 @@ class OffsetsController < ApplicationController
     @stat = Stat.all.first
     @stat.increment!(:pounds, pounds)
     @stat.increment!(:dollars, params[:offset][:cost].to_f)
+    region = Region.get_by_zip(params[:offset][:zipcde])
     if params[:team].to_i > 0
       @team = Team.find(params[:team])
       # on front-end there is a 0 option inserted for default placeholder text
@@ -56,7 +57,7 @@ class OffsetsController < ApplicationController
       @offset.update_attribute(:name, params[:offset][:name])
     elsif params[:offset][:new_team_name] && params[:offset][:new_team_name].length > 0
       # admin is assigning user to a new team
-      @team = Team.create(name: params[:offset][:new_team_name], pounds: pounds, count: 1)
+      @team = Team.create(name: params[:offset][:new_team_name], pounds: pounds, count: 1, region: region)
       TeamMember.create(email: email, name: params[:offset][:name], offsets: 1, team_id: @team.id)
       @offset.update_attribute(:team_id, @team.id)
     else
@@ -64,7 +65,7 @@ class OffsetsController < ApplicationController
       if @i.present?
 
       else
-        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: '1')
+        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: '1', region: region)
 
       end
       @offset.update_attribute(:individual_id, @i.id)
