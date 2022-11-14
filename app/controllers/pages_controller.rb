@@ -38,17 +38,8 @@ class PagesController < ApplicationController
         total_cost += item.cost
       end
 
-      # post to LGL
-      require 'net/http'
-      require 'uri'
-      require 'json'
-      uri = URI.parse('https://sustainabletompkins.littlegreenlight.com/integrations/e43d9598-3876-47a8-9411-9a6afdff1647/listener')
-      data = { payment_type: 'Credit Card', email: email, amount: total_cost, name: name, zip_code: zipcode || 12_314, date: Date.today, fund: 'Finger Lakes Climate Fund' }
-      http = Net::HTTP.new(uri.host, uri.port)
-      puts 'posting to lgl'
-      puts data
-      http.use_ssl = true
-      http.post(uri, data.to_json, { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
+      # post to LGL via background job
+      LglJob.perform_async(email, total_cost, name, zipcode)
 
       # redirect to index & include checkout session id
       # redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
