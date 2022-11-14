@@ -40,7 +40,6 @@ gem 'sass-rails', '= 5.0.7'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'sitemap_generator'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
-gem 'tinymce-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
