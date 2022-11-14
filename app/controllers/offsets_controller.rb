@@ -38,7 +38,7 @@ class OffsetsController < ApplicationController
 
   def manual_create
     pounds = params[:offset][:cost].to_i * 80
-    email = params[:offset][:email].strip
+    email = params[:offset][:email].strip.downcase
     @offset = Offset.create(user_id: '0', name: params[:offset][:name], title: params[:offset][:title], cost: params[:offset][:cost], pounds: pounds, email: email, zipcode: params[:offset][:zipcode])
     @stat = Stat.all.first
     @stat.increment!(:pounds, pounds)
@@ -50,7 +50,14 @@ class OffsetsController < ApplicationController
       if params.has_key?(:team_member) && params[:team_member].to_i != 0
         # we don't need to keep track of offets this way any more
       else
-        TeamMember.create(email: email, name: params[:offset][:name], offsets: 1, team_id: @team.id)
+        # let's check if there is already a team member
+        tm = @team.team_members.where(email: email).first
+        puts tm.inspect
+        if tm.present?
+          tm.update_attribute(:offsets, tm.offsets + 1)
+        else
+          TeamMember.create(email: email.downcase, name: params[:offset][:name], offsets: 1, team_id: @team.id)
+        end
 
       end
       @offset.update_attribute(:team_id, @team.id)
@@ -58,7 +65,7 @@ class OffsetsController < ApplicationController
     elsif params[:offset][:new_team_name] && params[:offset][:new_team_name].length > 0
       # admin is assigning user to a new team
       @team = Team.create(name: params[:offset][:new_team_name], pounds: pounds, count: 1, region: region)
-      TeamMember.create(email: email, name: params[:offset][:name], offsets: 1, team_id: @team.id)
+      TeamMember.create(email: email.downcase, name: params[:offset][:name], offsets: 1, team_id: @team.id)
       @offset.update_attribute(:team_id, @team.id)
     else
       @i = Individual.where(email: email).first

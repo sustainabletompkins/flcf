@@ -167,6 +167,6 @@ class PagesController < ApplicationController
   end
 
   def verification
-    render plain: '870E0E2346D565F9BE3056DD58219B8914AF9F9A994D08FDD3612C9FB227BC96 comodoca.com 5efc06b064907'
+    render plain: '3D053997760490550BD9B5E198F4880F3207D6F69F1B778DCD3E987576DF2E46 comodoca.com 6334e37295071'
   end
 end
