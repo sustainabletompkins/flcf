@@ -84,6 +84,8 @@ class PagesController < ApplicationController
       if team_member.present?
         @team = team_member.team
         @offsets.update_all(team_id: @team.id)
+        # sync the offset count in TeamMember to the correct amount
+        team_member.count_offsets
       elsif player.present?
         @team = player
         @offsets.update_all(individual_id: @player.id)

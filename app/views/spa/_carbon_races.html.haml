@@ -9,10 +9,28 @@
       =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name', @team.id), id: 'select-new-team', prompt: 'Which team?'
       
       #new-team-msg
+    .large-12.columns#change-team{:style=>'display:none'}
+      %h4 Change your team
+      =select_tag :team, options_from_collection_for_select(@teams, 'id', 'name', @team.id), id: 'select-new-team', prompt: 'Which team?'  
     .large-12.columns
       %h4.team-msg Your offset of #{@offsets.sum(&:pounds)} lbs has been added to the tally for Team '#{@team.name}'
       %p=link_to "Click here to change the team you are playing for", "#", :class => 'change-team'
+      %p=link_to "Or, you can start a new team", "#", :class => 'defect-to-new-team'
 
+    .large12.medium-12.columns#create-team{:style=>'display:none'}
+      %h4 Create a  Team
+      %p Make a team for your friends or organization and invite others to join it
+      =form_for :team, :url=>teams_path, :remote=>:true, :html=> {:id=>'new-team'} do |f|
+        %label Team Name
+        =f.text_field :name, id: 'team-name'
+        %label Your Name (for public display)
+        =text_field_tag :member_name, '', id: 'public-name'
+        =hidden_field_tag :checkout_session_id, @checkout_session
+        #form-msg
+        %br
+        #msg
+        =f.submit 'submit', :class=>'button'
+    .large-12.columns
   -elsif @individual
     .large-12.columns
       %h4 Your offset of #{@offset_data[:pounds]} lbs has been added to your individual tally
@@ -78,20 +96,6 @@
       you have won an award
   .large-6.medium-6.columns
 
-    #wheel
-      .cycle-slideshow{"data-paused" => "true", "data-cycle-speed" => "100"}
-        -@prizes.each do |p|
-          -@count=0
-          -p.count.times do
-            =render :partial => 'prizes/spot', :locals => {prize:p}
-            -@count = @count + 1
-        -@empties.times do
-          =image_tag('footprint.jpg', :'data-name'=>'Nothing')
-          -@count = @count + 1
-        :javascript
-          var total_spots = "#{@count}";
-
-  .large-6.medium-6.columns
 
 :javascript
   const queryString = window.location.search;
@@ -103,6 +107,11 @@
   $('.change-team').on('click',function() {
     $('#race-actions').hide();
     $('#change-team').show();
+  })
+
+  $('.defect-to-new-team').on('click',function() {
+    $('#race-actions').hide();
+    $('#create-team').show();
   })
 
   $('#new-team').submit(function(event) {

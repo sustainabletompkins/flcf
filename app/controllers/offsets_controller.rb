@@ -52,7 +52,6 @@ class OffsetsController < ApplicationController
       else
         # let's check if there is already a team member
         tm = @team.team_members.where(email: email).first
-        puts tm.inspect
         if tm.present?
           tm.update_attribute(:offsets, tm.offsets + 1)
         else
@@ -70,9 +69,9 @@ class OffsetsController < ApplicationController
     else
       @i = Individual.where(email: email).first
       if @i.present?
-
+        @i.update_attribute(:count, @i.count + 1)
       else
-        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: '1', region: region)
+        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: 1, region: region)
 
       end
       @offset.update_attribute(:individual_id, @i.id)

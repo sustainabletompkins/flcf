@@ -10,9 +10,10 @@ class TeamsController < ApplicationController
         region = Region.get_by_zip(offsets.first.zipcode)
         @team = Team.create(team_params)
         @team.update_attribute(:region_id, region.id)
-        TeamMember.create(email: params[:user_email].downcase, name: params[:member_name], founder: 'TRUE', team_id: @team.id)
+        TeamMember.create(email: offsets.first.email.downcase, name: params[:member_name], founder: 'TRUE', team_id: @team.id)
 
         offsets.update_all(team_id: @team.id)
+        @team.update_offset_count
         render 'team_created_after_offset'
       else
         # team is not being created through checkout process
@@ -82,6 +83,11 @@ class TeamsController < ApplicationController
   end
 
   def index
+    @begin_date = if params.key?(:begin_date) && params[:begin_date].length > 0
+                    params[:begin_date]
+                  else
+                    '1/1/15'
+                  end
     @teams = if params.has_key?(:region)
                Team.where(region_id: params[:region]).order(pounds: :desc)
              else

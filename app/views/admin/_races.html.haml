@@ -1,5 +1,8 @@
 %h3 Carbon Races
 =select_tag :region, options_from_collection_for_select(Region.all.order(id: :asc), 'id', 'name')
+=label_tag 'Begin Date'
+=text_field_tag :begin_date, '',:placeholder=>'mm/dd/yy'
+
 .large-12.columns
     %h4 Carbon Races
     .row
@@ -20,4 +23,11 @@
     }) 
     $(document).on('click', '.show-edit', function(e) {
         $("#team_"+e.target.getAttribute('data-team')+" .edit").toggle();  
+    })
+    $(document).on('keyup', '#begin_date', function(e) {
+        if(e.keyCode == 13)
+        {
+            $.get("teams", {begin_date: $('#begin_date').val()});
+        }
+        
     })            

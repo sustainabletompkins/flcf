@@ -1,1 +1,2 @@
-$('#team-list').html("#{j render :collection => @teams, :partial => 'teams/editable_team', :as => :team}");
+$('#team-list').html("#{j render :collection => @teams, :partial => 'teams/editable_team', :as => :team, :locals=>{:begin_date=> @begin_date}}");
+console.log("#{@begin_date}");
