@@ -83,19 +83,6 @@
           %label Your Name (for public display)
           =text_field_tag :name, nil, :id=> 'player-name'
           %button#new-player Register 
-  .large-12.columns
-    %a#skip 
-      %h3 Spin Prize Wheel >
-.row#prize-wheel{:style=>"display:none;"}
-  .large-6.medium-6.columns
-    %h3 Prize Wheel
-    %p Spin after each offset for a shot at prizes from local businesses!
-    #spin
-      Spin Wheel
-    #award{:style=>'display:none'}
-      you have won an award
-  .large-6.medium-6.columns
-
 
 :javascript
   const queryString = window.location.search;
@@ -144,13 +131,6 @@
 
   });
 
-  $('#skip').on('click', function() {
-
-    $('#prize-wheel').show();
-    $('#carbon-races').hide();
-
-  });
-
 
   $('#submit-name').on('click', function() {
     if(!$('#team-member-name').val()) {
@@ -178,59 +158,6 @@
     }
 
   });
-
-  // for prize wheel
-  var spin;
-  count = 0;
-  var prize_id;
-
-  $.fn.shuffleChildren = function() {
-      $.each(this.get(), function(index, el) {
-          var $el = $(el);
-          var $find = $el.children();
-
-          $find.sort(function() {
-              return 0.5 - Math.random();
-          });
-
-          $el.empty();
-          $find.appendTo($el);
-      });
-  };
-  $('.cycle-slideshow').shuffleChildren();
-
-  $('#spin').on('click',function() {
-    spin = setInterval(cycleWheel, 250);
-    count = 0;
-    $.get("#{log_spin_path}");
-    $('#spin').hide();
-    $('#wheel').show();
-  });
-
-  function cycleWheel() {
-    $('.cycle-slideshow').cycle('next');
-    count++;
-
-    if(count == 20) {
-
-      clearInterval(spin);
-      $('#award').show();
-      val = $('.cycle-slideshow').data("cycle.opts").currSlide;
-      prize_id = parseInt($('.cycle-slide-active').data('prize-id'));
-      if(prize_id > 0) {
-        prize_id = $('.cycle-slide-active').data('prize-id');
-        
-        $.post('#{prize_winners_path}', {prize: $('.cycle-slide-active').data('prize-id'), checkout_session_id: "#{@checkout_session}"}, function() {
-          $('#award').html('Congrats, you won a ' + $('.cycle-slide-active').data('name') + '! Check your email for details on claiming prize.');        
-        });
-      }
-      else {
-        $('#award').html('Sorry, you did not win anything, but you can try again next time you make an offset!');
-        $('#carbon-race-button').show();
-      }
-    }
-  }
-
 
 -if @team.present?
   :javascript

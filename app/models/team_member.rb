@@ -13,4 +13,13 @@ class TeamMember < ActiveRecord::Base
             end
     team.offsets.where('email = ? AND created_at > ?', email, start).count
   end
+
+  def pounds_since(date = nil)
+    start = if date
+              Date.strptime(date, '%m/%d/%y')
+            else
+              Date.strptime('1/1/15', '%m/%d/%y')
+            end
+    team.offsets.where('email = ? AND created_at > ?', email, start).sum(&:pounds)
+  end
 end
