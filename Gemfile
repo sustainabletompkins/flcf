@@ -5,8 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.5'
-gem 'rails', '~> 5.2.4.3'
+ruby '2.7.7'
+gem 'rails', '~> 5.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'haml-rails'
 gem 'newrelic_rpm'
