@@ -24,6 +24,8 @@ $ ->
   offset_quantity = undefined
   offset_units = undefined
   offset_title = undefined
+  urlParams = new URLSearchParams(window.location.search);
+  session_id = urlParams.get('session_cookie');
 
   monthly_avgs = {}
   monthly_avgs["home energy"] = 1240
@@ -89,6 +91,8 @@ $ ->
 
 
   calculateCarOffset = (miles) ->
+    console.log('calculating')
+    console.log(miles)
     gallons_gas = miles/mpg
     offset_weight = gallons_gas * lbs_co2_per_gallon
     offset_cost = offset_weight * cost_per_pound
@@ -96,8 +100,8 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
-
+      session_id: session_id
+    console.log(data)
     saveOffset data
 
   calculateAirOffset = (miles) ->
@@ -117,7 +121,7 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
 
@@ -161,7 +165,7 @@ $ ->
       offset_type: $("#offset_type").val()
       offset_interval: $("#offset_interval").val()
       frequency: $("#offset_frequency").val()
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
     return
@@ -325,13 +329,16 @@ $ ->
       pounds: offset_weight.toFixed(2)
       cost: offset_cost.toFixed(2)
       title: offset_title
-      session_id: $.cookie('session_id')
+      session_id: session_id
 
     saveOffset data
 
   $("#calculate-car-offset").on "click", ->
     miles = undefined
     mpg = parseInt($('#mpg').val())
+    $('.starting-car-city').val('')
+    $('.ending-car-city').val('')
+    
     unless parseInt($("#car-miles").val()) > 0
       request =
         origin: origin
@@ -344,7 +351,12 @@ $ ->
 
 
       directionsService.route request, (response, status) ->
-        miles = response.routes[0].legs[0].distance.text.split(' ')[0]
+        console.log(response)
+        console.log(response.routes[0].legs[0].distance)
+
+        meters = response.routes[0].legs[0].distance.value
+        miles = meters / 1609
+        console.log(meters, miles)
         if $("#car-travel-offset input[type=checkbox]")[0].checked
           miles = miles*2
           offset_title += " (RT)"
@@ -360,7 +372,7 @@ $ ->
   $("#calculate-air-offset").on "click", ->
 
     miles = undefined
-    unless parseInt($("#air-miles").val()) > 0
+    unless parseFloat($("#air-miles").val()) > 0
       air_meters = google.maps.geometry.spherical.computeDistanceBetween origin_latlng, destination_latlng
       miles = air_meters * miles_per_meter
       l1 = air_autocomplete1.getPlace().formatted_address.substring(0, air_autocomplete1.getPlace().formatted_address.lastIndexOf(','))
@@ -368,7 +380,7 @@ $ ->
       offset_title =  l1+ " > " + l2
 
     else
-      miles = $("#air-miles").val()
+      miles = parseFloat($("#air-miles").val())
       offset_title = "Plane Trip"
 
     miles = miles * $("#air-travel-offset input[type=number]")[0].value
@@ -392,7 +404,7 @@ $ ->
         pounds: offset_weight.toFixed(2)
         cost: offset_cost.toFixed(2)
         title: offset_title
-        session_id: $.cookie('session_id')
+        session_id: session_id
 
       saveOffset data
 

@@ -1,0 +1,68 @@
+.row.stats
+  .large-12.medium-12.small-12.columns
+    %h2 OFFSET STATS
+
+  .large-4.medium-4.small-4.columns
+    %h4.log-title{:'data-dir' => 'desc'} Total
+    #{@offsets.count}
+  .large-4.medium-4.small-4.columns
+    %h4.log-pounds{:'data-dir' => 'desc'} Pounds
+    #{@offsets.sum(&:pounds)}
+  .large-4.medium-4.small-4.columns
+    %h4.log-price{:'data-dir' => 'desc'} Price
+    #{@offsets.sum(&:cost).round(2)}
+%hr
+.row.column-headers
+
+  .large-4.medium-4.small-6.columns
+    %h4.log-title{:'data-dir' => 'desc'} Title
+  .large-3.medium-3.small-6.columns
+    %h4.log-email{:'data-dir' => 'desc'} Email
+  .large-2.medium-2.small-6.columns
+    %h4.log-pounds{:'data-dir' => 'desc'} Pounds
+
+  .large-2.medium-2.small-6.columns
+    %h4.log-price{:'data-dir' => 'desc'} Price
+
+  .large-1.medium-1.small-6.columns
+    %h4.log-date{:'data-dir' => 'desc'} Date
+#offsets.row
+  =render :partial => 'offsets/log_offset', :collection => Offset.all.order(created_at: :desc), :as => :offset
+:css
+  label {
+    color: #444;
+  }
+  .add-to-individual {
+    display: none;
+  }
+  .show-individual-form {
+    color: blue;
+    cursor: pointer;
+  }
+  h4 {
+    cursor: pointer;
+  }
+  body {
+    font-family: Arial;
+  }
+  .stats {
+    background-color: #bbb;
+  }
+
+:javascript
+
+  $('.show-individual-form').on('click', function() {
+    $(this).next().show();
+  });
+
+  $('.column-headers h4').on('click', function() {
+    var className = $(this).attr('class');
+    var dir = $(this).attr('data-dir');
+    $.get("#{filter_offsets_path}", {mode: className, dir: dir});
+    if(dir == 'asc') {
+      $(this).attr('data-dir','desc');
+    }
+    else {
+      $(this).attr('data-dir','asc');
+    }
+  })

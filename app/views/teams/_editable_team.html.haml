@@ -2,7 +2,7 @@
   .large-8.columns
     =team.name
   .large-3.columns
-    =team.pounds
+    =team.pounds_since(@begin_date)
   .large-1.columns
     %span.show-details{"data-team" => team.id, :style=>'cursor:pointer;'}
       >

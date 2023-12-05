@@ -17,10 +17,11 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'cancan'
+gem 'formtastic'
 gem 'jbuilder', '~> 2.0'
 gem 'rails_admin', '~> 1.3'
-
-gem 'formtastic'
+gem 'redis', '~> 4.0'
+gem 'sidekiq'
 
 gem 'autoprefixer-rails', '8.6.5'
 gem 'aws-sdk-s3', require: false
@@ -39,7 +40,6 @@ gem 'sass-rails', '= 5.0.7'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'sitemap_generator'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
-gem 'tinymce-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

@@ -4,66 +4,61 @@
       #home
         =link_to root_path do
           %i.fi-home
-      #total-cost
+      #total-cost{:style=>'padding:0.3rem;'}
         %i.fi-shopping-cart
 
       #offset-buttons
         .show-for-large-up
           #air-travel-button.air-travel-button.button
-            =image_tag('plane.png', :size=>'30x30')
+            =image_tag('plane.png', :size=>'28x28')
             Air Travel
 
           #car-travel-button.button.car-travel-button
-            =image_tag('car.png', :size=>'30x30')
+            =image_tag('car.png', :size=>'28x28')
             Car Travel
 
           #home-energy-button.home-energy-button.button
-            =image_tag('house.png', :size=>'30x30')
+            =image_tag('house.png', :size=>'28x28')
             Building Energy
             
 
           #quick-button.quick-button.button
-            =image_tag('quick.png', :size=>'30x30')
+            =image_tag('quick.png', :size=>'28x28')
             Quick Offset
 
         .show-for-medium-only
           #air-travel-button.air-travel-button.button
-            =image_tag('plane.png', :size=>'30x30')
+            =image_tag('plane.png', :size=>'28x28')
             Air
 
           #car-travel-button.button.car-travel-button
-            =image_tag('car.png', :size=>'30x30')
+            =image_tag('car.png', :size=>'28x28')
             Car
 
           #home-energy-button.home-energy-button.button
-            =image_tag('house.png', :size=>'30x30')
+            =image_tag('house.png', :size=>'28x28')
             Home
             
 
           #quick-button.quick-button.button
-            =image_tag('quick.png', :size=>'30x30')
+            =image_tag('quick.png', :size=>'28x28')
             Quick
 
-          #donate-button.donate-button.button
-            =image_tag('quick.png', :size=>'30x30')
-            Donate
 
         .show-for-small-only
           #air-travel-button.air-travel-button.button.mobile-button
-            =image_tag('plane.png', :size=>'30x30')
+            =image_tag('plane.png', :size=>'28x28')
 
 
           #car-travel-button.button.car-travel-button.mobile-button
-            =image_tag('car.png', :size=>'30x30')
+            =image_tag('car.png', :size=>'28x28')
 
 
           #home-energy-button.home-energy-button.button.mobile-button
-            =image_tag('house.png', :size=>'30x30')
+            =image_tag('house.png', :size=>'28x28')
 
           #quick-button.quick-button.button.mobile-button.quick-button
-            =image_tag('quick.png', :size=>'30x30')
-          #donate-button.donate-button.button.mobile-button
-            =image_tag('quick.png', :size=>'30x30')
+            =image_tag('quick.png', :size=>'28x28')
 
       .arrow_box
         To get started playing the carbon races, please start by offsetting your travel or home energy use.
@@ -94,8 +89,9 @@
             .large-4.medium-4.small-12.columns
               #calculate-air-offset.custom_btn.custom_btnline
                 Calculate Offset
+              #cookie-info
             .large-8.medium-8.small-12.columns{:style=>"margin-top:7px;"}
-              Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
+              Or, send check to Sustainable Finger Lakes / 309 N Aurora / Ithaca, NY 14850 with 'FLCF' in memo line
         #car-travel-offset.offset-form
           .row
             .large-4.medium-4.small-12.columns{:style=>"margin-bottom:5px"}
@@ -122,7 +118,7 @@
               #calculate-car-offset.custom_btn.custom_btnline
                 Calculate Offset
             .large-8.medium-8.small-12.columns
-              Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
+              Or, send check to Sustainable Finger Lakes / 309 N Aurora / Ithaca, NY 14850 with 'FLCF' in memo line
         #home-energy-offset.offset-form
           Enter your energy use
           .row
@@ -140,7 +136,7 @@
               #calculate-home-offset.custom_btn.custom_btnline
                 Calculate Offset
             .large-8.medium-8.small-12.columns
-              Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
+              Or, send check to Sustainable Finger Lakes / 309 N Aurora / Ithaca, NY 14850 with 'FLCF' in memo line
         #quick-offset.offset-form
           =form_with url: '/cart_items', method: :post do |form|
             .row
@@ -151,33 +147,16 @@
                 For What Period?
                 .optgroup
                   =form.select :offset_interval, options_for_select(["month", "quarter", "year" ], "year"), {}, :id => 'offset_interval'
-            #save-offset.custom_btn.custom_btnline Add to Cart
-        #donate-form.offset-form
-          Make a Donation
-          .donate-buttons{:style=>'margin-top: 1em;'}
-            .donate-link
-              =link_to "https://buy.stripe.com/test_eVa9Ep3LN4eU5k4fZ0" do
-                %button $25
-            .donate-link
-              =link_to "https://buy.stripe.com/test_cN2bMx6XZ4eU4g0cMM" do
-                %button $50  
-            .donate-link
-              =link_to "https://buy.stripe.com/test_aEU7whgyz8va3bW8wz" do
-                %button $100 
-            .donate-link
-              =link_to "https://buy.stripe.com/test_3cs17TdmncLq7scfZ2" do
-                %button $250 
-            .donate-link
-              =link_to "https://buy.stripe.com/test_dR617TeqraDicMw9AF" do
-                %button $500 
-          Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line     
+            #save-offset.custom_btn.custom_btnline Add to Cart   
         #cart
-          %h4 Your Cart
-          #cart-items
-
           .row
-            .large-3.medium-12.small-12.columns
-              #checkout-button.custom_btn.custom_btnline
-                Checkout
-            .large-9.medium-12.small-12.columns{:style=>"margin-top:7px;"}
-              Or, send check to Sustainable Tompkins / 309 N Aurora / Ithaca, NY with 'FLCF' in memo line
+            .large-12.columns
+              %h4 Your Cart
+              #cart-items
+
+              .row
+                .large-3.medium-12.small-12.columns
+                  #checkout-button.custom_btn.custom_btnline
+                    Checkout
+                .large-9.medium-12.small-12.columns{:style=>"margin-top:7px;"}
+                  Or, send check to Sustainable Finger Lakes / 309 N Aurora / Ithaca, NY 14850 with 'FLCF' in memo line

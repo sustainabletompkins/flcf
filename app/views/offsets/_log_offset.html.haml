@@ -3,6 +3,11 @@
     =offset.title || '--'
     =link_to 'x', offset_path(offset), :remote=>:true, :method=>:delete, :data => {:confirm=>'you sure?'}
   .large-3.medium-3.small-6.columns
+    -if (offset.name && offset.name.length > 1)
+      =offset.name
+    -else
+      no email 
+    /
     -if (offset.email && offset.email.length > 1)
       =offset.email
     -else

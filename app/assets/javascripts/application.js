@@ -18,44 +18,40 @@
 //= require_tree .
 //= require best_in_place
 
-$(document).on('ready page:load', function(){
-  window.fbAsyncInit = function() {
+$(document).on('ready page:load', function () {
+  window.fbAsyncInit = function () {
     FB.init({
-      appId      : '1752616198297352',
-      xfbml      : true,
-      version    : 'v2.2'
+      appId: '1752616198297352',
+      xfbml: true,
+      version: 'v2.2'
     });
   };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-	if ($.cookie('session_id')==undefined) {
-		var id = Math.random() * 100000000 ;
-    $.cookie('session_id', parseInt(id), { expires: 1 });
-    console.log($.cookie('session_id'))
-	}
-	else console.log($.cookie('session_id'));
-
-	$(".fancybox").fancybox({
-	});
-	$('.fancybox-media').fancybox({
-        openEffect: 'none',
-        closeEffect: 'none',
-        helpers: {
-          media: {}
-        }
-    });
-	var data = {
-		session_id: $.cookie("session_id")
-	}
-	$.post("/cart_items/populate_cart", data);
+  var urlParams = new URLSearchParams(window.location.search);
+  var session_id = urlParams.get('session_cookie');
+  console.log("sess: " + session_id);
+  $(".fancybox").fancybox({
+  });
+  $('.fancybox-media').fancybox({
+    openEffect: 'none',
+    closeEffect: 'none',
+    helpers: {
+      media: {}
+    }
+  });
+  var data = {
+    session_id: session_id
+  }
+  $.post("/cart_items/populate_cart", data);
 
 
 })
-$(function(){ $(document).foundation(); });
+$(function () { $(document).foundation(); });

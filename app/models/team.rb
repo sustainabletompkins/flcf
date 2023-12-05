@@ -7,7 +7,12 @@ class Team < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers
 
-  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, solo_mode = nil)
+  def update_offset_count
+    self.count = offsets.count
+    save
+  end
+
+  def self.generate_leaderboard(start_date = nil, end_date = nil, region = nil, limit = 0, offset = 0, mode = nil)
     results = []
     puts region
     region = Region.where(name: region).first
@@ -23,11 +28,13 @@ class Team < ActiveRecord::Base
                  end_date.to_datetime
                end
 
-    if solo_mode
+    if mode == 'individual'
       Individual.all.each do |team|
         offsets = team.offsets.where('created_at > ? and created_at < ?', start_date, end_date)
+        puts team.inspect
+        puts region.present?
         offsets = offsets.where(region: region) if region.present?
-        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count }
+        results << { team: team.name, pounds: offsets.sum(&:pounds), count: offsets.count, region: region.present? ? team.region.name : nil }
       end
     else
       Team.all.each do |team|
@@ -46,6 +53,15 @@ class Team < ActiveRecord::Base
     results = results.sort_by { |k| k[:pounds] }.reverse
     results = results[offset..(offset + limit - 1)] if limit > 0
     results
+  end
+
+  def pounds_since(date = nil)
+    start = if date
+              Date.strptime(date, '%m/%d/%y')
+            else
+              Date.strptime('1/1/15', '%m/%d/%y')
+            end
+    offsets.where('created_at > ?', start).sum(:pounds).round
   end
 
   def cover_url

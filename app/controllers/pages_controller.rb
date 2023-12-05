@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   http_basic_authenticate_with name: 'admin', password: '309NAurora', only: %i[admin list offset_log]
 
   def payment_success
-    puts 'asdkljskldjaklsjdalks'
     if params.has_key?('checkout_session_id')
       # create the offset objects
       @checkout_session = params['checkout_session_id']
@@ -31,17 +30,21 @@ class PagesController < ApplicationController
       end
 
       region = Region.get_by_zip(zipcode)
-
+      total_cost = 0
       # convert cart items into completed offsets
       CartItem.where(checkout_session_id: @checkout_session).each do |item|
         Offset.create(name: name, user_id: item.user_id, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email)
         item.update_attribute(:purchased, true)
+        total_cost += item.cost
       end
+
+      # post to LGL via background job
+      LglJob.perform_async(email, total_cost, name, zipcode)
 
       # redirect to index & include checkout session id
       # redirect_to controller: 'pages', action: 'index', checkout_session_id: @checkout_session
       # redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
-      redirect_to "http://gayn.sg-host.com/?c_id=#{@checkout_session}"
+      redirect_to "https://fingerlakesclimatefund.org/?c_id=#{@checkout_session}"
 
     else
       # there was no checkout session id
@@ -53,14 +56,13 @@ class PagesController < ApplicationController
 
   def index
     # response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM http://gayn.sg-host.com/, https://hyadev.com/'
-    puts params
-    puts 'heyskjahakjaldj'
     if params.has_key?('checkout_session_id')
       # user has just completed a checkout
       # handle carbon races and prize wheel\
       @checkout_session = params['checkout_session_id']
       # start by getting offsets associated with checkout session
       @offsets = Offset.where(checkout_session_id: @checkout_session)
+      # error is here
       zipcode = @offsets.first.zipcode
 
       # check to see if this region has any prize choices
@@ -83,6 +85,8 @@ class PagesController < ApplicationController
       if team_member.present?
         @team = team_member.team
         @offsets.update_all(team_id: @team.id)
+        # sync the offset count in TeamMember to the correct amount
+        team_member.count_offsets
       elsif player.present?
         @team = player
         @offsets.update_all(individual_id: @player.id)
@@ -157,6 +161,10 @@ class PagesController < ApplicationController
   end
 
   def verification
-    render plain: '870E0E2346D565F9BE3056DD58219B8914AF9F9A994D08FDD3612C9FB227BC96 comodoca.com 5efc06b064907'
+    if params[:filename] == '967C9E3CE0C86DA5CFBBFB204A4EF995.txt'
+      render plan: 'CCEAC6616A4863B51F9280201E4F43598116262854B02C61EC739023A4DEDC53 comodoca.com 61801d26d14d8'
+    else
+      render plain: '3D053997760490550BD9B5E198F4880F3207D6F69F1B778DCD3E987576DF2E46 comodoca.com 6334e37295071'
+    end
   end
 end

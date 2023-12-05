@@ -18,7 +18,6 @@
             =text_field_tag :user_email,'', :placeholder => 'user email'
             =text_field_tag :member_name, '',:placeholder => 'team member name'
         %br
-        =show_simple_captcha(:label=>'Enter letters...')
         =f.submit 'submit', :class=>'button'
 
         #offset-msg
@@ -41,7 +40,9 @@
     });
     $('#race_individual').on('change', function() {
         if($('#race_individual').is(':checked')) {
-            $('.player-info').show();
+            //$('.player-info').show();
+            //$('#user_email').val($('#offset_email').val());
+            //$('#member_name').val($('#offset_name').val());
             $('.team-info').hide();
         }
         else {
