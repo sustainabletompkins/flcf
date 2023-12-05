@@ -62,6 +62,7 @@ class PagesController < ApplicationController
       @checkout_session = params['checkout_session_id']
       # start by getting offsets associated with checkout session
       @offsets = Offset.where(checkout_session_id: @checkout_session)
+      # error is here
       zipcode = @offsets.first.zipcode
 
       # check to see if this region has any prize choices

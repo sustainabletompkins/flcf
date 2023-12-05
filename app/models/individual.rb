@@ -18,6 +18,6 @@ class Individual < ActiveRecord::Base
             else
               Date.strptime('1/1/15', '%m/%d/%y')
             end
-    offsets.where('created_at > ?', start).sum(&:pounds)
+    offsets.where('created_at > ?', start).sum(&:pounds).round
   end
 end
