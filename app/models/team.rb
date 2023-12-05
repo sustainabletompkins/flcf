@@ -30,7 +30,7 @@ class Team < ActiveRecord::Base
 
     if mode == 'individual'
       Individual.all.each do |team|
-        offsets = team.offsets.where('created_at > ? and created_at < ?', start_date, end_date)
+        offsets = team.offsets.where('created_at > ? and created_at < ? and purchased=?', start_date, end_date, true)
         puts team.inspect
         puts region.present?
         offsets = offsets.where(region: region) if region.present?
@@ -39,7 +39,7 @@ class Team < ActiveRecord::Base
     else
       Team.all.each do |team|
         offsets = if end_date - start_date > 1.day
-                    team.offsets.where('created_at > ? and created_at < ?', start_date, end_date)
+                    team.offsets.where('created_at > ? and created_at < ? and purchased=?', start_date, end_date,true)
                   else
                     team.offsets
                   end

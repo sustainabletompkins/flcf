@@ -28,12 +28,21 @@ class PagesController < ApplicationController
         customer = Stripe::Customer.retrieve(session.customer)
         # TO DO: get zip and name
       end
-
+      # ok so sometimes this zipcode does not come in propery
+      zipcode_regex = /\A\d{5}(-\d{4})?\z/
+      if(!valid_zipcode?(zipcode)) 
+        zipcode='14850' # set ithaca as default
+      end
+      # just to be extra safe, we will make sure there is a name as well
+      if(name.length < 1) 
+        name = "{name unknown}"
+      end
       region = Region.get_by_zip(zipcode)
       total_cost = 0
       # convert cart items into completed offsets
       CartItem.where(checkout_session_id: @checkout_session).each do |item|
-        Offset.create(name: name, user_id: item.user_id, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email)
+        # the user_id is legacy / not needed
+        Offset.create(name: name, user_id: nil, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email)
         item.update_attribute(:purchased, true)
         total_cost += item.cost
       end
@@ -52,6 +61,14 @@ class PagesController < ApplicationController
       @app_mode = 'error'
       render 'spa/app'
     end
+  end
+
+  def valid_zipcode?(zipcode)
+    # Regular expression for a valid U.S. ZIP code
+    zipcode_regex = /\A\d{5}(-\d{4})?\z/
+
+    # Check if the input string matches the regular expression
+    !!(zipcode =~ zipcode_regex)
   end
 
   def index
