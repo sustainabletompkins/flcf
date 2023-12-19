@@ -9,7 +9,7 @@ class Individual < ActiveRecord::Base
             else
               Date.strptime('1/1/15', '%m/%d/%y')
             end
-    offsets.where('created_at > ?', start).count
+    offsets.where('created_at > ? and purchased = ?', start, true).count
   end
 
   def pounds_since(date = nil)
@@ -18,6 +18,6 @@ class Individual < ActiveRecord::Base
             else
               Date.strptime('1/1/15', '%m/%d/%y')
             end
-    offsets.where('created_at > ?', start).sum(&:pounds).round
+    offsets.where('created_at > ? and purchased = ?', start, true).sum(&:pounds).round
   end
 end

@@ -82,7 +82,7 @@ class OffsetsController < ApplicationController
 
   def save_donation
     @pounds = params[:cost].to_i * 80
-    @offset = Offset.create(session_id: params[:session_id], user_id: '0', title: 'Donation', cost: params[:cost], name: params[:name], zipcode: params[:zipcode], pounds: @pounds)
+    @offset = Offset.create(session_id: params[:session_id], user_id: '0', purchased: true, title: 'Donation', cost: params[:cost], name: params[:name], zipcode: params[:zipcode], pounds: @pounds)
   end
 
   def add_name_and_zip

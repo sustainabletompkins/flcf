@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   def update_offset_count
-    self.count = offsets.count
+    self.count = offsets.where('purchased = ?', true).count
     save
   end
 
@@ -61,7 +61,7 @@ class Team < ActiveRecord::Base
             else
               Date.strptime('1/1/15', '%m/%d/%y')
             end
-    offsets.where('created_at > ?', start).sum(:pounds).round
+    offsets.where('created_at > ? and purchased = ?', start, true).sum(:pounds).round
   end
 
   def cover_url
