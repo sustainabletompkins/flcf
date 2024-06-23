@@ -10,7 +10,8 @@
     #{@offsets.sum(&:pounds)}
   .large-4.medium-4.small-4.columns
     %h4.log-price{:'data-dir' => 'desc'} Price
-    #{@offsets.sum(&:cost).round(2)}
+    - total_cost = @offsets.compact.sum(&:cost)
+    = total_cost.round(2) unless total_cost.nil?
 %hr
 .row.column-headers
 
