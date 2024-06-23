@@ -85,7 +85,8 @@ Rails.application.routes.draw do
   get '/init-checkout-session', to: 'charges#init_checkout'
   post '/customer-portal', to: 'charges#manage'
   get '.well-known/pki-validation/:filename' => 'pages#verification'
-
+  # Error page route
+  get 'processing-error', to: 'pages#processing_error'
   get 'exports/awardees', to: 'awardees#csv'
   get 'exports/offsetters', to: 'offsetters#csv'
 

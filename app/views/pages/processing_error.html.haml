@@ -1,0 +1,26 @@
+!!! 5
+%html
+  %head
+    %title Something Went Wrong
+    :css
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+      h1 {
+        font-size: 50px;
+      }
+      p {
+        font-size: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+  %body
+    .container
+      %h1 Oops!
+      %p Sorry, something went wrong. Please try again later.
+      %p If the issue persists, contact our support team.
+      %a{ href: "/" } Go back to homepage
