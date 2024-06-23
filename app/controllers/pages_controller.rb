@@ -107,6 +107,7 @@ class PagesController < ApplicationController
       elsif player.present?
         @team = player
         @offsets.update_all(individual_id: @player.id)
+        player.count_offsets
       end
 
       # set app to carbon race mode

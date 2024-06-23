@@ -3,6 +3,12 @@ class Individual < ActiveRecord::Base
   has_many :offsets
   validates :name, uniqueness: true
 
+  def count_offsets
+    total_pounds = self.offsets.sum(:pounds)
+    total_count = self.offsets.count
+    self.update(pounds: total_pounds, count: total_count)
+  end
+
   def offsets_since(date = nil)
     start = if date
               Date.strptime(date, '%m/%d/%y')
