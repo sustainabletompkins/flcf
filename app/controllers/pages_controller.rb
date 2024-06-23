@@ -42,7 +42,7 @@ class PagesController < ApplicationController
       # convert cart items into completed offsets
       CartItem.where(checkout_session_id: @checkout_session).each do |item|
         # the user_id is legacy / not needed
-        Offset.create(name: name, user_id: nil, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email)
+        Offset.create(name: name, user_id: nil, title: item.title, cost: item.cost, pounds: item.pounds, offset_type: item.offset_type, offset_interval: item.offset_interval, zipcode: zipcode, region: region, checkout_session_id: @checkout_session, email: email, purchased: true)
         item.update_attribute(:purchased, true)
         total_cost += item.cost
       end

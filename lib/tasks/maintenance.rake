@@ -14,6 +14,24 @@ namespace :maintenance do
     end
   end
 
+  task update_purchased: :environment do
+    # Find all purchased CartItems
+    purchased_cart_items = CartItem.where(purchased: true)
+
+    purchased_cart_items.find_each do |cart_item|
+      # Find corresponding offsets with the same checkout_session_id
+      offsets = Offset.where(checkout_session_id: cart_item.checkout_session_id)
+      
+      offsets.find_each do |offset|
+        # Update each offset to purchased: true
+        offset.update(purchased: true)
+        puts "Updated Offset ID: #{offset.id} to purchased: true"
+      end
+    end
+
+    puts "All corresponding offsets have been updated."
+  end
+
   task consolidate_team_members: :environment do
     Team.all.each do |team|
       team.team_members.each do |tm|

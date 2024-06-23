@@ -68,14 +68,12 @@ class OffsetsController < ApplicationController
       @offset.update_attribute(:team_id, @team.id)
     else
       @i = Individual.where(email: email).first
-      if @i.present?
-        @i.update_attribute(:count, @i.count + 1)
-      else
-        @i = Individual.create(email: email, name: params[:offset][:name], pounds: pounds, count: 1, region: region)
-
+      if @i.blank?
+        @i = Individual.create(email: email, name: params[:offset][:name], pounds: 0, count: 0, region: region)
       end
-      @offset.update_attribute(:individual_id, @i.id)
-      @offset.update_attribute(:name, @i.name)
+
+      @offset.update(individual_id: @i.id, name: @i.name)
+      @i.count_offsets
     end
     render 'created'
   end
