@@ -133,38 +133,59 @@
 
 
   $('#submit-name').on('click', function() {
-    if(!$('#team-member-name').val()) {
+    if (!$('#team-member-name').val()) {
       $('#join-msg').text('Please provide your name.');
+    } else {
+      let team_data = {
+        name: $('#team-member-name').val(),
+        checkout_session_id: checkout_session_id
+      };
+      $.post('/teams/' + $('#select-team').val() + '/join', team_data)
+        .done(function(response) {
+          alert('Successfully joined the team!');
+        })
+        .fail(function(response) {
+          alert('Failed to join the team.');
+        });
     }
-    else {
-      team_data = {}
-      team_data.name = $('#team-member-name').val();
-      team_data.checkout_session_id = checkout_session_id;
-      $.post('/teams/'+ $('#select-team').val() + '/join', team_data);
-    }
-
   });
-
-
 
   $('#new-player').on('click', function() {
-    if(!$('#player-name').val()) {
+    if (!$('#player-name').val()) {
       $('#player-msg').text('Please provide a name to publicly display.');
+    } else {
+      let individual_data = {
+        individual: {
+          name: $('#player-name').val()
+        },
+        checkout_session_id: checkout_session_id
+      };
+      $.post('/individuals/', individual_data)
+        .done(function(response) {
+          alert('Successfully registered as an individual!');
+        })
+        .fail(function(response) {
+          alert('Failed to register as an individual.');
+        });
     }
-    else {
-      team_data = {}
-      team_data.name = $('#player-name').val();
-      $.post('/individuals/', {individual:team_data, checkout_session_id:checkout_session_id});
-    }
-
   });
+
+  
 
 -if @team.present?
   :javascript
 
     $('#select-new-team').on('change', function() {
-
-      team_data =  {new_team_id: $(this).val(), old_team_id: '#{@team.id}', checkout_session_id: checkout_session_id};
-      $.post('#{change_teams_path}', team_data);
-
+      let team_data = {
+        new_team_id: $(this).val(),
+        old_team_id: '#{@team.id}',
+        checkout_session_id: checkout_session_id
+      };
+      $.post('#{change_teams_path}', team_data)
+        .done(function(response) {
+          alert('Successfully changed the team!');
+        })
+        .fail(function(response) {
+          alert('Failed to change the team.');
+        });
     });
