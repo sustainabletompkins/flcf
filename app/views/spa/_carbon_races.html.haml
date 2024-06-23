@@ -160,13 +160,20 @@
         },
         checkout_session_id: checkout_session_id
       };
-      $.post('/individuals/', individual_data)
-        .done(function(response) {
+      $.ajax({
+        type: "POST",
+        url: '/individuals/',
+        data: individual_data,
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
           alert('Successfully registered as an individual!');
-        })
-        .fail(function(response) {
+        },
+        error: function(response) {
           alert('Failed to register as an individual.');
-        });
+        }
+      });
     }
   });
 
